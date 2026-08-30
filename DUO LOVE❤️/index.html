@@ -1,0 +1,6393 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#07070d">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="DUO LOVE"
+  >
+
+  <meta
+    name="format-detection"
+    content="telephone=no"
+  >
+
+  <title>DUO LOVE ❤️</title>
+
+  <link rel="manifest" href="./manifest.json">
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="./apple-touch-icon.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="./icon-192.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="512x512"
+    href="./icon-512.png"
+  >
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://vrcwpodmvdamkgveuedz.supabase.co" crossorigin>
+  <link rel="dns-prefetch" href="//vrcwpodmvdamkgveuedz.supabase.co">
+
+  <link rel="stylesheet" href="./style.css?v=31">
+
+
+  <style>
+
+    /* =====================================================
+       ECRAN DE PORNIRE - DUO LOVE ❤️
+       FULL SCREEN + O SINGURĂ DATĂ LA INTRAREA ÎN APLICAȚIE
+    ====================================================== */
+
+    body.duo-splash-active {
+      overflow: hidden !important;
+      touch-action: none !important;
+    }
+
+    /*
+      Cât timp splash-ul este activ, ascundem TOATĂ aplicația
+      din spate, inclusiv bara de navigare de jos.
+    */
+    body.duo-splash-active > :not(#duoLoveSplash):not(script) {
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    /*
+      Când revenim pe Home din Chat / Amintiri / Setări
+      în aceeași sesiune, splash-ul nu mai apare.
+    */
+    body.duo-splash-skip #duoLoveSplash {
+      display: none !important;
+    }
+
+    #duoLoveSplash {
+      position: fixed !important;
+      inset: 0 !important;
+
+      z-index: 2147483647 !important;
+
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      width: 100% !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+
+      padding:
+        env(safe-area-inset-top)
+        24px
+        env(safe-area-inset-bottom) !important;
+
+      box-sizing: border-box !important;
+
+      overflow: hidden !important;
+
+      background:
+        radial-gradient(
+          circle at 18% 18%,
+          rgba(226, 77, 142, .32),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at 82% 75%,
+          rgba(116, 83, 221, .30),
+          transparent 38%
+        ),
+        linear-gradient(
+          160deg,
+          #08070d,
+          #190d19 55%,
+          #09070d
+        ) !important;
+
+      color: white !important;
+
+      opacity: 1 !important;
+      visibility: visible !important;
+
+      transition:
+        opacity .55s ease,
+        visibility .55s ease !important;
+
+      -webkit-tap-highlight-color: transparent !important;
+    }
+
+
+    #duoLoveSplash.hide {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+
+    .duo-splash-heart {
+      margin-bottom: 18px !important;
+
+      font-size: 66px !important;
+      line-height: 1 !important;
+
+      filter:
+        drop-shadow(
+          0 8px 24px
+          rgba(226, 77, 142, .38)
+        ) !important;
+
+      animation:
+        duoSplashHeartbeat
+        1.15s
+        ease-in-out
+        infinite !important;
+    }
+
+
+    .duo-splash-title {
+      margin: 0 !important;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif !important;
+
+      font-size:
+        clamp(
+          39px,
+          11vw,
+          50px
+        ) !important;
+
+      font-weight: 500 !important;
+
+      line-height: 1 !important;
+
+      letter-spacing: 2px !important;
+
+      text-align: center !important;
+
+      background:
+        linear-gradient(
+          90deg,
+          #ff91be,
+          #ffffff 50%,
+          #a98cff
+        ) !important;
+
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+
+      -webkit-text-fill-color: transparent !important;
+      color: transparent !important;
+
+      text-shadow: none !important;
+    }
+
+
+    .duo-splash-line {
+      width: 58px !important;
+      height: 1px !important;
+
+      margin:
+        27px
+        0
+        18px !important;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .25
+        ) !important;
+    }
+
+
+    .duo-splash-creator-label {
+      margin-bottom: 7px !important;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .48
+        ) !important;
+
+      font-size: 10px !important;
+      font-weight: 800 !important;
+
+      letter-spacing: 4px !important;
+    }
+
+
+    .duo-splash-creator {
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .94
+        ) !important;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif !important;
+
+      font-size: 20px !important;
+      line-height: 1.3 !important;
+
+      text-align: center !important;
+    }
+
+
+    .duo-splash-footer {
+      position: absolute !important;
+
+      left: 0 !important;
+      right: 0 !important;
+
+      bottom:
+        calc(
+          24px +
+          env(safe-area-inset-bottom)
+        ) !important;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .28
+        ) !important;
+
+      font-size: 10px !important;
+      letter-spacing: 2px !important;
+
+      text-align: center !important;
+    }
+
+
+    @keyframes duoSplashHeartbeat {
+
+      0%,
+      100% {
+        transform:
+          scale(1);
+      }
+
+      50% {
+        transform:
+          scale(1.14);
+      }
+
+    }
+
+
+    @media (
+      prefers-reduced-motion:
+      reduce
+    ) {
+
+      .duo-splash-heart {
+        animation:
+          none !important;
+      }
+
+      #duoLoveSplash {
+        transition:
+          none !important;
+      }
+
+    }
+
+
+    /* =====================================================
+       URSULEȚ AI FLOTANT
+    ====================================================== */
+
+    .bear-ai-floating {
+      position: fixed !important;
+
+      right: 14px !important;
+
+      bottom:
+        calc(
+          96px +
+          env(safe-area-inset-bottom)
+        ) !important;
+
+      z-index: 2147483000 !important;
+
+      display: flex !important;
+      flex-direction: column !important;
+
+      align-items: center !important;
+
+      gap: 5px !important;
+
+      will-change: left, top !important;
+    }
+
+
+    .bear-ai-circle {
+      position: relative !important;
+
+      width: 68px !important;
+      height: 68px !important;
+
+      margin: 0 !important;
+      padding: 0 !important;
+
+      overflow: hidden !important;
+
+      border:
+        2px solid
+        rgba(
+          255,
+          183,
+          215,
+          .80
+        ) !important;
+
+      border-radius: 50% !important;
+
+      background:
+        rgba(
+          13,
+          8,
+          17,
+          .96
+        ) !important;
+
+      box-shadow:
+        0 8px 25px
+        rgba(
+          0,
+          0,
+          0,
+          .42
+        ) !important;
+
+      cursor: grab !important;
+
+      touch-action: none !important;
+
+      user-select: none !important;
+      -webkit-user-select: none !important;
+
+      -webkit-touch-callout: none !important;
+
+      -webkit-tap-highlight-color:
+        transparent !important;
+    }
+
+
+    .bear-ai-circle:active {
+      cursor: grabbing !important;
+    }
+
+
+    .bear-ai-circle img {
+      display: block !important;
+
+      width: 100% !important;
+      height: 100% !important;
+
+      object-fit: cover !important;
+
+      pointer-events: none !important;
+
+      user-select: none !important;
+      -webkit-user-select: none !important;
+    }
+
+
+    .bear-ai-online {
+      position: absolute !important;
+
+      right: 2px !important;
+      bottom: 3px !important;
+
+      width: 13px !important;
+      height: 13px !important;
+
+      border:
+        2px solid
+        #100914 !important;
+
+      border-radius: 50% !important;
+
+      background:
+        #4ddd84 !important;
+
+      pointer-events: none !important;
+    }
+
+
+    .bear-ai-floating-name {
+      max-width: 90px !important;
+
+      overflow: hidden !important;
+
+      padding:
+        4px
+        8px !important;
+
+      border-radius: 10px !important;
+
+      background:
+        rgba(
+          8,
+          5,
+          12,
+          .90
+        ) !important;
+
+      color: white !important;
+
+      font-size: 11px !important;
+      font-weight: 700 !important;
+
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+
+      box-shadow:
+        0 3px 12px
+        rgba(
+          0,
+          0,
+          0,
+          .25
+        ) !important;
+
+      pointer-events: none !important;
+
+      user-select: none !important;
+      -webkit-user-select: none !important;
+    }
+
+
+
+    /* =====================================================
+       FEREASTRĂ URSULEȚ AI
+    ====================================================== */
+
+    .bear-ai-panel {
+      position: fixed !important;
+
+      right: 12px !important;
+
+      bottom:
+        calc(
+          180px +
+          env(safe-area-inset-bottom)
+        ) !important;
+
+      z-index: 2147482999 !important;
+
+      display: none !important;
+
+      flex-direction: column !important;
+
+      width:
+        min(
+          calc(100% - 24px),
+          365px
+        ) !important;
+
+      height: 430px !important;
+
+      max-height:
+        calc(
+          100dvh -
+          210px
+        ) !important;
+
+      overflow: hidden !important;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .12
+        ) !important;
+
+      border-radius: 25px !important;
+
+      background:
+        rgba(
+          12,
+          8,
+          17,
+          .97
+        ) !important;
+
+      box-shadow:
+        0 15px 45px
+        rgba(
+          0,
+          0,
+          0,
+          .52
+        ) !important;
+
+      backdrop-filter:
+        blur(12px) !important;
+
+      -webkit-backdrop-filter:
+        blur(12px) !important;
+    }
+
+
+    .bear-ai-panel.open {
+      display: flex !important;
+    }
+
+
+
+    /* HEADER AI */
+
+    .bear-ai-header {
+      flex: 0 0 auto !important;
+
+      display: flex !important;
+
+      align-items: center !important;
+
+      gap: 10px !important;
+
+      padding: 13px !important;
+
+      border-bottom:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        ) !important;
+    }
+
+
+    .bear-ai-header-photo {
+      flex: 0 0 45px !important;
+
+      width: 45px !important;
+      height: 45px !important;
+
+      overflow: hidden !important;
+
+      border-radius: 50% !important;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          190,
+          218,
+          .35
+        ) !important;
+    }
+
+
+    .bear-ai-header-photo img {
+      width: 100% !important;
+      height: 100% !important;
+
+      display: block !important;
+
+      object-fit: cover !important;
+    }
+
+
+    .bear-ai-header-text {
+      flex: 1 1 auto !important;
+
+      min-width: 0 !important;
+    }
+
+
+    .bear-ai-header-text strong {
+      display: block !important;
+
+      overflow: hidden !important;
+
+      color: white !important;
+
+      font-size: 16px !important;
+
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+    }
+
+
+    .bear-ai-header-text span {
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .58
+        ) !important;
+
+      font-size: 11px !important;
+    }
+
+
+    .bear-ai-close {
+      flex: 0 0 38px !important;
+
+      width: 38px !important;
+      height: 38px !important;
+
+      padding: 0 !important;
+
+      border: 0 !important;
+
+      border-radius: 50% !important;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        ) !important;
+
+      color: white !important;
+
+      font-size: 22px !important;
+
+      cursor: pointer !important;
+    }
+
+
+
+    /* =====================================================
+       MESAJE AI
+    ====================================================== */
+
+    .bear-ai-messages {
+      flex: 1 1 0 !important;
+
+      min-height: 0 !important;
+
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+
+      padding: 13px !important;
+
+      -webkit-overflow-scrolling:
+        touch !important;
+
+      scrollbar-width:
+        none !important;
+    }
+
+
+    .bear-ai-messages::-webkit-scrollbar {
+      display: none !important;
+    }
+
+
+    .bear-ai-message {
+      width: fit-content !important;
+
+      max-width: 84% !important;
+
+      margin-bottom: 9px !important;
+
+      padding:
+        10px
+        13px !important;
+
+      border-radius: 17px !important;
+
+      color: white !important;
+
+      font-size: 14px !important;
+
+      line-height: 1.45 !important;
+
+      white-space: pre-wrap !important;
+
+      word-break: break-word !important;
+    }
+
+
+    .bear-ai-message.ai {
+      margin-left: 0 !important;
+      margin-right: auto !important;
+
+      border-bottom-left-radius:
+        5px !important;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .09
+        ) !important;
+    }
+
+
+    .bear-ai-message.user {
+      margin-left: auto !important;
+      margin-right: 0 !important;
+
+      border-bottom-right-radius:
+        5px !important;
+
+      background:
+        rgba(
+          151,
+          62,
+          101,
+          .78
+        ) !important;
+    }
+
+
+    .bear-ai-message.typing {
+      opacity: .65 !important;
+      font-style: italic !important;
+    }
+
+
+
+    /* =====================================================
+       INPUT AI
+    ====================================================== */
+
+    .bear-ai-input-row {
+      flex: 0 0 auto !important;
+
+      display: flex !important;
+
+      align-items: center !important;
+
+      gap: 7px !important;
+
+      padding: 10px !important;
+
+      border-top:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        ) !important;
+    }
+
+
+    #bearAIInput {
+      flex: 1 1 auto !important;
+
+      min-width: 0 !important;
+
+      height: 48px !important;
+
+      box-sizing: border-box !important;
+
+      padding:
+        0
+        13px !important;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .11
+        ) !important;
+
+      border-radius: 16px !important;
+
+      outline: none !important;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        ) !important;
+
+      color: white !important;
+
+      font-size: 16px !important;
+
+      font-family: inherit !important;
+    }
+
+
+    #bearAISend {
+      flex: 0 0 48px !important;
+
+      width: 48px !important;
+      height: 48px !important;
+
+      padding: 0 !important;
+
+      border: 0 !important;
+
+      border-radius: 16px !important;
+
+      background:
+        #c95887 !important;
+
+      color: white !important;
+
+      font-size: 19px !important;
+
+      cursor: pointer !important;
+    }
+
+
+
+    /* =====================================================
+       SERIE ZILNICĂ 🔥
+    ====================================================== */
+
+    .streak-card {
+      --streak-color: #ff9a3c;
+      --streak-glow: rgba(255, 154, 60, .42);
+
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      margin-top: 15px;
+      padding: 14px 16px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.07),
+          rgba(255,255,255,.035)
+        );
+
+      box-shadow:
+        inset 0 1px 0
+        rgba(
+          255,
+          255,
+          255,
+          .04
+        );
+    }
+
+
+    .streak-card.orange {
+      --streak-color: #ff9a3c;
+      --streak-glow: rgba(255, 154, 60, .42);
+    }
+
+
+    .streak-card.red {
+      --streak-color: #ff4f5f;
+      --streak-glow: rgba(255, 79, 95, .44);
+    }
+
+
+    .streak-card.purple {
+      --streak-color: #c26cff;
+      --streak-glow: rgba(194, 108, 255, .44);
+    }
+
+
+    .streak-card.blue {
+      --streak-color: #55c7ff;
+      --streak-glow: rgba(85, 199, 255, .46);
+    }
+
+
+    .streak-flame-wrap {
+      position: relative;
+
+      flex:
+        0 0
+        58px;
+
+      display: grid;
+      place-items: center;
+
+      width: 58px;
+      height: 58px;
+
+      border-radius: 18px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .055
+        );
+    }
+
+
+    .streak-flame-wrap::before {
+      content: "";
+
+      position: absolute;
+
+      width: 42px;
+      height: 42px;
+
+      border-radius: 50%;
+
+      background:
+        var(--streak-glow);
+
+      filter: blur(13px);
+
+      opacity: .90;
+
+      animation:
+        streakGlow 1.7s
+        ease-in-out
+        infinite;
+    }
+
+
+    .streak-flame {
+      position: relative;
+
+      z-index: 1;
+
+      width: 38px;
+      height: 46px;
+
+      color:
+        var(--streak-color);
+
+      filter:
+        drop-shadow(
+          0 0 9px
+          var(--streak-glow)
+        );
+
+      animation:
+        streakFlame 1.15s
+        ease-in-out
+        infinite
+        alternate;
+
+      transform-origin:
+        50% 86%;
+    }
+
+
+    .streak-main {
+      flex: 1 1 auto;
+
+      min-width: 0;
+    }
+
+
+    .streak-label {
+      display: block;
+
+      margin-bottom: 2px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .58
+        );
+
+      font-size: 10px;
+      font-weight: 700;
+
+      letter-spacing: 2px;
+    }
+
+
+    .streak-number-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+
+      min-width: 0;
+    }
+
+
+    .streak-number {
+      color: white;
+
+      font-size: 28px;
+      font-weight: 800;
+
+      line-height: 1;
+    }
+
+
+    .streak-days-text {
+      color:
+        var(--streak-color);
+
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+
+    .streak-help {
+      margin:
+        5px 0 0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .55
+        );
+
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+
+    .streak-best {
+      flex:
+        0 0 auto;
+
+      padding:
+        8px 10px;
+
+      border-radius: 13px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .055
+        );
+
+      text-align: center;
+    }
+
+
+    .streak-best span {
+      display: block;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .48
+        );
+
+      font-size: 9px;
+      font-weight: 700;
+
+      letter-spacing: 1px;
+    }
+
+
+    .streak-best strong {
+      display: block;
+
+      margin-top: 2px;
+
+      color:
+        var(--streak-color);
+
+      font-size: 17px;
+    }
+
+
+    .streak-card.just-increased {
+      animation:
+        streakCardPop .65s
+        ease;
+    }
+
+
+    @keyframes streakFlame {
+
+      from {
+        transform:
+          translateY(1px)
+          rotate(-2deg)
+          scale(.96);
+      }
+
+      to {
+        transform:
+          translateY(-1px)
+          rotate(2deg)
+          scale(1.04);
+      }
+
+    }
+
+
+    @keyframes streakGlow {
+
+      0%,
+      100% {
+        opacity: .55;
+        transform: scale(.90);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+
+    }
+
+
+    @keyframes streakCardPop {
+
+      0% {
+        transform: scale(.97);
+      }
+
+      55% {
+        transform: scale(1.02);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+
+    }
+
+
+
+    /* =====================================================
+       XP COMUN AL CUPLULUI ⭐
+    ====================================================== */
+
+    .xp-card {
+      position: relative;
+      overflow: hidden;
+
+      margin-top: 12px;
+      padding: 16px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(116, 91, 255, .16),
+          rgba(255, 104, 173, .08)
+        );
+
+      box-shadow:
+        inset 0 1px 0
+        rgba(
+          255,
+          255,
+          255,
+          .04
+        );
+    }
+
+
+    .xp-card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 120px;
+      height: 120px;
+
+      right: -42px;
+      top: -52px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(
+          117,
+          91,
+          255,
+          .20
+        );
+
+      filter: blur(24px);
+
+      pointer-events: none;
+    }
+
+
+    .xp-header {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+
+    .xp-title-wrap {
+      min-width: 0;
+    }
+
+
+    .xp-small {
+      display: block;
+
+      margin-bottom: 3px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .55
+        );
+
+      font-size: 10px;
+      font-weight: 800;
+
+      letter-spacing: 1.7px;
+    }
+
+
+    .xp-value-row {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+
+      min-width: 0;
+    }
+
+
+    .xp-value {
+      color: white;
+
+      font-size: 28px;
+      font-weight: 800;
+
+      line-height: 1;
+    }
+
+
+    .xp-of {
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .52
+        );
+
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+
+    .xp-balance {
+      flex: 0 0 auto;
+
+      padding: 8px 10px;
+
+      border-radius: 13px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .06
+        );
+
+      text-align: center;
+    }
+
+
+    .xp-balance span {
+      display: block;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .46
+        );
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: 1px;
+    }
+
+
+    .xp-balance strong {
+      display: block;
+
+      margin-top: 2px;
+
+      color: #ffd767;
+
+      font-size: 16px;
+    }
+
+
+    .xp-progress {
+      position: relative;
+      z-index: 1;
+
+      width: 100%;
+      height: 10px;
+
+      margin-top: 14px;
+
+      overflow: hidden;
+
+      border-radius: 999px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        );
+    }
+
+
+    .xp-progress-fill {
+      width: 0%;
+      height: 100%;
+
+      border-radius: inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          #7d68ff,
+          #d36fff,
+          #ff77ae
+        );
+
+      box-shadow:
+        0 0 16px
+        rgba(
+          204,
+          111,
+          255,
+          .36
+        );
+
+      transition:
+        width .55s
+        cubic-bezier(.2,.8,.2,1);
+    }
+
+
+    .xp-meta {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+
+      margin-top: 10px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .60
+        );
+
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+
+    .xp-users-today {
+      white-space: nowrap;
+    }
+
+
+    .xp-unlock {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      margin-top: 12px;
+      padding: 11px 12px;
+
+      border-radius: 15px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .05
+        );
+    }
+
+
+    .xp-unlock-icon {
+      flex: 0 0 auto;
+
+      font-size: 20px;
+    }
+
+
+    .xp-unlock-text {
+      min-width: 0;
+    }
+
+
+    .xp-unlock-text strong {
+      display: block;
+
+      color: white;
+
+      font-size: 13px;
+    }
+
+
+    .xp-unlock-text span {
+      display: block;
+
+      margin-top: 2px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .53
+        );
+
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+
+    .xp-card.unlocked .xp-unlock {
+      background:
+        rgba(
+          81,
+          215,
+          142,
+          .10
+        );
+
+      border:
+        1px solid
+        rgba(
+          81,
+          215,
+          142,
+          .18
+        );
+    }
+
+
+    .xp-gain-pop {
+      position: absolute;
+
+      top: 10px;
+      right: 14px;
+
+      z-index: 5;
+
+      padding: 7px 10px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(
+          255,
+          215,
+          103,
+          .16
+        );
+
+      border:
+        1px solid
+        rgba(
+          255,
+          215,
+          103,
+          .28
+        );
+
+      color: #ffe28a;
+
+      font-size: 12px;
+      font-weight: 800;
+
+      opacity: 0;
+
+      transform:
+        translateY(8px)
+        scale(.94);
+
+      pointer-events: none;
+    }
+
+
+    .xp-gain-pop.show {
+      animation:
+        xpGainPop 1.45s
+        ease
+        forwards;
+    }
+
+
+    @keyframes xpGainPop {
+
+      0% {
+        opacity: 0;
+        transform:
+          translateY(8px)
+          scale(.94);
+      }
+
+      18% {
+        opacity: 1;
+        transform:
+          translateY(0)
+          scale(1);
+      }
+
+      70% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform:
+          translateY(-12px)
+          scale(1.02);
+      }
+
+    }
+
+
+
+    /* =====================================================
+       BUTON RECOMPENSE PE HOME 🏆
+    ====================================================== */
+
+    .rewards-home-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      margin-top: 12px;
+      padding: 13px 14px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .09
+        );
+
+      border-radius: 17px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .045
+        );
+
+      color: white;
+
+      text-decoration: none;
+
+      -webkit-tap-highlight-color:
+        transparent;
+    }
+
+
+    .rewards-home-link-icon {
+      flex: 0 0 auto;
+
+      display: grid;
+      place-items: center;
+
+      width: 42px;
+      height: 42px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(
+          255,
+          215,
+          103,
+          .11
+        );
+
+      font-size: 21px;
+    }
+
+
+    .rewards-home-link-copy {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+
+    .rewards-home-link-copy strong {
+      display: block;
+
+      color: white;
+
+      font-size: 13px;
+    }
+
+
+    .rewards-home-link-copy span {
+      display: block;
+
+      margin-top: 2px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .50
+        );
+
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+
+    .rewards-home-link-arrow {
+      flex: 0 0 auto;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .42
+        );
+
+      font-size: 20px;
+    }
+
+
+    .rewards-home-link:active {
+      transform: scale(.985);
+    }
+
+
+    @media (max-width: 360px) {
+
+      .bear-ai-panel {
+        right: 8px !important;
+
+        width:
+          calc(
+            100% - 16px
+          ) !important;
+      }
+
+    }
+
+
+    /* =====================================================
+       OPTIMIZARE PWA / iPHONE
+    ====================================================== */
+
+    button,
+    a,
+    input,
+    textarea {
+      touch-action: manipulation;
+    }
+
+    .love-note,
+    .home-section {
+      content-visibility: auto;
+      contain-intrinsic-size: 420px;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .streak-flame,
+      .streak-flame-wrap::before,
+      .xp-progress-fill,
+      .streak-card.just-increased {
+        animation: none !important;
+        transition: none !important;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body class="duo-splash-active" data-build="v28">
+
+  <script>
+    /*
+      Splash-ul apare o singură dată pe sesiunea aplicației.
+      Dacă utilizatorul revine pe Home din altă pagină,
+      îl sărim imediat.
+    */
+    (function () {
+
+      try {
+
+        const splashShown =
+          sessionStorage.getItem(
+            "duoLoveSplashShown"
+          );
+
+        if (
+          splashShown ===
+          "1"
+        ) {
+
+          document.body.classList.remove(
+            "duo-splash-active"
+          );
+
+          document.body.classList.add(
+            "duo-splash-skip"
+          );
+
+        } else {
+
+          sessionStorage.setItem(
+            "duoLoveSplashShown",
+            "1"
+          );
+
+        }
+
+      } catch (
+        error
+      ) {
+
+        /*
+          Dacă sessionStorage nu este disponibil,
+          splash-ul funcționează normal.
+        */
+
+      }
+
+    })();
+  </script>
+
+
+  <!-- =====================================================
+       ECRAN PORNIRE DUO LOVE ❤️
+  ====================================================== -->
+
+  <div
+    id="duoLoveSplash"
+    role="status"
+    aria-label="DUO LOVE, creator Alexandru Joantă"
+  >
+
+    <div
+      class="duo-splash-heart"
+      aria-hidden="true"
+    >
+      ❤️
+    </div>
+
+    <div class="duo-splash-title">
+      DUO LOVE
+    </div>
+
+    <div class="duo-splash-line"></div>
+
+    <div class="duo-splash-creator-label">
+      CREATOR
+    </div>
+
+    <div class="duo-splash-creator">
+      Alexandru Joantă
+    </div>
+
+    <div class="duo-splash-footer">
+      OUR SPACE ❤️
+    </div>
+
+  </div>
+
+
+
+  <main class="app">
+
+    <!-- =====================================================
+         POZA + CONTOR
+    ====================================================== -->
+
+    <section class="hero-card love-hero">
+
+      <div class="hero-photo-wrap">
+
+        <img
+          id="couplePhoto"
+          class="couple-photo"
+          src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=85"
+          alt="Poza noastră"
+          decoding="async"
+          fetchpriority="high"
+        >
+
+        <div class="hero-photo-shade"></div>
+
+        <label
+          for="couplePhotoInput"
+          class="hero-photo-button"
+        >
+          📷
+        </label>
+
+        <input
+          id="couplePhotoInput"
+          type="file"
+          accept="image/*"
+          hidden
+        >
+
+      </div>
+
+
+      <div class="hero-heart">
+        🩵
+      </div>
+
+
+      <h1
+        class="couple-title"
+        id="coupleNames"
+      >
+        Alex💙 & Bianca💙
+      </h1>
+
+
+      <p class="together-title">
+        Împreună de
+
+        <strong id="totalDaysText">
+          0
+        </strong>
+
+        zile ❤️
+      </p>
+
+
+      <div class="counter-grid love-counter-grid">
+
+        <div class="counter-item">
+          <strong id="counterYears">0</strong>
+          <span>ANI</span>
+        </div>
+
+        <div class="counter-item">
+          <strong id="counterMonths">0</strong>
+          <span>LUNI</span>
+        </div>
+
+        <div class="counter-item">
+          <strong id="days">0</strong>
+          <span>ZILE</span>
+        </div>
+
+        <div class="counter-item">
+          <strong id="hours">00</strong>
+          <span>ORE</span>
+        </div>
+
+        <div class="counter-item">
+          <strong id="minutes">00</strong>
+          <span>MINUTE</span>
+        </div>
+
+        <div class="counter-item">
+          <strong id="seconds">00</strong>
+          <span>SECUNDE</span>
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           SERIE ZILNICĂ APLICAȚIE
+      =================================================== -->
+
+      <div
+        id="appStreakCard"
+        class="streak-card orange"
+      >
+
+        <div class="streak-flame-wrap">
+
+          <svg
+            id="appStreakFlame"
+            class="streak-flame"
+            viewBox="0 0 64 80"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M35.8 3.6c2.8 13.2-6.8 18.8-2.8 29.2 1.5 3.8 4.8 6.2 7.9 3.9 4.2-3.1 4.3-10.1 3.4-15.2 10.2 8.4 16.1 20.3 13 33.1C54.2 67.5 44 76 31.8 76 17.7 76 7 65.7 7 51.3c0-13.8 9.8-23 17.2-31.5 5.2-6 9.4-11 11.6-16.2Z"
+            />
+            <path
+              fill="rgba(255,255,255,.46)"
+              d="M32.8 40.3c1.1 6.6-4.5 9.4-2.2 14.8 1 2.4 3 3.3 4.7 1.9 2.2-1.8 2.3-5.1 1.8-7.6 5 4.1 7.7 10.1 6 16.1-1.6 5.7-6.2 9-11.6 9-6.5 0-11.5-4.8-11.5-11.4 0-6.5 4.5-10.8 8-14.8 2.4-2.8 4.1-5 4.8-8Z"
+            />
+          </svg>
+
+        </div>
+
+
+        <div class="streak-main">
+
+          <span class="streak-label">
+            🔥 SERIE ZILNICĂ
+          </span>
+
+          <div class="streak-number-row">
+
+            <strong
+              id="appStreakCount"
+              class="streak-number"
+            >
+              0
+            </strong>
+
+            <span
+              id="appStreakDaysText"
+              class="streak-days-text"
+            >
+              zile
+            </span>
+
+          </div>
+
+          <p
+            id="appStreakHelp"
+            class="streak-help"
+          >
+            Intrați zilnic ca să țineți focul aprins.
+          </p>
+
+        </div>
+
+
+        <div class="streak-best">
+
+          <span>
+            RECORD
+          </span>
+
+          <strong id="appStreakBest">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           XP COMUN
+      =================================================== -->
+
+      <div
+        id="coupleXPCard"
+        class="xp-card"
+      >
+
+        <div
+          id="xpGainPop"
+          class="xp-gain-pop"
+        >
+          ⭐ +50 XP
+        </div>
+
+
+        <div class="xp-header">
+
+          <div class="xp-title-wrap">
+
+            <span class="xp-small">
+              ⭐ XP-UL VOSTRU
+            </span>
+
+            <div class="xp-value-row">
+
+              <strong
+                id="coupleTotalXP"
+                class="xp-value"
+              >
+                0
+              </strong>
+
+              <span
+                id="coupleXPGoalText"
+                class="xp-of"
+              >
+                / 1000 XP
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="xp-balance">
+
+            <span>
+              DISPONIBIL
+            </span>
+
+            <strong id="coupleAvailableXP">
+              0 XP
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="xp-progress">
+
+          <div
+            id="coupleXPProgress"
+            class="xp-progress-fill"
+          ></div>
+
+        </div>
+
+
+        <div class="xp-meta">
+
+          <span id="coupleXPNextText">
+            Următoarea funcție la 1000 XP
+          </span>
+
+          <span
+            id="coupleXPUsersToday"
+            class="xp-users-today"
+          >
+            👥 0/2 azi
+          </span>
+
+        </div>
+
+
+        <div
+          id="coupleXPUnlock"
+          class="xp-unlock"
+        >
+
+          <span
+            id="coupleXPUnlockIcon"
+            class="xp-unlock-icon"
+          >
+            🔒
+          </span>
+
+
+          <div class="xp-unlock-text">
+
+            <strong id="coupleXPUnlockTitle">
+              Mesaje Secrete
+            </strong>
+
+            <span id="coupleXPUnlockDescription">
+              Se deblochează permanent la 1000 XP total.
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <a
+        href="./recompense.html"
+        class="rewards-home-link"
+      >
+
+        <span class="rewards-home-link-icon">
+          🏆
+        </span>
+
+        <span class="rewards-home-link-copy">
+
+          <strong>
+            Recompense & Magazin
+          </strong>
+
+          <span>
+            Trofee, XP și funcții speciale deblocate pentru voi.
+          </span>
+
+        </span>
+
+        <span class="rewards-home-link-arrow">
+          ›
+        </span>
+
+      </a>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CITAT
+    ====================================================== -->
+
+    <section class="love-note">
+
+      <span class="heart-icon">
+        ♡
+      </span>
+
+      <p id="homeCoupleQuote">
+        În fiecare zi aleg din nou să te iubesc.
+      </p>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         URSULEȚUL MARE
+    ====================================================== -->
+
+    <section class="home-section bear-section">
+
+      <span class="home-small">
+        🧸 URSULEȚUL NOSTRU
+      </span>
+
+      <h2>
+        Ursulețul iubirii ❤️
+      </h2>
+
+      <p class="home-description">
+        Apasă de 2 ori pentru un citat și de 3 ori pentru o inimă.
+      </p>
+
+
+      <div class="bear-stage">
+
+        <div
+          id="loveBear"
+          class="real-bear-wrap"
+        >
+
+          <img
+            src="ursulet.png"
+            alt="Ursuleț"
+            class="real-bear"
+            id="realBear"
+            draggable="false"
+            loading="lazy"
+            decoding="async"
+          >
+
+        </div>
+
+
+        <div
+          id="bearAccessory"
+          class="bear-accessory"
+        ></div>
+
+      </div>
+
+
+      <div class="bear-info">
+
+        <strong id="bearLevel">
+          Nivel 1
+        </strong>
+
+        <span id="bearAge">
+          Pui de urs
+        </span>
+
+      </div>
+
+
+      <div class="bear-happiness">
+
+        <span>
+          ❤️ Fericire
+        </span>
+
+        <div class="bear-progress">
+
+          <div
+            id="bearProgress"
+            class="bear-progress-fill"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="bear-actions">
+
+        <button
+          id="petBear"
+          type="button"
+        >
+          ❤️ Mângâie
+        </button>
+
+
+        <button
+          id="changeBearItem"
+          type="button"
+        >
+          🎁 Obiect
+        </button>
+
+      </div>
+
+
+      <p
+        id="bearMessage"
+        class="home-description"
+      >
+        Apasă pe ursuleț și vezi ce face. 🧸
+      </p>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ISTORIC
+    ====================================================== -->
+
+    <section class="home-section">
+
+      <span class="home-small">
+        🕘 ISTORIC
+      </span>
+
+      <h2>
+        Activitatea noastră
+      </h2>
+
+      <div
+        id="activityHistory"
+        class="activity-history"
+      ></div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         EVENIMENT
+    ====================================================== -->
+
+    <section class="home-section">
+
+      <span class="home-small">
+        📅 URMĂTORUL EVENIMENT
+      </span>
+
+      <h2 id="nextEventTitle">
+        Niciun eveniment
+      </h2>
+
+      <p
+        id="nextEventDate"
+        class="home-description"
+      >
+        Adaugă un moment important.
+      </p>
+
+      <div
+        id="nextEventCountdown"
+        class="home-event-countdown"
+      ></div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================================
+       URSULEȚ AI FLOTANT
+  ====================================================== -->
+
+  <div
+    id="bearAIFloating"
+    class="bear-ai-floating"
+  >
+
+    <button
+      id="bearAICircle"
+      class="bear-ai-circle"
+      type="button"
+      aria-label="Deschide sau mută ursulețul AI"
+    >
+
+      <img
+        src="./ursulet.png"
+        alt="Ursuleț AI"
+        draggable="false"
+        loading="lazy"
+        decoding="async"
+      >
+
+      <span class="bear-ai-online"></span>
+
+    </button>
+
+
+    <span
+      id="bearAIFloatingName"
+      class="bear-ai-floating-name"
+    >
+      Teddy
+    </span>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       CHAT URSULEȚ AI
+  ====================================================== -->
+
+  <section
+    id="bearAIPanel"
+    class="bear-ai-panel"
+  >
+
+    <div class="bear-ai-header">
+
+      <div class="bear-ai-header-photo">
+
+        <img
+          src="./ursulet.png"
+          alt="Ursuleț AI"
+          draggable="false"
+          loading="lazy"
+          decoding="async"
+        >
+
+      </div>
+
+
+      <div class="bear-ai-header-text">
+
+        <strong id="bearAIHeaderName">
+          Teddy 🧸
+        </strong>
+
+        <span>
+          Ursulețul vostru AI ❤️
+        </span>
+
+      </div>
+
+
+      <button
+        id="bearAIClose"
+        class="bear-ai-close"
+        type="button"
+        aria-label="Închide"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      id="bearAIMessages"
+      class="bear-ai-messages"
+    ></div>
+
+
+    <div class="bear-ai-input-row">
+
+      <input
+        id="bearAIInput"
+        type="text"
+        placeholder="Vorbește cu ursulețul..."
+        autocomplete="off"
+      >
+
+
+      <button
+        id="bearAISend"
+        type="button"
+        aria-label="Trimite"
+      >
+        ➤
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       MENIU
+  ====================================================== -->
+
+  <nav class="bottom-nav">
+
+    <button
+      type="button"
+      class="nav-item active"
+      data-page="index.html"
+    >
+      <span class="nav-icon">🏠</span>
+      <span>Acasă</span>
+    </button>
+
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="chat.html"
+    >
+      <span class="nav-icon">💬</span>
+      <span>Chat</span>
+    </button>
+
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="amintiri.html"
+    >
+      <span class="nav-icon">📸</span>
+      <span>Amintiri</span>
+    </button>
+
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="evenimente.html"
+    >
+      <span class="nav-icon">📅</span>
+      <span>Evenimente</span>
+    </button>
+
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="setari.html"
+    >
+      <span class="nav-icon">⚙️</span>
+      <span>Setări</span>
+    </button>
+
+  </nav>
+
+
+
+  <!-- =====================================================
+       SCRIPTURI
+  ====================================================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./supabase.js?v=31"></script>
+<script src="./security.js?v=32"></script>
+  <script src="./cloud-sync.js?v=28"></script>
+
+  <script src="./tema.js?v=28"></script>
+
+  <script src="./ursulet.js?v=28"></script>
+
+
+
+  <script>
+
+    console.log("❤️ DUO LOVE BUILD v28 - HOME");
+
+    /* =====================================================
+       AUTENTIFICARE
+    ====================================================== */
+
+    async function checkAuthentication() {
+
+      if (
+        typeof supabaseClient ===
+        "undefined"
+      ) {
+
+        console.error(
+          "Supabase nu este încărcat."
+        );
+
+        return false;
+      }
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .auth
+            .getSession();
+
+
+        if (
+          error ||
+          !data ||
+          !data.session
+        ) {
+
+          window.location.href =
+            "./login.html";
+
+          return false;
+        }
+
+
+        return true;
+
+      } catch (error) {
+
+        console.error(
+          "Eroare autentificare:",
+          error
+        );
+
+        return false;
+      }
+
+    }
+
+
+
+    /* =====================================================
+       HOME
+    ====================================================== */
+
+    function loadHomeData() {
+
+      const firstName =
+        localStorage.getItem(
+          "firstName"
+        ) ||
+        "Alex";
+
+
+      const secondName =
+        localStorage.getItem(
+          "secondName"
+        ) ||
+        "Bianca";
+
+
+      document.getElementById(
+        "coupleNames"
+      ).textContent =
+        firstName +
+        "💙 & " +
+        secondName +
+        "💙";
+
+
+      const savedPhoto =
+        localStorage.getItem(
+          "couplePhoto"
+        );
+
+
+      if (
+        savedPhoto
+      ) {
+
+        document.getElementById(
+          "couplePhoto"
+        ).src =
+          savedPhoto;
+
+      }
+
+
+      const quote =
+        localStorage.getItem(
+          "coupleQuote"
+        );
+
+
+      if (
+        quote
+      ) {
+
+        document.getElementById(
+          "homeCoupleQuote"
+        ).textContent =
+          quote;
+
+      }
+
+
+      loadActivityHistory();
+
+      loadNextEvent();
+
+    }
+
+
+
+    /* =====================================================
+       ISTORIC
+    ====================================================== */
+
+    function loadActivityHistory() {
+
+      const box =
+        document.getElementById(
+          "activityHistory"
+        );
+
+
+      let history = [];
+
+
+      try {
+
+        history =
+          JSON.parse(
+            localStorage.getItem(
+              "loveHistory"
+            ) ||
+            "[]"
+          );
+
+      } catch (error) {
+
+        history = [];
+
+      }
+
+
+      if (
+        !Array.isArray(history) ||
+        !history.length
+      ) {
+
+        box.innerHTML = `
+
+          <div class="history-item">
+
+            <span>
+              ❤️
+            </span>
+
+            <div>
+
+              <strong>
+                Povestea voastră
+              </strong>
+
+              <p>
+                Încă nu există activitate.
+              </p>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        return;
+      }
+
+
+      box.innerHTML =
+        history
+          .slice(
+            0,
+            6
+          )
+          .map(
+            function (item) {
+
+              return `
+
+                <div class="history-item">
+
+                  <span>
+                    ${item.icon || "❤️"}
+                  </span>
+
+                  <div>
+
+                    <strong>
+                      ${item.title || ""}
+                    </strong>
+
+                    <p>
+                      ${item.text || ""}
+                    </p>
+
+                  </div>
+
+                </div>
+
+              `;
+
+            }
+          )
+          .join("");
+
+    }
+
+
+
+    /* =====================================================
+       URMĂTORUL EVENIMENT
+    ====================================================== */
+
+    function loadNextEvent() {
+
+      let events = [];
+
+
+      try {
+
+        events =
+          JSON.parse(
+            localStorage.getItem(
+              "loveEvents"
+            ) ||
+            "[]"
+          );
+
+      } catch (error) {
+
+        events = [];
+
+      }
+
+
+      if (
+        !Array.isArray(events)
+      ) {
+
+        events = [];
+
+      }
+
+
+      const title =
+        document.getElementById(
+          "nextEventTitle"
+        );
+
+
+      const date =
+        document.getElementById(
+          "nextEventDate"
+        );
+
+
+      const countdown =
+        document.getElementById(
+          "nextEventCountdown"
+        );
+
+
+      const today =
+        new Date();
+
+
+      today.setHours(
+        0,
+        0,
+        0,
+        0
+      );
+
+
+      const future =
+        events
+          .filter(
+            function (event) {
+
+              if (
+                !event ||
+                !event.date
+              ) {
+
+                return false;
+              }
+
+
+              const eventDate =
+                new Date(
+                  event.date +
+                  "T00:00:00"
+                );
+
+
+              return (
+                !Number.isNaN(
+                  eventDate.getTime()
+                ) &&
+                eventDate >= today
+              );
+
+            }
+          )
+          .sort(
+            function (a, b) {
+
+              return (
+                new Date(
+                  a.date +
+                  "T00:00:00"
+                ) -
+                new Date(
+                  b.date +
+                  "T00:00:00"
+                )
+              );
+
+            }
+          );
+
+
+      if (
+        !future.length
+      ) {
+
+        title.textContent =
+          "Niciun eveniment";
+
+
+        date.textContent =
+          "Adaugă un moment important.";
+
+
+        countdown.textContent =
+          "";
+
+
+        return;
+      }
+
+
+      const next =
+        future[0];
+
+
+      const target =
+        new Date(
+          next.date +
+          "T00:00:00"
+        );
+
+
+      const days =
+        Math.ceil(
+          (
+            target -
+            today
+          ) /
+          86400000
+        );
+
+
+      title.textContent =
+        next.title ||
+        "Moment important";
+
+
+      date.textContent =
+        target.toLocaleDateString(
+          "ro-RO",
+          {
+            day:
+              "numeric",
+
+            month:
+              "long",
+
+            year:
+              "numeric"
+          }
+        );
+
+
+      countdown.textContent =
+        days === 0
+          ? "🎉 Este astăzi! ❤️"
+          : "❤️ Mai sunt " +
+            days +
+            " zile";
+
+    }
+
+
+
+    /* =====================================================
+       POZA CUPLULUI - COMUNĂ PENTRU AMÂNDOI
+       SUPABASE STORAGE
+    ====================================================== */
+
+    const photoInput =
+      document.getElementById(
+        "couplePhotoInput"
+      );
+
+
+    const homePhotoButton =
+      document.querySelector(
+        'label[for="couplePhotoInput"]'
+      );
+
+
+    const homeCouplePhoto =
+      document.getElementById(
+        "couplePhoto"
+      );
+
+
+
+    async function refreshHomeCouplePhoto() {
+
+      /*
+        Dacă avem o cale în Storage,
+        cerem un URL privat nou pentru
+        utilizatorul conectat.
+      */
+
+      if (
+        localStorage.getItem(
+          "couplePhotoPath"
+        ) &&
+        typeof window.refreshCouplePhotoFromStorage ===
+          "function"
+      ) {
+
+        const url =
+          await window
+            .refreshCouplePhotoFromStorage();
+
+
+        if (
+          url
+        ) {
+
+          homeCouplePhoto.src =
+            url;
+
+
+          return url;
+
+        }
+
+      }
+
+
+      /*
+        Fallback local.
+      */
+
+      const localPhoto =
+        localStorage.getItem(
+          "couplePhoto"
+        );
+
+
+      if (
+        localPhoto
+      ) {
+
+        homeCouplePhoto.src =
+          localPhoto;
+
+
+        return localPhoto;
+
+      }
+
+
+      return null;
+
+    }
+
+
+
+    function setHomePhotoBusy(
+      busy
+    ) {
+
+      photoInput.disabled =
+        busy;
+
+
+      if (
+        homePhotoButton
+      ) {
+
+        homePhotoButton.style.pointerEvents =
+          busy
+            ? "none"
+            : "";
+
+
+        homePhotoButton.style.opacity =
+          busy
+            ? ".65"
+            : "";
+
+
+        homePhotoButton.textContent =
+          busy
+            ? "⏳"
+            : "📷";
+
+      }
+
+    }
+
+
+
+    photoInput.addEventListener(
+      "change",
+      async function () {
+
+        const file =
+          this.files &&
+          this.files[0];
+
+
+        if (
+          !file
+        ) {
+
+          return;
+
+        }
+
+
+        /*
+          Acceptăm doar imagini.
+        */
+
+        if (
+          !file.type ||
+          !file.type.startsWith(
+            "image/"
+          )
+        ) {
+
+          alert(
+            "Alege o imagine validă."
+          );
+
+
+          this.value =
+            "";
+
+
+          return;
+
+        }
+
+
+        if (
+          typeof window.uploadCouplePhotoBlob !==
+          "function"
+        ) {
+
+          alert(
+            "Lipsește funcția de salvare în Storage. Verifică cloud-sync.js."
+          );
+
+
+          this.value =
+            "";
+
+
+          return;
+
+        }
+
+
+        setHomePhotoBusy(
+          true
+        );
+
+
+        const objectUrl =
+          URL.createObjectURL(
+            file
+          );
+
+
+        try {
+
+          const image =
+            new Image();
+
+
+          const loaded =
+            await new Promise(
+              function (
+                resolve,
+                reject
+              ) {
+
+                image.onload =
+                  function () {
+
+                    resolve(
+                      true
+                    );
+
+                  };
+
+
+                image.onerror =
+                  function () {
+
+                    reject(
+                      new Error(
+                        "Imaginea nu a putut fi citită."
+                      )
+                    );
+
+                  };
+
+
+                image.src =
+                  objectUrl;
+
+              }
+            );
+
+
+          if (
+            !loaded
+          ) {
+
+            throw new Error(
+              "Imagine invalidă."
+            );
+
+          }
+
+
+          const maxSize =
+            1400;
+
+
+          const scale =
+            Math.min(
+              1,
+              maxSize /
+              Math.max(
+                image.width,
+                image.height
+              )
+            );
+
+
+          const canvas =
+            document.createElement(
+              "canvas"
+            );
+
+
+          canvas.width =
+            Math.max(
+              1,
+              Math.round(
+                image.width *
+                scale
+              )
+            );
+
+
+          canvas.height =
+            Math.max(
+              1,
+              Math.round(
+                image.height *
+                scale
+              )
+            );
+
+
+          const context =
+            canvas.getContext(
+              "2d"
+            );
+
+
+          context.drawImage(
+            image,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+
+
+          const blob =
+            await new Promise(
+              function (
+                resolve
+              ) {
+
+                canvas.toBlob(
+                  resolve,
+                  "image/jpeg",
+                  0.82
+                );
+
+              }
+            );
+
+
+          if (
+            !blob
+          ) {
+
+            throw new Error(
+              "Poza nu a putut fi pregătită."
+            );
+
+          }
+
+
+          /*
+            uploadCouplePhotoBlob:
+            - urcă poza în love-media
+            - salvează couplePhotoPath
+            - salvează calea în couple_app_data
+            - generează URL-ul privat
+          */
+
+          const result =
+            await window
+              .uploadCouplePhotoBlob(
+                blob,
+                {
+                  logActivity:
+                    true
+                }
+              );
+
+
+          if (
+            !result ||
+            !result.success
+          ) {
+
+            throw new Error(
+              result &&
+              result.error
+                ? result.error
+                : "Poza nu s-a putut salva."
+            );
+
+          }
+
+
+          if (
+            result.url
+          ) {
+
+            homeCouplePhoto.src =
+              result.url;
+
+          } else {
+
+            await refreshHomeCouplePhoto();
+
+          }
+
+
+          console.log(
+            "❤️ Poza cuplului a fost salvată pentru amândoi."
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Eroare poză cuplu:",
+            error
+          );
+
+
+          alert(
+            error &&
+            error.message
+              ? error.message
+              : "Poza nu s-a putut salva."
+          );
+
+        } finally {
+
+          URL.revokeObjectURL(
+            objectUrl
+          );
+
+
+          setHomePhotoBusy(
+            false
+          );
+
+
+          this.value =
+            "";
+
+        }
+
+      }
+    );
+
+
+
+    /* =====================================================
+       CONTOR RELAȚIE - ORA ROMÂNIEI 🇷🇴
+
+       Numărul de zile se schimbă exact când
+       în România se face 00:00:00.
+    ====================================================== */
+
+    const ROMANIA_TIMEZONE =
+      "Europe/Bucharest";
+
+
+    let lastRomaniaCounterDateKey =
+      null;
+
+
+    function getRomaniaDateParts(
+      date = new Date()
+    ) {
+
+      const formatter =
+        new Intl.DateTimeFormat(
+          "en-CA",
+          {
+            timeZone:
+              ROMANIA_TIMEZONE,
+
+            year:
+              "numeric",
+
+            month:
+              "2-digit",
+
+            day:
+              "2-digit",
+
+            hour:
+              "2-digit",
+
+            minute:
+              "2-digit",
+
+            second:
+              "2-digit",
+
+            hourCycle:
+              "h23"
+          }
+        );
+
+
+      const result = {};
+
+
+      formatter
+        .formatToParts(
+          date
+        )
+        .forEach(
+          function (
+            part
+          ) {
+
+            if (
+              part.type !==
+              "literal"
+            ) {
+
+              result[
+                part.type
+              ] =
+                Number(
+                  part.value
+                );
+
+            }
+
+          }
+        );
+
+
+      return result;
+
+    }
+
+
+
+    function getRomaniaDateKey(
+      parts
+    ) {
+
+      return (
+        String(
+          parts.year
+        ) +
+        "-" +
+        String(
+          parts.month
+        ).padStart(
+          2,
+          "0"
+        ) +
+        "-" +
+        String(
+          parts.day
+        ).padStart(
+          2,
+          "0"
+        )
+      );
+
+    }
+
+
+
+    function relationshipStartParts() {
+
+      const saved =
+        localStorage.getItem(
+          "relationshipStartDate"
+        ) ||
+        "2026-03-10";
+
+
+      /*
+        Luăm doar data YYYY-MM-DD.
+        Astfel nu depindem de fusul orar
+        setat pe telefon.
+      */
+
+      const match =
+        String(
+          saved
+        )
+          .match(
+            /(\d{4})-(\d{2})-(\d{2})/
+          );
+
+
+      if (
+        !match
+      ) {
+
+        return {
+          year:
+            2026,
+
+          month:
+            3,
+
+          day:
+            10
+        };
+
+      }
+
+
+      return {
+        year:
+          Number(
+            match[1]
+          ),
+
+        month:
+          Number(
+            match[2]
+          ),
+
+        day:
+          Number(
+            match[3]
+          )
+      };
+
+    }
+
+
+
+    function calculateRelationshipTotalDays(
+      nowParts,
+      startParts
+    ) {
+
+      const todayDate =
+        Date.UTC(
+          nowParts.year,
+          nowParts.month - 1,
+          nowParts.day
+        );
+
+
+      const startDate =
+        Date.UTC(
+          startParts.year,
+          startParts.month - 1,
+          startParts.day
+        );
+
+
+      return Math.max(
+        0,
+        Math.floor(
+          (
+            todayDate -
+            startDate
+          ) /
+          86400000
+        )
+      );
+
+    }
+
+
+
+    /* =====================================================
+       NOTIFICARE LOCALĂ LA SCHIMBAREA ZILEI
+
+       Funcționează exact la 00:00 dacă PWA-ul
+       este activ și notificările sunt permise.
+
+       Pentru notificare exactă atunci când PWA-ul
+       este complet închis este necesar Web Push
+       trimis de server/Supabase.
+    ====================================================== */
+
+    async function showRelationshipMidnightNotification(
+      totalDays,
+      dateKey
+    ) {
+
+      if (
+        !("Notification" in window) ||
+        Notification.permission !==
+          "granted" ||
+        !("serviceWorker" in navigator)
+      ) {
+
+        return false;
+
+      }
+
+
+      const notificationKey =
+        "relationshipMidnightNotification:" +
+        dateKey;
+
+
+      if (
+        localStorage.getItem(
+          notificationKey
+        ) ===
+        "sent"
+      ) {
+
+        return false;
+
+      }
+
+
+      try {
+
+        const registration =
+          await navigator
+            .serviceWorker
+            .ready;
+
+
+        await registration
+          .showNotification(
+            "❤️ O nouă zi împreună",
+            {
+              body:
+                "Astăzi aveți " +
+                totalDays +
+                " zile împreună. 🥰",
+
+              icon:
+                "./icon-192.png",
+
+              badge:
+                "./icon-192.png",
+
+              tag:
+                "relationship-new-day",
+
+              renotify:
+                true,
+
+              data: {
+                url:
+                  "./index.html"
+              }
+            }
+          );
+
+
+        localStorage.setItem(
+          notificationKey,
+          "sent"
+        );
+
+
+        return true;
+
+      } catch (error) {
+
+        console.warn(
+          "Notificarea de miezul nopții nu a putut fi afișată:",
+          error
+        );
+
+
+        return false;
+
+      }
+
+    }
+
+
+
+    /* =====================================================
+       CONTOR RELAȚIE
+    ====================================================== */
+
+    function updateCounter() {
+
+      const now =
+        getRomaniaDateParts();
+
+
+      const start =
+        relationshipStartParts();
+
+
+      const currentRomaniaDateKey =
+        getRomaniaDateKey(
+          now
+        );
+
+
+      const totalDays =
+        calculateRelationshipTotalDays(
+          now,
+          start
+        );
+
+
+      /*
+        Ani / luni / zile calendaristice.
+        Ora de început este 00:00 România.
+      */
+
+      let years =
+        now.year -
+        start.year;
+
+
+      let months =
+        now.month -
+        start.month;
+
+
+      let days =
+        now.day -
+        start.day;
+
+
+      if (
+        days < 0
+      ) {
+
+        const previousMonthDays =
+          new Date(
+            Date.UTC(
+              now.year,
+              now.month - 1,
+              0
+            )
+          )
+            .getUTCDate();
+
+
+        days +=
+          previousMonthDays;
+
+
+        months--;
+
+      }
+
+
+      if (
+        months < 0
+      ) {
+
+        months +=
+          12;
+
+
+        years--;
+
+      }
+
+
+      const beforeStart =
+        (
+          Date.UTC(
+            now.year,
+            now.month - 1,
+            now.day
+          ) <
+          Date.UTC(
+            start.year,
+            start.month - 1,
+            start.day
+          )
+        );
+
+
+      const values =
+        beforeStart
+          ? {
+              totalDaysText:
+                "0",
+
+              counterYears:
+                "0",
+
+              counterMonths:
+                "0",
+
+              days:
+                "0",
+
+              hours:
+                "00",
+
+              minutes:
+                "00",
+
+              seconds:
+                "00"
+            }
+          : {
+              totalDaysText:
+                String(
+                  totalDays
+                ),
+
+              counterYears:
+                String(
+                  Math.max(
+                    0,
+                    years
+                  )
+                ),
+
+              counterMonths:
+                String(
+                  Math.max(
+                    0,
+                    months
+                  )
+                ),
+
+              days:
+                String(
+                  Math.max(
+                    0,
+                    days
+                  )
+                ),
+
+              hours:
+                String(
+                  now.hour
+                ).padStart(
+                  2,
+                  "0"
+                ),
+
+              minutes:
+                String(
+                  now.minute
+                ).padStart(
+                  2,
+                  "0"
+                ),
+
+              seconds:
+                String(
+                  now.second
+                ).padStart(
+                  2,
+                  "0"
+                )
+            };
+
+
+      Object.entries(
+        values
+      )
+        .forEach(
+          function (
+            entry
+          ) {
+
+            const id =
+              entry[0];
+
+
+            const value =
+              entry[1];
+
+
+            const element =
+              document.getElementById(
+                id
+              );
+
+
+            if (
+              element &&
+              element.textContent !==
+                value
+            ) {
+
+              element.textContent =
+                value;
+
+            }
+
+          }
+        );
+
+
+      /*
+        Prima rulare doar memorează data.
+        Dacă trecem dintr-o zi în alta cât
+        aplicația rulează, trimitem notificarea.
+      */
+
+      if (
+        lastRomaniaCounterDateKey ===
+        null
+      ) {
+
+        lastRomaniaCounterDateKey =
+          currentRomaniaDateKey;
+
+
+        return;
+
+      }
+
+
+      if (
+        lastRomaniaCounterDateKey !==
+        currentRomaniaDateKey
+      ) {
+
+        lastRomaniaCounterDateKey =
+          currentRomaniaDateKey;
+
+
+        showRelationshipMidnightNotification(
+          totalDays,
+          currentRomaniaDateKey
+        );
+
+      }
+
+    }
+
+
+
+    /* =====================================================
+       SERIE ZILNICĂ 🔥
+    ====================================================== */
+
+    const appStreakCard =
+      document.getElementById(
+        "appStreakCard"
+      );
+
+
+    const appStreakCount =
+      document.getElementById(
+        "appStreakCount"
+      );
+
+
+    const appStreakDaysText =
+      document.getElementById(
+        "appStreakDaysText"
+      );
+
+
+    const appStreakBest =
+      document.getElementById(
+        "appStreakBest"
+      );
+
+
+    const appStreakHelp =
+      document.getElementById(
+        "appStreakHelp"
+      );
+
+
+
+    function getStreakLevelFromCount(
+      count
+    ) {
+
+      if (
+        count >= 30
+      ) {
+
+        return "blue";
+
+      }
+
+
+      if (
+        count >= 14
+      ) {
+
+        return "purple";
+
+      }
+
+
+      if (
+        count >= 7
+      ) {
+
+        return "red";
+
+      }
+
+
+      return "orange";
+
+    }
+
+
+
+    function renderAppStreak(
+      info,
+      animate = false
+    ) {
+
+      const safeInfo =
+        info &&
+        typeof info === "object"
+          ? info
+          : {};
+
+
+      const count =
+        Math.max(
+          0,
+          Number(
+            safeInfo.count
+          ) || 0
+        );
+
+
+      const best =
+        Math.max(
+          count,
+          Number(
+            safeInfo.best
+          ) || 0
+        );
+
+
+      const level =
+        safeInfo.level ||
+        getStreakLevelFromCount(
+          count
+        );
+
+
+      appStreakCount.textContent =
+        count;
+
+
+      appStreakBest.textContent =
+        best;
+
+
+      appStreakDaysText.textContent =
+        count === 1
+          ? "zi"
+          : "zile";
+
+
+      appStreakCard.classList.remove(
+        "orange",
+        "red",
+        "purple",
+        "blue",
+        "just-increased"
+      );
+
+
+      appStreakCard.classList.add(
+        level
+      );
+
+
+      if (
+        count <= 1
+      ) {
+
+        appStreakHelp.textContent =
+          "Intrați și mâine ca să continuați seria.";
+
+      } else if (
+        count < 7
+      ) {
+
+        appStreakHelp.textContent =
+          "Focul crește. Continuați zilnic 🔥";
+
+      } else if (
+        count < 14
+      ) {
+
+        appStreakHelp.textContent =
+          "Seria voastră este încinsă ❤️‍🔥";
+
+      } else if (
+        count < 30
+      ) {
+
+        appStreakHelp.textContent =
+          "Flacăra voastră a ajuns la nivel mov 💜";
+
+      } else {
+
+        appStreakHelp.textContent =
+          "Serie legendară. Foc albastru 💙🔥";
+
+      }
+
+
+      if (
+        animate
+      ) {
+
+        requestAnimationFrame(
+          function () {
+
+            appStreakCard.classList.add(
+              "just-increased"
+            );
+
+          }
+        );
+
+
+        setTimeout(
+          function () {
+
+            appStreakCard.classList.remove(
+              "just-increased"
+            );
+
+          },
+          800
+        );
+
+      }
+
+    }
+
+
+
+    function renderStoredAppStreak() {
+
+      if (
+        typeof window.getAppStreakInfo ===
+        "function"
+      ) {
+
+        renderAppStreak(
+          window.getAppStreakInfo(),
+          false
+        );
+
+
+        return;
+
+      }
+
+
+      const count =
+        Number(
+          localStorage.getItem(
+            "appStreakCount"
+          )
+        ) || 0;
+
+
+      const best =
+        Number(
+          localStorage.getItem(
+            "appStreakBest"
+          )
+        ) || count;
+
+
+      renderAppStreak(
+        {
+          count:
+            count,
+
+          best:
+            best,
+
+          level:
+            getStreakLevelFromCount(
+              count
+            )
+        },
+        false
+      );
+
+    }
+
+
+
+    async function registerAndRenderAppStreak() {
+
+      if (
+        typeof window.registerDailyAppOpen !==
+        "function"
+      ) {
+
+        renderStoredAppStreak();
+
+        return;
+
+      }
+
+
+      const result =
+        await window
+          .registerDailyAppOpen();
+
+
+      if (
+        result &&
+        result.success
+      ) {
+
+        renderAppStreak(
+          result,
+          result.increased === true
+        );
+
+
+        return;
+
+      }
+
+
+      renderStoredAppStreak();
+
+    }
+
+
+
+
+    /* =====================================================
+       XP COMUN ⭐
+    ====================================================== */
+
+    const coupleXPCard =
+      document.getElementById(
+        "coupleXPCard"
+      );
+
+
+    const coupleTotalXP =
+      document.getElementById(
+        "coupleTotalXP"
+      );
+
+
+    const coupleAvailableXP =
+      document.getElementById(
+        "coupleAvailableXP"
+      );
+
+
+    const coupleXPProgress =
+      document.getElementById(
+        "coupleXPProgress"
+      );
+
+
+    const coupleXPUsersToday =
+      document.getElementById(
+        "coupleXPUsersToday"
+      );
+
+
+    const coupleXPNextText =
+      document.getElementById(
+        "coupleXPNextText"
+      );
+
+
+    const coupleXPGoalText =
+      document.getElementById(
+        "coupleXPGoalText"
+      );
+
+
+    const coupleXPUnlock =
+      document.getElementById(
+        "coupleXPUnlock"
+      );
+
+
+    const coupleXPUnlockIcon =
+      document.getElementById(
+        "coupleXPUnlockIcon"
+      );
+
+
+    const coupleXPUnlockTitle =
+      document.getElementById(
+        "coupleXPUnlockTitle"
+      );
+
+
+    const coupleXPUnlockDescription =
+      document.getElementById(
+        "coupleXPUnlockDescription"
+      );
+
+
+    const xpGainPop =
+      document.getElementById(
+        "xpGainPop"
+      );
+
+
+
+    function renderCoupleXP(
+      info,
+      showGain = false
+    ) {
+
+      const safeInfo =
+        info &&
+        typeof info === "object"
+          ? info
+          : {};
+
+
+      const totalXP =
+        Math.max(
+          0,
+          Number(
+            safeInfo.totalXP
+          ) || 0
+        );
+
+
+      const availableXP =
+        Math.max(
+          0,
+          Number(
+            safeInfo.availableXP
+          ) || 0
+        );
+
+
+      const usersToday =
+        Math.max(
+          0,
+          Math.min(
+            2,
+            Number(
+              safeInfo.usersToday
+            ) || 0
+          )
+        );
+
+
+      const unlocked =
+        safeInfo.unlocked1000 === true ||
+        totalXP >= 1000;
+
+
+      const progress =
+        Math.min(
+          100,
+          Math.max(
+            0,
+            (
+              totalXP /
+              1000
+            ) *
+            100
+          )
+        );
+
+
+      coupleTotalXP.textContent =
+        totalXP;
+
+
+      coupleAvailableXP.textContent =
+        availableXP +
+        " XP";
+
+
+      coupleXPUsersToday.textContent =
+        "👥 " +
+        usersToday +
+        "/2 azi";
+
+
+      coupleXPProgress.style.width =
+        progress +
+        "%";
+
+
+      if (
+        unlocked
+      ) {
+
+        coupleXPCard.classList.add(
+          "unlocked"
+        );
+
+
+        coupleXPGoalText.textContent =
+          " XP total";
+
+
+        coupleXPNextText.textContent =
+          "Pragul de 1000 XP a fost atins 🎉";
+
+
+        coupleXPUnlockIcon.textContent =
+          "🔓";
+
+
+        coupleXPUnlockTitle.textContent =
+          "Mesaje Secrete deblocate 💌";
+
+
+        coupleXPUnlockDescription.textContent =
+          "Funcția este deblocată permanent pentru voi.";
+
+      } else {
+
+        coupleXPCard.classList.remove(
+          "unlocked"
+        );
+
+
+        coupleXPGoalText.textContent =
+          "/ 1000 XP";
+
+
+        const remaining =
+          Math.max(
+            0,
+            1000 -
+            totalXP
+          );
+
+
+        coupleXPNextText.textContent =
+          "Mai aveți " +
+          remaining +
+          " XP până la deblocare";
+
+
+        coupleXPUnlockIcon.textContent =
+          "🔒";
+
+
+        coupleXPUnlockTitle.textContent =
+          "Mesaje Secrete";
+
+
+        coupleXPUnlockDescription.textContent =
+          "Se deblochează permanent la 1000 XP total.";
+
+      }
+
+
+      if (
+        showGain
+      ) {
+
+        xpGainPop.classList.remove(
+          "show"
+        );
+
+
+        void xpGainPop.offsetWidth;
+
+
+        xpGainPop.classList.add(
+          "show"
+        );
+
+
+        setTimeout(
+          function () {
+
+            xpGainPop.classList.remove(
+              "show"
+            );
+
+          },
+          1600
+        );
+
+      }
+
+    }
+
+
+
+    function renderCachedCoupleXP() {
+
+      if (
+        typeof window.getCachedCoupleXP ===
+        "function"
+      ) {
+
+        renderCoupleXP(
+          window.getCachedCoupleXP(),
+          false
+        );
+
+
+        return;
+
+      }
+
+
+      renderCoupleXP(
+        {
+          totalXP:
+            Number(
+              localStorage.getItem(
+                "coupleTotalXP"
+              )
+            ) || 0,
+
+          availableXP:
+            Number(
+              localStorage.getItem(
+                "coupleAvailableXP"
+              )
+            ) || 0,
+
+          usersToday:
+            Number(
+              localStorage.getItem(
+                "coupleXPUsersToday"
+              )
+            ) || 0,
+
+          unlocked1000:
+            localStorage.getItem(
+              "coupleUnlocked1000"
+            ) === "true"
+        },
+        false
+      );
+
+    }
+
+
+
+    async function claimAndRenderDailyXP() {
+
+      if (
+        typeof window.claimDailyAppXP !==
+        "function"
+      ) {
+
+        renderCachedCoupleXP();
+
+        return;
+
+      }
+
+
+      const result =
+        await window
+          .claimDailyAppXP();
+
+
+      if (
+        result &&
+        result.success
+      ) {
+
+        renderCoupleXP(
+          result,
+          result.awarded === true
+        );
+
+
+        return;
+
+      }
+
+
+      renderCachedCoupleXP();
+
+    }
+
+
+
+    /* =====================================================
+       URSULEȚ AI - ELEMENTE
+    ====================================================== */
+
+    const bearAIFloating =
+      document.getElementById(
+        "bearAIFloating"
+      );
+
+
+    const bearAICircle =
+      document.getElementById(
+        "bearAICircle"
+      );
+
+
+    const bearAIPanel =
+      document.getElementById(
+        "bearAIPanel"
+      );
+
+
+    const bearAIClose =
+      document.getElementById(
+        "bearAIClose"
+      );
+
+
+    const bearAIHeaderName =
+      document.getElementById(
+        "bearAIHeaderName"
+      );
+
+
+    const bearAIFloatingName =
+      document.getElementById(
+        "bearAIFloatingName"
+      );
+
+
+    const bearAIMessages =
+      document.getElementById(
+        "bearAIMessages"
+      );
+
+
+    const bearAIInput =
+      document.getElementById(
+        "bearAIInput"
+      );
+
+
+    const bearAISend =
+      document.getElementById(
+        "bearAISend"
+      );
+
+
+    let bearAIChatMessages =
+      [];
+
+
+
+    /* =====================================================
+       NUMELE URSULEȚULUI AI
+    ====================================================== */
+
+    function getBearAIName() {
+
+      const name =
+        localStorage.getItem(
+          "bearAIName"
+        );
+
+
+      if (
+        name &&
+        name.trim()
+      ) {
+
+        return name.trim();
+
+      }
+
+
+      return "Teddy";
+
+    }
+
+
+
+    function refreshBearAIName() {
+
+      const name =
+        getBearAIName();
+
+
+      bearAIFloatingName.textContent =
+        name;
+
+
+      bearAIHeaderName.textContent =
+        name +
+        " 🧸";
+
+    }
+
+
+
+    /* =====================================================
+       CHAT URSULEȚ AI
+    ====================================================== */
+
+    function loadBearAIChat() {
+
+      try {
+
+        bearAIChatMessages =
+          JSON.parse(
+            localStorage.getItem(
+              "bearAIChatMessages"
+            ) ||
+            "[]"
+          );
+
+      } catch (error) {
+
+        bearAIChatMessages =
+          [];
+
+      }
+
+
+      if (
+        !Array.isArray(
+          bearAIChatMessages
+        )
+      ) {
+
+        bearAIChatMessages =
+          [];
+
+      }
+
+
+      if (
+        !bearAIChatMessages.length
+      ) {
+
+        bearAIChatMessages.push({
+
+          role:
+            "ai",
+
+          text:
+            "Hei! 🧸❤️ Eu sunt " +
+            getBearAIName() +
+            ". Sunt ursulețul vostru. Poți vorbi cu mine oricând. 💕",
+
+          date:
+            Date.now()
+
+        });
+
+
+        saveBearAIChat();
+
+      }
+
+    }
+
+
+
+    function saveBearAIChat() {
+
+      if (
+        bearAIChatMessages.length >
+        60
+      ) {
+
+        bearAIChatMessages =
+          bearAIChatMessages.slice(
+            -60
+          );
+
+      }
+
+
+      if (
+        typeof window.saveJSON ===
+        "function"
+      ) {
+
+        window.saveJSON(
+          "bearAIChatMessages",
+          bearAIChatMessages
+        );
+
+      } else {
+
+        localStorage.setItem(
+          "bearAIChatMessages",
+          JSON.stringify(
+            bearAIChatMessages
+          )
+        );
+
+      }
+
+    }
+
+
+
+    function renderBearAIChat() {
+
+      bearAIMessages.innerHTML =
+        "";
+
+
+      bearAIChatMessages.forEach(
+        function (
+          message
+        ) {
+
+          const bubble =
+            document.createElement(
+              "div"
+            );
+
+
+          bubble.className =
+            "bear-ai-message " +
+            (
+              message.role ===
+              "user"
+                ? "user"
+                : "ai"
+            );
+
+
+          bubble.textContent =
+            message.text;
+
+
+          bearAIMessages.appendChild(
+            bubble
+          );
+
+        }
+      );
+
+
+      requestAnimationFrame(
+        function () {
+
+          bearAIMessages.scrollTop =
+            bearAIMessages.scrollHeight;
+
+        }
+      );
+
+    }
+
+
+
+    /* =====================================================
+       RĂSPUNSURI URSULEȚ
+    ====================================================== */
+
+    function normalizeBearText(
+      text
+    ) {
+
+      return text
+        .toLowerCase()
+        .normalize(
+          "NFD"
+        )
+        .replace(
+          /[\u0300-\u036f]/g,
+          ""
+        );
+
+    }
+
+
+
+    function bearRandom(
+      list
+    ) {
+
+      return list[
+        Math.floor(
+          Math.random() *
+          list.length
+        )
+      ];
+
+    }
+
+
+
+    function generateBearAIReply(
+      userText
+    ) {
+
+      const text =
+        normalizeBearText(
+          userText
+        );
+
+
+      const name =
+        getBearAIName();
+
+
+      if (
+        text.includes(
+          "cum te cheama"
+        ) ||
+        text.includes(
+          "numele tau"
+        )
+      ) {
+
+        return (
+          "Eu sunt " +
+          name +
+          ". 🧸❤️ Numele meu poate fi schimbat din Setări."
+        );
+
+      }
+
+
+      if (
+        text.includes(
+          "salut"
+        ) ||
+        text.includes(
+          "buna"
+        ) ||
+        text.includes(
+          "hei"
+        )
+      ) {
+
+        return (
+          "Hei! 🧸💕 Eu sunt " +
+          name +
+          ". Cum ești azi?"
+        );
+
+      }
+
+
+      if (
+        text.includes(
+          "ce faci"
+        )
+      ) {
+
+        return (
+          "Stau aici și am grijă de povestea voastră. 🧸❤️ Și aștept să mai vorbim."
+        );
+
+      }
+
+
+      if (
+        text.includes(
+          "trist"
+        ) ||
+        text.includes(
+          "suparat"
+        ) ||
+        text.includes(
+          "plang"
+        )
+      ) {
+
+        return bearRandom([
+          "Vin cu o îmbrățișare mare de urs. 🧸🤍 Spune-mi ce s-a întâmplat.",
+          "Sunt aici să te ascult. 🫂❤️ Poți să-mi povestești.",
+          "Îți trimit o îmbrățișare virtuală. 🧸💕 Spune-mi ce ai pe suflet."
+        ]);
+
+      }
+
+
+      if (
+        text.includes(
+          "dor"
+        )
+      ) {
+
+        return (
+          "Dorul apare atunci când cineva înseamnă mult pentru tine. 🥹❤️ Poate îi trimiți un mesaj chiar acum."
+        );
+
+      }
+
+
+      if (
+        text.includes(
+          "iubesc"
+        ) ||
+        text.includes(
+          "iubire"
+        ) ||
+        text.includes(
+          "te iubesc"
+        )
+      ) {
+
+        return bearRandom([
+          "Awww 🧸❤️ Iubirea voastră îmi face și mie inimioara fericită.",
+          "Atunci spune-i și persoanei iubite. 🥹💕 Un «te iubesc» spus la momentul potrivit valorează enorm.",
+          "Eu sunt ursulețul oficial al poveștii voastre. 🧸❤️"
+        ]);
+
+      }
+
+
+      if (
+        text.includes(
+          "cearta"
+        ) ||
+        text.includes(
+          "impac"
+        )
+      ) {
+
+        return (
+          "Într-o ceartă, încearcă să nu lupți împotriva persoanei iubite, ci împreună cu ea împotriva problemei. 🧸❤️ Vorbiți calm și spuneți ce simțiți."
+        );
+
+      }
+
+
+      if (
+        text.includes(
+          "noapte buna"
+        )
+      ) {
+
+        return (
+          "Noapte bună. 🌙🧸❤️ Să ai vise frumoase și o inimă liniștită."
+        );
+
+      }
+
+
+      return bearRandom([
+        "Sunt aici cu tine. 🧸❤️ Spune-mi mai multe.",
+        "Hmm... ursulețul se gândește. 🧸💭 Continuă.",
+        "Te ascult. ❤️ Ce s-a întâmplat?",
+        "Awww 🧸💕 spune-mi mai multe.",
+        "Poți să-mi spui orice. Eu sunt " +
+          name +
+          ". 🧸❤️"
+      ]);
+
+    }
+
+
+
+    /* =====================================================
+       TRIMITE MESAJ URSULEȚ
+    ====================================================== */
+
+    function sendBearAIMessage() {
+
+      const value =
+        bearAIInput.value
+          .trim();
+
+
+      if (
+        !value
+      ) {
+
+        return;
+
+      }
+
+
+      bearAIChatMessages.push({
+
+        role:
+          "user",
+
+        text:
+          value,
+
+        date:
+          Date.now()
+
+      });
+
+
+      bearAIInput.value =
+        "";
+
+
+      saveBearAIChat();
+
+      renderBearAIChat();
+
+
+      const typing =
+        document.createElement(
+          "div"
+        );
+
+
+      typing.className =
+        "bear-ai-message ai typing";
+
+
+      typing.textContent =
+        getBearAIName() +
+        " se gândește... 🧸";
+
+
+      bearAIMessages.appendChild(
+        typing
+      );
+
+
+      bearAIMessages.scrollTop =
+        bearAIMessages.scrollHeight;
+
+
+      setTimeout(
+        function () {
+
+          typing.remove();
+
+
+          bearAIChatMessages.push({
+
+            role:
+              "ai",
+
+            text:
+              generateBearAIReply(
+                value
+              ),
+
+            date:
+              Date.now()
+
+          });
+
+
+          saveBearAIChat();
+
+          renderBearAIChat();
+
+        },
+        550
+      );
+
+    }
+
+
+
+    /* =====================================================
+       MUTARE URSULEȚ AI
+    ====================================================== */
+
+    let bearDragging =
+      false;
+
+
+    let bearMoved =
+      false;
+
+
+    let bearStartX =
+      0;
+
+
+    let bearStartY =
+      0;
+
+
+    let bearOriginalX =
+      0;
+
+
+    let bearOriginalY =
+      0;
+
+
+
+    /* =====================================================
+       ZONA ÎN CARE POATE FI MUTAT
+    ====================================================== */
+
+    function getBearMoveBounds() {
+
+      const rect =
+        bearAIFloating
+          .getBoundingClientRect();
+
+
+      const width =
+        rect.width ||
+        80;
+
+
+      const height =
+        rect.height ||
+        90;
+
+
+      const minX =
+        8;
+
+
+      const maxX =
+        Math.max(
+          minX,
+          window.innerWidth -
+          width -
+          8
+        );
+
+
+      const minY =
+        8;
+
+
+      const nav =
+        document.querySelector(
+          ".bottom-nav"
+        );
+
+
+      let navTop =
+        window.innerHeight -
+        92;
+
+
+      if (
+        nav
+      ) {
+
+        const navRect =
+          nav.getBoundingClientRect();
+
+
+        if (
+          Number.isFinite(
+            navRect.top
+          )
+        ) {
+
+          navTop =
+            navRect.top;
+
+        }
+
+      }
+
+
+      const maxY =
+        Math.max(
+          minY,
+          navTop -
+          height -
+          8
+        );
+
+
+      return {
+
+        minX:
+          minX,
+
+        maxX:
+          maxX,
+
+        minY:
+          minY,
+
+        maxY:
+          maxY
+
+      };
+
+    }
+
+
+
+    /* =====================================================
+       APLICĂ POZIȚIA
+    ====================================================== */
+
+    function setBearAIPosition(
+      x,
+      y
+    ) {
+
+      const bounds =
+        getBearMoveBounds();
+
+
+      const finalX =
+        Math.min(
+          bounds.maxX,
+          Math.max(
+            bounds.minX,
+            x
+          )
+        );
+
+
+      const finalY =
+        Math.min(
+          bounds.maxY,
+          Math.max(
+            bounds.minY,
+            y
+          )
+        );
+
+
+      /*
+        IMPORTANT:
+        CSS-ul inițial are right și bottom cu !important.
+        Le dezactivăm tot cu !important.
+      */
+
+      bearAIFloating.style.setProperty(
+        "right",
+        "auto",
+        "important"
+      );
+
+
+      bearAIFloating.style.setProperty(
+        "bottom",
+        "auto",
+        "important"
+      );
+
+
+      bearAIFloating.style.setProperty(
+        "left",
+        finalX +
+        "px",
+        "important"
+      );
+
+
+      bearAIFloating.style.setProperty(
+        "top",
+        finalY +
+        "px",
+        "important"
+      );
+
+    }
+
+
+
+    /* =====================================================
+       SALVEAZĂ POZIȚIA
+    ====================================================== */
+
+    function saveBearAIPosition() {
+
+      const rect =
+        bearAIFloating
+          .getBoundingClientRect();
+
+
+      const bounds =
+        getBearMoveBounds();
+
+
+      const availableX =
+        Math.max(
+          1,
+          bounds.maxX -
+          bounds.minX
+        );
+
+
+      const availableY =
+        Math.max(
+          1,
+          bounds.maxY -
+          bounds.minY
+        );
+
+
+      let ratioX =
+        (
+          rect.left -
+          bounds.minX
+        ) /
+        availableX;
+
+
+      let ratioY =
+        (
+          rect.top -
+          bounds.minY
+        ) /
+        availableY;
+
+
+      ratioX =
+        Math.max(
+          0,
+          Math.min(
+            1,
+            ratioX
+          )
+        );
+
+
+      ratioY =
+        Math.max(
+          0,
+          Math.min(
+            1,
+            ratioY
+          )
+        );
+
+
+      if (
+        typeof window.saveSetting ===
+        "function"
+      ) {
+
+        window.saveSetting(
+          "bearAIPosX",
+          ratioX
+        );
+
+
+        window.saveSetting(
+          "bearAIPosY",
+          ratioY
+        );
+
+      } else {
+
+        localStorage.setItem(
+          "bearAIPosX",
+          ratioX
+        );
+
+
+        localStorage.setItem(
+          "bearAIPosY",
+          ratioY
+        );
+
+      }
+
+    }
+
+
+
+    /* =====================================================
+       ÎNCARCĂ POZIȚIA
+    ====================================================== */
+
+    function loadBearAIPosition() {
+
+      const savedX =
+        localStorage.getItem(
+          "bearAIPosX"
+        );
+
+
+      const savedY =
+        localStorage.getItem(
+          "bearAIPosY"
+        );
+
+
+      /*
+        Dacă nu a fost mutat niciodată,
+        rămâne în dreapta jos.
+      */
+
+      if (
+        savedX === null ||
+        savedY === null
+      ) {
+
+        return;
+
+      }
+
+
+      const ratioX =
+        Number(
+          savedX
+        );
+
+
+      const ratioY =
+        Number(
+          savedY
+        );
+
+
+      if (
+        !Number.isFinite(
+          ratioX
+        ) ||
+        !Number.isFinite(
+          ratioY
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      const bounds =
+        getBearMoveBounds();
+
+
+      const x =
+        bounds.minX +
+        Math.max(
+          0,
+          Math.min(
+            1,
+            ratioX
+          )
+        ) *
+        (
+          bounds.maxX -
+          bounds.minX
+        );
+
+
+      const y =
+        bounds.minY +
+        Math.max(
+          0,
+          Math.min(
+            1,
+            ratioY
+          )
+        ) *
+        (
+          bounds.maxY -
+          bounds.minY
+        );
+
+
+      setBearAIPosition(
+        x,
+        y
+      );
+
+    }
+
+
+
+    /* =====================================================
+       DESCHIDE CHATUL
+    ====================================================== */
+
+    function toggleBearAIChat() {
+
+      refreshBearAIName();
+
+
+      bearAIPanel.classList.toggle(
+        "open"
+      );
+
+
+      if (
+        bearAIPanel.classList.contains(
+          "open"
+        )
+      ) {
+
+        renderBearAIChat();
+
+
+        setTimeout(
+          function () {
+
+            bearAIInput.focus();
+
+          },
+          120
+        );
+
+      }
+
+    }
+
+
+
+    /* =====================================================
+       ÎNCEPE MUTAREA
+    ====================================================== */
+
+    bearAICircle.addEventListener(
+      "pointerdown",
+      function (
+        event
+      ) {
+
+        bearDragging =
+          true;
+
+
+        bearMoved =
+          false;
+
+
+        const rect =
+          bearAIFloating
+            .getBoundingClientRect();
+
+
+        bearStartX =
+          event.clientX;
+
+
+        bearStartY =
+          event.clientY;
+
+
+        bearOriginalX =
+          rect.left;
+
+
+        bearOriginalY =
+          rect.top;
+
+
+        try {
+
+          bearAICircle
+            .setPointerCapture(
+              event.pointerId
+            );
+
+        } catch (error) {
+        }
+
+      }
+    );
+
+
+
+    /* =====================================================
+       ÎL MIȘCĂM
+    ====================================================== */
+
+    bearAICircle.addEventListener(
+      "pointermove",
+      function (
+        event
+      ) {
+
+        if (
+          !bearDragging
+        ) {
+
+          return;
+
+        }
+
+
+        const differenceX =
+          event.clientX -
+          bearStartX;
+
+
+        const differenceY =
+          event.clientY -
+          bearStartY;
+
+
+        /*
+          Până la 5px considerăm
+          că este doar o atingere.
+        */
+
+        if (
+          Math.abs(
+            differenceX
+          ) >
+          5 ||
+          Math.abs(
+            differenceY
+          ) >
+          5
+        ) {
+
+          bearMoved =
+            true;
+
+        }
+
+
+        if (
+          !bearMoved
+        ) {
+
+          return;
+
+        }
+
+
+        event.preventDefault();
+
+
+        /*
+          Dacă chatul este deschis și începem
+          să mutăm ursulețul, îl închidem.
+        */
+
+        bearAIPanel.classList.remove(
+          "open"
+        );
+
+
+        setBearAIPosition(
+          bearOriginalX +
+          differenceX,
+          bearOriginalY +
+          differenceY
+        );
+
+      }
+    );
+
+
+
+    /* =====================================================
+       TERMINĂ MUTAREA / DESCHIDE CHAT
+    ====================================================== */
+
+    bearAICircle.addEventListener(
+      "pointerup",
+      function (
+        event
+      ) {
+
+        if (
+          !bearDragging
+        ) {
+
+          return;
+
+        }
+
+
+        bearDragging =
+          false;
+
+
+        try {
+
+          bearAICircle
+            .releasePointerCapture(
+              event.pointerId
+            );
+
+        } catch (error) {
+        }
+
+
+        /*
+          Dacă a fost tras,
+          salvăm poziția.
+        */
+
+        if (
+          bearMoved
+        ) {
+
+          saveBearAIPosition();
+
+          return;
+
+        }
+
+
+        /*
+          Dacă nu s-a mișcat,
+          a fost o simplă apăsare.
+        */
+
+        toggleBearAIChat();
+
+      }
+    );
+
+
+
+    /* =====================================================
+       MUTARE ANULATĂ
+    ====================================================== */
+
+    bearAICircle.addEventListener(
+      "pointercancel",
+      function () {
+
+        bearDragging =
+          false;
+
+        bearMoved =
+          false;
+
+      }
+    );
+
+
+
+    /* =====================================================
+       DACĂ SE SCHIMBĂ DIMENSIUNEA ECRANULUI
+    ====================================================== */
+
+    window.addEventListener(
+      "resize",
+      function () {
+
+        loadBearAIPosition();
+
+      }
+    );
+
+
+
+    /* =====================================================
+       ÎNCHIDE CHAT
+    ====================================================== */
+
+    bearAIClose.addEventListener(
+      "click",
+      function () {
+
+        bearAIPanel.classList.remove(
+          "open"
+        );
+
+      }
+    );
+
+
+
+    /* =====================================================
+       BUTON TRIMITE
+    ====================================================== */
+
+    bearAISend.addEventListener(
+      "click",
+      sendBearAIMessage
+    );
+
+
+
+    /* =====================================================
+       ENTER
+    ====================================================== */
+
+    bearAIInput.addEventListener(
+      "keydown",
+      function (
+        event
+      ) {
+
+        if (
+          event.key ===
+          "Enter"
+        ) {
+
+          event.preventDefault();
+
+          sendBearAIMessage();
+
+        }
+
+      }
+    );
+
+
+
+    /* =====================================================
+       PORNIRE HOME + CLOUD
+    ====================================================== */
+
+    let counterInterval =
+      null;
+
+
+    async function syncHomeInBackground() {
+
+      if (
+        typeof window
+          .loadAppDataFromCloud ===
+        "function"
+      ) {
+
+        try {
+
+          await window
+            .loadAppDataFromCloud();
+
+
+          loadHomeData();
+
+
+          if (
+            typeof window
+              .applyGlobalBackground ===
+            "function"
+          ) {
+
+            window
+              .applyGlobalBackground();
+
+          }
+
+
+          if (
+            typeof window
+              .applyGlobalFont ===
+            "function"
+          ) {
+
+            window
+              .applyGlobalFont();
+
+          }
+
+
+          refreshBearAIName();
+
+        } catch (error) {
+
+          console.warn(
+            "Sincronizare cloud în fundal:",
+            error
+          );
+
+        }
+
+      }
+
+
+      await Promise.allSettled([
+        registerAndRenderAppStreak(),
+        claimAndRenderDailyXP(),
+        refreshHomeCouplePhoto()
+      ]);
+
+    }
+
+
+
+    async function startHome() {
+
+      const authenticated =
+        await checkAuthentication();
+
+
+      if (
+        !authenticated
+      ) {
+
+        return;
+
+      }
+
+
+      /*
+        HOME APARE IMEDIAT DIN CACHE / LOCALSTORAGE
+      */
+
+      if (
+        typeof window
+          .applyGlobalBackground ===
+        "function"
+      ) {
+
+        window
+          .applyGlobalBackground();
+
+      }
+
+
+      if (
+        typeof window
+          .applyGlobalFont ===
+        "function"
+      ) {
+
+        window
+          .applyGlobalFont();
+
+      }
+
+
+      loadHomeData();
+
+      renderStoredAppStreak();
+
+      renderCachedCoupleXP();
+
+      updateCounter();
+
+      refreshBearAIName();
+
+      loadBearAIChat();
+
+
+      /*
+        Nu randăm istoricul de chat Teddy până nu deschizi panoul.
+        Asta economisește muncă la pornire.
+      */
+
+
+      requestAnimationFrame(
+        function () {
+
+          loadBearAIPosition();
+
+        }
+      );
+
+
+      if (
+        counterInterval
+      ) {
+
+        clearInterval(
+          counterInterval
+        );
+
+      }
+
+
+      counterInterval =
+        setInterval(
+          updateCounter,
+          1000
+        );
+
+
+      /*
+        CLOUD ÎN FUNDAL
+        Nu blocăm afișarea Home.
+      */
+
+      requestAnimationFrame(
+        function () {
+
+          syncHomeInBackground();
+
+        }
+      );
+
+    }
+
+
+
+    /* =====================================================
+       CÂND REVII ÎN APLICAȚIE
+       REÎNCĂRCĂM DATELE COMUNE
+    ====================================================== */
+
+    let lastHomeCloudRefresh = 0;
+    let homeRefreshRunning = false;
+
+
+    document.addEventListener(
+      "visibilitychange",
+      function () {
+
+        if (
+          document.visibilityState !==
+          "visible"
+        ) {
+
+          return;
+
+        }
+
+
+        /*
+          DATE LOCALE IMEDIAT
+      */
+
+        loadHomeData();
+
+        renderStoredAppStreak();
+
+        renderCachedCoupleXP();
+
+        updateCounter();
+
+        refreshBearAIName();
+
+        loadBearAIPosition();
+
+
+        /*
+          Nu lovim Supabase din nou dacă revii în aplicație
+          după doar câteva secunde.
+      */
+
+        const now =
+          Date.now();
+
+
+        if (
+          homeRefreshRunning ||
+          (
+            now -
+            lastHomeCloudRefresh
+          ) <
+          15000
+        ) {
+
+          return;
+
+        }
+
+
+        homeRefreshRunning =
+          true;
+
+
+        lastHomeCloudRefresh =
+          now;
+
+
+        syncHomeInBackground()
+          .finally(
+            function () {
+
+              homeRefreshRunning =
+                false;
+
+            }
+          );
+
+      }
+    );
+
+
+
+
+
+    /* =====================================================
+       ECRAN PORNIRE DUO LOVE ❤️
+    ====================================================== */
+
+    function hideDuoLoveSplash() {
+
+      const splash =
+        document.getElementById(
+          "duoLoveSplash"
+        );
+
+
+      if (
+        !splash ||
+        splash.classList.contains(
+          "hide"
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      splash.classList.add(
+        "hide"
+      );
+
+
+      document.body.classList.remove(
+        "duo-splash-active"
+      );
+
+
+      setTimeout(
+        function () {
+
+          if (
+            splash &&
+            splash.parentNode
+          ) {
+
+            splash.remove();
+
+          }
+
+        },
+        650
+      );
+
+    }
+
+
+    /*
+      Îl ținem pe ecran aproximativ 2 secunde.
+      Nu blocăm încărcarea aplicației în fundal.
+    */
+
+    if (
+      document.body.classList.contains(
+        "duo-splash-skip"
+      )
+    ) {
+
+      hideDuoLoveSplash();
+
+    } else {
+
+      window.setTimeout(
+        hideDuoLoveSplash,
+        2000
+      );
+
+    }
+
+
+
+    /* =====================================================
+       START
+    ====================================================== */
+
+    startHome();
+
+
+
+    /* =====================================================
+       PWA - SERVICE WORKER
+    ====================================================== */
+
+    if (
+      "serviceWorker" in navigator
+    ) {
+
+      window.addEventListener(
+        "load",
+        function () {
+
+          navigator.serviceWorker
+            .register(
+              "./service-worker.js",
+              {
+                scope:
+                  "./"
+              }
+            )
+            .then(
+              function (
+                registration
+              ) {
+
+                console.log(
+                  "❤️ PWA Service Worker activ:",
+                  registration.scope
+                );
+
+              }
+            )
+            .catch(
+              function (
+                error
+              ) {
+
+                /*
+                  Pe adrese HTTP din rețeaua locală
+                  (ex: 192.168.x.x) iPhone poate refuza
+                  Service Worker-ul. Pe HTTPS/Netlify
+                  va funcționa.
+                */
+
+                console.warn(
+                  "Service Worker indisponibil:",
+                  error
+                );
+
+              }
+            );
+
+        }
+      );
+
+    }
+
+  </script>
+
+</body>
+
+</html>

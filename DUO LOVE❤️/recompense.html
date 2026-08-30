@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#07070d">
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+
+  <title>Recompense ❤️</title>
+
+  <link
+    rel="manifest"
+    href="./manifest.json"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="./apple-touch-icon.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  >
+
+
+  <style>
+
+    body {
+      min-height: 100dvh;
+    }
+
+
+    .rewards-page {
+      width:
+        min(
+          100%,
+          720px
+        );
+
+      margin:
+        0 auto;
+
+      padding:
+        max(
+          18px,
+          env(safe-area-inset-top)
+        )
+        16px
+        calc(
+          110px +
+          env(safe-area-inset-bottom)
+        );
+    }
+
+
+    .rewards-topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      margin-bottom: 18px;
+    }
+
+
+    .rewards-back {
+      display: grid;
+      place-items: center;
+
+      width: 42px;
+      height: 42px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 14px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .06
+        );
+
+      color: white;
+
+      text-decoration: none;
+      font-size: 20px;
+    }
+
+
+    .rewards-topbar h1 {
+      margin: 0;
+
+      color: white;
+
+      font-size: 23px;
+    }
+
+
+    .rewards-topbar p {
+      margin:
+        3px 0 0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .55
+        );
+
+      font-size: 12px;
+    }
+
+
+    .rewards-hero {
+      position: relative;
+
+      overflow: hidden;
+
+      padding: 20px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 26px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(114, 91, 255, .18),
+          rgba(255, 103, 170, .12)
+        );
+    }
+
+
+    .rewards-hero::after {
+      content: "";
+
+      position: absolute;
+
+      right: -45px;
+      top: -55px;
+
+      width: 150px;
+      height: 150px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(
+          199,
+          111,
+          255,
+          .20
+        );
+
+      filter: blur(28px);
+
+      pointer-events: none;
+    }
+
+
+    .xp-row {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+
+    .xp-total small {
+      display: block;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .55
+        );
+
+      font-size: 10px;
+      font-weight: 800;
+
+      letter-spacing: 1.8px;
+    }
+
+
+    .xp-total strong {
+      display: block;
+
+      margin-top: 4px;
+
+      color: white;
+
+      font-size: 36px;
+      line-height: 1;
+    }
+
+
+    .xp-total span {
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .65
+        );
+
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+
+    .xp-available {
+      padding:
+        9px 11px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .07
+        );
+
+      text-align: center;
+    }
+
+
+    .xp-available small {
+      display: block;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .46
+        );
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: 1px;
+    }
+
+
+    .xp-available strong {
+      display: block;
+
+      margin-top: 3px;
+
+      color: #ffe17c;
+
+      font-size: 16px;
+    }
+
+
+    .hero-progress {
+      position: relative;
+      z-index: 1;
+
+      height: 10px;
+
+      margin-top: 17px;
+
+      overflow: hidden;
+
+      border-radius: 999px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        );
+    }
+
+
+    .hero-progress-fill {
+      width: 0%;
+      height: 100%;
+
+      border-radius: inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          #7864ff,
+          #cf72ff,
+          #ff77aa
+        );
+
+      transition:
+        width .45s ease;
+    }
+
+
+    .hero-progress-copy {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+
+      margin-top: 9px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .58
+        );
+
+      font-size: 11px;
+    }
+
+
+    .reward-section {
+      margin-top: 18px;
+
+      padding: 18px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        );
+
+      border-radius: 24px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .045
+        );
+    }
+
+
+    .section-label {
+      display: block;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .50
+        );
+
+      font-size: 10px;
+      font-weight: 800;
+
+      letter-spacing: 1.8px;
+    }
+
+
+    .reward-section h2 {
+      margin:
+        5px 0 6px;
+
+      color: white;
+
+      font-size: 20px;
+    }
+
+
+    .section-description {
+      margin:
+        0 0 14px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .56
+        );
+
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+
+    .unlock-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+
+    .unlock-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      padding: 12px;
+
+      border-radius: 17px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .045
+        );
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .06
+        );
+    }
+
+
+    .unlock-card.unlocked {
+      border-color:
+        rgba(
+          87,
+          224,
+          153,
+          .20
+        );
+
+      background:
+        rgba(
+          87,
+          224,
+          153,
+          .06
+        );
+    }
+
+
+    .unlock-icon {
+      flex: 0 0 auto;
+
+      display: grid;
+      place-items: center;
+
+      width: 46px;
+      height: 46px;
+
+      border-radius: 15px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .06
+        );
+
+      font-size: 22px;
+    }
+
+
+    .unlock-copy {
+      min-width: 0;
+    }
+
+
+    .unlock-copy strong,
+    .unlock-copy span,
+    .unlock-copy small {
+      display: block;
+    }
+
+
+    .unlock-copy strong {
+      color: white;
+
+      font-size: 14px;
+    }
+
+
+    .unlock-copy span {
+      margin-top: 2px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .53
+        );
+
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+
+    .unlock-copy small {
+      margin-top: 5px;
+
+      color: #cf87ff;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+
+
+    /* =====================================================
+       RECOMPENSE LA FIECARE 50 XP
+    ====================================================== */
+
+    .milestone-summary {
+      margin:
+        0 0 12px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .58
+        );
+
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+
+    .milestone-grid {
+      display: grid;
+      gap: 9px;
+    }
+
+
+    .milestone-card {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      padding: 11px 12px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .06
+        );
+
+      border-radius: 16px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .04
+        );
+    }
+
+
+    .milestone-card.unlocked {
+      border-color:
+        rgba(
+          255,
+          215,
+          103,
+          .20
+        );
+
+      background:
+        rgba(
+          255,
+          215,
+          103,
+          .055
+        );
+    }
+
+
+    .milestone-icon {
+      flex: 0 0 auto;
+
+      display: grid;
+      place-items: center;
+
+      width: 42px;
+      height: 42px;
+
+      border-radius: 13px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .06
+        );
+
+      font-size: 20px;
+    }
+
+
+    .milestone-copy {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+
+    .milestone-copy strong,
+    .milestone-copy span {
+      display: block;
+    }
+
+
+    .milestone-copy strong {
+      color: white;
+
+      font-size: 12px;
+    }
+
+
+    .milestone-copy span {
+      margin-top: 3px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .46
+        );
+
+      font-size: 10px;
+    }
+
+
+    .milestone-status {
+      flex: 0 0 auto;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .50
+        );
+
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+
+    /* =====================================================
+       MISIUNI
+    ====================================================== */
+
+    .mission-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+
+      margin-bottom: 12px;
+    }
+
+
+    .mission-counter {
+      flex: 0 0 auto;
+
+      padding:
+        6px 9px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .055
+        );
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .58
+        );
+
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+
+    .mission-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+
+    .mission-card {
+      display: grid;
+      grid-template-columns:
+        auto
+        minmax(
+          0,
+          1fr
+        )
+        auto;
+
+      align-items: center;
+      gap: 11px;
+
+      padding: 12px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .07
+        );
+
+      border-radius: 17px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .045
+        );
+    }
+
+
+    .mission-card.completed {
+      border-color:
+        rgba(
+          87,
+          224,
+          153,
+          .18
+        );
+
+      background:
+        rgba(
+          87,
+          224,
+          153,
+          .045
+        );
+    }
+
+
+    .mission-icon {
+      display: grid;
+      place-items: center;
+
+      width: 43px;
+      height: 43px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .06
+        );
+
+      font-size: 21px;
+    }
+
+
+    .mission-copy {
+      min-width: 0;
+    }
+
+
+    .mission-copy strong,
+    .mission-copy span,
+    .mission-copy small {
+      display: block;
+    }
+
+
+    .mission-copy strong {
+      color: white;
+
+      font-size: 12px;
+    }
+
+
+    .mission-copy span {
+      margin-top: 2px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .50
+        );
+
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+
+    .mission-copy small {
+      margin-top: 5px;
+
+      color: #ffe17c;
+
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+
+    .mission-claim {
+      flex: 0 0 auto;
+
+      padding:
+        9px 10px;
+
+      border: 0;
+      border-radius: 12px;
+
+      background:
+        #c95887;
+
+      color: white;
+
+      font: inherit;
+      font-size: 10px;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .mission-claim:disabled {
+      opacity: .55;
+      cursor: default;
+    }
+
+
+    @media (max-width: 430px) {
+
+      .mission-card {
+        grid-template-columns:
+          auto
+          minmax(
+            0,
+            1fr
+          );
+      }
+
+
+      .mission-claim {
+        grid-column:
+          1 / -1;
+
+        width: 100%;
+      }
+
+    }
+
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
+      gap: 11px;
+    }
+
+
+    .shop-card {
+      display: flex;
+      flex-direction: column;
+
+      min-height: 205px;
+
+      padding: 14px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        );
+
+      border-radius: 19px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .045
+        );
+    }
+
+
+    .shop-card.owned {
+      border-color:
+        rgba(
+          255,
+          215,
+          103,
+          .22
+        );
+
+      background:
+        rgba(
+          255,
+          215,
+          103,
+          .055
+        );
+    }
+
+
+    .shop-icon {
+      font-size: 32px;
+    }
+
+
+    .shop-card > strong {
+      display: block;
+
+      margin-top: 8px;
+
+      color: white;
+
+      font-size: 14px;
+    }
+
+
+    .shop-card > p {
+      margin:
+        5px 0 12px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .52
+        );
+
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+
+    .shop-footer {
+      margin-top: auto;
+    }
+
+
+    .shop-price {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: #ffe17c;
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+
+    .shop-buy {
+      width: 100%;
+
+      padding:
+        10px 9px;
+
+      border: 0;
+      border-radius: 13px;
+
+      background:
+        #c95887;
+
+      color: white;
+
+      font: inherit;
+      font-size: 11px;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .shop-buy:disabled {
+      opacity: .55;
+      cursor: default;
+    }
+
+
+    .feature-card {
+      position: relative;
+
+      overflow: hidden;
+
+      margin-top: 18px;
+
+      padding: 18px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        );
+
+      border-radius: 24px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .045
+        );
+    }
+
+
+    .feature-card h2 {
+      margin:
+        5px 0 6px;
+
+      color: white;
+
+      font-size: 20px;
+    }
+
+
+    .feature-lock-overlay {
+      position: absolute;
+      inset: 0;
+
+      z-index: 10;
+
+      display: grid;
+      place-items: center;
+
+      padding: 20px;
+
+      background:
+        rgba(
+          7,
+          7,
+          13,
+          .84
+        );
+
+      backdrop-filter:
+        blur(9px);
+
+      -webkit-backdrop-filter:
+        blur(9px);
+
+      text-align: center;
+    }
+
+
+    .feature-lock-overlay[hidden] {
+      display: none;
+    }
+
+
+    .feature-lock-overlay strong {
+      display: block;
+
+      font-size: 30px;
+    }
+
+
+    .feature-lock-overlay span {
+      display: block;
+
+      margin-top: 8px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .72
+        );
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+
+    .secret-compose textarea,
+    .capsule-form textarea,
+    .capsule-form input {
+      width: 100%;
+
+      box-sizing: border-box;
+
+      padding: 12px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 14px;
+
+      outline: none;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .06
+        );
+
+      color: white;
+
+      font: inherit;
+      font-size: 14px;
+    }
+
+
+    .secret-compose textarea,
+    .capsule-form textarea {
+      min-height: 95px;
+
+      resize: vertical;
+    }
+
+
+    .secret-compose textarea::placeholder,
+    .capsule-form textarea::placeholder,
+    .capsule-form input::placeholder {
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .36
+        );
+    }
+
+
+    .primary-reward-button {
+      width: 100%;
+
+      margin-top: 10px;
+      padding: 12px;
+
+      border: 0;
+      border-radius: 14px;
+
+      background:
+        #c95887;
+
+      color: white;
+
+      font: inherit;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .secret-list,
+    .capsule-list {
+      display: grid;
+      gap: 9px;
+
+      margin-top: 13px;
+    }
+
+
+    .secret-message,
+    .capsule-item {
+      padding: 12px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .05
+        );
+    }
+
+
+    .secret-message.mine {
+      background:
+        rgba(
+          201,
+          88,
+          135,
+          .09
+        );
+    }
+
+
+    .secret-message-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+
+    .secret-message strong,
+    .capsule-item strong {
+      color: white;
+
+      font-size: 12px;
+    }
+
+
+    .secret-message small {
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .42
+        );
+
+      font-size: 9px;
+    }
+
+
+    .secret-message p {
+      margin:
+        8px 0 0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .72
+        );
+
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+
+    .open-secret,
+    .open-capsule {
+      margin-top: 8px;
+
+      padding:
+        9px 11px;
+
+      border: 0;
+      border-radius: 12px;
+
+      background:
+        rgba(
+          201,
+          88,
+          135,
+          .20
+        );
+
+      color: white;
+
+      font: inherit;
+      font-size: 11px;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .wheel-wrap {
+      display: grid;
+      place-items: center;
+
+      padding:
+        12px 0 2px;
+    }
+
+
+    .love-wheel {
+      display: grid;
+      place-items: center;
+
+      width: 150px;
+      height: 150px;
+
+      border:
+        9px solid
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        );
+
+      border-radius: 50%;
+
+      background:
+        conic-gradient(
+          #c95887 0 12.5%,
+          #8d67ff 12.5% 25%,
+          #e881aa 25% 37.5%,
+          #6757d9 37.5% 50%,
+          #c95887 50% 62.5%,
+          #8d67ff 62.5% 75%,
+          #e881aa 75% 87.5%,
+          #6757d9 87.5% 100%
+        );
+
+      box-shadow:
+        0 10px 35px
+        rgba(
+          0,
+          0,
+          0,
+          .30
+        );
+
+      font-size: 42px;
+    }
+
+
+    .love-wheel.spinning {
+      animation:
+        loveWheelSpin 1.1s
+        cubic-bezier(.18,.75,.24,1)
+        forwards;
+    }
+
+
+    @keyframes loveWheelSpin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(1080deg);
+      }
+    }
+
+
+    .feature-result {
+      min-height: 44px;
+
+      margin:
+        12px 0 0;
+
+      padding: 12px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .05
+        );
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .78
+        );
+
+      font-size: 13px;
+      line-height: 1.45;
+
+      text-align: center;
+    }
+
+
+    .capsule-form {
+      display: grid;
+      gap: 8px;
+    }
+
+
+    .capsule-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+
+    .capsule-item > div {
+      min-width: 0;
+    }
+
+
+    .capsule-item span {
+      display: block;
+
+      margin-top: 3px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .52
+        );
+
+      font-size: 10px;
+    }
+
+
+    .open-capsule {
+      flex: 0 0 auto;
+      margin: 0;
+    }
+
+
+    .open-capsule:disabled {
+      opacity: .45;
+    }
+
+
+    .empty-state {
+      margin: 0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .50
+        );
+
+      font-size: 12px;
+    }
+
+
+    .reward-toast {
+      position: fixed;
+
+      left: 50%;
+      bottom:
+        calc(
+          94px +
+          env(safe-area-inset-bottom)
+        );
+
+      z-index: 3000000;
+
+      max-width:
+        calc(
+          100% - 32px
+        );
+
+      padding:
+        11px 15px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(
+          12,
+          8,
+          17,
+          .95
+        );
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .11
+        );
+
+      color: white;
+
+      font-size: 12px;
+      font-weight: 800;
+
+      opacity: 0;
+
+      transform:
+        translate(
+          -50%,
+          15px
+        );
+
+      pointer-events: none;
+    }
+
+
+    .reward-toast.show {
+      animation:
+        rewardToastShow 2.2s
+        ease
+        forwards;
+    }
+
+
+    @keyframes rewardToastShow {
+      0% {
+        opacity: 0;
+        transform:
+          translate(
+            -50%,
+            15px
+          );
+      }
+
+      15%,
+      75% {
+        opacity: 1;
+        transform:
+          translate(
+            -50%,
+            0
+          );
+      }
+
+      100% {
+        opacity: 0;
+        transform:
+          translate(
+            -50%,
+            -8px
+          );
+      }
+    }
+
+
+    .reward-modal {
+      position: fixed;
+      inset: 0;
+
+      z-index: 4000000;
+
+      display: none;
+      place-items: center;
+
+      padding: 20px;
+
+      background:
+        rgba(
+          0,
+          0,
+          0,
+          .62
+        );
+
+      backdrop-filter:
+        blur(8px);
+
+      -webkit-backdrop-filter:
+        blur(8px);
+    }
+
+
+    .reward-modal.open {
+      display: grid;
+    }
+
+
+    .reward-modal-card {
+      width:
+        min(
+          100%,
+          420px
+        );
+
+      padding: 20px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 22px;
+
+      background:
+        #100b17;
+
+      box-shadow:
+        0 20px 55px
+        rgba(
+          0,
+          0,
+          0,
+          .45
+        );
+    }
+
+
+    .reward-modal-card h3 {
+      margin:
+        0 0 10px;
+
+      color: white;
+    }
+
+
+    .reward-modal-card p {
+      margin: 0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .73
+        );
+
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+
+    @media (max-width: 390px) {
+      .shop-grid {
+        grid-template-columns:
+          1fr;
+      }
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <main class="rewards-page">
+
+
+    <header class="rewards-topbar">
+
+      <a
+        class="rewards-back"
+        href="./index.html"
+        aria-label="Înapoi"
+      >
+        ←
+      </a>
+
+
+      <div>
+
+        <h1>
+          Recompense 🏆
+        </h1>
+
+        <p>
+          XP, trofee și funcții speciale pentru voi.
+        </p>
+
+      </div>
+
+    </header>
+
+
+
+    <section class="rewards-hero">
+
+      <div class="xp-row">
+
+        <div class="xp-total">
+
+          <small>
+            XP TOTAL
+          </small>
+
+          <strong id="rewardTotalXP">
+            0
+          </strong>
+
+          <span>
+            XP
+          </span>
+
+        </div>
+
+
+        <div class="xp-available">
+
+          <small>
+            DISPONIBIL
+          </small>
+
+          <strong id="rewardAvailableXP">
+            0 XP
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-progress">
+
+        <div
+          id="rewardProgressFill"
+          class="hero-progress-fill"
+        ></div>
+
+      </div>
+
+
+      <div class="hero-progress-copy">
+
+        <span id="rewardNextTitle">
+          Următoarea deblocare
+        </span>
+
+        <span id="rewardProgressText">
+          0 XP
+        </span>
+
+      </div>
+
+
+      <div class="hero-progress-copy">
+
+        <span>
+          Intrări azi
+        </span>
+
+        <span id="rewardUsersToday">
+          0/2 azi
+        </span>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="reward-section">
+
+      <span class="section-label">
+        🔓 FUNCȚII
+      </span>
+
+      <h2>
+        Deblocări XP
+      </h2>
+
+      <p class="section-description">
+        XP-ul total nu scade când cumpărați trofee.
+        Funcțiile rămân deblocate permanent.
+      </p>
+
+      <div
+        id="unlockGrid"
+        class="unlock-grid"
+      ></div>
+
+    </section>
+
+
+
+
+    
+    <!-- 5 - 100 XP -->
+    <section class="reward-section">
+      <span class="section-label">🌈 5 — 100 XP</span>
+      <h2>Fundaluri noi</h2>
+      <p class="section-description">
+        Fundaluri care se deblochează permanent pe măsură ce crește XP-ul total.
+      </p>
+      <div id="rewards5to100" class="milestone-grid"></div>
+    </section>
+
+    <!-- 100 - 500 XP -->
+    <section class="reward-section">
+      <span class="section-label">✨ 100 — 500 XP</span>
+      <h2>Animații, muzică & efecte</h2>
+      <p class="section-description">
+        Efecte animate și funcții noi care schimbă experiența aplicației.
+      </p>
+      <div id="rewards100to500" class="milestone-grid"></div>
+    </section>
+
+    <!-- 500 - 1000 XP -->
+    <section class="reward-section">
+      <span class="section-label">🎁 500 — 1000 XP</span>
+      <h2>Funcții rare</h2>
+      <p class="section-description">
+        Recompense rare înainte de nivelurile epice.
+      </p>
+      <div id="rewards500to1000" class="milestone-grid"></div>
+    </section>
+
+    <!-- 1000 - 10000 XP -->
+    <section class="reward-section">
+      <span class="section-label">💎 1000 — 10000 XP</span>
+      <h2>Funcții epice</h2>
+      <p class="section-description">
+        Cele mai rare funcții ale aplicației. La 10000 XP se deblochează ETERNITY.
+      </p>
+      <div id="rewardsEpic" class="milestone-grid"></div>
+    </section>
+
+
+
+
+    <section class="reward-section">
+
+      <div class="mission-top">
+
+        <div>
+
+          <span class="section-label">
+            ⭐ MISIUNI ZILNICE
+          </span>
+
+          <h2>
+            Fă XP și singur
+          </h2>
+
+        </div>
+
+
+        <span
+          id="missionCounter"
+          class="mission-counter"
+        >
+          0/6 azi
+        </span>
+
+      </div>
+
+
+      <p class="section-description">
+        Fiecare misiune poate fi făcută o dată pe zi de fiecare dintre voi.
+        XP-ul câștigat intră în XP-ul comun.
+      </p>
+
+
+      <div
+        id="missionGrid"
+        class="mission-grid"
+      ></div>
+
+    </section>
+
+
+
+    <section class="reward-section">
+
+      <span class="section-label">
+        🏆 MAGAZIN
+      </span>
+
+      <h2>
+        Magazin de trofee
+      </h2>
+
+      <p class="section-description">
+        Cumpărați trofee cu XP-ul disponibil.
+        Trofeele sunt comune pentru amândoi.
+      </p>
+
+      <div
+        id="shopGrid"
+        class="shop-grid"
+      ></div>
+
+    </section>
+
+
+
+    <section
+      id="secretFeature"
+      class="feature-card feature-locked"
+    >
+
+      <div
+        class="feature-lock-overlay"
+      >
+        <div>
+          <strong>
+            🔒
+          </strong>
+
+          <span>
+            Se deblochează la 1000 XP
+          </span>
+        </div>
+      </div>
+
+
+      <span class="section-label">
+        💌 1000 XP
+      </span>
+
+      <h2>
+        Mesaje Secrete
+      </h2>
+
+      <p class="section-description">
+        Lasă-i partenerului o surpriză.
+        Textul rămâne ascuns până îl deschide.
+      </p>
+
+
+      <div class="secret-compose">
+
+        <textarea
+          id="secretMessageInput"
+          maxlength="500"
+          placeholder="Scrie un mesaj secret..."
+        ></textarea>
+
+        <button
+          id="secretSendButton"
+          class="primary-reward-button"
+          type="button"
+        >
+          💌 Trimite surpriza
+        </button>
+
+      </div>
+
+
+      <div
+        id="secretMessagesList"
+        class="secret-list"
+      ></div>
+
+    </section>
+
+
+
+    <section
+      id="wheelFeature"
+      class="feature-card feature-locked"
+    >
+
+      <div
+        class="feature-lock-overlay"
+      >
+        <div>
+          <strong>
+            🔒
+          </strong>
+
+          <span>
+            Se deblochează la 3000 XP
+          </span>
+        </div>
+      </div>
+
+
+      <span class="section-label">
+        🎲 3000 XP
+      </span>
+
+      <h2>
+        Date Night Generator
+      </h2>
+
+      <p class="section-description">
+        Generează o idee specială pentru o întâlnire sau un moment în doi.
+      </p>
+
+
+      <div class="wheel-wrap">
+
+        <div
+          id="loveWheel"
+          class="love-wheel"
+        >
+          ❤️
+        </div>
+
+      </div>
+
+
+      <button
+        id="spinWheelButton"
+        class="primary-reward-button"
+        type="button"
+      >
+        🎲 Generează
+      </button>
+
+
+      <p
+        id="wheelResult"
+        class="feature-result"
+      >
+        Roata vă așteaptă ❤️
+      </p>
+
+    </section>
+
+
+
+    <section
+      id="challengeFeature"
+      class="feature-card feature-locked"
+    >
+
+      <div
+        class="feature-lock-overlay"
+      >
+        <div>
+          <strong>
+            🔒
+          </strong>
+
+          <span>
+            Se deblochează la 5000 XP
+          </span>
+        </div>
+      </div>
+
+
+      <span class="section-label">
+        🎯 5000 XP
+      </span>
+
+      <h2>
+        Provocarea de Cuplu
+      </h2>
+
+      <p class="section-description">
+        Primește o provocare romantică sau distractivă pentru voi.
+      </p>
+
+
+      <button
+        id="challengeButton"
+        class="primary-reward-button"
+        type="button"
+      >
+        🎯 Dă-ne o provocare
+      </button>
+
+
+      <p
+        id="challengeResult"
+        class="feature-result"
+      >
+        Apăsați butonul când sunteți pregătiți. 💕
+      </p>
+
+    </section>
+
+
+
+    <section
+      id="capsuleFeature"
+      class="feature-card feature-locked"
+    >
+
+      <div
+        class="feature-lock-overlay"
+      >
+        <div>
+          <strong>
+            🔒
+          </strong>
+
+          <span>
+            Se deblochează la 7000 XP
+          </span>
+        </div>
+      </div>
+
+
+      <span class="section-label">
+        ⏳ 7000 XP
+      </span>
+
+      <h2>
+        Scrisoare pentru Viitor
+      </h2>
+
+      <p class="section-description">
+        Scrieți o scrisoare pentru viitor și alegeți ziua în care va putea fi deschisă.
+      </p>
+
+
+      <div class="capsule-form">
+
+        <input
+          id="capsuleTitle"
+          type="text"
+          maxlength="80"
+          placeholder="Titlul capsulei"
+        >
+
+        <textarea
+          id="capsuleMessage"
+          maxlength="1500"
+          placeholder="Mesaj pentru voi din viitor..."
+        ></textarea>
+
+        <input
+          id="capsuleDate"
+          type="date"
+        >
+
+        <button
+          id="createCapsuleButton"
+          class="primary-reward-button"
+          type="button"
+        >
+          ⏳ Sigilează scrisoarea
+        </button>
+
+      </div>
+
+
+      <div
+        id="capsuleList"
+        class="capsule-list"
+      ></div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <div
+    id="rewardToast"
+    class="reward-toast"
+  ></div>
+
+
+
+  <div
+    id="rewardModal"
+    class="reward-modal"
+  >
+
+    <div class="reward-modal-card">
+
+      <h3 id="rewardModalTitle">
+        Mesaj
+      </h3>
+
+      <div id="rewardModalText"></div>
+
+      <button
+        id="rewardModalClose"
+        class="primary-reward-button"
+        type="button"
+      >
+        Închide ❤️
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="./supabase.js"></script>
+
+  <script src="./cloud-sync.js"></script>
+
+  <script src="./tema.js"></script>
+
+  <script src="./recompense.js"></script>
+
+
+</body>
+
+</html>

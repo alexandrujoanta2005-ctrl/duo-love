@@ -1,0 +1,10510 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top, #fff7fa 0%, #f8e8ee 45%, #f3dde6 100%);
+  color: #503742;
+  overflow-x: hidden;
+}
+
+.app {
+  width: min(92%, 430px);
+  margin: 0 auto;
+  padding: 30px 0 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-card {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 32px;
+  padding: 30px 20px;
+  box-shadow: 0 20px 50px rgba(110, 70, 90, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.photo-ring {
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  padding: 5px;
+  background: linear-gradient(135deg, #eaa4bb, #d9b4cf);
+  box-shadow: 0 12px 32px rgba(127, 82, 102, 0.18);
+}
+
+.couple-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid white;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #b46d88;
+  margin-bottom: 8px;
+}
+
+h1 {
+  font-size: 34px;
+  line-height: 1.1;
+  color: #5e3e4b;
+}
+
+.subtitle {
+  margin-top: 10px;
+  color: #8c6b79;
+  font-size: 15px;
+}
+
+.together-card {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 24px;
+  background: rgba(247, 221, 231, 0.72);
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  color: #8f6274;
+  margin-bottom: 16px;
+}
+
+.counter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.counter-item {
+  background: rgba(255, 255, 255, 0.68);
+  padding: 13px 5px;
+  border-radius: 16px;
+}
+
+.counter-item strong {
+  display: block;
+  font-size: 22px;
+  color: #6c4755;
+}
+
+.counter-item span {
+  display: block;
+  margin-top: 2px;
+  font-size: 10px;
+  color: #a17c8b;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+  margin-top: 18px;
+}
+
+.menu-card {
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  min-height: 140px;
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.66);
+  box-shadow: 0 12px 30px rgba(110, 70, 90, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menu-card:active {
+  transform: scale(0.97);
+}
+
+.icon {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+
+.menu-title {
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+  color: #674652;
+}
+
+.menu-text {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #9a7885;
+}
+
+.love-note {
+  margin-top: 18px;
+  background: rgba(255, 255, 255, 0.58);
+  border-radius: 24px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 10px 28px rgba(110, 70, 90, 0.07);
+}
+
+.heart-icon {
+  display: block;
+  font-size: 28px;
+  color: #d783a2;
+  margin-bottom: 7px;
+}
+
+.love-note p {
+  font-size: 14px;
+  color: #80606d;
+}
+
+.floating-heart {
+  position: fixed;
+  bottom: -40px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.45;
+  }
+
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .app {
+    width: 94%;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .counter-item strong {
+    font-size: 19px;
+  }
+
+  .counter-item span {
+    font-size: 9px;
+  }
+
+  .menu-card {
+    min-height: 130px;
+    padding: 15px;
+  }
+}
+.menu-card {
+  text-decoration: none;
+  color: inherit;
+}
+.back-button {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 10px 16px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.65);
+  color: #774f5f;
+
+  text-decoration: none;
+  font-size: 14px;
+
+  box-shadow: 0 8px 20px rgba(110, 70, 90, 0.08);
+}
+
+.memories-page {
+  margin-bottom: 18px;
+}
+
+.memories-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.memory-card {
+  overflow: hidden;
+  border-radius: 26px;
+
+  background: rgba(255, 255, 255, 0.7);
+
+  box-shadow: 0 14px 35px rgba(110, 70, 90, 0.1);
+
+  transition: transform 0.2s ease;
+}
+
+.memory-card:active {
+  transform: scale(0.98);
+}
+
+.memory-card img {
+  width: 100%;
+  height: 230px;
+
+  object-fit: cover;
+
+  display: block;
+}
+
+.memory-info {
+  padding: 18px;
+}
+
+.memory-info h2 {
+  font-size: 18px;
+  color: #674652;
+
+  margin-bottom: 6px;
+}
+
+.memory-info p {
+  font-size: 13px;
+  color: #9a7885;
+}
+.menu-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+/* ============================= */
+/* PAGINA MESAJE */
+/* ============================= */
+
+.message-buttons {
+  display: grid;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.ai-message-button {
+  width: 100%;
+
+  border: 1px solid rgba(210, 140, 170, 0.3);
+
+  border-radius: 20px;
+
+  padding: 14px 20px;
+
+  background: rgba(255, 255, 255, 0.78);
+
+  color: #8b5670;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px
+    rgba(110, 70, 90, 0.08);
+
+  transition:
+    transform 0.2s ease;
+}
+
+.ai-message-button:active {
+  transform: scale(0.97);
+}
+
+
+/* ============================= */
+/* LISTA MESAJE */
+/* ============================= */
+
+.messages-list {
+  display: grid;
+
+  gap: 16px;
+
+  margin-top: 18px;
+}
+
+.love-message-card {
+  position: relative;
+
+  padding: 22px;
+
+  border-radius: 25px;
+
+  background:
+    rgba(255, 255, 255, 0.72);
+
+  box-shadow:
+    0 12px 30px
+    rgba(110, 70, 90, 0.09);
+}
+
+.message-heart {
+  font-size: 30px;
+
+  color: #d683a2;
+
+  margin-bottom: 10px;
+}
+
+.love-message-card h2 {
+  color: #674652;
+
+  font-size: 19px;
+
+  margin-bottom: 9px;
+}
+
+.love-message-card p {
+  color: #876a76;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  white-space: pre-wrap;
+}
+
+.love-message-card small {
+  display: block;
+
+  margin-top: 15px;
+
+  color: #aa8997;
+
+  font-size: 11px;
+}
+
+.delete-message {
+  margin-top: 12px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  padding: 8px 12px;
+
+  background: #f7e5eb;
+
+  color: #a15570;
+
+  cursor: pointer;
+}
+
+
+/* ============================= */
+/* MODAL */
+/* ============================= */
+
+.message-modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 100;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(70, 40, 55, 0.38);
+
+  backdrop-filter: blur(8px);
+
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.message-modal.hidden {
+  display: none;
+}
+
+.message-modal-card {
+  width: min(100%, 410px);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  position: relative;
+
+  padding: 28px 20px 22px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      160deg,
+      #fffafd,
+      #fff2f7
+    );
+
+  box-shadow:
+    0 20px 60px
+    rgba(90, 50, 70, 0.25);
+}
+
+.message-modal-card h2 {
+  color: #674652;
+
+  margin-bottom: 18px;
+}
+
+.close-modal {
+  position: absolute;
+
+  top: 12px;
+
+  right: 16px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #916b79;
+
+  font-size: 28px;
+
+  cursor: pointer;
+}
+
+.message-modal-card input,
+.message-modal-card textarea {
+  width: 100%;
+
+  border:
+    1px solid #efd3dd;
+
+  border-radius: 16px;
+
+  padding: 13px;
+
+  margin-bottom: 12px;
+
+  outline: none;
+
+  font: inherit;
+
+  background: white;
+
+  color: #674652;
+}
+
+.message-modal-card input:focus,
+.message-modal-card textarea:focus {
+  border-color: #d98ba7;
+}
+
+.message-modal-card textarea {
+  min-height: 140px;
+
+  resize: vertical;
+}
+
+
+/* ============================= */
+/* SALVARE */
+/* ============================= */
+
+.save-message {
+  width: 100%;
+
+  border: none;
+
+  border-radius: 17px;
+
+  padding: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d986a4,
+      #bf88ae
+    );
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* ============================= */
+/* BOT */
+/* ============================= */
+
+.ai-card {
+  text-align: left;
+}
+
+.bot-heart {
+  width: 65px;
+
+  height: 65px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin:
+    0 auto 12px;
+
+  border-radius: 50%;
+
+  font-size: 32px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f9d8e4,
+      #edd6eb
+    );
+
+  animation:
+    botPulse 2s infinite;
+}
+
+@keyframes botPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+}
+
+.ai-card h2 {
+  text-align: center;
+
+  margin-bottom: 5px;
+}
+
+.ai-description {
+  text-align: center;
+
+  color: #987482;
+
+  font-size: 13px;
+
+  margin-bottom: 22px;
+}
+
+.ai-label {
+  display: block;
+
+  color: #73515f;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  margin:
+    14px 0 8px;
+}
+
+
+/* ============================= */
+/* OPȚIUNI BOT */
+/* ============================= */
+
+.ai-options {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 8px;
+}
+
+.ai-option {
+  border:
+    1px solid #f0d4de;
+
+  border-radius: 15px;
+
+  padding: 11px 8px;
+
+  background: white;
+
+  color: #805d6b;
+
+  cursor: pointer;
+
+  font-size: 12px;
+
+  transition:
+    0.2s ease;
+}
+
+.ai-option.active {
+  border-color: #d685a3;
+
+  background: #f9e3eb;
+
+  color: #a64f71;
+
+  transform: scale(1.02);
+}
+
+.ai-details {
+  min-height: 90px !important;
+}
+
+
+/* ============================= */
+/* GENERARE */
+/* ============================= */
+
+.generate-message {
+  width: 100%;
+
+  margin-top: 5px;
+
+  border: none;
+
+  border-radius: 17px;
+
+  padding: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d986a4,
+      #b982ac
+    );
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px
+    rgba(160, 90, 120, 0.18);
+}
+
+
+/* ============================= */
+/* MESAJ GENERAT */
+/* ============================= */
+
+.generated-area {
+  margin-top: 18px;
+
+  padding: 17px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(247, 222, 232, 0.65);
+}
+
+.generated-area.hidden {
+  display: none;
+}
+
+.generated-label {
+  color: #a15c77;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  margin-bottom: 9px;
+}
+
+.generated-message {
+  color: #674652;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  white-space: pre-wrap;
+}
+
+.generated-buttons {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 8px;
+
+  margin-top: 15px;
+}
+
+.secondary-button,
+.use-message {
+  border: none;
+
+  border-radius: 14px;
+
+  padding: 11px 7px;
+
+  cursor: pointer;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.secondary-button {
+  background: white;
+
+  color: #916578;
+}
+
+.use-message {
+  background: #d986a4;
+
+  color: white;
+}
+
+
+/* ============================= */
+/* TELEFON */
+/* ============================= */
+
+@media (max-width: 360px) {
+
+  .ai-options {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* ============================= */
+/* HOME SECTIONS */
+/* ============================= */
+
+.home-section {
+  margin-top: 18px;
+
+  padding: 22px;
+
+  border-radius: 25px;
+
+  background:
+    rgba(255, 255, 255, 0.68);
+
+  box-shadow:
+    0 12px 30px
+    rgba(110, 70, 90, 0.08);
+}
+
+.home-section-title {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.home-section h2 {
+  margin-top: 5px;
+
+  color: #674652;
+
+  font-size: 19px;
+}
+
+.home-small {
+  color: #b46d88;
+
+  font-size: 10px;
+
+  letter-spacing: 1.5px;
+
+  font-weight: 700;
+}
+
+.home-description {
+  margin-top: 12px;
+
+  color: #92717e;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+.see-all {
+  flex-shrink: 0;
+
+  color: #b45e7e;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.daily-love-message {
+  margin-top: 12px;
+
+  color: #80606d;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.home-button {
+  display: inline-block;
+
+  margin-top: 16px;
+
+  padding: 11px 16px;
+
+  border-radius: 16px;
+
+  background: #f7e2ea;
+
+  color: #a95373;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+/* ============================= */
+/* MENIU FIX JOS */
+/* ============================= */
+
+body {
+  padding-bottom:
+    calc(100px + env(safe-area-inset-bottom));
+}
+
+.bottom-nav {
+  position: fixed;
+
+  left: 50%;
+
+  bottom: 12px;
+
+  transform: translateX(-50%);
+
+  z-index: 1000;
+
+  width: min(94%, 430px);
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  padding:
+    8px
+    8px
+    calc(8px + env(safe-area-inset-bottom));
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.8);
+
+  border-radius: 25px;
+
+  background:
+    rgba(255, 250, 252, 0.9);
+
+  backdrop-filter: blur(20px);
+
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 12px 35px
+    rgba(90, 50, 70, 0.16);
+}
+
+.nav-item {
+  min-height: 52px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 3px;
+
+  border-radius: 17px;
+
+  color: #987482;
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  transition: 0.2s ease;
+}
+
+.nav-icon {
+  font-size: 21px;
+}
+
+.nav-item.active {
+  background: #f7e2ea;
+
+  color: #a95373;
+
+  font-weight: 700;
+}
+
+.nav-item:active {
+  transform: scale(0.92);
+}
+/* POZA PRINCIPALĂ DIN SETĂRI */
+
+.settings-main-photo {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 30px;
+}
+
+.settings-main-photo img {
+  width: 145px;
+  height: 145px;
+
+  object-fit: cover;
+
+  border-radius: 32px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.18);
+
+  box-shadow:
+    0 16px 40px
+    rgba(0, 0, 0, 0.25);
+}
+
+.settings-section-title {
+  font-family: Georgia, serif;
+
+  font-size: 30px;
+
+  font-weight: 400;
+
+  color: white;
+
+  margin-bottom: 25px;
+}
+
+.private-count {
+  display: block;
+
+  margin-top: 10px;
+
+  color: #aaa3b3;
+
+  font-size: 14px;
+}
+
+.streak-line {
+  color: #aaa3b3;
+
+  font-size: 17px;
+
+  margin-bottom: 15px;
+}
+
+.streak-line strong {
+  color: white;
+
+  font-size: 24px;
+}
+/* ================================= */
+/* PAGINA SETĂRI */
+/* ================================= */
+
+.settings-body {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 15% 25%,
+      rgba(30, 70, 120, 0.38),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 65%,
+      rgba(145, 40, 75, 0.30),
+      transparent 35%
+    ),
+    linear-gradient(
+      160deg,
+      #080810,
+      #121326 50%,
+      #170d18
+    );
+
+  color: #f6f1f5;
+}
+
+
+.settings-app {
+  padding-top: 45px;
+}
+
+
+/* TITLU */
+
+.settings-header {
+  margin-bottom: 30px;
+}
+
+.settings-header h1 {
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: 44px;
+
+  font-weight: 400;
+
+  color: white;
+}
+
+.settings-header p {
+  margin-top: 7px;
+
+  color: #aaa3b3;
+
+  font-size: 14px;
+}
+
+
+/* CARDURI */
+
+.settings-big-card {
+  margin-bottom: 22px;
+
+  padding: 28px 20px;
+
+  border-radius: 30px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  background:
+    linear-gradient(
+      150deg,
+      rgba(24, 25, 50, 0.82),
+      rgba(42, 18, 35, 0.78)
+    );
+
+  backdrop-filter: blur(22px);
+
+  -webkit-backdrop-filter: blur(22px);
+
+  box-shadow:
+    0 18px 50px
+    rgba(0, 0, 0, 0.16);
+}
+
+.settings-big-card h2 {
+  margin-top: 0;
+
+  margin-bottom: 25px;
+
+  font-family: Georgia, serif;
+
+  font-size: 29px;
+
+  font-weight: 400;
+
+  color: white;
+}
+
+
+/* LABEL */
+
+.settings-label {
+  display: block;
+
+  margin:
+    21px 0
+    7px;
+
+  color: #aaa4b0;
+
+  font-size: 11px;
+
+  letter-spacing: 2px;
+}
+
+
+/* INPUTURI */
+
+.settings-input {
+  display: block;
+
+  width: 100%;
+
+  min-height: 56px;
+
+  padding: 0 16px;
+
+  border-radius: 14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.18);
+
+  outline: none;
+
+  background:
+    rgba(15, 13, 25, 0.35);
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 16px;
+
+  box-sizing: border-box;
+}
+
+.settings-input:focus {
+  border-color:
+    rgba(255, 170, 200, 0.7);
+}
+
+
+/* POZA CUPLULUI */
+
+.couple-photo-setting {
+  display: flex;
+
+  align-items: center;
+
+  gap: 17px;
+
+  margin-top: 25px;
+}
+
+.settings-couple-photo {
+  width: 82px;
+
+  height: 82px;
+
+  flex-shrink: 0;
+
+  border-radius: 22px;
+
+  object-fit: cover;
+}
+
+.photo-change-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 48px;
+
+  padding: 0 18px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.2);
+
+  border-radius: 13px;
+
+  background:
+    rgba(8, 7, 15, 0.7);
+
+  color: white;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+
+/* FUNDALURI */
+
+.background-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+.background-option {
+  min-height: 105px;
+
+  padding: 17px;
+
+  border: 2px solid transparent;
+
+  border-radius: 23px;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  color: white;
+
+  text-align: left;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.background-option:active {
+  transform: scale(0.97);
+}
+
+.background-option span {
+  display: block;
+
+  margin-bottom: 11px;
+
+  font-size: 27px;
+}
+
+.background-option.selected {
+  border-color: #db7da1;
+
+  background:
+    rgba(219, 125, 161, 0.15);
+}
+
+
+.custom-background-buttons {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 18px;
+}
+
+.remove-background {
+  min-height: 48px;
+
+  padding: 0 12px;
+
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+
+/* FOC */
+
+.streak-number {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 10px;
+
+  margin-bottom: 15px;
+}
+
+.streak-number strong {
+  font-size: 40px;
+
+  color: white;
+}
+
+.streak-number span {
+  color: #aaa3b3;
+}
+
+.settings-description {
+  color: #aaa3b3;
+
+  line-height: 1.7;
+
+  font-size: 14px;
+}
+
+
+/* SWITCH */
+
+.setting-toggle {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  min-height: 58px;
+
+  color: white;
+
+  font-size: 15px;
+}
+
+.switch {
+  position: relative;
+
+  width: 52px;
+
+  height: 30px;
+
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+
+  width: 0;
+
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 30px;
+
+  background: #464250;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.slider::before {
+  content: "";
+
+  position: absolute;
+
+  width: 24px;
+
+  height: 24px;
+
+  left: 3px;
+
+  top: 3px;
+
+  border-radius: 50%;
+
+  background: #15121d;
+
+  transition: 0.25s;
+}
+
+.switch input:checked + .slider {
+  background: #2597ad;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(22px);
+}
+
+
+/* BUTOANE */
+
+.settings-secondary-button {
+  width: 100%;
+
+  min-height: 48px;
+
+  margin-top: 10px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.18);
+
+  border-radius: 14px;
+
+  background:
+    rgba(10, 8, 16, 0.6);
+
+  color: white;
+
+  font-family: inherit;
+
+  cursor: pointer;
+}
+
+.save-all-settings {
+  width: 100%;
+
+  min-height: 55px;
+
+  margin-bottom: 10px;
+
+  border: none;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ce628b,
+      #9e659d
+    );
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.save-confirmation {
+  min-height: 30px;
+
+  text-align: center;
+
+  color: #efb6cc;
+
+  font-size: 13px;
+}
+
+
+/* BARĂ JOS PE SETĂRI */
+
+.settings-body .bottom-nav {
+  border-color:
+    rgba(255, 255, 255, 0.12);
+
+  background:
+    rgba(19, 14, 27, 0.94);
+}
+
+.settings-body .nav-item {
+  color: #aaa4b3;
+}
+
+.settings-body .nav-item.active {
+  background:
+    rgba(207, 104, 146, 0.16);
+
+  color: #f0bdd0;
+}
+
+
+/* FUNDALURI SELECTABILE */
+
+.settings-body.bg-aurora {
+  background:
+    radial-gradient(circle at 15% 25%, rgba(33, 100, 160, 0.45), transparent 35%),
+    radial-gradient(circle at 80% 70%, rgba(170, 55, 100, 0.38), transparent 40%),
+    linear-gradient(160deg, #080810, #111429 55%, #190d18);
+}
+
+.settings-body.bg-mesh {
+  background:
+    radial-gradient(circle at 20% 20%, #20375a, transparent 30%),
+    radial-gradient(circle at 80% 40%, #4d1e42, transparent 35%),
+    radial-gradient(circle at 40% 85%, #301c4b, transparent 40%),
+    #0b0b14;
+}
+
+.settings-body.bg-starlight {
+  background:
+    radial-gradient(circle at 15% 15%, rgba(255,255,255,.8) 0 1px, transparent 2px),
+    radial-gradient(circle at 70% 30%, rgba(255,255,255,.6) 0 1px, transparent 2px),
+    radial-gradient(circle at 35% 70%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+    linear-gradient(#0b0d20, #191026);
+}
+
+.settings-body.bg-silk {
+  background:
+    linear-gradient(
+      145deg,
+      #130d19,
+      #442139,
+      #1d1930,
+      #130d19
+    );
+}
+
+.settings-body.bg-plain {
+  background: #16131d;
+}
+
+.settings-body.bg-nature {
+  background:
+    radial-gradient(circle at top left, rgba(57, 112, 71, .5), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(90, 53, 62, .4), transparent 40%),
+    #0e1713;
+}
+
+.settings-body.bg-stars {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 65% 45%, rgba(255,255,255,.8) 0 1px, transparent 2px),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,.5) 0 1px, transparent 2px),
+    linear-gradient(#060711, #16132a);
+}
+
+.settings-body.bg-moon {
+  background:
+    radial-gradient(circle at 80% 15%, rgba(220,224,255,.3), transparent 13%),
+    linear-gradient(#07101d, #121323, #170e1c);
+}
+
+.settings-body.bg-clouds {
+  background:
+    radial-gradient(ellipse at 20% 25%, rgba(255,255,255,.15), transparent 30%),
+    radial-gradient(ellipse at 75% 50%, rgba(255,255,255,.1), transparent 35%),
+    linear-gradient(#142032, #1b1a2d, #170f19);
+}
+
+.settings-body.bg-cozy {
+  background:
+    radial-gradient(circle at 70% 70%, rgba(255,150,90,.25), transparent 32%),
+    linear-gradient(#160e12, #281519, #130e17);
+}
+
+.settings-body.bg-pastel {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(199,153,222,.35), transparent 35%),
+    radial-gradient(circle at 80% 65%, rgba(244,150,180,.3), transparent 40%),
+    linear-gradient(#201728, #29172a);
+}
+
+.settings-body.bg-dark {
+  background:
+    linear-gradient(#050508, #0d0c12);
+}
+
+
+/* TELEFON MIC */
+
+@media (max-width: 360px) {
+
+  .settings-header h1 {
+    font-size: 38px;
+  }
+
+  .settings-big-card {
+    padding:
+      24px 16px;
+  }
+
+  .background-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .couple-photo-setting {
+    align-items: flex-start;
+  }
+
+}
+body.bg-aurora {
+  background: #14213d !important;
+}
+
+body.bg-mesh {
+  background: #3a0f35 !important;
+}
+
+body.bg-starlight {
+  background: #090b24 !important;
+}
+
+body.bg-silk {
+  background: #441d38 !important;
+}
+
+body.bg-plain {
+  background: #18151d !important;
+}
+
+body.bg-nature {
+  background: #17351f !important;
+}
+
+body.bg-stars {
+  background: #050515 !important;
+}
+
+body.bg-moon {
+  background: #10192d !important;
+}
+
+body.bg-clouds {
+  background: #34445a !important;
+}
+
+body.bg-cozy {
+  background: #3b211c !important;
+}
+
+body.bg-pastel {
+  background: #50324f !important;
+}
+
+body.bg-dark {
+  background: #050505 !important;
+}
+
+body.bg-custom {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+/* ========================================= */
+/* TEMA GLOBALĂ - SE VEDE PE TOATĂ APLICAȚIA */
+/* ========================================= */
+
+body[class*="bg-"] {
+  color: white;
+}
+
+
+/* FUNDALUL PAGINII */
+
+body.bg-nature {
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(54, 120, 72, 0.55),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 70%,
+      rgba(25, 75, 45, 0.45),
+      transparent 40%
+    ),
+    linear-gradient(
+      160deg,
+      #07130d,
+      #0d2819,
+      #07110c
+    ) !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* ========================================= */
+/* CARDURILE DEVIN TRANSPARENTE */
+/* CA SĂ SE VADĂ TEMA */
+/* ========================================= */
+
+body[class*="bg-"] .hero-card,
+body[class*="bg-"] .home-section,
+body[class*="bg-"] .love-note,
+body[class*="bg-"] .settings-big-card {
+
+  background:
+    rgba(20, 16, 28, 0.72) !important;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.12) !important;
+
+  backdrop-filter: blur(20px);
+
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 15px 45px
+    rgba(0, 0, 0, 0.20) !important;
+}
+
+
+/* CONTOR */
+
+body[class*="bg-"] .together-card {
+
+  background:
+    rgba(255, 255, 255, 0.07) !important;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+}
+
+
+/* NUMERE CONTOR */
+
+body[class*="bg-"] .counter-item {
+
+  background:
+    rgba(255, 255, 255, 0.09) !important;
+
+  color: white !important;
+}
+
+
+body[class*="bg-"] .counter-item strong {
+  color: white !important;
+}
+
+
+body[class*="bg-"] .counter-item span {
+  color:
+    rgba(255,255,255,0.65) !important;
+}
+
+
+/* TEXTE */
+
+body[class*="bg-"] h1,
+body[class*="bg-"] h2 {
+  color: white !important;
+}
+
+
+body[class*="bg-"] .subtitle,
+body[class*="bg-"] .home-description,
+body[class*="bg-"] .daily-love-message,
+body[class*="bg-"] .love-note p,
+body[class*="bg-"] .label {
+
+  color:
+    rgba(255,255,255,0.72) !important;
+}
+
+
+body[class*="bg-"] .eyebrow,
+body[class*="bg-"] .home-small {
+
+  color: #efa5c1 !important;
+}
+
+
+/* LINKURI */
+
+body[class*="bg-"] .see-all {
+  color: #f0a5c2 !important;
+}
+
+
+/* BUTOANE */
+
+body[class*="bg-"] .home-button {
+
+  background:
+    rgba(218, 105, 151, 0.18) !important;
+
+  color: #ffc5db !important;
+
+  border:
+    1px solid
+    rgba(255, 170, 205, 0.18);
+}
+
+
+/* ========================================= */
+/* MENIU DE JOS */
+/* ========================================= */
+
+body[class*="bg-"] .bottom-nav {
+
+  background:
+    rgba(15, 11, 22, 0.90) !important;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.10) !important;
+
+  backdrop-filter: blur(25px);
+
+  -webkit-backdrop-filter: blur(25px);
+}
+
+
+body[class*="bg-"] .nav-item {
+  color:
+    rgba(255,255,255,0.60) !important;
+}
+
+
+body[class*="bg-"] .nav-item.active {
+
+  background:
+    rgba(210, 100, 145, 0.20) !important;
+
+  color: #ffc0d8 !important;
+}
+
+
+/* ========================================= */
+/* POZA PERSONALIZATĂ */
+/* ========================================= */
+
+body.bg-custom {
+
+  background-size:
+    cover !important;
+
+  background-position:
+    center !important;
+
+  background-repeat:
+    no-repeat !important;
+
+  background-attachment:
+    fixed !important;
+}
+/* MENIU CU 5 BUTOANE */
+
+.bottom-nav.five-items {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.bottom-nav.five-items .nav-item {
+  font-size: 9px;
+}
+
+.bottom-nav.five-items .nav-icon {
+  font-size: 19px;
+}
+
+
+/* EVENIMENTE */
+
+.events-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.event-card {
+  display: flex;
+  gap: 15px;
+
+  padding: 20px;
+
+  border-radius: 24px;
+
+  background:
+    rgba(20, 16, 28, 0.72);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  backdrop-filter: blur(20px);
+}
+
+.event-icon {
+  font-size: 28px;
+}
+
+.event-main {
+  flex: 1;
+}
+
+.event-main h2 {
+  margin-bottom: 5px;
+}
+
+.event-date {
+  opacity: .7;
+  font-size: 12px;
+}
+
+.event-countdown {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #f2a9c4;
+}
+
+.event-note {
+  margin-top: 10px;
+
+  opacity: .8;
+
+  line-height: 1.5;
+}
+
+.delete-event {
+  margin-top: 12px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  padding: 8px 10px;
+
+  background: rgba(255,255,255,.08);
+
+  color: white;
+}
+
+
+/* CHAT */
+
+.chat-card {
+  margin-top: 18px;
+
+  padding: 16px;
+
+  border-radius: 26px;
+
+  background:
+    rgba(20, 16, 28, 0.72);
+
+  backdrop-filter: blur(20px);
+}
+
+.chat-messages {
+  min-height: 350px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.ai-bubble,
+.user-bubble {
+  max-width: 82%;
+
+  padding: 12px 14px;
+
+  border-radius: 18px;
+
+  line-height: 1.5;
+
+  font-size: 14px;
+}
+
+.ai-bubble {
+  align-self: flex-start;
+
+  background:
+    rgba(255,255,255,.09);
+
+  color: white;
+}
+
+.user-bubble {
+  align-self: flex-end;
+
+  background:
+    rgba(213, 105, 148, .35);
+
+  color: white;
+}
+
+.chat-quick {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin-top: 15px;
+}
+
+.chat-quick button {
+  border: none;
+
+  border-radius: 14px;
+
+  padding: 9px 11px;
+
+  background:
+    rgba(255,255,255,.08);
+
+  color: white;
+}
+
+.chat-input-row {
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 14px;
+}
+
+.chat-input-row textarea {
+  flex: 1;
+
+  min-height: 50px;
+
+  max-height: 120px;
+
+  resize: none;
+
+  border: none;
+
+  border-radius: 18px;
+
+  padding: 12px;
+
+  font: inherit;
+}
+
+.chat-input-row button {
+  width: 50px;
+
+  border: none;
+
+  border-radius: 18px;
+
+  background: #d76e98;
+
+  color: white;
+
+  font-size: 20px;
+}
+
+
+/* SEIF */
+
+.vault-card {
+  margin-top: 18px;
+
+  padding: 22px;
+
+  border-radius: 26px;
+
+  background:
+    rgba(20,16,28,.75);
+
+  color: white;
+}
+
+.vault-card textarea {
+  width: 100%;
+
+  min-height: 180px;
+
+  margin: 12px 0;
+
+  padding: 14px;
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(255,255,255,.15);
+
+  background: rgba(255,255,255,.06);
+
+  color: white;
+
+  font: inherit;
+}
+
+.hidden {
+  display: none !important;
+}
+/* ========================================= */
+/* LOGIN */
+/* ========================================= */
+
+.login-page {
+
+  min-height: 100vh;
+
+  margin: 0;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background:
+
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(225, 100, 155, .25),
+      transparent 35%
+    ),
+
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(120, 70, 180, .25),
+      transparent 40%
+    ),
+
+    linear-gradient(
+      160deg,
+      #090711,
+      #160c1c,
+      #0c0912
+    );
+
+  color: white;
+
+}
+
+
+.login-container {
+
+  width: 100%;
+
+  max-width: 430px;
+
+  padding:
+
+    max(50px, env(safe-area-inset-top))
+
+    25px
+
+    max(40px, env(safe-area-inset-bottom));
+
+  text-align: center;
+
+}
+
+
+.login-logo {
+
+  width: 90px;
+
+  height: 90px;
+
+  margin: 0 auto 25px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 42px;
+
+  border-radius: 30px;
+
+  background:
+    rgba(255,255,255,.08);
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  box-shadow:
+    0 20px 60px
+    rgba(220, 80, 140, .20);
+
+}
+
+
+.login-small {
+
+  margin: 0 0 10px;
+
+  font-size: 12px;
+
+  letter-spacing: 5px;
+
+  color: #e99ab9;
+
+}
+
+
+.login-title {
+
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 42px;
+
+  font-weight: 500;
+
+}
+
+
+.login-description {
+
+  max-width: 330px;
+
+  margin: 16px auto 30px;
+
+  line-height: 1.6;
+
+  color:
+    rgba(255,255,255,.60);
+
+}
+
+
+.login-card {
+
+  padding: 20px;
+
+  border-radius: 30px;
+
+  background:
+    rgba(255,255,255,.055);
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  backdrop-filter:
+    blur(25px);
+
+  -webkit-backdrop-filter:
+    blur(25px);
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.25);
+
+}
+
+
+.login-provider {
+
+  width: 100%;
+
+  min-height: 58px;
+
+  margin-bottom: 12px;
+
+  padding: 0 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  border-radius: 18px;
+
+  border: none;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+
+.google-login {
+
+  background: white;
+
+  color: #202124;
+
+}
+
+
+.provider-icon {
+
+  width: 25px;
+
+  height: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-weight: 800;
+
+}
+
+
+.google-login .provider-icon {
+
+  color: #4285f4;
+
+  border:
+    1px solid #ddd;
+
+}
+
+
+.apple-login {
+
+  background: #050505;
+
+  color: white;
+
+  border:
+    1px solid
+    rgba(255,255,255,.18);
+
+}
+
+
+.apple-icon {
+
+  font-size: 25px;
+
+}
+
+
+.guest-login {
+
+  margin-bottom: 0;
+
+  color: white;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      rgba(213, 93, 145, .85),
+      rgba(154, 76, 139, .85)
+    );
+
+}
+
+
+.login-divider {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin: 15px 0;
+
+  color:
+    rgba(255,255,255,.40);
+
+}
+
+
+.login-divider span {
+
+  flex: 1;
+
+  height: 1px;
+
+  background:
+    rgba(255,255,255,.10);
+
+}
+
+
+.login-divider p {
+
+  margin: 0;
+
+  font-size: 12px;
+
+}
+
+
+.login-status {
+
+  min-height: 20px;
+
+  margin: 15px 0 0;
+
+  font-size: 13px;
+
+  color: #f2aec9;
+
+}
+
+
+.login-security {
+
+  margin-top: 25px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-size: 13px;
+
+  color:
+    rgba(255,255,255,.60);
+
+}
+
+
+.login-footer {
+
+  max-width: 300px;
+
+  margin: 15px auto 0;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+
+  color:
+    rgba(255,255,255,.35);
+
+}
+
+
+.login-provider:disabled {
+
+  opacity: .5;
+
+  cursor: not-allowed;
+
+}
+/* ================================= */
+/* URSULEȚ */
+/* ================================= */
+
+.bear-section {
+  text-align: center;
+}
+
+.bear-stage {
+  position: relative;
+
+  min-height: 210px;
+
+  margin-top: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 25px;
+
+  background:
+    rgba(255,255,255,.06);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+.love-bear {
+  font-size: 105px;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  animation:
+    bearBreathe 2.4s
+    ease-in-out infinite;
+
+  transition:
+    transform .2s ease;
+}
+
+.love-bear.happy {
+  animation:
+    bearJump .55s ease;
+}
+
+.bear-accessory {
+  position: absolute;
+
+  top: 43px;
+
+  left: 50%;
+
+  transform:
+    translateX(25px);
+
+  font-size: 36px;
+
+  pointer-events: none;
+}
+
+@keyframes bearBreathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+}
+
+@keyframes bearJump {
+
+  0% {
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  40% {
+    transform:
+      translateY(-25px)
+      scale(1.08);
+  }
+
+  100% {
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+.bear-info {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 15px;
+
+  color: white;
+}
+
+.bear-info span {
+  opacity: .65;
+}
+
+.bear-happiness {
+  margin-top: 18px;
+
+  text-align: left;
+
+  color: white;
+
+  font-size: 13px;
+}
+
+.bear-progress {
+  height: 10px;
+
+  margin-top: 8px;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,.1);
+}
+
+.bear-progress-fill {
+  height: 100%;
+
+  width: 20%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d66f98,
+      #f3a9c4
+    );
+
+  transition:
+    width .4s ease;
+}
+
+.bear-actions {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 10px;
+
+  margin-top: 16px;
+}
+
+.bear-actions button {
+  min-height: 46px;
+
+  border: none;
+
+  border-radius: 15px;
+
+  background:
+    rgba(255,255,255,.08);
+
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+/* ===================================== */
+/* URSULEȚ ANIMAT */
+/* ===================================== */
+
+.bear-stage {
+  position: relative;
+
+  min-height: 230px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+
+  margin-top: 18px;
+
+  padding-bottom: 30px;
+
+  overflow: hidden;
+
+  border-radius: 26px;
+
+  background:
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(255,255,255,.10),
+      transparent 40%
+    ),
+    rgba(255,255,255,.04);
+}
+
+
+.love-bear {
+  position: relative;
+
+  z-index: 2;
+
+  font-size: 110px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  transform-origin:
+    center bottom;
+
+  animation:
+    bearIdle 2.6s
+    ease-in-out infinite;
+
+  filter:
+    drop-shadow(
+      0 14px 18px
+      rgba(0,0,0,.20)
+    );
+}
+
+
+/* RESPIRĂ UȘOR */
+
+@keyframes bearIdle {
+
+  0%,
+  100% {
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+  50% {
+
+    transform:
+      translateY(-4px)
+      scale(1.04);
+
+  }
+
+}
+
+
+/* SARE */
+
+.love-bear.bear-jump {
+
+  animation:
+    bearJump .85s
+    cubic-bezier(
+      .25,
+      .8,
+      .25,
+      1
+    );
+
+}
+
+
+@keyframes bearJump {
+
+  0% {
+
+    transform:
+      translateY(0)
+      scaleX(1)
+      scaleY(1);
+
+  }
+
+
+  15% {
+
+    transform:
+      translateY(5px)
+      scaleX(1.10)
+      scaleY(.90);
+
+  }
+
+
+  40% {
+
+    transform:
+      translateY(-65px)
+      scaleX(.95)
+      scaleY(1.08);
+
+  }
+
+
+  60% {
+
+    transform:
+      translateY(-70px)
+      rotate(-4deg);
+
+  }
+
+
+  78% {
+
+    transform:
+      translateY(0)
+      scaleX(1.08)
+      scaleY(.92);
+
+  }
+
+
+  90% {
+
+    transform:
+      translateY(-8px);
+
+  }
+
+
+  100% {
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+}
+
+
+/* DANSEAZĂ */
+
+.love-bear.bear-dance {
+
+  animation:
+    bearDance 1.2s
+    ease-in-out;
+
+}
+
+
+@keyframes bearDance {
+
+  0%,
+  100% {
+
+    transform:
+      translateY(0)
+      rotate(0);
+
+  }
+
+
+  15% {
+
+    transform:
+      translateY(-10px)
+      rotate(-10deg);
+
+  }
+
+
+  30% {
+
+    transform:
+      translateY(0)
+      rotate(10deg);
+
+  }
+
+
+  45% {
+
+    transform:
+      translateY(-12px)
+      rotate(-8deg);
+
+  }
+
+
+  60% {
+
+    transform:
+      translateY(0)
+      rotate(8deg);
+
+  }
+
+
+  75% {
+
+    transform:
+      translateY(-8px)
+      rotate(-5deg);
+
+  }
+
+}
+
+
+/* OBIECT PE URSULEȚ */
+
+.bear-accessory {
+  position: absolute;
+
+  z-index: 3;
+
+  left: 50%;
+
+  bottom: 120px;
+
+  transform:
+    translateX(25px);
+
+  font-size: 36px;
+
+  pointer-events: none;
+}
+
+
+/* UMBRĂ SUB URS */
+
+.bear-stage::after {
+
+  content: "";
+
+  position: absolute;
+
+  bottom: 24px;
+
+  left: 50%;
+
+  width: 105px;
+
+  height: 18px;
+
+  transform:
+    translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    rgba(0,0,0,.20);
+
+  filter:
+    blur(6px);
+
+}
+
+
+/* BARA FERICIRE */
+
+.bear-progress {
+
+  width: 100%;
+
+  height: 11px;
+
+  margin-top: 8px;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,.10);
+
+}
+
+
+.bear-progress-fill {
+
+  height: 100%;
+
+  width: 30%;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d76a97,
+      #f2a2bf
+    );
+
+  transition:
+    width .4s ease;
+
+}
+
+
+/* BUTOANE */
+
+.bear-actions {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 10px;
+
+  margin-top: 16px;
+
+}
+
+
+.bear-actions button {
+
+  min-height: 48px;
+
+  border: 1px solid
+    rgba(255,255,255,.10);
+
+  border-radius: 16px;
+
+  background:
+    rgba(255,255,255,.08);
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+
+.bear-actions button:active {
+
+  transform:
+    scale(.96);
+
+}
+/* ===================================== */
+/* URSULEȚ DESENAT */
+/* ===================================== */
+
+.bear-stage {
+  min-height: 310px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+
+  padding-bottom: 30px;
+}
+
+.bear-character {
+  position: relative;
+
+  width: 150px;
+  height: 245px;
+
+  cursor: pointer;
+
+  transform-origin: center bottom;
+
+  animation:
+    bearStandIdle 2.8s
+    ease-in-out infinite;
+}
+
+
+/* URECHI */
+
+.bear-ear {
+  position: absolute;
+
+  top: 6px;
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  background: #8c5f45;
+
+  z-index: 1;
+}
+
+.bear-ear::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 10px;
+
+  border-radius: 50%;
+
+  background: #c48a6a;
+}
+
+.bear-ear-left {
+  left: 15px;
+}
+
+.bear-ear-right {
+  right: 15px;
+}
+
+
+/* CAP */
+
+.bear-head {
+  position: absolute;
+
+  top: 18px;
+  left: 50%;
+
+  width: 125px;
+  height: 115px;
+
+  transform: translateX(-50%);
+
+  border-radius:
+    48% 48% 45% 45%;
+
+  background: #9b6a4c;
+
+  z-index: 2;
+}
+
+
+/* OCHI */
+
+.bear-eye {
+  position: absolute;
+
+  top: 42px;
+
+  width: 12px;
+  height: 16px;
+
+  border-radius: 50%;
+
+  background: #1c1411;
+
+  transform-origin: center;
+
+  animation:
+    bearBlink 4.5s
+    infinite;
+}
+
+.bear-eye-left {
+  left: 32px;
+}
+
+.bear-eye-right {
+  right: 32px;
+}
+
+
+/* CLIPIT */
+
+@keyframes bearBlink {
+
+  0%,
+  45%,
+  48%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  46%,
+  47% {
+    transform: scaleY(0.08);
+  }
+
+}
+
+
+/* BOTIC */
+
+.bear-muzzle {
+  position: absolute;
+
+  left: 50%;
+  bottom: 14px;
+
+  width: 62px;
+  height: 47px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: #c99572;
+}
+
+.bear-nose {
+  position: absolute;
+
+  top: 8px;
+  left: 50%;
+
+  width: 22px;
+  height: 15px;
+
+  transform: translateX(-50%);
+
+  border-radius:
+    50% 50% 45% 45%;
+
+  background: #261917;
+}
+
+.bear-mouth {
+  position: absolute;
+
+  left: 50%;
+  top: 23px;
+
+  width: 22px;
+  height: 12px;
+
+  transform: translateX(-50%);
+
+  border-bottom:
+    3px solid #3a2220;
+
+  border-radius: 50%;
+}
+
+
+/* CORP */
+
+.bear-body {
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  width: 105px;
+  height: 135px;
+
+  transform: translateX(-50%);
+
+  border-radius:
+    48% 48% 38% 38%;
+
+  background: #925f43;
+
+  z-index: 1;
+}
+
+
+/* BURTICĂ */
+
+.bear-belly {
+  position: absolute;
+
+  left: 50%;
+  top: 28px;
+
+  width: 65px;
+  height: 78px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: #bf8666;
+}
+
+
+/* BRAȚE */
+
+.bear-arm {
+  position: absolute;
+
+  top: 15px;
+
+  width: 35px;
+  height: 88px;
+
+  border-radius: 25px;
+
+  background: #8d5b41;
+
+  transform-origin: top center;
+}
+
+.bear-arm-left {
+  left: -21px;
+
+  transform: rotate(11deg);
+}
+
+.bear-arm-right {
+  right: -21px;
+
+  transform: rotate(-11deg);
+}
+
+
+/* PICIOARE */
+
+.bear-leg {
+  position: absolute;
+
+  bottom: -10px;
+
+  width: 40px;
+  height: 62px;
+
+  border-radius:
+    25px 25px 18px 18px;
+
+  background: #84543d;
+
+  z-index: -1;
+}
+
+.bear-leg-left {
+  left: 9px;
+}
+
+.bear-leg-right {
+  right: 9px;
+}
+
+
+/* STĂ ÎN PICIOARE */
+
+@keyframes bearStandIdle {
+
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(0deg);
+  }
+
+  50% {
+    transform:
+      translateY(-4px)
+      rotate(1deg);
+  }
+
+}
+
+
+/* SARE */
+
+.bear-character.bear-jump {
+  animation:
+    bearStandingJump .9s ease;
+}
+
+@keyframes bearStandingJump {
+
+  0% {
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  20% {
+    transform:
+      translateY(5px)
+      scaleY(.94)
+      scaleX(1.05);
+  }
+
+  45% {
+    transform:
+      translateY(-75px)
+      scaleY(1.05);
+  }
+
+  70% {
+    transform:
+      translateY(0)
+      scaleY(.95)
+      scaleX(1.05);
+  }
+
+  85% {
+    transform:
+      translateY(-10px);
+  }
+
+  100% {
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+/* SE ÎNVÂRTE */
+
+.bear-character.bear-spin {
+  animation:
+    bearSpin 1.15s ease-in-out;
+}
+
+@keyframes bearSpin {
+
+  0% {
+    transform:
+      rotateY(0deg);
+  }
+
+  50% {
+    transform:
+      rotateY(180deg)
+      scale(1.05);
+  }
+
+  100% {
+    transform:
+      rotateY(360deg);
+  }
+
+}
+
+
+/* FACE CU MÂNA */
+
+.bear-character.wave
+.bear-arm-right {
+  animation:
+    bearWave .7s ease-in-out
+    4;
+}
+
+@keyframes bearWave {
+
+  0%,
+  100% {
+    transform:
+      rotate(-11deg);
+  }
+
+  50% {
+    transform:
+      rotate(-75deg);
+  }
+
+}
+/* =====================================================
+   TEME GLOBALE
+===================================================== */
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  background-color: #0d0b14;
+
+  background-attachment: fixed;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+
+/* 🌈 AURORA */
+
+body.theme-aurora {
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(67, 255, 210, 0.24),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(126, 82, 255, 0.30),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(255, 91, 173, 0.22),
+      transparent 45%
+    ),
+    #0b0b16;
+
+  background-attachment: fixed;
+}
+
+
+/* 🕸 MESH */
+
+body.theme-mesh {
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 100, 170, 0.25),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(116, 96, 255, 0.28),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 40% 90%,
+      rgba(90, 210, 255, 0.18),
+      transparent 45%
+    ),
+    #100d19;
+
+  background-attachment: fixed;
+}
+
+
+/* ✨ STARLIGHT */
+
+body.theme-starlight {
+  background-color: #070711;
+
+  background-image:
+    radial-gradient(
+      white 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      rgba(255,255,255,.45) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      180deg,
+      #080812,
+      #151126
+    );
+
+  background-size:
+    45px 45px,
+    75px 75px,
+    100% 100%;
+
+  background-position:
+    0 0,
+    20px 30px,
+    0 0;
+
+  background-attachment: fixed;
+}
+
+
+/* 🎀 SILK */
+
+body.theme-silk {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 190, 218, 0.32),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(189, 154, 255, 0.28),
+      transparent 45%
+    ),
+    linear-gradient(
+      145deg,
+      #221526,
+      #120e1b
+    );
+
+  background-attachment: fixed;
+}
+
+
+/* ⬜ PLAIN */
+
+body.theme-plain {
+  background: #f6f3f5;
+  color: #503b46;
+}
+
+
+/* 🌿 NATURE */
+
+body.theme-nature {
+  background:
+    radial-gradient(
+      circle at 10% 15%,
+      rgba(41, 151, 101, 0.28),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 90% 70%,
+      rgba(64, 116, 81, 0.25),
+      transparent 45%
+    ),
+    linear-gradient(
+      160deg,
+      #07140f,
+      #0c1f17 50%,
+      #160f1b
+    );
+
+  background-attachment: fixed;
+}
+
+
+/* ⭐ STARS */
+
+body.theme-stars {
+  background-color: #070711;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.9) 1px,
+      transparent 1.5px
+    ),
+    radial-gradient(
+      circle,
+      rgba(255,218,145,.6) 1px,
+      transparent 1.5px
+    ),
+    linear-gradient(
+      #080813,
+      #121026
+    );
+
+  background-size:
+    55px 55px,
+    90px 90px,
+    100% 100%;
+
+  background-position:
+    0 0,
+    25px 35px,
+    0 0;
+
+  background-attachment: fixed;
+}
+
+
+/* 🌙 MOON */
+
+body.theme-moon {
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(255, 245, 196, 0.22),
+      transparent 12%
+    ),
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(164, 167, 255, 0.13),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #080a18,
+      #10132a 60%,
+      #171125
+    );
+
+  background-attachment: fixed;
+}
+
+
+/* 🕯 COZY */
+
+body.theme-cozy {
+  background:
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(255, 174, 96, 0.23),
+      transparent 40%
+    ),
+    linear-gradient(
+      160deg,
+      #24130f,
+      #160d12 55%,
+      #100b12
+    );
+
+  background-attachment: fixed;
+}
+
+
+/* 🌸 PASTEL */
+
+body.theme-pastel {
+  background:
+    linear-gradient(
+      145deg,
+      #ffe6ef,
+      #eadfff,
+      #dff4ff
+    );
+
+  background-attachment: fixed;
+  color: #604553;
+}
+
+
+/* 🌑 DARK */
+
+body.theme-dark {
+  background:
+    linear-gradient(
+      160deg,
+      #050506,
+      #111018,
+      #08080d
+    );
+
+  background-attachment: fixed;
+}
+
+
+/* =====================================================
+   URSULEȚ
+   IMPORTANT: ASTA STĂ ÎN STYLE.CSS, NU ÎN TEMA.JS
+===================================================== */
+
+.bear {
+  position: relative;
+}
+
+.bear-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bear-actions button {
+  border: 1px solid rgba(255,255,255,.12);
+
+  border-radius: 16px;
+
+  padding: 12px 18px;
+
+  font: inherit;
+
+  cursor: pointer;
+
+  transition:
+    transform .15s ease,
+    opacity .15s ease;
+}
+
+.bear-actions button:hover {
+  opacity: .9;
+}
+
+.bear-actions button:active {
+  transform: scale(.96);
+}
+/* =========================================
+   TEME FRUMOASE ❤️
+========================================= */
+
+
+/* 🌈 AURORA */
+
+body.bg-aurora {
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(255, 105, 180, 0.28),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(138, 92, 246, 0.28),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(93, 190, 255, 0.18),
+      transparent 45%
+    ),
+    linear-gradient(
+      160deg,
+      #0c0913,
+      #1c1023,
+      #0b0912
+    ) !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* 🕸 MESH */
+
+body.bg-mesh {
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(255, 120, 170, .30),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 90% 30%,
+      rgba(135, 90, 255, .28),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 30% 90%,
+      rgba(80, 180, 255, .18),
+      transparent 45%
+    ),
+    #100b17 !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* ✨ STARLIGHT */
+
+body.bg-starlight {
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,255,255,.16),
+      transparent 2%
+    ),
+    radial-gradient(
+      circle at 80% 35%,
+      rgba(255,255,255,.12),
+      transparent 2%
+    ),
+    linear-gradient(
+      180deg,
+      #070712,
+      #111127,
+      #090914
+    ) !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* 🎀 SILK */
+
+body.bg-silk {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 190, 220, .30),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(190, 150, 255, .25),
+      transparent 45%
+    ),
+    linear-gradient(
+      145deg,
+      #281526,
+      #120d19
+    ) !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* 🤍 PLAIN */
+
+body.bg-plain {
+  background:
+    linear-gradient(
+      160deg,
+      #f9edf2,
+      #eee5f3
+    ) !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* 🌿 NATURE */
+
+body.bg-nature {
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(63, 150, 87, .38),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(44, 105, 70, .32),
+      transparent 45%
+    ),
+    linear-gradient(
+      160deg,
+      #07130d,
+      #10291a,
+      #09110d
+    ) !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* ⭐ STARS */
+
+body.bg-stars {
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(255,255,255,.8) 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 70% 35%,
+      rgba(255,220,160,.6) 1px,
+      transparent 2px
+    ),
+    linear-gradient(
+      180deg,
+      #050510,
+      #101026
+    ) !important;
+
+  background-size:
+    55px 55px,
+    85px 85px,
+    100% 100% !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* 🌙 MOON */
+
+body.bg-moon {
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(255, 244, 194, .25),
+      transparent 13%
+    ),
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(150, 160, 255, .14),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #080a18,
+      #11162c,
+      #161021
+    ) !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* ☁️ CLOUDS */
+
+body.bg-clouds {
+  background:
+    radial-gradient(
+      ellipse at 20% 25%,
+      rgba(255,255,255,.18),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 80% 65%,
+      rgba(255,255,255,.13),
+      transparent 40%
+    ),
+    linear-gradient(
+      160deg,
+      #29384d,
+      #151a29
+    ) !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* 🕯️ COZY */
+
+body.bg-cozy {
+  background:
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(255, 160, 90, .25),
+      transparent 40%
+    ),
+    linear-gradient(
+      160deg,
+      #2a1510,
+      #1a0e13,
+      #100a10
+    ) !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* 🌸 PASTEL */
+
+body.bg-pastel {
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 180, 210, .40),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(190, 170, 255, .35),
+      transparent 45%
+    ),
+    linear-gradient(
+      150deg,
+      #3b2438,
+      #22172d
+    ) !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* 🌑 DARK */
+
+body.bg-dark {
+  background:
+    linear-gradient(
+      160deg,
+      #030304,
+      #0d0c12,
+      #050507
+    ) !important;
+
+  background-attachment: fixed !important;
+}
+
+
+/* 📷 POZĂ PERSONALIZATĂ */
+
+body.bg-custom {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+
+/* =========================================
+   CARDURI GLASS ❤️
+========================================= */
+
+body[class*="bg-"] .hero-card,
+body[class*="bg-"] .home-section,
+body[class*="bg-"] .love-note,
+body[class*="bg-"] .chat-card,
+body[class*="bg-"] .vault-card,
+body[class*="bg-"] .event-card {
+
+  background:
+    rgba(18, 13, 25, 0.72) !important;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10) !important;
+
+  backdrop-filter:
+    blur(22px);
+
+  -webkit-backdrop-filter:
+    blur(22px);
+
+  box-shadow:
+    0 18px 50px
+    rgba(0,0,0,.18);
+}
+
+
+/* MENIU JOS */
+
+body[class*="bg-"] .bottom-nav {
+
+  background:
+    rgba(12, 9, 18, .88) !important;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  backdrop-filter:
+    blur(25px);
+
+  -webkit-backdrop-filter:
+    blur(25px);
+}
+/* 🧸 ANIMAȚIE URSULEȚ */
+
+.bear {
+  cursor: pointer;
+
+  animation: bearFloat 2.5s ease-in-out infinite;
+
+  transform-origin: bottom center;
+
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+
+/* mișcare ușoară sus-jos */
+
+@keyframes bearFloat {
+
+  0% {
+    transform: translateY(0) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+
+}
+
+
+/* când îl apeși */
+
+.bear.bear-jump {
+  animation: bearJump .6s ease;
+}
+
+
+@keyframes bearJump {
+
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  35% {
+    transform: translateY(-30px) scale(1.08);
+  }
+
+  60% {
+    transform: translateY(0) scale(.95);
+  }
+
+  80% {
+    transform: translateY(-8px) scale(1.03);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+}
+
+
+/* inimioare */
+
+.bear-heart {
+  position: fixed;
+
+  z-index: 9999;
+
+  pointer-events: none;
+
+  font-size: 22px;
+
+  animation: bearHeartFly 1.5s ease-out forwards;
+}
+
+
+@keyframes bearHeartFly {
+
+  0% {
+    transform:
+      translate(-50%, 0)
+      scale(.5);
+
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translate(-50%, -100px)
+      scale(1.4)
+      rotate(15deg);
+
+    opacity: 0;
+  }
+
+}
+/* ========================================= */
+/* URSULEȚ REALIST */
+/* ========================================= */
+
+.bear-section {
+  text-align: center;
+}
+
+.bear-stage {
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-end;
+
+  min-height: 250px;
+
+  margin: 20px 0;
+}
+
+
+.real-bear-wrap {
+  position: relative;
+
+  display: inline-block;
+
+  animation:
+    bearFloat 2.8s ease-in-out infinite;
+
+  transform-origin:
+    bottom center;
+}
+
+
+.real-bear {
+  display: block;
+
+  width: 210px;
+
+  max-width: 62vw;
+
+  height: auto;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  -webkit-user-drag: none;
+
+  filter:
+    drop-shadow(
+      0 18px 24px
+      rgba(0,0,0,.22)
+    );
+}
+
+
+@keyframes bearFloat {
+
+  0% {
+    transform:
+      translateY(0)
+      rotate(-1deg);
+  }
+
+  50% {
+    transform:
+      translateY(-9px)
+      rotate(1deg);
+  }
+
+  100% {
+    transform:
+      translateY(0)
+      rotate(-1deg);
+  }
+
+}
+
+
+/* CÂND ÎL MÂNGÂI */
+
+.real-bear-wrap.bear-jump {
+  animation:
+    bearJump .65s ease;
+}
+
+
+@keyframes bearJump {
+
+  0% {
+    transform:
+      translateY(0)
+      scale(1)
+      rotate(0);
+  }
+
+  30% {
+    transform:
+      translateY(-28px)
+      scale(1.07)
+      rotate(-3deg);
+  }
+
+  55% {
+    transform:
+      translateY(0)
+      scale(.96)
+      rotate(2deg);
+  }
+
+  75% {
+    transform:
+      translateY(-8px)
+      scale(1.03);
+  }
+
+  100% {
+    transform:
+      translateY(0)
+      scale(1)
+      rotate(0);
+  }
+
+}
+
+
+/* INIMIOARE */
+
+.bear-heart {
+  position: fixed;
+
+  z-index: 9999;
+
+  pointer-events: none;
+
+  font-size: 22px;
+
+  animation:
+    bearHeartFly 1.5s
+    ease-out forwards;
+}
+
+
+@keyframes bearHeartFly {
+
+  0% {
+    transform:
+      translate(-50%, 0)
+      scale(.4);
+
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translate(
+        calc(-50% + 15px),
+        -115px
+      )
+      scale(1.35)
+      rotate(15deg);
+
+    opacity: 0;
+  }
+
+}
+
+
+/* NIVEL */
+
+.bear-info {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 12px;
+}
+
+
+.bear-info strong {
+  color: white;
+
+  font-size: 15px;
+}
+
+
+.bear-info span {
+  color:
+    rgba(255,255,255,.65);
+
+  font-size: 12px;
+}
+
+
+/* FERICIRE */
+
+.bear-happiness {
+  margin-top: 15px;
+
+  text-align: left;
+}
+
+
+.bear-happiness > span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 12px;
+
+  color:
+    rgba(255,255,255,.72);
+}
+
+
+.bear-progress {
+  width: 100%;
+
+  height: 10px;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,.09);
+}
+
+
+.bear-progress-fill {
+  width: 25%;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d96e98,
+      #ff9abd
+    );
+
+  transition:
+    width .4s ease;
+}
+
+
+/* BUTOANE */
+
+.bear-actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 10px;
+
+  margin-top: 16px;
+}
+
+
+.bear-actions button {
+  min-height: 45px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  border-radius: 15px;
+
+  background:
+    rgba(255,255,255,.07);
+
+  color: white;
+
+  font: inherit;
+
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+
+.bear-actions button:active {
+  transform: scale(.96);
+}
+
+
+/* ACCESORIU */
+
+.bear-accessory {
+  position: absolute;
+
+  top: 20px;
+
+  left: 50%;
+
+  transform:
+    translateX(45px);
+
+  z-index: 5;
+
+  font-size: 36px;
+
+  pointer-events: none;
+}
+
+
+/* =====================================================
+   HOME - HERO CA ÎN POZA DE REFERINȚĂ
+   (override la final ca să nu afecteze restul paginilor)
+===================================================== */
+
+.home-user-bar {
+  margin: 18px 0 0;
+  padding: 13px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
+  background: rgba(17,14,25,.55);
+  color: white;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.home-user-bar p {
+  margin-top: 3px;
+  font-size: 12px;
+  color: rgba(255,255,255,.7);
+}
+
+.logout-button {
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 13px;
+  padding: 9px 13px;
+  background: rgba(255,255,255,.06);
+  color: white;
+  cursor: pointer;
+}
+
+.app {
+  width: min(100%, 430px);
+  padding-top: 0;
+}
+
+.hero-card.love-hero {
+  overflow: hidden;
+  padding: 0 0 28px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,.07);
+  background:
+    radial-gradient(circle at 8% 78%, rgba(237,45,77,.20), transparent 35%),
+    radial-gradient(circle at 95% 55%, rgba(67,93,255,.18), transparent 36%),
+    linear-gradient(180deg, #11111a 0%, #18131e 70%, #15111a 100%);
+  box-shadow: 0 25px 60px rgba(0,0,0,.28);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.hero-photo-wrap {
+  position: relative;
+  width: 100%;
+  height: 310px;
+  overflow: hidden;
+  background: #18151d;
+}
+
+.hero-card.love-hero .couple-photo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border: 0;
+  border-radius: 0;
+}
+
+.hero-photo-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 45%, rgba(15,13,22,.10) 65%, rgba(15,13,22,.86) 100%);
+}
+
+.hero-photo-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 4;
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.42);
+  color: white;
+  font-size: 19px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0,0,0,.25);
+}
+
+.hero-heart {
+  position: relative;
+  z-index: 3;
+  margin: -28px auto 1px;
+  font-size: 48px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 15px rgba(45,197,237,.32));
+}
+
+.couple-title {
+  margin: 8px 14px 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 37px;
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -.6px;
+  background: linear-gradient(90deg, #43c7e9 4%, #709aea 50%, #8b78f2 96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+.together-title {
+  margin: 31px 10px 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  line-height: 1.25;
+  color: #fffafc;
+}
+
+.together-title strong {
+  font-weight: 400;
+}
+
+.love-counter-grid {
+  width: calc(100% - 28px);
+  margin: 31px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.hero-card.love-hero .counter-item {
+  min-height: 108px;
+  padding: 16px 5px 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.035);
+  background: rgba(255,255,255,.055);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+.hero-card.love-hero .counter-item strong {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 37px;
+  line-height: 1;
+  font-weight: 400;
+  color: #fff !important;
+}
+
+.hero-card.love-hero .counter-item span {
+  margin-top: 11px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(230,225,237,.66) !important;
+}
+
+@media (max-width: 390px) {
+  .hero-photo-wrap { height: 285px; }
+  .couple-title { font-size: 34px; }
+  .together-title { font-size: 23px; }
+  .hero-card.love-hero .counter-item { min-height: 101px; border-radius: 20px; }
+  .hero-card.love-hero .counter-item strong { font-size: 34px; }
+}
+/* =========================================
+   CONT UTILIZATOR - SETĂRI
+========================================= */
+
+.settings-account-card {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-bottom: 22px;
+
+  padding: 18px;
+
+  border-radius: 22px;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.10);
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+
+  box-shadow:
+    0 15px 35px
+    rgba(0, 0, 0, 0.14);
+}
+
+
+.settings-account-info {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+}
+
+
+.settings-account-icon {
+  width: 48px;
+
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  font-size: 21px;
+}
+
+
+.settings-account-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  font-weight: 700;
+
+  color: #e99ab9;
+}
+
+
+.settings-account-card p {
+  max-width: 220px;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+
+.settings-logout-button {
+  min-height: 42px;
+
+  flex-shrink: 0;
+
+  padding: 0 17px;
+
+  border-radius: 14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.13);
+
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+.settings-logout-button:active {
+  transform: scale(0.96);
+}
+
+
+@media (max-width: 360px) {
+
+  .settings-account-card {
+    padding: 15px;
+  }
+
+
+  .settings-account-card p {
+    max-width: 150px;
+
+    font-size: 12px;
+  }
+
+
+  .settings-logout-button {
+    padding: 0 12px;
+  }
+
+}
+/* =========================================================
+   FUNDAL GLOBAL DIN GALERIE
+========================================================= */
+
+html {
+  min-height: 100%;
+}
+
+
+body {
+  min-height: 100vh;
+
+  background-attachment: fixed;
+}
+
+
+body.bg-custom {
+  min-height: 100vh;
+
+  background-size:
+    cover !important;
+
+  background-position:
+    center center !important;
+
+  background-repeat:
+    no-repeat !important;
+
+  background-attachment:
+    fixed !important;
+}
+
+
+
+/* =========================================================
+   CARDURILE PE FUNDAL PERSONALIZAT
+========================================================= */
+
+body.bg-custom .hero-card,
+body.bg-custom .love-hero,
+body.bg-custom .home-section,
+body.bg-custom .love-note,
+body.bg-custom .settings-big-card,
+body.bg-custom .chat-card,
+body.bg-custom .vault-card,
+body.bg-custom .event-card,
+body.bg-custom .memory-card {
+
+  background:
+    rgba(
+      12,
+      10,
+      18,
+      .72
+    ) !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .10
+    ) !important;
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+
+  box-shadow:
+    0 18px 50px
+    rgba(
+      0,
+      0,
+      0,
+      .20
+    );
+}
+
+
+
+/* =========================================================
+   TEXTE PE FUNDAL PERSONALIZAT
+========================================================= */
+
+body.bg-custom {
+  color: white;
+}
+
+
+body.bg-custom h1,
+body.bg-custom h2,
+body.bg-custom h3,
+body.bg-custom strong {
+  color: white;
+}
+
+
+body.bg-custom .home-description,
+body.bg-custom .love-note p,
+body.bg-custom .subtitle,
+body.bg-custom .settings-description {
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .72
+    ) !important;
+}
+
+
+
+/* =========================================================
+   MENIUL DE JOS
+========================================================= */
+
+body.bg-custom .bottom-nav {
+
+  background:
+    rgba(
+      10,
+      8,
+      16,
+      .90
+    ) !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .10
+    ) !important;
+
+  backdrop-filter:
+    blur(25px);
+
+  -webkit-backdrop-filter:
+    blur(25px);
+}
+
+
+body.bg-custom .nav-item {
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .62
+    ) !important;
+}
+
+
+body.bg-custom .nav-item.active {
+
+  background:
+    rgba(
+      214,
+      100,
+      148,
+      .20
+    ) !important;
+
+  color:
+    #ffc4db !important;
+}
+
+
+
+/* =========================================================
+   FONTURI
+========================================================= */
+
+body.font-system {
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+}
+
+
+body.font-serif {
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+}
+
+
+body.font-rounded {
+
+  font-family:
+    "Arial Rounded MT Bold",
+    Arial,
+    sans-serif;
+
+}
+
+
+body.font-classic {
+
+  font-family:
+    "Times New Roman",
+    Times,
+    serif;
+
+}
+
+
+body.font-romantic {
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-style:
+    italic;
+
+}
+
+
+
+/* =========================================================
+   DIMENSIUNEA FONTULUI
+
+   NU MODIFICĂ ZONA DE SUS DIN INDEX
+========================================================= */
+
+.home-section,
+.love-note,
+.chat-card,
+.event-card,
+.vault-card,
+.memory-card {
+
+  font-size:
+    calc(
+      16px *
+      var(
+        --app-font-scale,
+        1
+      )
+    );
+
+}
+
+
+
+/* =========================================================
+   ZONA DE SUS DIN INDEX RĂMÂNE MEREU MICĂ
+========================================================= */
+
+.love-hero {
+
+  font-size:
+    16px !important;
+
+}
+
+
+.love-names {
+
+  font-size:
+    34px !important;
+
+}
+
+
+.love-together {
+
+  font-size:
+    24px !important;
+
+}
+
+
+.relationship-box strong {
+
+  font-size:
+    32px !important;
+
+}
+
+
+.relationship-box span {
+
+  font-size:
+    8px !important;
+
+}
+
+
+
+/* =========================================================
+   BUTOANE FUNDAL GALERIE
+========================================================= */
+
+.custom-background-buttons {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:
+    10px;
+
+  margin-top:
+    14px;
+
+}
+
+
+.custom-background-button,
+.remove-custom-background {
+
+  min-height:
+    48px;
+
+  border-radius:
+    15px;
+
+  font-family:
+    inherit;
+
+  cursor:
+    pointer;
+
+}
+
+
+.custom-background-button {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .12
+    );
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .07
+    );
+
+  color:
+    white;
+
+}
+
+
+.remove-custom-background {
+
+  border:
+    1px solid
+    rgba(
+      255,
+      130,
+      150,
+      .16
+    );
+
+  background:
+    rgba(
+      255,
+      80,
+      100,
+      .08
+    );
+
+  color:
+    #ffc3cf;
+
+}
+
+
+
+/* =========================================================
+   PREVIEW FUNDAL
+========================================================= */
+
+.custom-background-preview {
+
+  position:
+    relative;
+
+  width:
+    100%;
+
+  min-height:
+    180px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    23px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .05
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .08
+    );
+
+}
+
+
+.custom-background-preview img {
+
+  width:
+    100%;
+
+  height:
+    210px;
+
+  display:
+    none;
+
+  object-fit:
+    cover;
+
+}
+
+
+.custom-background-placeholder {
+
+  padding:
+    25px;
+
+  text-align:
+    center;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .55
+    );
+
+  font-size:
+    13px;
+
+}
+
+
+
+/* =========================================================
+   TELEFON
+========================================================= */
+
+@media (
+  max-width: 390px
+) {
+
+  .love-names {
+
+    font-size:
+      31px !important;
+
+  }
+
+
+  .love-together {
+
+    font-size:
+      22px !important;
+
+  }
+
+
+  .relationship-box strong {
+
+    font-size:
+      29px !important;
+
+  }
+
+
+  .relationship-box span {
+
+    font-size:
+      7px !important;
+
+  }
+
+
+}
+
+
+
+/* =========================================================
+   FĂRĂ HIGHLIGHT PE TELEFON
+========================================================= */
+
+* {
+
+  -webkit-tap-highlight-color:
+    transparent;
+
+}/* =========================================
+   MENIU JOS - MAI COBORÂT
+========================================= */
+
+.bottom-nav {
+  bottom:
+    calc(
+      -4px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  transform:
+    translateX(-50%)
+    translateY(8px) !important;
+}
+
+
+/* SPAȚIU MAI MARE JOS
+   CA SĂ NU ACOPERE CONȚINUTUL */
+
+.app {
+  padding-bottom:
+    calc(
+      155px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+/* =========================================
+   MENIU LIPIT JOS DE TOT
+========================================= */
+
+.bottom-nav {
+  position: fixed !important;
+
+  left: 50% !important;
+
+  bottom: 0 !important;
+
+  transform:
+    translateX(-50%) !important;
+
+  width:
+    min(96%, 430px) !important;
+
+  border-radius:
+    24px 24px 0 0 !important;
+
+  padding:
+    8px
+    8px
+    calc(8px + env(safe-area-inset-bottom)) !important;
+
+  z-index:
+    9999 !important;
+}
+
+
+/* SPAȚIU SUB CONȚINUT
+   CA BARA SĂ NU ACOPERE CE E ÎN PAGINĂ */
+
+.app {
+  padding-bottom:
+    calc(
+      140px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+/* =========================================================
+   FIX FINAL PWA + MENIU
+========================================================= */
+
+html {
+  width: 100%;
+  min-height: 100%;
+
+  overscroll-behavior: none;
+
+  -webkit-text-size-adjust: 100%;
+}
+
+
+body {
+  width: 100%;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  margin: 0;
+
+  overscroll-behavior: none;
+
+  touch-action: manipulation;
+}
+
+
+* {
+  box-sizing: border-box;
+
+  -webkit-tap-highlight-color:
+    transparent;
+}
+
+
+/* =========================================================
+   MENIU JOS
+========================================================= */
+
+.bottom-nav {
+  position: fixed !important;
+
+  left: 50% !important;
+
+  bottom: 0 !important;
+
+  transform:
+    translateX(-50%) !important;
+
+  width:
+    min(
+      calc(100% - 20px),
+      430px
+    ) !important;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(5, 1fr) !important;
+
+  gap: 4px !important;
+
+  z-index: 99999 !important;
+
+  margin: 0 !important;
+
+  padding:
+    8px
+    6px
+    calc(
+      8px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  background:
+    rgba(
+      8,
+      6,
+      13,
+      0.96
+    ) !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.08
+    ) !important;
+
+  border-bottom: 0 !important;
+
+  border-radius:
+    26px
+    26px
+    0
+    0 !important;
+
+  box-shadow:
+    0 -10px 35px
+    rgba(
+      0,
+      0,
+      0,
+      0.25
+    ) !important;
+
+  backdrop-filter:
+    blur(22px);
+
+  -webkit-backdrop-filter:
+    blur(22px);
+}
+
+
+/* =========================================================
+   BUTOANE MENIU
+========================================================= */
+
+.bottom-nav .nav-item {
+  appearance: none !important;
+
+  -webkit-appearance:
+    none !important;
+
+  width: 100% !important;
+
+  min-width: 0 !important;
+
+  border: 0 !important;
+
+  outline: 0 !important;
+
+  margin: 0 !important;
+
+  padding:
+    8px
+    2px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.70
+    ) !important;
+
+  font-family:
+    inherit !important;
+
+  font-size:
+    12px !important;
+
+  line-height:
+    1.1 !important;
+
+  text-decoration:
+    none !important;
+
+  cursor:
+    pointer !important;
+
+  display:
+    flex !important;
+
+  flex-direction:
+    column !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  gap:
+    5px !important;
+
+  border-radius:
+    21px !important;
+
+  touch-action:
+    manipulation !important;
+}
+
+
+.bottom-nav .nav-icon {
+  display:
+    block !important;
+
+  font-size:
+    25px !important;
+
+  line-height:
+    1 !important;
+}
+
+
+/* ACTIV */
+
+.bottom-nav .nav-item.active {
+  color:
+    #ffd3e7 !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(
+        120,
+        38,
+        80,
+        0.82
+      ),
+      rgba(
+        72,
+        28,
+        61,
+        0.75
+      )
+    ) !important;
+}
+
+
+/* =========================================================
+   SPAȚIU PENTRU MENIU
+========================================================= */
+
+.app {
+  padding-bottom:
+    calc(
+      125px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+
+/* =========================================================
+   TEME
+========================================================= */
+
+body.bg-custom {
+  min-height:
+    100vh !important;
+
+  min-height:
+    100dvh !important;
+
+  background-size:
+    cover !important;
+
+  background-position:
+    center center !important;
+
+  background-repeat:
+    no-repeat !important;
+
+  background-attachment:
+    fixed !important;
+}
+/* =========================================================
+   FIX FINAL - TOATE PAGINILE MAI COMPACTE
+========================================================= */
+
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  width: 100% !important;
+
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+
+  overflow-x: hidden !important;
+
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+
+/* =========================================================
+   CONȚINUTUL APLICAȚIEI
+========================================================= */
+
+.app {
+  width: min(94%, 430px) !important;
+
+  margin: 0 auto !important;
+
+  padding-top:
+    calc(
+      env(safe-area-inset-top) +
+      5px
+    ) !important;
+
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
+  padding-bottom:
+    calc(
+      115px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+
+/* =========================================================
+   TOATE CARDURILE MAI MICI
+========================================================= */
+
+.home-section,
+.love-note,
+.chat-card,
+.event-card,
+.memory-card,
+.vault-card,
+.settings-big-card,
+.hero-card,
+.page-card,
+.settings-card {
+  border-radius: 24px !important;
+
+  margin-top: 14px !important;
+  margin-bottom: 14px !important;
+
+  padding: 20px !important;
+
+  background:
+    rgba(
+      14,
+      9,
+      18,
+      0.86
+    ) !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.09
+    ) !important;
+
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+
+/* =========================================================
+   TITLURI MAI MICI
+========================================================= */
+
+h1 {
+  font-size: 34px !important;
+
+  line-height: 1.08 !important;
+
+  margin-top: 8px !important;
+  margin-bottom: 10px !important;
+}
+
+
+h2 {
+  font-size: 25px !important;
+
+  line-height: 1.15 !important;
+}
+
+
+/* =========================================================
+   HEADER PAGINI
+========================================================= */
+
+.chat-header,
+.memory-header,
+.memories-header,
+.event-header,
+.events-header,
+.settings-header,
+.page-header {
+  min-height: auto !important;
+
+  padding:
+    18px
+    18px
+    22px !important;
+
+  margin-bottom: 14px !important;
+
+  border-radius:
+    0
+    0
+    28px
+    28px !important;
+}
+
+
+/* =========================================================
+   CHAT MAI COMPACT
+========================================================= */
+
+.chat-card {
+  min-height:
+    520px !important;
+
+  padding:
+    16px !important;
+}
+
+
+.chat-messages {
+  min-height:
+    330px !important;
+
+  max-height:
+    430px !important;
+}
+
+
+.chat-input-area {
+  margin-top:
+    10px !important;
+}
+
+
+/* =========================================================
+   AMINTIRI - SCOATE FUNDALUL ALB
+========================================================= */
+
+body.bg-dark,
+body.bg-custom,
+body.bg-aurora,
+body.bg-mesh,
+body.bg-starlight,
+body.bg-silk,
+body.bg-nature,
+body.bg-stars,
+body.bg-moon,
+body.bg-clouds,
+body.bg-cozy,
+body.bg-pastel,
+body.bg-plain {
+  color:
+    #ffffff !important;
+}
+
+
+.memory-card,
+.memories-card,
+.memory-empty,
+.memories-empty {
+  background:
+    rgba(
+      14,
+      9,
+      18,
+      0.84
+    ) !important;
+
+  color:
+    #ffffff !important;
+}
+
+
+/* =========================================================
+   EVENIMENTE
+========================================================= */
+
+.event-card,
+.events-card {
+  min-height:
+    auto !important;
+
+  padding:
+    18px !important;
+}
+
+
+/* =========================================================
+   SETĂRI
+========================================================= */
+
+.settings-big-card {
+  padding:
+    20px !important;
+}
+
+
+.settings-big-card + .settings-big-card {
+  margin-top:
+    16px !important;
+}
+
+
+/* =========================================================
+   MENIU DE JOS MAI MIC
+========================================================= */
+
+.bottom-nav {
+  position:
+    fixed !important;
+
+  left:
+    50% !important;
+
+  bottom:
+    0 !important;
+
+  transform:
+    translateX(-50%) !important;
+
+  width:
+    min(
+      calc(100% - 18px),
+      420px
+    ) !important;
+
+  min-height:
+    72px !important;
+
+  padding:
+    6px
+    6px
+    calc(
+      6px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  border-radius:
+    24px
+    24px
+    0
+    0 !important;
+
+  background:
+    rgba(
+      7,
+      5,
+      12,
+      0.96
+    ) !important;
+
+  z-index:
+    99999 !important;
+}
+
+
+.bottom-nav .nav-item {
+  padding:
+    7px
+    2px !important;
+
+  font-size:
+    11px !important;
+
+  border-radius:
+    18px !important;
+}
+
+
+.bottom-nav .nav-icon {
+  font-size:
+    23px !important;
+}
+
+
+.bottom-nav .nav-item.active {
+  background:
+    rgba(
+      112,
+      39,
+      77,
+      0.70
+    ) !important;
+}
+
+
+/* =========================================================
+   TELEFOANE MAI MICI
+========================================================= */
+
+@media (max-width: 390px) {
+
+  .app {
+    width:
+      95% !important;
+  }
+
+
+  h1 {
+    font-size:
+      30px !important;
+  }
+
+
+  .home-section,
+  .love-note,
+  .chat-card,
+  .event-card,
+  .memory-card,
+  .vault-card,
+  .settings-big-card {
+    padding:
+      16px !important;
+
+    border-radius:
+      21px !important;
+  }
+
+
+  .bottom-nav {
+    width:
+      calc(
+        100% - 12px
+      ) !important;
+  }
+
+}
+/* =========================================================
+   FIX CHAT + AMINTIRI
+   FOLOSESC ACELAȘI FUNDAL CA RESTUL APLICAȚIEI
+========================================================= */
+
+
+/* FUNDAL DARK PRINCIPAL */
+
+body.bg-dark {
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      rgba(120, 61, 38, 0.38),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 90% 25%,
+      rgba(95, 35, 54, 0.25),
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      #24110d 0%,
+      #160b10 45%,
+      #0d080d 100%
+    ) !important;
+
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+/* orice container vechi din Chat devine transparent */
+
+body > .chat-page,
+body > .chat-wrapper,
+body > .chat-container,
+body > .chat-screen,
+body > main.chat-page,
+body > main.chat-container {
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+}
+
+
+/* HEADER CHAT */
+
+.chat-header,
+.chat-hero,
+.chat-top-card {
+  background:
+    rgba(
+      19,
+      11,
+      17,
+      0.82
+    ) !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.08
+    ) !important;
+
+  backdrop-filter:
+    blur(18px) !important;
+
+  -webkit-backdrop-filter:
+    blur(18px) !important;
+}
+
+
+/* CARD CHAT */
+
+.chat-card,
+.chat-box,
+.chat-panel {
+  background:
+    rgba(
+      15,
+      9,
+      15,
+      0.88
+    ) !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.09
+    ) !important;
+
+  color:
+    #ffffff !important;
+
+  backdrop-filter:
+    blur(18px) !important;
+
+  -webkit-backdrop-filter:
+    blur(18px) !important;
+}
+
+
+/* MESAJ CHAT */
+
+.chat-message,
+.message,
+.message-bubble {
+  color:
+    #ffffff !important;
+}
+
+
+/* INPUT CHAT */
+
+.chat-input,
+.chat-input-area,
+.chat-form {
+  background:
+    transparent !important;
+}
+
+
+/* =========================================================
+   AMINTIRI
+========================================================= */
+
+/* scoate complet fundalul roz/alb vechi */
+
+body > .memories-page,
+body > .memory-page,
+body > .amintiri-page,
+body > .memories-wrapper,
+body > .memories-container,
+body > main.memories-page,
+body > main.amintiri-page {
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+}
+
+
+/* HEADER AMINTIRI */
+
+.memory-header,
+.memories-header,
+.amintiri-header,
+.memories-hero,
+.memory-hero {
+  background:
+    rgba(
+      19,
+      11,
+      17,
+      0.84
+    ) !important;
+
+  color:
+    #ffffff !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.09
+    ) !important;
+
+  backdrop-filter:
+    blur(18px) !important;
+
+  -webkit-backdrop-filter:
+    blur(18px) !important;
+}
+
+
+/* TITLURI AMINTIRI */
+
+.memory-header h1,
+.memories-header h1,
+.amintiri-header h1,
+.memories-hero h1,
+.memory-hero h1 {
+  color:
+    #ffffff !important;
+}
+
+
+/* TEXT AMINTIRI */
+
+.memory-header p,
+.memories-header p,
+.amintiri-header p,
+.memories-hero p,
+.memory-hero p {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.75
+    ) !important;
+}
+
+
+/* CARDURI AMINTIRI */
+
+.memory-card,
+.memories-card,
+.memory-item,
+.memories-item,
+.memory-empty,
+.memories-empty,
+.empty-memories {
+  background:
+    rgba(
+      15,
+      9,
+      15,
+      0.86
+    ) !important;
+
+  color:
+    #ffffff !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.09
+    ) !important;
+
+  border-radius:
+    24px !important;
+
+  backdrop-filter:
+    blur(18px) !important;
+
+  -webkit-backdrop-filter:
+    blur(18px) !important;
+}
+
+
+/* TEXTUL „ÎNCĂ NU AI ADĂUGAT...” */
+
+.memory-empty,
+.memories-empty,
+.empty-memories,
+#emptyMemories,
+#noMemories {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.82
+    ) !important;
+}
+
+
+/* BUTON ADAUGĂ POZĂ */
+
+.add-memory-button,
+.add-photo-button,
+.memory-add-button {
+  background:
+    rgba(
+      116,
+      42,
+      78,
+      0.80
+    ) !important;
+
+  color:
+    #ffffff !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.10
+    ) !important;
+
+  border-radius:
+    18px !important;
+}
+
+
+/* BUTON ÎNAPOI VECHI */
+
+.back-button,
+.back-btn,
+.memory-back {
+  background:
+    rgba(
+      15,
+      9,
+      15,
+      0.75
+    ) !important;
+
+  color:
+    #ffffff !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.08
+    ) !important;
+}
+
+
+/* =========================================================
+   TEME - FORȚEAZĂ FUNDALUL ȘI PE CHAT/AMINTIRI
+========================================================= */
+
+body.bg-aurora,
+body.bg-mesh,
+body.bg-starlight,
+body.bg-silk,
+body.bg-plain,
+body.bg-nature,
+body.bg-stars,
+body.bg-moon,
+body.bg-clouds,
+body.bg-cozy,
+body.bg-pastel,
+body.bg-dark,
+body.bg-custom {
+  min-height:
+    100vh !important;
+
+  min-height:
+    100dvh !important;
+
+  background-repeat:
+    no-repeat !important;
+
+  background-position:
+    center center !important;
+
+  background-size:
+    cover !important;
+}
+
+
+/* CONȚINUTUL NU MAI PUNE ALT FUNDAL PESTE TEMĂ */
+
+body > main,
+body > .app {
+  background:
+    transparent !important;
+}
+
+
+/* =========================================================
+   MENIU JOS
+========================================================= */
+
+.bottom-nav {
+  background:
+    rgba(
+      7,
+      5,
+      12,
+      0.96
+    ) !important;
+
+  backdrop-filter:
+    blur(20px) !important;
+
+  -webkit-backdrop-filter:
+    blur(20px) !important;
+}
+/* =========================================================
+   FIX CHAT - MESAJELE NU MAI INTRĂ PESTE INPUT
+========================================================= */
+
+.chat-card,
+.chat-box,
+.chat-panel {
+  position: relative !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  height: calc(100dvh - 315px) !important;
+  min-height: 470px !important;
+  max-height: 650px !important;
+
+  overflow: hidden !important;
+
+  padding: 14px !important;
+
+  background: rgba(15, 9, 15, 0.90) !important;
+
+  border: 1px solid rgba(255,255,255,.10) !important;
+
+  border-radius: 25px !important;
+}
+
+
+/* =========================================================
+   ZONA CU MESAJE
+========================================================= */
+
+.chat-messages,
+.messages,
+.messages-container,
+#chatMessages {
+  position: relative !important;
+
+  flex: 1 1 auto !important;
+
+  width: 100% !important;
+
+  min-height: 0 !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  padding:
+    4px
+    5px
+    16px !important;
+
+  margin: 0 !important;
+
+  -webkit-overflow-scrolling: touch !important;
+
+  overscroll-behavior: contain !important;
+}
+
+
+/* puțin spațiu între mesaje */
+
+.chat-message,
+.message,
+.message-bubble {
+  position: relative !important;
+
+  margin-bottom: 10px !important;
+
+  max-width: 82% !important;
+}
+
+
+/* mesajul utilizatorului */
+
+.user-message,
+.message.user,
+.message.sent {
+  margin-left: auto !important;
+}
+
+
+/* mesajul asistentului */
+
+.bot-message,
+.assistant-message,
+.message.bot,
+.message.received {
+  margin-right: auto !important;
+}
+
+
+/* =========================================================
+   BUTOANE RAPIDE
+========================================================= */
+
+.quick-actions,
+.chat-suggestions,
+.suggestion-buttons,
+.quick-buttons {
+  position: relative !important;
+
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+
+  flex: 0 0 auto !important;
+
+  display: flex !important;
+  flex-wrap: wrap !important;
+
+  gap: 7px !important;
+
+  width: 100% !important;
+
+  margin:
+    8px
+    0
+    10px !important;
+
+  padding: 0 !important;
+
+  z-index: 5 !important;
+}
+
+
+/* =========================================================
+   INPUT CHAT
+========================================================= */
+
+.chat-input-area,
+.chat-form,
+.input-area,
+.message-input-wrapper {
+  position: relative !important;
+
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+
+  flex: 0 0 auto !important;
+
+  width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  z-index: 10 !important;
+
+  background: transparent !important;
+}
+
+
+/* dacă inputul și butonul sunt într-un rând */
+
+.chat-input-area,
+.chat-form {
+  display: flex !important;
+
+  align-items: center !important;
+
+  gap: 8px !important;
+}
+
+
+.chat-input,
+#chatInput,
+.chat-form input,
+.chat-form textarea {
+  flex: 1 1 auto !important;
+
+  min-width: 0 !important;
+
+  height: 56px !important;
+
+  max-height: 90px !important;
+
+  padding:
+    0
+    14px !important;
+
+  border: 0 !important;
+
+  border-radius: 20px !important;
+
+  background: #ffffff !important;
+
+  color: #222 !important;
+
+  font-size: 16px !important;
+
+  outline: none !important;
+}
+
+
+/* buton trimite */
+
+.send-button,
+#sendButton,
+.chat-send-button {
+  flex: 0 0 56px !important;
+
+  width: 56px !important;
+  height: 56px !important;
+
+  margin: 0 !important;
+
+  border: 0 !important;
+
+  border-radius: 20px !important;
+
+  display: flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
+/* =========================================================
+   SPAȚIU PENTRU BARA DE JOS
+========================================================= */
+
+body:has(.chat-card) .app {
+  padding-bottom:
+    calc(
+      105px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+
+/* TELEFOANE MAI MICI */
+
+@media (max-height: 750px) {
+
+  .chat-card,
+  .chat-box,
+  .chat-panel {
+    height:
+      calc(100dvh - 275px) !important;
+
+    min-height:
+      390px !important;
+  }
+
+}
+/* =========================================================
+   CHAT FIX
+   DOAR MESAJELE FAC SCROLL
+========================================================= */
+
+.chat-card,
+.chat-box,
+.chat-panel {
+  display: flex !important;
+  flex-direction: column !important;
+
+  height: calc(100dvh - 310px) !important;
+  min-height: 480px !important;
+
+  overflow: hidden !important;
+
+  padding: 14px !important;
+}
+
+
+/* DOAR MESAJELE FAC SCROLL */
+
+.chat-messages,
+.messages,
+.messages-container,
+#chatMessages {
+  flex: 1 1 auto !important;
+
+  min-height: 0 !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  padding: 5px 6px 18px !important;
+
+  -webkit-overflow-scrolling: touch !important;
+
+  overscroll-behavior: contain !important;
+}
+
+
+/* BUTOANELE RAPIDE RĂMÂN FIXE */
+
+.quick-actions,
+.quick-buttons,
+.chat-suggestions,
+.suggestion-buttons {
+  flex: 0 0 auto !important;
+
+  position: relative !important;
+
+  bottom: auto !important;
+  top: auto !important;
+
+  margin: 8px 0 10px !important;
+
+  z-index: 20 !important;
+}
+
+
+/* INPUTUL RĂMÂNE FIX JOS ÎN CHAT */
+
+.chat-input-area,
+.chat-form,
+.input-area,
+.message-input-wrapper {
+  flex: 0 0 auto !important;
+
+  position: relative !important;
+
+  bottom: auto !important;
+  top: auto !important;
+
+  width: 100% !important;
+
+  margin: 0 !important;
+
+  z-index: 30 !important;
+
+  background: rgba(15, 9, 15, 0.96) !important;
+}
+
+
+/* INPUT */
+
+#chatInput,
+.chat-input,
+.chat-form input,
+.chat-form textarea {
+  height: 56px !important;
+
+  flex: 1 1 auto !important;
+
+  border-radius: 20px !important;
+
+  font-size: 16px !important;
+}
+
+
+/* BUTON TRIMITE */
+
+#sendButton,
+.send-button,
+.chat-send-button {
+  width: 56px !important;
+  height: 56px !important;
+
+  flex: 0 0 56px !important;
+
+  border-radius: 20px !important;
+}
+
+
+/* MESAJE */
+
+.chat-message,
+.message,
+.message-bubble {
+  margin-bottom: 10px !important;
+
+  max-width: 82% !important;
+}
+/* =========================================================
+   CHAT FINAL
+   PAGINA FIXĂ - DOAR MESAJELE FAC SCROLL
+========================================================= */
+
+/* PAGINA CHAT NU MAI FACE SCROLL */
+body:has(.chat-card) {
+  height: 100vh !important;
+  height: 100dvh !important;
+
+  overflow: hidden !important;
+}
+
+
+/* APLICAȚIA RĂMÂNE FIXĂ */
+body:has(.chat-card) .app {
+  height: 100vh !important;
+  height: 100dvh !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  overflow: hidden !important;
+
+  padding-bottom:
+    calc(
+      90px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+
+/* =========================================================
+   TITLUL RĂMÂNE FIX
+========================================================= */
+
+.chat-header,
+.chat-hero,
+.chat-top-card {
+  flex: 0 0 auto !important;
+
+  margin-bottom: 12px !important;
+}
+
+
+/* =========================================================
+   CARDUL CHAT
+========================================================= */
+
+.chat-card,
+.chat-box,
+.chat-panel {
+  flex: 1 1 auto !important;
+
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  overflow: hidden !important;
+
+  position: relative !important;
+
+  padding: 14px !important;
+}
+
+
+/* =========================================================
+   DOAR AICI SE FACE SCROLL
+========================================================= */
+
+.chat-messages,
+.messages,
+.messages-container,
+#chatMessages {
+  flex: 1 1 auto !important;
+
+  min-height: 0 !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  padding:
+    5px
+    5px
+    18px !important;
+
+  margin: 0 !important;
+
+  -webkit-overflow-scrolling: touch !important;
+
+  overscroll-behavior: contain !important;
+
+  touch-action: pan-y !important;
+}
+
+
+/* ascunde bara de scroll din mesaje */
+
+.chat-messages::-webkit-scrollbar,
+.messages::-webkit-scrollbar,
+.messages-container::-webkit-scrollbar,
+#chatMessages::-webkit-scrollbar {
+  width: 0 !important;
+  display: none !important;
+}
+
+
+/* =========================================================
+   MESAJE
+========================================================= */
+
+.chat-message,
+.message,
+.message-bubble {
+  flex-shrink: 0 !important;
+
+  max-width: 82% !important;
+
+  margin-bottom: 10px !important;
+}
+
+
+.user-message,
+.message.user,
+.message.sent {
+  margin-left: auto !important;
+}
+
+
+.bot-message,
+.assistant-message,
+.message.bot,
+.message.received {
+  margin-right: auto !important;
+}
+
+
+/* =========================================================
+   BUTOANELE RAPIDE RĂMÂN FIXE
+========================================================= */
+
+.quick-actions,
+.quick-buttons,
+.chat-suggestions,
+.suggestion-buttons {
+  flex: 0 0 auto !important;
+
+  position: relative !important;
+
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+
+  width: 100% !important;
+
+  margin:
+    8px
+    0
+    10px !important;
+
+  padding: 0 !important;
+
+  z-index: 20 !important;
+}
+
+
+/* =========================================================
+   CASUȚA SCRIE AICI RĂMÂNE FIXĂ
+========================================================= */
+
+.chat-input-area,
+.chat-form,
+.input-area,
+.message-input-wrapper {
+  flex: 0 0 auto !important;
+
+  position: relative !important;
+
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+
+  width: 100% !important;
+
+  margin: 0 !important;
+
+  padding: 0 !important;
+
+  z-index: 30 !important;
+
+  background: transparent !important;
+}
+
+
+/* INPUT + BUTON PE ACELAȘI RÂND */
+
+.chat-input-area,
+.chat-form {
+  display: flex !important;
+
+  align-items: center !important;
+
+  gap: 8px !important;
+}
+
+
+/* SCRIE AICI */
+
+#chatInput,
+.chat-input,
+.chat-form input,
+.chat-form textarea {
+  flex: 1 1 auto !important;
+
+  min-width: 0 !important;
+
+  height: 56px !important;
+
+  margin: 0 !important;
+
+  border-radius: 20px !important;
+
+  font-size: 16px !important;
+}
+
+
+/* BUTON TRIMITE */
+
+#sendButton,
+.send-button,
+.chat-send-button {
+  flex: 0 0 56px !important;
+
+  width: 56px !important;
+  height: 56px !important;
+
+  margin: 0 !important;
+
+  border-radius: 20px !important;
+}
+
+
+/* =========================================================
+   MENIUL DE JOS RĂMÂNE FIX
+========================================================= */
+
+.bottom-nav {
+  position: fixed !important;
+
+  left: 50% !important;
+  bottom: 0 !important;
+
+  transform: translateX(-50%) !important;
+
+  z-index: 99999 !important;
+}
+/* =========================================================
+   CHAT FINAL
+   MENIU JOS + SCRIE AICI JOS
+   DOAR MESAJELE FAC SCROLL
+========================================================= */
+
+/* PAGINA CHAT FIXĂ */
+body:has(.chat-card) {
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+
+  overflow: hidden !important;
+}
+
+
+/* APLICAȚIA CHAT */
+body:has(.chat-card) .app {
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  overflow: hidden !important;
+
+  padding-bottom:
+    calc(
+      88px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+
+/* =========================================================
+   HEADERUL RĂMÂNE SUS
+========================================================= */
+
+.chat-header,
+.chat-hero,
+.chat-top-card {
+  flex: 0 0 auto !important;
+
+  margin-bottom: 10px !important;
+}
+
+
+/* =========================================================
+   CARD CHAT
+========================================================= */
+
+.chat-card,
+.chat-box,
+.chat-panel {
+  flex: 1 1 auto !important;
+
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  overflow: hidden !important;
+
+  margin-bottom: 5px !important;
+
+  padding:
+    14px
+    14px
+    12px !important;
+}
+
+
+/* =========================================================
+   DOAR MESAJELE FAC SCROLL
+========================================================= */
+
+.chat-messages,
+.messages,
+.messages-container,
+#chatMessages {
+  flex: 1 1 0 !important;
+
+  min-height: 0 !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  padding:
+    5px
+    5px
+    10px !important;
+
+  margin: 0 !important;
+
+  -webkit-overflow-scrolling: touch !important;
+
+  overscroll-behavior: contain !important;
+
+  touch-action: pan-y !important;
+
+  scrollbar-width: none !important;
+}
+
+
+.chat-messages::-webkit-scrollbar,
+.messages::-webkit-scrollbar,
+.messages-container::-webkit-scrollbar,
+#chatMessages::-webkit-scrollbar {
+  display: none !important;
+}
+
+
+/* =========================================================
+   BUTOANE RAPIDE - RĂMÂN JOS
+========================================================= */
+
+.quick-actions,
+.quick-buttons,
+.chat-suggestions,
+.suggestion-buttons {
+  flex: 0 0 auto !important;
+
+  position: relative !important;
+
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+
+  width: 100% !important;
+
+  margin:
+    5px
+    0
+    8px !important;
+
+  padding: 0 !important;
+
+  z-index: 20 !important;
+}
+
+
+/* =========================================================
+   SCRIE AICI - CÂT MAI JOS
+========================================================= */
+
+.chat-input-area,
+.chat-form,
+.input-area,
+.message-input-wrapper {
+  flex: 0 0 auto !important;
+
+  position: relative !important;
+
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+
+  width: 100% !important;
+
+  margin: 0 !important;
+
+  padding: 0 !important;
+
+  z-index: 30 !important;
+
+  background: transparent !important;
+}
+
+
+.chat-input-area,
+.chat-form {
+  display: flex !important;
+
+  align-items: center !important;
+
+  gap: 8px !important;
+}
+
+
+/* INPUT */
+
+#chatInput,
+.chat-input,
+.chat-form input,
+.chat-form textarea {
+  flex: 1 1 auto !important;
+
+  min-width: 0 !important;
+
+  height: 56px !important;
+
+  margin: 0 !important;
+
+  padding:
+    0
+    14px !important;
+
+  border-radius: 20px !important;
+
+  font-size: 16px !important;
+}
+
+
+/* BUTON TRIMITE */
+
+#sendButton,
+.send-button,
+.chat-send-button {
+  flex:
+    0
+    0
+    56px !important;
+
+  width: 56px !important;
+  height: 56px !important;
+
+  margin: 0 !important;
+
+  border-radius: 20px !important;
+}
+
+
+/* =========================================================
+   MENIU LIPIT JOS DE TOT
+========================================================= */
+
+.bottom-nav {
+  position: fixed !important;
+
+  left: 50% !important;
+
+  right: auto !important;
+
+  top: auto !important;
+
+  bottom: 0 !important;
+
+  transform:
+    translateX(-50%) !important;
+
+  width:
+    min(
+      calc(100% - 18px),
+      430px
+    ) !important;
+
+  margin: 0 !important;
+
+  z-index: 999999 !important;
+
+  padding:
+    6px
+    6px
+    calc(
+      6px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  border-radius:
+    24px
+    24px
+    0
+    0 !important;
+}
+/* =========================================================
+   FIX FINAL IPHONE CHAT
+========================================================= */
+
+html {
+  width: 100% !important;
+  height: 100% !important;
+
+  background: #07070d !important;
+}
+
+
+body {
+  width: 100% !important;
+
+  height: 100vh !important;
+  height: 100dvh !important;
+
+  min-height: 100dvh !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background-color: #07070d !important;
+
+  overflow-x: hidden !important;
+}
+
+
+/* =========================================================
+   CHAT - OCUPĂ TOT ECRANUL
+========================================================= */
+
+body:has(.chat-card) {
+  overflow: hidden !important;
+}
+
+
+body:has(.chat-card) .app {
+  width:
+    min(
+      calc(100% - 20px),
+      430px
+    ) !important;
+
+  height: 100dvh !important;
+
+  margin: 0 auto !important;
+
+  padding:
+    calc(
+      env(safe-area-inset-top) +
+      8px
+    )
+    0
+    calc(
+      88px +
+      env(safe-area-inset-bottom)
+    )
+    !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  overflow: hidden !important;
+}
+
+
+/* =========================================================
+   HEADER CHAT
+========================================================= */
+
+.chat-header,
+.chat-hero,
+.chat-top-card {
+  flex: 0 0 auto !important;
+
+  margin:
+    0
+    0
+    12px !important;
+}
+
+
+/* =========================================================
+   CARD CHAT
+========================================================= */
+
+.chat-card,
+.chat-box,
+.chat-panel {
+  flex:
+    1
+    1
+    0 !important;
+
+  min-height: 0 !important;
+
+  height: auto !important;
+
+  max-height: none !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    14px !important;
+
+  display:
+    flex !important;
+
+  flex-direction:
+    column !important;
+
+  overflow:
+    hidden !important;
+}
+
+
+/* =========================================================
+   DOAR MESAJELE FAC SCROLL
+========================================================= */
+
+.chat-messages,
+.messages,
+.messages-container,
+#chatMessages {
+  flex:
+    1
+    1
+    0 !important;
+
+  min-height:
+    0 !important;
+
+  overflow-y:
+    auto !important;
+
+  overflow-x:
+    hidden !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    5px
+    5px
+    12px !important;
+
+  -webkit-overflow-scrolling:
+    touch !important;
+
+  overscroll-behavior:
+    contain !important;
+
+  touch-action:
+    pan-y !important;
+
+  scrollbar-width:
+    none !important;
+}
+
+
+.chat-messages::-webkit-scrollbar,
+.messages::-webkit-scrollbar,
+.messages-container::-webkit-scrollbar,
+#chatMessages::-webkit-scrollbar {
+  display:
+    none !important;
+}
+
+
+/* =========================================================
+   BUTOANE RAPIDE FIXE JOS
+========================================================= */
+
+.quick-actions,
+.quick-buttons,
+.chat-suggestions,
+.suggestion-buttons {
+  flex:
+    0
+    0
+    auto !important;
+
+  position:
+    relative !important;
+
+  margin:
+    6px
+    0
+    8px !important;
+
+  padding:
+    0 !important;
+
+  width:
+    100% !important;
+}
+
+
+/* =========================================================
+   SCRIE AICI FIX JOS ÎN CARD
+========================================================= */
+
+.chat-input-area,
+.chat-form,
+.input-area,
+.message-input-wrapper {
+  position:
+    relative !important;
+
+  flex:
+    0
+    0
+    auto !important;
+
+  width:
+    100% !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+
+  bottom:
+    auto !important;
+
+  background:
+    transparent !important;
+}
+
+
+.chat-input-area,
+.chat-form {
+  display:
+    flex !important;
+
+  align-items:
+    center !important;
+
+  gap:
+    8px !important;
+}
+
+
+#chatInput,
+.chat-input,
+.chat-form input,
+.chat-form textarea {
+  flex:
+    1
+    1
+    auto !important;
+
+  min-width:
+    0 !important;
+
+  height:
+    56px !important;
+
+  margin:
+    0 !important;
+
+  border-radius:
+    20px !important;
+
+  font-size:
+    16px !important;
+}
+
+
+#sendButton,
+.send-button,
+.chat-send-button {
+  flex:
+    0
+    0
+    56px !important;
+
+  width:
+    56px !important;
+
+  height:
+    56px !important;
+
+  margin:
+    0 !important;
+
+  border-radius:
+    20px !important;
+}
+
+
+/* =========================================================
+   MENIU - JOS DE TOT PE ECRAN
+========================================================= */
+
+body > .bottom-nav {
+  position:
+    fixed !important;
+
+  left:
+    50% !important;
+
+  right:
+    auto !important;
+
+  top:
+    auto !important;
+
+  bottom:
+    0 !important;
+
+  transform:
+    translateX(-50%) !important;
+
+  width:
+    min(
+      calc(100% - 18px),
+      430px
+    ) !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    6px
+    6px
+    calc(
+      6px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  border-radius:
+    24px
+    24px
+    0
+    0 !important;
+
+  z-index:
+    9999999 !important;
+
+  background:
+    rgba(
+      7,
+      5,
+      12,
+      .98
+    ) !important;
+}
+/* =========================================================
+   MENIU JOS DE TOT - TOATĂ APLICAȚIA
+========================================================= */
+
+html,
+body {
+  width: 100% !important;
+
+  min-height: 100% !important;
+  min-height: 100dvh !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background-color: #07070d !important;
+
+  overflow-x: hidden !important;
+}
+
+
+/* =========================================================
+   SPAȚIU PENTRU MENIU PE TOATE PAGINILE
+========================================================= */
+
+.app {
+  width: min(96%, 430px) !important;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  padding-bottom:
+    calc(
+      105px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+
+/* =========================================================
+   BARA JOS DE TOT
+========================================================= */
+
+.bottom-nav,
+body > .bottom-nav {
+  position: fixed !important;
+
+  left: 50% !important;
+  right: auto !important;
+
+  top: auto !important;
+  bottom: 0 !important;
+
+  transform:
+    translateX(-50%) !important;
+
+  width:
+    min(
+      calc(100% - 12px),
+      430px
+    ) !important;
+
+  min-height: 78px !important;
+
+  margin: 0 !important;
+
+  padding:
+    4px
+    5px
+    calc(
+      3px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(5, 1fr) !important;
+
+  align-items: end !important;
+
+  gap: 2px !important;
+
+  background:
+    rgba(
+      7,
+      5,
+      12,
+      0.98
+    ) !important;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.10
+    ) !important;
+
+  border-bottom: 0 !important;
+
+  border-radius:
+    24px
+    24px
+    0
+    0 !important;
+
+  z-index: 99999999 !important;
+
+  box-shadow:
+    0 -10px 30px
+    rgba(
+      0,
+      0,
+      0,
+      0.30
+    ) !important;
+
+  backdrop-filter:
+    blur(22px) !important;
+
+  -webkit-backdrop-filter:
+    blur(22px) !important;
+}
+
+
+/* =========================================================
+   TOATE CELE 5 BUTOANE MAI JOS
+========================================================= */
+
+.bottom-nav .nav-item {
+  position: relative !important;
+
+  width: 100% !important;
+
+  min-width: 0 !important;
+
+  min-height: 62px !important;
+
+  margin: 0 !important;
+
+  padding:
+    10px
+    2px
+    2px !important;
+
+  border: 0 !important;
+
+  outline: 0 !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  align-items: center !important;
+
+  justify-content: flex-end !important;
+
+  gap: 5px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    ) !important;
+
+  font-family:
+    inherit !important;
+
+  font-size:
+    11px !important;
+
+  line-height:
+    1 !important;
+
+  text-decoration:
+    none !important;
+
+  border-radius:
+    20px !important;
+
+  appearance:
+    none !important;
+
+  -webkit-appearance:
+    none !important;
+
+  -webkit-tap-highlight-color:
+    transparent !important;
+}
+
+
+/* ICONIȚELE */
+
+.bottom-nav .nav-icon {
+  display: block !important;
+
+  margin: 0 !important;
+
+  font-size:
+    25px !important;
+
+  line-height:
+    1 !important;
+}
+
+
+/* BUTONUL ACTIV */
+
+.bottom-nav .nav-item.active {
+  background:
+    rgba(
+      104,
+      34,
+      72,
+      0.72
+    ) !important;
+
+  color:
+    #ffd0e4 !important;
+}
+
+
+/* =========================================================
+   CHAT - SCRIE AICI CÂT MAI JOS
+========================================================= */
+
+.chat-card,
+.chat-box,
+.chat-panel {
+  padding-bottom:
+    10px !important;
+}
+
+
+.quick-actions,
+.quick-buttons,
+.chat-suggestions,
+.suggestion-buttons {
+  margin-top:
+    auto !important;
+
+  margin-bottom:
+    7px !important;
+}
+
+
+.chat-input-area,
+.chat-form,
+.input-area,
+.message-input-wrapper {
+  margin-top:
+    0 !important;
+
+  margin-bottom:
+    0 !important;
+}
+
+
+/* =========================================================
+   IPHONE SAFE AREA
+========================================================= */
+
+@supports (
+  padding-bottom:
+    env(safe-area-inset-bottom)
+) {
+
+  .bottom-nav,
+  body > .bottom-nav {
+    padding-bottom:
+      calc(
+        3px +
+        env(safe-area-inset-bottom)
+      ) !important;
+  }
+
+}
+/* =========================================
+   MENIU JOS DE TOT - FIX FINAL
+========================================= */
+
+.bottom-nav,
+body > .bottom-nav {
+  position: fixed !important;
+
+  left: 50% !important;
+  right: auto !important;
+
+  top: auto !important;
+  bottom: -1px !important;
+
+  transform: translateX(-50%) !important;
+
+  width: min(calc(100% - 12px), 430px) !important;
+
+  margin: 0 !important;
+
+  padding:
+    7px
+    6px
+    calc(8px + env(safe-area-inset-bottom)) !important;
+
+  border-radius: 24px 24px 0 0 !important;
+
+  z-index: 99999999 !important;
+
+  background: rgba(7, 5, 12, 0.99) !important;
+}
+
+
+/* BUTOANELE MAI JOS ÎN BARĂ */
+
+.bottom-nav .nav-item {
+  min-height: 64px !important;
+
+  padding:
+    12px
+    2px
+    3px !important;
+
+  justify-content: flex-end !important;
+}
+
+
+/* NU MAI LĂSĂM SPAȚIU GOL SUB MENIU */
+
+html,
+body {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+/* =========================================================
+   FIX FINAL GLOBAL
+========================================================= */
+
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  width: 100% !important;
+
+  min-height: 100% !important;
+
+  box-sizing: border-box !important;
+
+  overflow-x: hidden !important;
+}
+
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* FUNDAL */
+
+body {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+
+  background-color: #07070d !important;
+
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+
+  color: white;
+}
+
+
+body.bg-dark {
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      rgba(120, 61, 38, .34),
+      transparent 36%
+    ),
+    linear-gradient(
+      180deg,
+      #24110d,
+      #140a0e 50%,
+      #07070d
+    ) !important;
+}
+
+
+body.bg-aurora {
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(35,100,170,.5),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(170,55,100,.4),
+      transparent 40%
+    ),
+    #080810 !important;
+}
+
+
+body.bg-mesh {
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      #20375a,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 80% 40%,
+      #4d1e42,
+      transparent 35%
+    ),
+    #0b0b14 !important;
+}
+
+
+body.bg-starlight {
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      white 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 70% 30%,
+      white 0 1px,
+      transparent 2px
+    ),
+    linear-gradient(
+      #0b0d20,
+      #191026
+    ) !important;
+}
+
+
+body.bg-nature {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(57,112,71,.55),
+      transparent 40%
+    ),
+    #0e1713 !important;
+}
+
+
+body.bg-stars {
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      white 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      white 0 1px,
+      transparent 2px
+    ),
+    #060711 !important;
+}
+
+
+body.bg-moon {
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(220,224,255,.35),
+      transparent 13%
+    ),
+    #07101d !important;
+}
+
+
+body.bg-cozy {
+  background:
+    radial-gradient(
+      circle at 70% 70%,
+      rgba(255,150,90,.3),
+      transparent 35%
+    ),
+    #160e12 !important;
+}
+
+
+body.bg-pastel {
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(199,153,222,.35),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 80% 65%,
+      rgba(244,150,180,.3),
+      transparent 40%
+    ),
+    #201728 !important;
+}
+
+
+body.bg-custom {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+
+/* APP */
+
+.app {
+  width: min(
+    calc(100% - 20px),
+    430px
+  ) !important;
+
+  margin: 0 auto !important;
+
+  padding:
+    calc(
+      env(safe-area-inset-top) +
+      8px
+    )
+    0
+    calc(
+      100px +
+      env(safe-area-inset-bottom)
+    )
+    !important;
+}
+
+
+/* CARDURI */
+
+.home-section,
+.love-note,
+.hero-card,
+.chat-card,
+.event-card,
+.memory-card,
+.settings-big-card,
+.page-header,
+.chat-header {
+  background:
+    rgba(14, 9, 18, .84) !important;
+
+  border:
+    1px solid
+    rgba(255,255,255,.09) !important;
+
+  color: white !important;
+
+  backdrop-filter:
+    blur(18px) !important;
+
+  -webkit-backdrop-filter:
+    blur(18px) !important;
+}
+
+
+/* =========================================================
+   BARA JOS DE TOT
+========================================================= */
+
+body > .bottom-nav {
+  position: fixed !important;
+
+  left: 0 !important;
+  right: 0 !important;
+
+  top: auto !important;
+  bottom: 0 !important;
+
+  transform: none !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  min-height:
+    calc(
+      76px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  margin: 0 !important;
+
+  padding:
+    5px
+    8px
+    max(
+      5px,
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(
+      5,
+      minmax(0, 1fr)
+    ) !important;
+
+  gap: 2px !important;
+
+  align-items: center !important;
+
+  background:
+    rgba(
+      7,
+      5,
+      12,
+      .99
+    ) !important;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.10)
+    !important;
+
+  border-radius:
+    24px
+    24px
+    0
+    0 !important;
+
+  z-index:
+    2147483647 !important;
+
+  box-shadow:
+    0 -8px 30px
+    rgba(0,0,0,.35) !important;
+}
+
+
+body > .bottom-nav .nav-item {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  border: 0 !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  height: 62px !important;
+
+  margin: 0 !important;
+
+  padding:
+    7px
+    2px
+    3px !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 4px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    rgba(255,255,255,.68)
+    !important;
+
+  font-family: inherit !important;
+
+  font-size: 10px !important;
+
+  line-height: 1 !important;
+
+  border-radius:
+    19px !important;
+}
+
+
+body > .bottom-nav .nav-icon {
+  font-size:
+    24px !important;
+
+  line-height:
+    1 !important;
+}
+
+
+body > .bottom-nav .nav-item.active {
+  background:
+    rgba(
+      105,
+      35,
+      74,
+      .76
+    ) !important;
+
+  color:
+    #ffd0e4 !important;
+}
+
+
+/* =========================================================
+   CHAT FIX - NUMAI MESAJELE SCROLL
+========================================================= */
+
+.chat-page-body {
+  height:
+    100dvh !important;
+
+  overflow:
+    hidden !important;
+}
+
+
+.chat-app {
+  height:
+    100dvh !important;
+
+  display:
+    flex !important;
+
+  flex-direction:
+    column !important;
+
+  overflow:
+    hidden !important;
+
+  padding-bottom:
+    calc(
+      88px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+
+.chat-header {
+  flex:
+    0 0 auto !important;
+
+  border-radius:
+    25px !important;
+
+  padding:
+    18px !important;
+
+  margin-bottom:
+    10px !important;
+}
+
+
+.chat-header h1 {
+  margin:
+    5px
+    0 !important;
+}
+
+
+.chat-card {
+  flex:
+    1 1 0 !important;
+
+  min-height:
+    0 !important;
+
+  display:
+    flex !important;
+
+  flex-direction:
+    column !important;
+
+  overflow:
+    hidden !important;
+
+  border-radius:
+    25px !important;
+
+  padding:
+    14px !important;
+
+  margin:
+    0 0 4px !important;
+}
+
+
+.chat-messages {
+  flex:
+    1 1 0 !important;
+
+  min-height:
+    0 !important;
+
+  overflow-y:
+    auto !important;
+
+  overflow-x:
+    hidden !important;
+
+  padding:
+    5px
+    4px
+    12px !important;
+
+  overscroll-behavior:
+    contain !important;
+
+  touch-action:
+    pan-y !important;
+
+  -webkit-overflow-scrolling:
+    touch !important;
+
+  scrollbar-width:
+    none !important;
+}
+
+
+.chat-messages::-webkit-scrollbar {
+  display:
+    none !important;
+}
+
+
+.chat-message {
+  width:
+    fit-content;
+
+  max-width:
+    82%;
+
+  margin:
+    0 0 9px auto;
+
+  padding:
+    10px 13px;
+
+  border-radius:
+    17px;
+
+  background:
+    rgba(190,85,130,.35);
+
+  color:
+    white;
+}
+
+
+.chat-quick {
+  flex:
+    0 0 auto !important;
+
+  display:
+    flex !important;
+
+  flex-wrap:
+    wrap !important;
+
+  gap:
+    6px !important;
+
+  margin:
+    6px
+    0
+    8px !important;
+}
+
+
+.chat-quick button {
+  border:
+    1px solid
+    rgba(255,255,255,.08)
+    !important;
+
+  background:
+    rgba(255,255,255,.07)
+    !important;
+
+  color:
+    white !important;
+
+  border-radius:
+    14px !important;
+
+  padding:
+    9px !important;
+}
+
+
+.chat-input-row {
+  flex:
+    0 0 auto !important;
+
+  display:
+    flex !important;
+
+  gap:
+    7px !important;
+
+  margin:
+    0 !important;
+}
+
+
+.chat-input-row textarea {
+  flex:
+    1;
+
+  min-width:
+    0;
+
+  height:
+    54px;
+
+  min-height:
+    54px;
+
+  resize:
+    none;
+
+  padding:
+    15px;
+
+  border:
+    0;
+
+  outline:
+    0;
+
+  border-radius:
+    19px;
+
+  font-size:
+    16px;
+}
+
+
+.chat-input-row button {
+  width:
+    54px;
+
+  height:
+    54px;
+
+  flex:
+    0 0 54px;
+
+  border:
+    0;
+
+  border-radius:
+    19px;
+
+  background:
+    #c85e8a;
+
+  color:
+    white;
+
+  font-size:
+    21px;
+}
+
+
+/* AMINTIRI */
+
+.memories-grid,
+.events-list {
+  display:
+    grid;
+
+  gap:
+    14px;
+
+  margin-top:
+    14px;
+}
+
+
+.memory-card {
+  overflow:
+    hidden;
+
+  border-radius:
+    24px;
+}
+
+
+.memory-card img {
+  width:
+    100%;
+
+  height:
+    220px;
+
+  object-fit:
+    cover;
+
+  display:
+    block;
+}
+
+
+.memory-info {
+  padding:
+    16px;
+}
+
+
+/* EVENIMENTE */
+
+.event-card {
+  padding:
+    18px;
+
+  border-radius:
+    24px;
+}
+
+
+/* SETĂRI */
+
+.settings-big-card {
+  margin-bottom:
+    14px;
+
+  padding:
+    18px;
+
+  border-radius:
+    24px;
+}
+
+
+.app-input,
+.app-textarea,
+.settings-big-card select {
+  width:
+    100%;
+
+  margin-top:
+    10px;
+
+  padding:
+    13px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  border-radius:
+    15px;
+
+  outline:
+    0;
+
+  background:
+    rgba(255,255,255,.07);
+
+  color:
+    white;
+
+  font:
+    inherit;
+}
+
+
+.app-textarea {
+  min-height:
+    100px;
+
+  resize:
+    vertical;
+}
+
+
+.settings-label {
+  display:
+    block;
+
+  margin-top:
+    15px;
+
+  color:
+    rgba(255,255,255,.70);
+}
+
+
+.background-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:
+    8px;
+
+  margin:
+    15px 0;
+}
+
+
+.background-option {
+  padding:
+    12px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-radius:
+    15px;
+
+  background:
+    rgba(255,255,255,.07);
+
+  color:
+    white;
+}
+
+
+.save-settings-button {
+  width:
+    100%;
+
+  padding:
+    15px;
+
+  margin-bottom:
+    15px;
+
+  border:
+    0;
+
+  border-radius:
+    18px;
+
+  background:
+    #c65f89;
+
+  color:
+    white;
+
+  font-weight:
+    700;
+}
+
+
+/* FONTURI */
+
+.font-system {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+
+.font-serif {
+  font-family:
+    Georgia,
+    serif;
+}
+
+
+.font-rounded {
+  font-family:
+    "Trebuchet MS",
+    sans-serif;
+}
+
+
+.font-classic {
+  font-family:
+    Arial,
+    sans-serif;
+}
+
+
+.font-romantic {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+}
+
+
+/* mărimea din setări NU mărește poza/contorul de sus */
+
+.home-section,
+.love-note,
+.chat-card,
+.event-card,
+.memory-card,
+.settings-big-card {
+  font-size:
+    calc(
+      16px *
+      var(--app-font-scale, 1)
+    );
+}
+/* =========================================================
+   FIX PROIECT FINAL 2026-08-28
+   - meniu jos de tot pe toate paginile
+   - chat fix, doar mesajele fac scroll
+   - același fundal pe Chat / Amintiri / Evenimente / Setări
+========================================================= */
+
+html,
+body {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  -webkit-text-size-adjust: 100% !important;
+}
+
+html {
+  min-height: 100% !important;
+  background: #07070d !important;
+}
+
+body {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  background-color: #07070d !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  overscroll-behavior-x: none !important;
+  touch-action: manipulation;
+}
+
+* {
+  box-sizing: border-box !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fundalurile alese din Setări se văd pe orice pagină. */
+body > main,
+body > .app,
+.page-chat .chat-app,
+.page-amintiri .app,
+.page-evenimente .app,
+.page-setari .app {
+  background: transparent !important;
+}
+
+body.bg-aurora,
+body.bg-mesh,
+body.bg-starlight,
+body.bg-silk,
+body.bg-plain,
+body.bg-nature,
+body.bg-stars,
+body.bg-moon,
+body.bg-clouds,
+body.bg-cozy,
+body.bg-pastel,
+body.bg-dark,
+body.bg-custom {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Container compact și uniform pe toate paginile. */
+.app {
+  width: min(94%, 420px) !important;
+  margin: 0 auto !important;
+  padding-top: calc(env(safe-area-inset-top) + 6px) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 84px !important;
+}
+
+/* Cardurile lasă tema să se vadă în spate. */
+.home-section,
+.love-note,
+.hero-card,
+.chat-card,
+.event-card,
+.memory-card,
+.empty-memories,
+.settings-big-card,
+.page-header,
+.chat-header,
+.settings-header {
+  background: rgba(14, 9, 18, 0.82) !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  color: #fff !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+/* =========================================================
+   MENIU GLOBAL - CHIAR JOS DE TOT
+========================================================= */
+
+body > .bottom-nav {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  bottom: -1px !important;
+  transform: none !important;
+
+  width: 100% !important;
+  max-width: none !important;
+  height: 72px !important;
+  min-height: 72px !important;
+
+  margin: 0 !important;
+  padding: 4px 7px 0 !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  align-items: end !important;
+  gap: 2px !important;
+
+  background: rgba(7, 5, 12, 0.99) !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: 22px 22px 0 0 !important;
+  box-shadow: 0 -8px 30px rgba(0,0,0,.34) !important;
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+
+  z-index: 2147483647 !important;
+}
+
+body > .bottom-nav .nav-item {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 64px !important;
+  min-height: 64px !important;
+
+  margin: 0 !important;
+  padding: 8px 2px 2px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 18px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 4px !important;
+
+  background: transparent !important;
+  color: rgba(255,255,255,.70) !important;
+  font-family: inherit !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+}
+
+body > .bottom-nav .nav-icon {
+  display: block !important;
+  margin: 0 !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+}
+
+body > .bottom-nav .nav-item.active {
+  background: rgba(105, 35, 74, 0.78) !important;
+  color: #ffd0e4 !important;
+}
+
+/* =========================================================
+   CHAT - PAGINA FIXĂ, DOAR TEXTUL/MESAJELE FAC SCROLL
+========================================================= */
+
+body.page-chat,
+body.chat-page-body {
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
+}
+
+body.page-chat .chat-app,
+body.chat-page-body .chat-app {
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+  padding-top: calc(env(safe-area-inset-top) + 6px) !important;
+  padding-bottom: 76px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+body.page-chat .chat-header,
+body.chat-page-body .chat-header {
+  flex: 0 0 auto !important;
+  margin: 0 0 10px !important;
+  padding: 17px !important;
+  border-radius: 24px !important;
+}
+
+body.page-chat .chat-header h1,
+body.chat-page-body .chat-header h1 {
+  margin: 4px 0 6px !important;
+}
+
+body.page-chat .chat-card,
+body.chat-page-body .chat-card {
+  flex: 1 1 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 12px !important;
+  border-radius: 24px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+body.page-chat .chat-messages,
+body.chat-page-body .chat-messages,
+body.page-chat #chatMessages,
+body.chat-page-body #chatMessages {
+  flex: 1 1 0 !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 4px 4px 10px !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain !important;
+  touch-action: pan-y !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+}
+
+body.page-chat .chat-messages::-webkit-scrollbar,
+body.chat-page-body .chat-messages::-webkit-scrollbar,
+body.page-chat #chatMessages::-webkit-scrollbar,
+body.chat-page-body #chatMessages::-webkit-scrollbar {
+  width: 0 !important;
+  display: none !important;
+}
+
+body.page-chat .chat-quick,
+body.chat-page-body .chat-quick {
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  margin: 5px 0 7px !important;
+  padding: 0 !important;
+}
+
+body.page-chat .chat-input-row,
+body.chat-page-body .chat-input-row {
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+body.page-chat .chat-input-row textarea,
+body.chat-page-body .chat-input-row textarea {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+  height: 54px !important;
+  min-height: 54px !important;
+  max-height: 54px !important;
+  margin: 0 !important;
+  padding: 15px !important;
+  resize: none !important;
+  border-radius: 18px !important;
+  font-size: 16px !important;
+}
+
+body.page-chat .chat-input-row button,
+body.chat-page-body .chat-input-row button {
+  flex: 0 0 54px !important;
+  width: 54px !important;
+  height: 54px !important;
+  min-width: 54px !important;
+  min-height: 54px !important;
+  margin: 0 !important;
+  border-radius: 18px !important;
+}
+
+/* =========================================================
+   AMINTIRI - ACELAȘI FUNDAL CA RESTUL APLICAȚIEI
+========================================================= */
+
+body.page-amintiri .memories-page,
+body.page-amintiri .memories-gallery,
+body.page-amintiri main {
+  background-color: transparent !important;
+}
+
+body.page-amintiri .memories-page {
+  background: rgba(14, 9, 18, 0.82) !important;
+  color: #fff !important;
+  border-radius: 24px !important;
+}
+
+body.page-amintiri .memories-gallery {
+  display: grid !important;
+  gap: 12px !important;
+  margin-top: 12px !important;
+}
+
+body.page-amintiri .empty-memories,
+body.page-amintiri .memory-card {
+  background: rgba(14, 9, 18, 0.84) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.09) !important;
+  border-radius: 22px !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+body.page-amintiri .empty-memories {
+  padding: 28px 18px !important;
+  text-align: center !important;
+}
+
+body.page-amintiri .memory-photo {
+  width: 100% !important;
+  max-height: 340px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* Evenimente și Setări folosesc aceeași transparență peste temă. */
+body.page-evenimente .events-list,
+body.page-setari .settings-app {
+  background: transparent !important;
+}
+
+/* Telefon mic: bara rămâne jos și compactă. */
+@media (max-width: 390px) {
+  .app {
+    width: calc(100% - 14px) !important;
+  }
+
+  body > .bottom-nav {
+    height: 70px !important;
+    min-height: 70px !important;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+
+  body > .bottom-nav .nav-item {
+    height: 62px !important;
+    min-height: 62px !important;
+    font-size: 9px !important;
+  }
+
+  body > .bottom-nav .nav-icon {
+    font-size: 23px !important;
+  }
+
+  body.page-chat .chat-app,
+  body.chat-page-body .chat-app {
+    padding-bottom: 74px !important;
+  }
+}
+/* =========================================================
+   FONT + ACCENT DIN SETĂRI
+   ADAUGĂ ULTIMUL DE TOT ÎN style.css
+========================================================= */
+
+:root {
+
+  --app-font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  --app-font-scale:
+    1;
+
+  --app-accent:
+    #d96898;
+
+  --app-accent-rgb:
+    217,
+    104,
+    152;
+
+  --app-accent-soft:
+    rgba(
+      217,
+      104,
+      152,
+      .22
+    );
+
+}
+
+
+/* =========================================================
+   FONT GLOBAL
+========================================================= */
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family:
+    var(
+      --app-font-family
+    ) !important;
+}
+
+
+/* =========================================================
+   HOME
+   SCHIMBĂ FONTUL DAR NU MUTĂ POZA / CONTORUL
+========================================================= */
+
+body.home-page #coupleNames,
+body.home-page .couple-title,
+body.home-page .together-title,
+body.home-page .counter-item strong,
+body.home-page .love-note,
+body.home-page .home-section h2,
+body.home-page .home-section p {
+
+  font-family:
+    var(
+      --app-font-family
+    ) !important;
+
+}
+
+
+/* =========================================================
+   MĂRIME TEXT
+   NU SCHIMBĂ POZA ȘI CARDUL PRINCIPAL HOME
+========================================================= */
+
+body:not(.home-page)
+.settings-big-card,
+
+body:not(.home-page)
+.chat-card,
+
+body:not(.home-page)
+.event-card,
+
+body:not(.home-page)
+.memory-card {
+
+  font-size:
+    calc(
+      16px *
+      var(
+        --app-font-scale,
+        1
+      )
+    ) !important;
+
+}
+
+
+body.home-page .love-note,
+body.home-page .home-section {
+
+  font-size:
+    calc(
+      16px *
+      var(
+        --app-font-scale,
+        1
+      )
+    ) !important;
+
+}
+
+
+/* =========================================================
+   ACCENT GLOBAL
+========================================================= */
+
+.home-small,
+.settings-label,
+.settings-account-label,
+.save-confirmation {
+
+  color:
+    var(
+      --app-accent
+    ) !important;
+
+}
+
+
+/* =========================================================
+   MENIU ACTIV
+========================================================= */
+
+.bottom-nav .nav-item.active {
+
+  background:
+    rgba(
+      var(
+        --app-accent-rgb
+      ),
+      .30
+    ) !important;
+
+  color:
+    #ffffff !important;
+
+}
+
+
+/* =========================================================
+   BUTOANE SELECTATE
+========================================================= */
+
+.background-option.selected,
+.typography-option.selected,
+.accent-option.selected {
+
+  border-color:
+    var(
+      --app-accent
+    ) !important;
+
+  box-shadow:
+    inset
+    0
+    0
+    0
+    1px
+    var(
+      --app-accent
+    ) !important;
+
+}
+
+
+/* =========================================================
+   BUTOANE PRINCIPALE
+========================================================= */
+
+.save-all-settings,
+.chat-input-row button,
+.send-button,
+#sendButton {
+
+  background:
+    var(
+      --app-accent
+    ) !important;
+
+}
+
+
+/* =========================================================
+   INIMA CITAT
+========================================================= */
+
+.heart-icon {
+
+  color:
+    var(
+      --app-accent
+    ) !important;
+
+}
+
+
+/* =========================================================
+   URSULEȚ PROGRES
+========================================================= */
+
+.bear-progress-fill {
+
+  background:
+    linear-gradient(
+      90deg,
+      var(
+        --app-accent
+      ),
+      rgba(
+        var(
+          --app-accent-rgb
+        ),
+        .55
+      )
+    ) !important;
+
+}
+
+
+/* =========================================================
+   SLIDER
+========================================================= */
+
+input[type="range"] {
+
+  accent-color:
+    var(
+      --app-accent
+    ) !important;
+
+}
+
+
+/* =========================================================
+   FĂRĂ FLASH ALB PE IPHONE
+========================================================= */
+
+.bottom-nav,
+.bottom-nav *,
+.background-option,
+.typography-option,
+.accent-option {
+
+  -webkit-tap-highlight-color:
+    transparent !important;
+
+}
+/* =========================================================
+   HOME - CARDUL CU POZA + DATA MAI MIC ȘI MAI STRÂNS
+========================================================= */
+
+body.home-page .love-hero {
+  width: 94% !important;
+
+  margin:
+    0 auto
+    14px !important;
+
+  padding:
+    0
+    14px
+    16px !important;
+
+  border-radius:
+    24px !important;
+}
+
+
+/* POZA MAI MICĂ */
+
+body.home-page .hero-photo-wrap {
+  width:
+    calc(100% + 28px) !important;
+
+  height:
+    260px !important;
+
+  min-height:
+    260px !important;
+
+  max-height:
+    260px !important;
+
+  margin-left:
+    -14px !important;
+
+  margin-right:
+    -14px !important;
+}
+
+
+body.home-page .couple-photo {
+  width:
+    100% !important;
+
+  height:
+    100% !important;
+
+  object-fit:
+    cover !important;
+}
+
+
+/* INIMA */
+
+body.home-page .hero-heart {
+  font-size:
+    38px !important;
+
+  margin:
+    -19px auto
+    7px !important;
+}
+
+
+/* NUMELE */
+
+body.home-page #coupleNames,
+body.home-page .couple-title {
+  font-size:
+    28px !important;
+
+  margin:
+    5px
+    0
+    14px !important;
+}
+
+
+/* ÎMPREUNĂ DE... */
+
+body.home-page .together-title {
+  font-size:
+    21px !important;
+
+  margin:
+    0
+    0
+    18px !important;
+}
+
+
+/* CONTORUL MAI STRÂNS */
+
+body.home-page .love-counter-grid {
+  gap:
+    8px !important;
+}
+
+
+/* CĂSUȚELE CU ANI/LUNI/ZILE */
+
+body.home-page .counter-item {
+  height:
+    88px !important;
+
+  min-height:
+    88px !important;
+
+  max-height:
+    88px !important;
+
+  padding:
+    8px
+    3px !important;
+
+  border-radius:
+    18px !important;
+}
+
+
+/* NUMERELE */
+
+body.home-page .counter-item strong {
+  font-size:
+    27px !important;
+
+  margin-bottom:
+    7px !important;
+}
+
+
+/* ANI / LUNI / ZILE / ORE */
+
+body.home-page .counter-item span {
+  font-size:
+    7px !important;
+
+  letter-spacing:
+    2px !important;
+}
+
+/* =========================================================
+   FIX DEFINITIV MENIU JOS - ACEEAȘI POZIȚIE PE TOATE PAGINILE
+   2026-08-29
+========================================================= */
+
+html,
+body {
+  margin: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.bottom-nav,
+body > .bottom-nav {
+  position: fixed !important;
+
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  bottom: 0 !important;
+
+  transform: none !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  height:
+    calc(
+      72px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  min-height:
+    calc(
+      72px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  max-height:
+    calc(
+      72px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  margin: 0 !important;
+
+  padding:
+    4px
+    6px
+    calc(
+      4px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(
+      5,
+      minmax(0, 1fr)
+    ) !important;
+
+  align-items: start !important;
+  align-content: start !important;
+
+  gap: 2px !important;
+
+  background:
+    rgba(
+      7,
+      5,
+      12,
+      0.99
+    ) !important;
+
+  border: 0 !important;
+
+  border-top:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.10
+    ) !important;
+
+  border-radius:
+    22px
+    22px
+    0
+    0 !important;
+
+  box-shadow:
+    0 -8px 30px
+    rgba(
+      0,
+      0,
+      0,
+      0.34
+    ) !important;
+
+  backdrop-filter:
+    blur(22px) !important;
+
+  -webkit-backdrop-filter:
+    blur(22px) !important;
+
+  z-index:
+    2147483647 !important;
+}
+
+.bottom-nav .nav-item,
+body > .bottom-nav .nav-item {
+  position: relative !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  height: 64px !important;
+  min-height: 64px !important;
+  max-height: 64px !important;
+
+  margin: 0 !important;
+
+  padding:
+    7px
+    2px
+    3px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  border-radius:
+    18px !important;
+
+  display: flex !important;
+
+  flex-direction:
+    column !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  gap: 4px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.70
+    ) !important;
+
+  font-family:
+    inherit !important;
+
+  font-size:
+    10px !important;
+
+  line-height:
+    1 !important;
+
+  text-align:
+    center !important;
+
+  text-decoration:
+    none !important;
+
+  cursor:
+    pointer !important;
+
+  transform:
+    none !important;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease !important;
+
+  touch-action:
+    manipulation !important;
+
+  -webkit-tap-highlight-color:
+    transparent !important;
+}
+
+.bottom-nav .nav-icon,
+body > .bottom-nav .nav-icon {
+  display: block !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-size:
+    23px !important;
+
+  line-height:
+    1 !important;
+
+  transform:
+    none !important;
+}
+
+.bottom-nav .nav-item.active,
+body > .bottom-nav .nav-item.active {
+  background:
+    rgba(
+      var(
+        --app-accent-rgb,
+        217,
+        104,
+        152
+      ),
+      0.30
+    ) !important;
+
+  color:
+    #ffffff !important;
+
+  transform:
+    none !important;
+}
+
+.bottom-nav .nav-item:active,
+body > .bottom-nav .nav-item:active {
+  transform:
+    none !important;
+}
+
+.app,
+.chat-app,
+.settings-app {
+  padding-bottom:
+    calc(
+      90px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+body.page-chat .chat-app,
+body.chat-page-body .chat-app,
+body:has(.chat-card) .app {
+  padding-bottom:
+    calc(
+      82px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+@media (max-width: 390px) {
+  .bottom-nav,
+  body > .bottom-nav {
+    height:
+      calc(
+        70px +
+        env(safe-area-inset-bottom)
+      ) !important;
+
+    min-height:
+      calc(
+        70px +
+        env(safe-area-inset-bottom)
+      ) !important;
+
+    max-height:
+      calc(
+        70px +
+        env(safe-area-inset-bottom)
+      ) !important;
+  }
+
+  .bottom-nav .nav-item,
+  body > .bottom-nav .nav-item {
+    height: 62px !important;
+    min-height: 62px !important;
+    max-height: 62px !important;
+
+    font-size:
+      9px !important;
+  }
+
+  .bottom-nav .nav-icon,
+  body > .bottom-nav .nav-icon {
+    font-size:
+      23px !important;
+  }
+}
+
+
+/* =========================================================
+   DUO LOVE - FIX FINAL MENIU JOS v29
+   Butoanele rămân permanent lipite jos.
+   Nici active / focus / hover / tap nu le mai ridică.
+========================================================= */
+
+.bottom-nav,
+body > .bottom-nav {
+  position: fixed !important;
+
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  bottom: 0 !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+
+  transform:
+    translate3d(0, 0, 0) !important;
+
+  -webkit-transform:
+    translate3d(0, 0, 0) !important;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr)) !important;
+
+  align-items: end !important;
+  align-content: end !important;
+
+  z-index:
+    2147483647 !important;
+
+  will-change:
+    auto !important;
+}
+
+
+/* TOATE BUTOANELE AU EXACT ACEEAȘI POZIȚIE */
+
+.bottom-nav .nav-item,
+body > .bottom-nav .nav-item,
+.bottom-nav .nav-item.active,
+body > .bottom-nav .nav-item.active,
+.bottom-nav .nav-item:active,
+body > .bottom-nav .nav-item:active,
+.bottom-nav .nav-item:focus,
+body > .bottom-nav .nav-item:focus,
+.bottom-nav .nav-item:focus-visible,
+body > .bottom-nav .nav-item:focus-visible,
+.bottom-nav .nav-item:hover,
+body > .bottom-nav .nav-item:hover {
+  position: relative !important;
+
+  top: 0 !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
+  transform:
+    translate3d(0, 0, 0) !important;
+
+  -webkit-transform:
+    translate3d(0, 0, 0) !important;
+
+  scale:
+    1 !important;
+
+  translate:
+    0 0 !important;
+
+  animation:
+    none !important;
+
+  outline:
+    none !important;
+}
+
+
+/* ICONIȚA ȘI TEXTUL NU SE MAI MIȘCĂ */
+
+.bottom-nav .nav-item .nav-icon,
+body > .bottom-nav .nav-item .nav-icon,
+.bottom-nav .nav-item span,
+body > .bottom-nav .nav-item span {
+  position: static !important;
+
+  top: auto !important;
+  bottom: auto !important;
+
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
+  transform:
+    none !important;
+
+  -webkit-transform:
+    none !important;
+
+  animation:
+    none !important;
+}
+
+
+/* DOAR CULOAREA ARATĂ PAGINA ACTIVĂ */
+
+.bottom-nav .nav-item.active,
+body > .bottom-nav .nav-item.active {
+  background:
+    rgba(
+      var(
+        --app-accent-rgb,
+        217,
+        104,
+        152
+      ),
+      .30
+    ) !important;
+
+  color:
+    #ffffff !important;
+}
+
+
+/* PE IPHONE NU LĂSĂM TAP-UL SĂ SCALEZE BUTONUL */
+
+.bottom-nav button,
+body > .bottom-nav button {
+  -webkit-tap-highlight-color:
+    transparent !important;
+
+  touch-action:
+    manipulation !important;
+}
+
+
+/* =========================================================
+   DUO LOVE - MENIU JOS FIX REAL v31
+   IMPORTANT: ACEST BLOC TREBUIE SĂ RĂMÂNĂ ULTIMUL ÎN CSS.
+   Elimină orice ridicare a butoanelor și orice safe-area
+   adăugat în bara de navigare.
+========================================================= */
+
+html,
+body {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+
+/* BARA RĂMÂNE LIPITĂ DE PARTEA DE JOS */
+
+.bottom-nav,
+body > .bottom-nav,
+.bottom-nav.five-items,
+body > .bottom-nav.five-items {
+  position: fixed !important;
+
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  bottom: 0 !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  height: 74px !important;
+  min-height: 74px !important;
+  max-height: 74px !important;
+
+  margin: 0 !important;
+
+  /* NU mai folosim env(safe-area-inset-bottom) aici */
+  padding: 4px 6px 2px !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+
+  gap: 2px !important;
+
+  align-items: stretch !important;
+  align-content: stretch !important;
+
+  transform: none !important;
+  -webkit-transform: none !important;
+
+  translate: none !important;
+  scale: 1 !important;
+
+  background: rgba(7, 5, 12, .99) !important;
+
+  border: 0 !important;
+  border-top: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: 22px 22px 0 0 !important;
+
+  box-shadow: 0 -8px 30px rgba(0,0,0,.34) !important;
+
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+
+  z-index: 2147483647 !important;
+
+  overflow: hidden !important;
+}
+
+
+/* TOATE CELE 5 BUTOANE AU EXACT ACEEAȘI DIMENSIUNE ȘI POZIȚIE */
+
+.bottom-nav .nav-item,
+body > .bottom-nav .nav-item,
+.bottom-nav.five-items .nav-item,
+body > .bottom-nav.five-items .nav-item,
+.bottom-nav .nav-item.active,
+body > .bottom-nav .nav-item.active,
+.bottom-nav .nav-item:active,
+body > .bottom-nav .nav-item:active,
+.bottom-nav .nav-item:focus,
+body > .bottom-nav .nav-item:focus,
+.bottom-nav .nav-item:focus-visible,
+body > .bottom-nav .nav-item:focus-visible,
+.bottom-nav .nav-item:hover,
+body > .bottom-nav .nav-item:hover {
+  position: static !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  height: 68px !important;
+  min-height: 68px !important;
+  max-height: 68px !important;
+
+  margin: 0 !important;
+
+  padding: 5px 2px 2px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  border-radius: 18px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 4px !important;
+
+  color: rgba(255,255,255,.70) !important;
+
+  font-family: inherit !important;
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+
+  text-align: center !important;
+  text-decoration: none !important;
+
+  transform: none !important;
+  -webkit-transform: none !important;
+
+  translate: none !important;
+  scale: 1 !important;
+
+  animation: none !important;
+
+  transition:
+    background-color .15s ease,
+    color .15s ease !important;
+
+  touch-action: manipulation !important;
+
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+
+/* ICONIȚA NU SE MIȘCĂ */
+
+.bottom-nav .nav-item .nav-icon,
+body > .bottom-nav .nav-item .nav-icon,
+.bottom-nav .nav-item.active .nav-icon,
+body > .bottom-nav .nav-item.active .nav-icon {
+  position: static !important;
+
+  display: block !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-size: 23px !important;
+  line-height: 1 !important;
+
+  transform: none !important;
+  -webkit-transform: none !important;
+
+  translate: none !important;
+  scale: 1 !important;
+
+  animation: none !important;
+}
+
+
+/* TEXTUL NU SE MIȘCĂ */
+
+.bottom-nav .nav-item span,
+body > .bottom-nav .nav-item span {
+  position: static !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+  -webkit-transform: none !important;
+
+  translate: none !important;
+  scale: 1 !important;
+
+  animation: none !important;
+}
+
+
+/* ACTIV = DOAR CULOARE, FĂRĂ SCHIMBARE DE POZIȚIE */
+
+.bottom-nav .nav-item.active,
+body > .bottom-nav .nav-item.active {
+  background:
+    rgba(
+      var(--app-accent-rgb, 217, 104, 152),
+      .30
+    ) !important;
+
+  color: #ffffff !important;
+
+  font-weight: 400 !important;
+
+  transform: none !important;
+  -webkit-transform: none !important;
+}
+
+
+/* IPHONE: ANULĂM TOATE REGULILE VECHI CU SAFE AREA DIN MENIU */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+
+  .bottom-nav,
+  body > .bottom-nav,
+  .bottom-nav.five-items,
+  body > .bottom-nav.five-items {
+    bottom: 0 !important;
+
+    height: 74px !important;
+    min-height: 74px !important;
+    max-height: 74px !important;
+
+    padding: 4px 6px 2px !important;
+  }
+
+}
+
+
+/* TELEFOANE MICI */
+
+@media (max-width: 390px) {
+
+  .bottom-nav,
+  body > .bottom-nav,
+  .bottom-nav.five-items,
+  body > .bottom-nav.five-items {
+    height: 72px !important;
+    min-height: 72px !important;
+    max-height: 72px !important;
+
+    padding: 3px 4px 1px !important;
+  }
+
+
+  .bottom-nav .nav-item,
+  body > .bottom-nav .nav-item {
+    height: 68px !important;
+    min-height: 68px !important;
+    max-height: 68px !important;
+
+    font-size: 9px !important;
+  }
+
+}

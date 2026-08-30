@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#090711">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DUO LOVE">
+
+  <title>DUO LOVE ❤️</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+
+  <link rel="stylesheet" href="./style.css?v=31">
+</head>
+
+
+<body class="login-page" data-build="v25">
+
+  <main class="login-container">
+
+    <div class="login-logo">
+      ❤️
+    </div>
+
+    <p class="login-small">
+      DUO LOVE
+    </p>
+
+    <h1 class="login-title">
+      Povestea voastră
+    </h1>
+
+    <p class="login-description">
+      Un spațiu doar pentru voi doi, pentru amintiri,
+      mesaje, momente și iubire. ❤️
+    </p>
+
+
+    <section class="login-card">
+
+      <button
+        id="googleLogin"
+        class="login-provider google-login"
+        type="button"
+      >
+        <span class="provider-icon">
+          G
+        </span>
+
+        Continuă cu Google
+      </button>
+
+
+      <button
+        id="appleLogin"
+        class="login-provider apple-login"
+        type="button"
+      >
+        <span class="provider-icon apple-icon">
+          
+        </span>
+
+        Continuă cu Apple
+      </button>
+
+
+      <div class="login-divider">
+
+        <span></span>
+
+        <p>
+          SAU
+        </p>
+
+        <span></span>
+
+      </div>
+
+
+      <button
+        id="guestLogin"
+        class="login-provider guest-login"
+        type="button"
+      >
+        ❤️ Intră în DUO LOVE
+      </button>
+
+
+      <p
+        id="loginStatus"
+        class="login-status"
+        aria-live="polite"
+      ></p>
+
+    </section>
+
+
+    <div class="login-security">
+      <span>
+        🔒
+      </span>
+
+      <span>
+        Spațiul vostru este privat
+      </span>
+    </div>
+
+
+    <p class="login-footer">
+      Prin continuare, datele contului sunt folosite doar
+      pentru autentificarea și funcționarea spațiului DUO LOVE.
+    </p>
+
+  </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="./supabase.js?v=25"></script>
+
+  <script src="./login.js?v=25"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,6524 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#07070d">
+
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+
+ <title>Setări ❤️</title>
+
+<link
+  rel="manifest"
+  href="./manifest.json"
+>
+
+<link rel="stylesheet" href="./style.css?v=31">
+<link rel="stylesheet" href="./setari.css?v=27">
+
+<style>
+
+    body.settings-page {
+      margin: 0 !important;
+      padding: 0 !important;
+
+      min-height: 100vh;
+      min-height: 100dvh;
+
+      overflow-x: hidden;
+    }
+
+
+    body.settings-page .app {
+      width:
+        min(
+          calc(100% - 20px),
+          430px
+        );
+
+      margin:
+        0 auto;
+
+      padding:
+        calc(
+          env(safe-area-inset-top) + 10px
+        )
+        0
+        calc(
+          110px +
+          env(safe-area-inset-bottom)
+        );
+    }
+
+
+    .settings-header {
+      margin-bottom: 15px;
+
+      padding: 20px;
+
+      border-radius: 25px;
+
+      background:
+        rgba(
+          14,
+          9,
+          18,
+          .84
+        );
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .09
+        );
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+
+    .settings-header h1 {
+      margin:
+        5px
+        0
+        7px;
+
+      font-size: 34px;
+    }
+
+
+    .settings-header p {
+      margin: 0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .68
+        );
+    }
+
+
+    .settings-card {
+      margin-bottom: 15px;
+
+      padding: 18px;
+
+      border-radius: 25px;
+
+      background:
+        rgba(
+          14,
+          9,
+          18,
+          .84
+        );
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .09
+        );
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+
+    .settings-small {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: #ef93bd;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      letter-spacing: 3px;
+    }
+
+
+    .settings-card h2 {
+      margin:
+        0
+        0
+        15px;
+
+      font-size: 28px;
+    }
+
+
+    .settings-card-description {
+      margin:
+        -6px
+        0
+        12px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .64
+        );
+
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+
+    .settings-label {
+      display: block;
+
+      margin:
+        17px
+        0
+        7px;
+
+      color: #ef93bd;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      letter-spacing: 3px;
+    }
+
+
+    .settings-input,
+    .settings-textarea,
+    .settings-select {
+      width: 100%;
+
+      box-sizing: border-box;
+
+      padding: 14px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .13
+        );
+
+      border-radius: 16px;
+
+      outline: none;
+
+      background:
+        rgba(
+          10,
+          7,
+          15,
+          .55
+        );
+
+      color: white;
+
+      font: inherit;
+      font-size: 16px;
+    }
+
+
+    .settings-input:focus,
+    .settings-textarea:focus,
+    .settings-select:focus {
+      border-color:
+        rgba(
+          220,
+          102,
+          154,
+          .65
+        );
+
+      box-shadow:
+        0 0 0 2px
+        rgba(
+          220,
+          102,
+          154,
+          .10
+        );
+    }
+
+
+    .settings-textarea {
+      min-height: 110px;
+
+      resize: vertical;
+    }
+
+
+    .settings-photo {
+      position: relative;
+
+      overflow: hidden;
+
+      width: 100%;
+      height: 240px;
+
+      margin-top: 15px;
+
+      border-radius: 23px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .05
+        );
+    }
+
+
+    .settings-photo img {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+    }
+
+
+    .settings-photo-button {
+      position: absolute;
+
+      right: 15px;
+      bottom: 15px;
+
+      padding:
+        11px
+        15px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .14
+        );
+
+      border-radius: 16px;
+
+      background:
+        rgba(
+          5,
+          5,
+          10,
+          .72
+        );
+
+      color: white;
+
+      cursor: pointer;
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+
+    /* =====================================================
+       CONT
+    ====================================================== */
+
+    .account-row {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      padding: 14px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 18px;
+    }
+
+
+    #userAccount {
+      min-width: 0;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .logout-button,
+    .save-button,
+    .remove-background,
+    .partner-button,
+    .copy-code-button {
+      appearance: none;
+      -webkit-appearance: none;
+
+      border: 0;
+
+      cursor: pointer;
+
+      font: inherit;
+    }
+
+
+    .logout-button {
+      flex: 0 0 auto;
+
+      padding:
+        11px
+        14px;
+
+      border-radius: 15px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        );
+
+      color: white;
+    }
+
+
+
+    /* =====================================================
+       PARTENER
+    ====================================================== */
+
+    .partner-status {
+      margin-top: 13px;
+
+      padding: 14px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 19px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .04
+        );
+    }
+
+
+    .partner-status-row {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      margin-bottom: 6px;
+    }
+
+
+    .partner-status-dot {
+      flex:
+        0 0
+        10px;
+
+      width: 10px;
+      height: 10px;
+
+      border-radius: 50%;
+
+      background: #909090;
+
+      box-shadow:
+        0 0 10px
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+    }
+
+
+    .partner-status-dot.waiting {
+      background: #f1b457;
+    }
+
+
+    .partner-status-dot.connected {
+      background: #55db86;
+
+      box-shadow:
+        0 0 12px
+        rgba(
+          85,
+          219,
+          134,
+          .35
+        );
+    }
+
+
+    .partner-status strong {
+      min-width: 0;
+
+      overflow-wrap: anywhere;
+      word-break: break-word;
+
+      font-size: 16px;
+    }
+
+
+    .partner-status p {
+      margin: 0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .62
+        );
+
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+
+    .partner-controls {
+      margin-top: 16px;
+    }
+
+
+    .partner-button {
+      width: 100%;
+
+      min-height: 50px;
+
+      padding:
+        12px
+        14px;
+
+      border-radius: 16px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #c95887,
+          #993f6b
+        );
+
+      color: white;
+
+      font-weight: 700;
+    }
+
+
+    .partner-button.secondary {
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .09
+        );
+    }
+
+
+    .partner-button:disabled,
+    .copy-code-button:disabled {
+      cursor: default;
+
+      opacity: .55;
+    }
+
+
+    .partner-divider {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      margin:
+        17px
+        0
+        3px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .40
+        );
+
+      font-size: 10px;
+
+      letter-spacing: 2px;
+    }
+
+
+    .partner-divider::before,
+    .partner-divider::after {
+      content: "";
+
+      flex: 1;
+
+      height: 1px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        );
+    }
+
+
+    .partner-code-input {
+      text-transform: uppercase;
+
+      letter-spacing: 3px;
+
+      font-weight: 700;
+
+      text-align: center;
+    }
+
+
+    .partner-input-row {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        auto;
+
+      gap: 8px;
+    }
+
+
+    .partner-input-row .partner-button {
+      width: auto;
+
+      min-width: 112px;
+    }
+
+
+    .invite-code-box {
+      margin-top: 15px;
+
+      padding: 16px;
+
+      border:
+        1px solid
+        rgba(
+          239,
+          147,
+          189,
+          .24
+        );
+
+      border-radius: 19px;
+
+      background:
+        rgba(
+          181,
+          71,
+          121,
+          .09
+        );
+
+      text-align: center;
+    }
+
+
+    .invite-code-box[hidden],
+    .partner-controls[hidden] {
+      display: none !important;
+    }
+
+
+    .invite-code-label {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: #ef93bd;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      letter-spacing: 3px;
+    }
+
+
+    .invite-code {
+      display: block;
+
+      margin:
+        3px
+        0
+        12px;
+
+      color: white;
+
+      font-size: 28px;
+      font-weight: 800;
+
+      letter-spacing: 5px;
+
+      word-break: break-all;
+    }
+
+
+    .copy-code-button {
+      min-height: 43px;
+
+      padding:
+        10px
+        16px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      color: white;
+    }
+
+
+    .invite-code-help {
+      margin:
+        12px
+        0
+        0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .55
+        );
+
+      font-size: 12px;
+
+      line-height: 1.45;
+    }
+
+
+    .partner-message {
+      min-height: 20px;
+
+      margin:
+        12px
+        0
+        0;
+
+      color: #ffb8d4;
+
+      font-size: 13px;
+
+      text-align: center;
+    }
+
+
+
+
+
+    /* =====================================================
+       NOTIFICĂRI
+    ====================================================== */
+
+    .notification-status {
+      margin-top: 13px;
+
+      padding: 14px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 19px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .04
+        );
+    }
+
+
+    .notification-status-row {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      margin-bottom: 6px;
+    }
+
+
+    .notification-status-dot {
+      flex:
+        0 0
+        10px;
+
+      width: 10px;
+      height: 10px;
+
+      border-radius: 50%;
+
+      background: #909090;
+    }
+
+
+    .notification-status-dot.waiting {
+      background: #f1b457;
+    }
+
+
+    .notification-status-dot.active {
+      background: #55db86;
+
+      box-shadow:
+        0 0 12px
+        rgba(
+          85,
+          219,
+          134,
+          .35
+        );
+    }
+
+
+    .notification-status-dot.blocked {
+      background: #e86474;
+
+      box-shadow:
+        0 0 12px
+        rgba(
+          232,
+          100,
+          116,
+          .30
+        );
+    }
+
+
+    .notification-status strong {
+      font-size: 16px;
+    }
+
+
+    .notification-status p {
+      margin: 0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .62
+        );
+
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+
+    .notification-actions {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 9px;
+
+      margin-top: 14px;
+    }
+
+
+    .notification-button {
+      appearance: none;
+      -webkit-appearance: none;
+
+      min-height: 50px;
+
+      padding:
+        12px
+        14px;
+
+      border: 0;
+      border-radius: 16px;
+
+      color: white;
+
+      font: inherit;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    .notification-button.primary {
+      background:
+        linear-gradient(
+          135deg,
+          #c95887,
+          #993f6b
+        );
+    }
+
+
+    .notification-button.secondary {
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .09
+        );
+    }
+
+
+    .notification-button:disabled {
+      cursor: default;
+
+      opacity: .52;
+    }
+
+
+    .notification-message {
+      min-height: 20px;
+
+      margin:
+        12px
+        0
+        0;
+
+      color: #ffb8d4;
+
+      font-size: 13px;
+
+      text-align: center;
+    }
+
+
+    .notification-note {
+      margin:
+        12px
+        0
+        0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .47
+        );
+
+      font-size: 12px;
+
+      line-height: 1.45;
+    }
+
+
+    /* =====================================================
+       URSULEȚ AI
+    ====================================================== */
+
+    .bear-ai-settings-preview {
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+
+      margin-top: 14px;
+
+      padding: 13px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 18px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .04
+        );
+    }
+
+
+    .bear-ai-settings-circle {
+      flex:
+        0 0
+        62px;
+
+      width: 62px;
+      height: 62px;
+
+      overflow: hidden;
+
+      border:
+        2px solid
+        rgba(
+          255,
+          184,
+          214,
+          .60
+        );
+
+      border-radius: 50%;
+
+      background:
+        rgba(
+          10,
+          7,
+          15,
+          .70
+        );
+    }
+
+
+    .bear-ai-settings-circle img {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+    }
+
+
+    .bear-ai-settings-info {
+      min-width: 0;
+    }
+
+
+    .bear-ai-settings-info strong {
+      display: block;
+
+      margin-bottom: 3px;
+
+      overflow: hidden;
+
+      color: white;
+
+      font-size: 17px;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .bear-ai-settings-info span {
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .60
+        );
+
+      font-size: 12px;
+    }
+
+
+
+    /* =====================================================
+       FONT
+    ====================================================== */
+
+    .font-size-row {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-top: 17px;
+      margin-bottom: 7px;
+    }
+
+
+    #fontSizeRange {
+      width: 100%;
+
+      accent-color: #d56191;
+    }
+
+
+
+    /* =====================================================
+       FUNDAL
+    ====================================================== */
+
+    .background-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 9px;
+
+      margin-top: 15px;
+    }
+
+
+    .background-option {
+      min-height: 52px;
+
+      padding: 10px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        );
+
+      border-radius: 16px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .06
+        );
+
+      color: white;
+
+      font: inherit;
+
+      cursor: pointer;
+    }
+
+
+    .background-option.selected {
+      border-color: #d76696;
+
+      box-shadow:
+        0 0 0 2px
+        rgba(
+          215,
+          102,
+          150,
+          .17
+        );
+    }
+
+
+    .background-upload {
+      display: block;
+
+      width: 100%;
+
+      box-sizing: border-box;
+
+      margin-top: 13px;
+
+      padding: 13px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 16px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .07
+        );
+
+      color: white;
+
+      text-align: center;
+
+      cursor: pointer;
+    }
+
+
+    .remove-background {
+      width: 100%;
+
+      margin-top: 9px;
+
+      padding: 12px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .05
+        );
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .72
+        );
+    }
+
+
+    .save-button {
+      width: 100%;
+
+      margin:
+        5px
+        0
+        15px;
+
+      padding: 15px;
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #c95887,
+          #993f6b
+        );
+
+      color: white;
+
+      font-weight: 700;
+    }
+
+
+    .saved-message {
+      min-height: 22px;
+
+      margin:
+        0
+        0
+        10px;
+
+      color: #ffb8d4;
+
+      text-align: center;
+
+      font-size: 13px;
+    }
+
+
+
+
+    /* =====================================================
+       SECURITATE - COD DE ACCES
+    ====================================================== */
+
+    .security-status {
+      margin-top: 13px;
+
+      padding: 14px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius: 19px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .04
+        );
+    }
+
+
+    .security-status-row {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      margin-bottom: 6px;
+    }
+
+
+    .security-status-dot {
+      flex:
+        0 0
+        10px;
+
+      width: 10px;
+      height: 10px;
+
+      border-radius: 50%;
+
+      background: #909090;
+    }
+
+
+    .security-status-dot.active {
+      background: #55db86;
+
+      box-shadow:
+        0 0 12px
+        rgba(
+          85,
+          219,
+          134,
+          .35
+        );
+    }
+
+
+    .security-status-dot.off {
+      background: #f1b457;
+    }
+
+
+    .security-status strong {
+      color: white;
+
+      font-size: 16px;
+    }
+
+
+    .security-status p {
+      margin: 0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .62
+        );
+
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+
+    .security-fields {
+      margin-top: 15px;
+    }
+
+
+    .security-pin-input {
+      letter-spacing: 7px;
+
+      text-align: center;
+
+      font-size: 21px;
+
+      font-weight: 800;
+    }
+
+
+    .security-actions {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 9px;
+
+      margin-top: 14px;
+    }
+
+
+    .security-button {
+      appearance: none;
+      -webkit-appearance: none;
+
+      width: 100%;
+
+      min-height: 50px;
+
+      padding:
+        12px
+        14px;
+
+      border: 0;
+
+      border-radius: 16px;
+
+      color: white;
+
+      font: inherit;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    .security-button.primary {
+      background:
+        linear-gradient(
+          135deg,
+          #c95887,
+          #993f6b
+        );
+    }
+
+
+    .security-button.secondary {
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .09
+        );
+    }
+
+
+    .security-button.danger {
+      background:
+        rgba(
+          203,
+          74,
+          91,
+          .16
+        );
+
+      border:
+        1px solid
+        rgba(
+          232,
+          100,
+          116,
+          .20
+        );
+    }
+
+
+    .security-button:disabled {
+      cursor: default;
+
+      opacity: .55;
+    }
+
+
+    .security-message {
+      min-height: 20px;
+
+      margin:
+        12px
+        0
+        0;
+
+      color: #ffb8d4;
+
+      font-size: 13px;
+
+      text-align: center;
+    }
+
+
+    .security-note {
+      margin:
+        12px
+        0
+        0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .47
+        );
+
+      font-size: 12px;
+
+      line-height: 1.45;
+    }
+
+
+    #currentPinWrap[hidden],
+    #disableAccessPinButton[hidden] {
+      display: none !important;
+    }
+
+
+
+    @media (
+      max-width: 360px
+    ) {
+
+      .partner-input-row {
+        grid-template-columns: 1fr;
+      }
+
+
+      .partner-input-row .partner-button {
+        width: 100%;
+      }
+
+
+      .invite-code {
+        font-size: 23px;
+
+        letter-spacing: 3px;
+      }
+
+
+      .notification-actions,
+      .security-actions {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body class="settings-page" data-build="v27">
+
+
+  <main class="app">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="settings-header">
+
+      <span class="settings-small">
+        ⚙️ SETĂRI
+      </span>
+
+      <h1>
+        Setări
+      </h1>
+
+      <p>
+        Personalizează spațiul vostru ❤️
+      </p>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONT
+    ====================================================== -->
+
+    <section class="settings-card">
+
+      <span class="settings-small">
+        👤 CONT
+      </span>
+
+      <h2>
+        Contul tău
+      </h2>
+
+
+      <div class="account-row">
+
+        <span id="userAccount">
+          Se verifică...
+        </span>
+
+
+        <button
+          id="logoutButton"
+          class="logout-button"
+          type="button"
+        >
+          Ieși
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SECURITATE
+    ====================================================== -->
+
+    <section
+      id="securityCard"
+      class="settings-card"
+    >
+
+      <span class="settings-small">
+        🔐 SECURITATE
+      </span>
+
+      <h2>
+        Cod de acces
+      </h2>
+
+
+      <p class="settings-card-description">
+        Protejează DUO LOVE cu un cod personal. Fiecare cont are propriul cod. ❤️
+      </p>
+
+
+      <div class="security-status">
+
+        <div class="security-status-row">
+
+          <span
+            id="securityStatusDot"
+            class="security-status-dot off"
+          ></span>
+
+
+          <strong id="securityStatusTitle">
+            Se verifică...
+          </strong>
+
+        </div>
+
+
+        <p id="securityStatusText">
+          Verificăm dacă ai un cod de acces activ.
+        </p>
+
+      </div>
+
+
+      <div class="security-fields">
+
+        <div
+          id="currentPinWrap"
+          hidden
+        >
+
+          <label
+            class="settings-label"
+            for="currentAccessPin"
+          >
+            CODUL ACTUAL
+          </label>
+
+
+          <input
+            id="currentAccessPin"
+            class="settings-input security-pin-input"
+            type="password"
+            inputmode="numeric"
+            maxlength="6"
+            autocomplete="off"
+            placeholder="••••••"
+          >
+
+        </div>
+
+
+        <label
+          class="settings-label"
+          for="newAccessPin"
+        >
+          COD NOU
+        </label>
+
+
+        <input
+          id="newAccessPin"
+          class="settings-input security-pin-input"
+          type="password"
+          inputmode="numeric"
+          maxlength="6"
+          autocomplete="off"
+          placeholder="••••••"
+        >
+
+
+        <label
+          class="settings-label"
+          for="confirmAccessPin"
+        >
+          REPETĂ CODUL
+        </label>
+
+
+        <input
+          id="confirmAccessPin"
+          class="settings-input security-pin-input"
+          type="password"
+          inputmode="numeric"
+          maxlength="6"
+          autocomplete="off"
+          placeholder="••••••"
+        >
+
+      </div>
+
+
+      <div class="security-actions">
+
+        <button
+          id="saveAccessPinButton"
+          class="security-button primary"
+          type="button"
+        >
+          🔐 Activează codul
+        </button>
+
+
+        <button
+          id="disableAccessPinButton"
+          class="security-button danger"
+          type="button"
+          hidden
+        >
+          Dezactivează
+        </button>
+
+      </div>
+
+
+      <p
+        id="securityMessage"
+        class="security-message"
+      ></p>
+
+
+      <p class="security-note">
+        Dacă uiți codul, pe ecranul de blocare apeși „Am uitat codul”. Vei primi un link securizat pe email; îl deschizi și alegi un cod nou.
+      </p>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PARTENER
+    ====================================================== -->
+
+    <section
+      id="partnerCard"
+      class="settings-card"
+    >
+
+      <span class="settings-small">
+        💞 PARTENER
+      </span>
+
+      <h2>
+        Conectați aplicația
+      </h2>
+
+
+      <p class="settings-card-description">
+        Fiecare folosește propriul cont. După conectare, datele voastre devin comune. ❤️
+      </p>
+
+
+      <div class="partner-status">
+
+        <div class="partner-status-row">
+
+          <span
+            id="partnerStatusDot"
+            class="partner-status-dot"
+          ></span>
+
+
+          <strong id="partnerStatusTitle">
+            Se verifică...
+          </strong>
+
+        </div>
+
+
+        <p id="partnerStatusText">
+          Verificăm conexiunea cu partenerul.
+        </p>
+
+      </div>
+
+
+
+      <!-- NU ESTE ÎNCĂ ÎNTR-UN CUPLU -->
+
+      <div
+        id="partnerControls"
+        class="partner-controls"
+        hidden
+      >
+
+        <button
+          id="createInviteButton"
+          class="partner-button"
+          type="button"
+        >
+          💌 Generează cod de invitație
+        </button>
+
+
+        <div class="partner-divider">
+          SAU
+        </div>
+
+
+        <label
+          class="settings-label"
+          for="partnerCodeInput"
+        >
+          CODUL PARTENERULUI
+        </label>
+
+
+        <div class="partner-input-row">
+
+          <input
+            id="partnerCodeInput"
+            class="settings-input partner-code-input"
+            type="text"
+            maxlength="8"
+            placeholder="A1B2C3D4"
+            autocomplete="off"
+            autocapitalize="characters"
+            spellcheck="false"
+          >
+
+
+          <button
+            id="joinCoupleButton"
+            class="partner-button secondary"
+            type="button"
+          >
+            Conectează
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- CODUL GENERAT -->
+
+      <div
+        id="inviteCodeBox"
+        class="invite-code-box"
+        hidden
+      >
+
+        <span class="invite-code-label">
+          COD INVITAȚIE
+        </span>
+
+
+        <strong
+          id="inviteCodeText"
+          class="invite-code"
+        >
+          --------
+        </strong>
+
+
+        <button
+          id="copyInviteCode"
+          class="copy-code-button"
+          type="button"
+        >
+          📋 Copiază codul
+        </button>
+
+
+        <p class="invite-code-help">
+          Trimite acest cod partenerei. Ea intră în contul ei, deschide Setări și introduce codul aici.
+        </p>
+
+      </div>
+
+
+      <p
+        id="partnerMessage"
+        class="partner-message"
+      ></p>
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         NOTIFICĂRI
+    ====================================================== -->
+
+    <section
+      id="notificationCard"
+      class="settings-card"
+    >
+
+      <span class="settings-small">
+        🔔 NOTIFICĂRI
+      </span>
+
+      <h2>
+        Zilele voastre ❤️
+      </h2>
+
+
+      <p class="settings-card-description">
+        Primește automat la 00:00, ora României, numărul vostru actual de zile împreună. ❤️
+      </p>
+
+
+      <div class="notification-status">
+
+        <div class="notification-status-row">
+
+          <span
+            id="notificationStatusDot"
+            class="notification-status-dot"
+          ></span>
+
+
+          <strong id="notificationStatusTitle">
+            Se verifică...
+          </strong>
+
+        </div>
+
+
+        <p id="notificationStatusText">
+          Verificăm dacă telefonul poate primi notificări.
+        </p>
+
+      </div>
+
+
+      <div class="notification-actions">
+
+        <button
+          id="enableNotificationsButton"
+          class="notification-button primary"
+          type="button"
+        >
+          🔔 Activează notificările
+        </button>
+
+
+        <button
+          id="testNotificationButton"
+          class="notification-button secondary"
+          type="button"
+          disabled
+        >
+          🧪 Test notificare
+        </button>
+
+      </div>
+
+
+      <p
+        id="notificationMessage"
+        class="notification-message"
+      ></p>
+
+
+      <p class="notification-note">
+        Pe iPhone, notificările web funcționează din aplicația instalată pe ecranul principal. Abonarea se salvează în Supabase, iar notificarea automată poate veni chiar dacă aplicația este închisă.
+      </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         CUPLU
+    ====================================================== -->
+
+    <section class="settings-card">
+
+      <span class="settings-small">
+        ❤️ CUPLUL NOSTRU
+      </span>
+
+      <h2>
+        Povestea voastră
+      </h2>
+
+
+      <p class="settings-card-description">
+        Poza aleasă aici se salvează în spațiul vostru comun și poate fi văzută de amândoi. ❤️
+      </p>
+
+
+      <div class="settings-photo">
+
+        <img
+          id="settingsCouplePhoto"
+          src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1000&q=80"
+          alt="Poza noastră"
+        >
+
+
+        <label
+          for="couplePhotoInput"
+          class="settings-photo-button"
+        >
+          📷 Alege poza
+        </label>
+
+
+        <input
+          id="couplePhotoInput"
+          type="file"
+          accept="image/*"
+          hidden
+        >
+
+      </div>
+
+
+      <label
+        class="settings-label"
+        for="firstName"
+      >
+        PRIMUL NUME
+      </label>
+
+      <input
+        id="firstName"
+        class="settings-input"
+        type="text"
+        placeholder="Alex"
+      >
+
+
+      <label
+        class="settings-label"
+        for="secondName"
+      >
+        AL DOILEA NUME
+      </label>
+
+      <input
+        id="secondName"
+        class="settings-input"
+        type="text"
+        placeholder="Bianca"
+      >
+
+
+      <label
+        class="settings-label"
+        for="relationshipStartDate"
+      >
+        DATA ȘI ORA RELAȚIEI
+      </label>
+
+      <input
+        id="relationshipStartDate"
+        class="settings-input"
+        type="datetime-local"
+      >
+
+
+      <label
+        class="settings-label"
+        for="coupleQuote"
+      >
+        CITATUL VOSTRU
+      </label>
+
+      <textarea
+        id="coupleQuote"
+        class="settings-textarea"
+        placeholder="În fiecare zi aleg din nou să te iubesc."
+      ></textarea>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         URSULEȚ AI
+    ====================================================== -->
+
+    <section class="settings-card">
+
+      <span class="settings-small">
+        🧸 URSULEȚ AI
+      </span>
+
+      <h2>
+        Ursulețul vostru
+      </h2>
+
+
+      <p class="settings-card-description">
+        Alege numele ursulețului care apare în dreapta jos pe pagina Acasă. ❤️
+      </p>
+
+
+      <div class="bear-ai-settings-preview">
+
+        <div class="bear-ai-settings-circle">
+
+          <img
+            src="./ursulet.png"
+            alt="Ursuleț AI"
+            draggable="false"
+          >
+
+        </div>
+
+
+        <div class="bear-ai-settings-info">
+
+          <strong id="bearAINamePreview">
+            Teddy
+          </strong>
+
+          <span>
+            Ursulețul vostru AI ❤️
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <label
+        class="settings-label"
+        for="bearAIName"
+      >
+        NUMELE URSULEȚULUI
+      </label>
+
+
+      <input
+        id="bearAIName"
+        class="settings-input"
+        type="text"
+        maxlength="20"
+        placeholder="Teddy"
+        autocomplete="off"
+      >
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <section class="settings-card">
+
+      <span class="settings-small">
+        ✍️ TIPOGRAFIE
+      </span>
+
+      <h2>
+        Stilul textului
+      </h2>
+
+
+      <select
+        id="fontSelect"
+        class="settings-select"
+      >
+
+        <option value="system">
+          Modern
+        </option>
+
+        <option value="serif">
+          Romantic Serif
+        </option>
+
+        <option value="classic">
+          Classic
+        </option>
+
+        <option value="rounded">
+          Refined
+        </option>
+
+        <option value="romantic">
+          Editorial
+        </option>
+
+        <option value="handwritten">
+          Handwritten
+        </option>
+
+      </select>
+
+
+      <div class="font-size-row">
+
+        <span>
+          MĂRIMEA TEXTULUI
+        </span>
+
+        <strong id="fontSizeValue">
+          100%
+        </strong>
+
+      </div>
+
+
+      <input
+        id="fontSizeRange"
+        type="range"
+        min="85"
+        max="130"
+        value="100"
+        step="5"
+      >
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FUNDAL
+    ====================================================== -->
+
+    <section class="settings-card">
+
+      <span class="settings-small">
+        🎨 FUNDAL
+      </span>
+
+      <h2>
+        Fundal aplicație
+      </h2>
+
+
+      <div class="background-grid">
+
+        <button type="button" class="background-option" data-theme="dark">
+          🌑 Dark
+        </button>
+
+        <button type="button" class="background-option" data-theme="aurora">
+          🌌 Aurora
+        </button>
+
+        <button type="button" class="background-option" data-theme="mesh">
+          💜 Mesh
+        </button>
+
+        <button type="button" class="background-option" data-theme="starlight">
+          ✨ Stele
+        </button>
+
+        <button type="button" class="background-option" data-theme="nature">
+          🌿 Natură
+        </button>
+
+        <button type="button" class="background-option" data-theme="moon">
+          🌙 Lună
+        </button>
+
+        <button type="button" class="background-option" data-theme="cozy">
+          🕯 Cozy
+        </button>
+
+        <button type="button" class="background-option" data-theme="pastel">
+          🌸 Pastel
+        </button>
+
+      </div>
+
+
+      <label
+        class="background-upload"
+        for="backgroundImageInput"
+      >
+        🖼 Alege fundal din galerie
+      </label>
+
+
+      <input
+        id="backgroundImageInput"
+        type="file"
+        accept="image/*"
+        hidden
+      >
+
+
+      <button
+        id="removeBackgroundButton"
+        class="remove-background"
+        type="button"
+      >
+        Șterge fundalul personalizat
+      </button>
+
+    </section>
+
+
+
+    <p
+      id="savedMessage"
+      class="saved-message"
+    ></p>
+
+
+    <button
+      id="saveAllSettings"
+      class="save-button"
+      type="button"
+    >
+      ❤️ Salvează setările
+    </button>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+       MENIU
+  ====================================================== -->
+
+  <nav class="bottom-nav">
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="index.html"
+    >
+      <span class="nav-icon">🏠</span>
+      <span>Acasă</span>
+    </button>
+
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="chat.html"
+    >
+      <span class="nav-icon">💬</span>
+      <span>Chat</span>
+    </button>
+
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="amintiri.html"
+    >
+      <span class="nav-icon">📸</span>
+      <span>Amintiri</span>
+    </button>
+
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="evenimente.html"
+    >
+      <span class="nav-icon">📅</span>
+      <span>Evenimente</span>
+    </button>
+
+
+    <button
+      type="button"
+      class="nav-item active"
+      data-page="setari.html"
+    >
+      <span class="nav-icon">⚙️</span>
+      <span>Setări</span>
+    </button>
+
+  </nav>
+
+
+
+  <!-- =====================================================
+       SCRIPTURI
+  ====================================================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./supabase.js?v=31"></script>
+<script src="./security.js?v=32"></script>
+
+  <script src="./cloud-sync.js?v=27"></script>
+
+  <script src="./tema.js?v=27"></script>
+
+
+  <script>
+
+    console.log("❤️ DUO LOVE BUILD v27 - SETARI");
+
+    /* =====================================================
+       ELEMENTE
+    ====================================================== */
+
+    const firstNameInput =
+      document.getElementById(
+        "firstName"
+      );
+
+
+    const secondNameInput =
+      document.getElementById(
+        "secondName"
+      );
+
+
+    const relationshipInput =
+      document.getElementById(
+        "relationshipStartDate"
+      );
+
+
+    const quoteInput =
+      document.getElementById(
+        "coupleQuote"
+      );
+
+
+    const bearAINameInput =
+      document.getElementById(
+        "bearAIName"
+      );
+
+
+    const bearAINamePreview =
+      document.getElementById(
+        "bearAINamePreview"
+      );
+
+
+    const photoInput =
+      document.getElementById(
+        "couplePhotoInput"
+      );
+
+
+    const photoPreview =
+      document.getElementById(
+        "settingsCouplePhoto"
+      );
+
+
+    const fontSelect =
+      document.getElementById(
+        "fontSelect"
+      );
+
+
+    const fontSizeRange =
+      document.getElementById(
+        "fontSizeRange"
+      );
+
+
+    const fontSizeValue =
+      document.getElementById(
+        "fontSizeValue"
+      );
+
+
+    const savedMessage =
+      document.getElementById(
+        "savedMessage"
+      );
+
+
+    const backgroundInput =
+      document.getElementById(
+        "backgroundImageInput"
+      );
+
+
+    const backgroundButtons =
+      document.querySelectorAll(
+        ".background-option"
+      );
+
+
+
+    /* PARTENER */
+
+    const partnerStatusDot =
+      document.getElementById(
+        "partnerStatusDot"
+      );
+
+
+    const partnerStatusTitle =
+      document.getElementById(
+        "partnerStatusTitle"
+      );
+
+
+    const partnerStatusText =
+      document.getElementById(
+        "partnerStatusText"
+      );
+
+
+    const partnerControls =
+      document.getElementById(
+        "partnerControls"
+      );
+
+
+    const createInviteButton =
+      document.getElementById(
+        "createInviteButton"
+      );
+
+
+    const partnerCodeInput =
+      document.getElementById(
+        "partnerCodeInput"
+      );
+
+
+    const joinCoupleButton =
+      document.getElementById(
+        "joinCoupleButton"
+      );
+
+
+    const inviteCodeBox =
+      document.getElementById(
+        "inviteCodeBox"
+      );
+
+
+    const inviteCodeText =
+      document.getElementById(
+        "inviteCodeText"
+      );
+
+
+    const copyInviteCode =
+      document.getElementById(
+        "copyInviteCode"
+      );
+
+
+    const partnerMessage =
+      document.getElementById(
+        "partnerMessage"
+      );
+
+
+
+    /* NOTIFICĂRI */
+
+    const notificationStatusDot =
+      document.getElementById(
+        "notificationStatusDot"
+      );
+
+
+    const notificationStatusTitle =
+      document.getElementById(
+        "notificationStatusTitle"
+      );
+
+
+    const notificationStatusText =
+      document.getElementById(
+        "notificationStatusText"
+      );
+
+
+    const enableNotificationsButton =
+      document.getElementById(
+        "enableNotificationsButton"
+      );
+
+
+    const testNotificationButton =
+      document.getElementById(
+        "testNotificationButton"
+      );
+
+
+    const notificationMessage =
+      document.getElementById(
+        "notificationMessage"
+      );
+
+
+
+
+
+    /* =====================================================
+       SECURITATE - COD DE ACCES 🔐
+    ====================================================== */
+
+    const securityStatusDot =
+      document.getElementById(
+        "securityStatusDot"
+      );
+
+
+    const securityStatusTitle =
+      document.getElementById(
+        "securityStatusTitle"
+      );
+
+
+    const securityStatusText =
+      document.getElementById(
+        "securityStatusText"
+      );
+
+
+    const currentPinWrap =
+      document.getElementById(
+        "currentPinWrap"
+      );
+
+
+    const currentAccessPin =
+      document.getElementById(
+        "currentAccessPin"
+      );
+
+
+    const newAccessPin =
+      document.getElementById(
+        "newAccessPin"
+      );
+
+
+    const confirmAccessPin =
+      document.getElementById(
+        "confirmAccessPin"
+      );
+
+
+    const saveAccessPinButton =
+      document.getElementById(
+        "saveAccessPinButton"
+      );
+
+
+    const disableAccessPinButton =
+      document.getElementById(
+        "disableAccessPinButton"
+      );
+
+
+    const securityMessage =
+      document.getElementById(
+        "securityMessage"
+      );
+
+
+    let accessPinEnabled =
+      false;
+
+
+    function cleanAccessPinInput(
+      input
+    ) {
+
+      input.value =
+        input.value
+          .replace(
+            /\D/g,
+            ""
+          )
+          .slice(
+            0,
+            6
+          );
+
+    }
+
+
+    [
+      currentAccessPin,
+      newAccessPin,
+      confirmAccessPin
+    ]
+      .forEach(
+        function (
+          input
+        ) {
+
+          input.addEventListener(
+            "input",
+            function () {
+
+              cleanAccessPinInput(
+                this
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    let securityMessageTimer =
+      null;
+
+
+    function showSecurityMessage(
+      message
+    ) {
+
+      securityMessage.textContent =
+        message;
+
+
+      clearTimeout(
+        securityMessageTimer
+      );
+
+
+      securityMessageTimer =
+        setTimeout(
+          function () {
+
+            securityMessage.textContent =
+              "";
+
+          },
+          4200
+        );
+
+    }
+
+
+    function renderSecurityStatus(
+      enabled
+    ) {
+
+      accessPinEnabled =
+        enabled === true;
+
+
+      if (
+        accessPinEnabled
+      ) {
+
+        securityStatusDot.className =
+          "security-status-dot active";
+
+
+        securityStatusTitle.textContent =
+          "Cod de acces activ ❤️";
+
+
+        securityStatusText.textContent =
+          "La redeschiderea aplicației trebuie introdus codul personal.";
+
+
+        currentPinWrap.hidden =
+          false;
+
+
+        saveAccessPinButton.textContent =
+          "🔐 Schimbă codul";
+
+
+        disableAccessPinButton.hidden =
+          false;
+
+
+        return;
+
+      }
+
+
+      securityStatusDot.className =
+        "security-status-dot off";
+
+
+      securityStatusTitle.textContent =
+        "Cod de acces neactivat";
+
+
+      securityStatusText.textContent =
+        "Codul de acces este oprit.";
+
+
+      currentPinWrap.hidden =
+        true;
+
+
+      currentAccessPin.value =
+        "";
+
+
+      saveAccessPinButton.textContent =
+        "🔐 Activează codul";
+
+
+      disableAccessPinButton.hidden =
+        true;
+
+    }
+
+
+    async function loadSecuritySettings() {
+
+      if (
+        !window.DuoLoveSecurity ||
+        typeof window.DuoLoveSecurity.hasPin !==
+          "function"
+      ) {
+
+        securityStatusTitle.textContent =
+          "Securitatea nu este disponibilă";
+
+
+        securityStatusText.textContent =
+          "Verifică security.js și rulează SQL-ul pentru codul de acces.";
+
+
+        saveAccessPinButton.disabled =
+          true;
+
+
+        disableAccessPinButton.hidden =
+          true;
+
+
+        return;
+
+      }
+
+
+      saveAccessPinButton.disabled =
+        true;
+
+
+      const enabled =
+        await window
+          .DuoLoveSecurity
+          .hasPin();
+
+
+      saveAccessPinButton.disabled =
+        false;
+
+
+      renderSecurityStatus(
+        enabled
+      );
+
+    }
+
+
+    saveAccessPinButton
+      .addEventListener(
+        "click",
+        async function () {
+
+          const newPin =
+            newAccessPin.value;
+
+
+          const confirmPin =
+            confirmAccessPin.value;
+
+
+          if (
+            !/^\d{4,6}$/.test(
+              newPin
+            )
+          ) {
+
+            showSecurityMessage(
+              "Cod invalid. Verifică cifrele introduse."
+            );
+
+
+            return;
+
+          }
+
+
+          if (
+            newPin !==
+            confirmPin
+          ) {
+
+            showSecurityMessage(
+              "Cele două coduri nu sunt identice."
+            );
+
+
+            return;
+
+          }
+
+
+          if (
+            accessPinEnabled
+          ) {
+
+            const currentPin =
+              currentAccessPin.value;
+
+
+            if (
+              !/^\d{4,6}$/.test(
+                currentPin
+              )
+            ) {
+
+              showSecurityMessage(
+                "Introdu codul actual."
+              );
+
+
+              return;
+
+            }
+
+
+            const verifyResult =
+              await window
+                .DuoLoveSecurity
+                .verifyPin(
+                  currentPin
+                );
+
+
+            if (
+              !verifyResult ||
+              !verifyResult.success ||
+              !verifyResult.correct
+            ) {
+
+              showSecurityMessage(
+                verifyResult &&
+                verifyResult.error
+                  ? verifyResult.error
+                  : "Codul actual este greșit."
+              );
+
+
+              currentAccessPin.value =
+                "";
+
+
+              return;
+
+            }
+
+          }
+
+
+          this.disabled =
+            true;
+
+
+          this.textContent =
+            "⏳ Se salvează...";
+
+
+          const result =
+            await window
+              .DuoLoveSecurity
+              .setPin(
+                newPin
+              );
+
+
+          this.disabled =
+            false;
+
+
+          if (
+            !result ||
+            !result.success
+          ) {
+
+            renderSecurityStatus(
+              accessPinEnabled
+            );
+
+
+            showSecurityMessage(
+              result &&
+              result.error
+                ? result.error
+                : "Codul nu a putut fi salvat."
+            );
+
+
+            return;
+
+          }
+
+
+          currentAccessPin.value =
+            "";
+
+
+          newAccessPin.value =
+            "";
+
+
+          confirmAccessPin.value =
+            "";
+
+
+          renderSecurityStatus(
+            true
+          );
+
+
+          window
+            .DuoLoveSecurity
+            .markUnlocked();
+
+
+          showSecurityMessage(
+            accessPinEnabled
+              ? "Codul de acces a fost schimbat ❤️"
+              : "Codul de acces a fost activat ❤️"
+          );
+
+        }
+      );
+
+
+    disableAccessPinButton
+      .addEventListener(
+        "click",
+        async function () {
+
+          const currentPin =
+            currentAccessPin.value;
+
+
+          if (
+            !/^\d{4,6}$/.test(
+              currentPin
+            )
+          ) {
+
+            showSecurityMessage(
+              "Introdu codul actual pentru dezactivare."
+            );
+
+
+            return;
+
+          }
+
+
+          const verifyResult =
+            await window
+              .DuoLoveSecurity
+              .verifyPin(
+                currentPin
+              );
+
+
+          if (
+            !verifyResult ||
+            !verifyResult.success ||
+            !verifyResult.correct
+          ) {
+
+            showSecurityMessage(
+              verifyResult &&
+              verifyResult.error
+                ? verifyResult.error
+                : "Codul actual este greșit."
+            );
+
+
+            currentAccessPin.value =
+              "";
+
+
+            return;
+
+          }
+
+
+          const confirmed =
+            window.confirm(
+              "Dezactivezi codul de acces pentru acest cont?"
+            );
+
+
+          if (
+            !confirmed
+          ) {
+
+            return;
+
+          }
+
+
+          this.disabled =
+            true;
+
+
+          const result =
+            await window
+              .DuoLoveSecurity
+              .disablePin();
+
+
+          this.disabled =
+            false;
+
+
+          if (
+            !result ||
+            !result.success
+          ) {
+
+            showSecurityMessage(
+              result &&
+              result.error
+                ? result.error
+                : "Codul nu a putut fi dezactivat."
+            );
+
+
+            return;
+
+          }
+
+
+          currentAccessPin.value =
+            "";
+
+
+          newAccessPin.value =
+            "";
+
+
+          confirmAccessPin.value =
+            "";
+
+
+          renderSecurityStatus(
+            false
+          );
+
+
+          showSecurityMessage(
+            "Codul de acces a fost dezactivat."
+          );
+
+        }
+      );
+
+
+
+    /* =====================================================
+       SALVARE LOCAL + CLOUD
+    ====================================================== */
+
+    function saveCloudSetting(
+      key,
+      value
+    ) {
+
+      if (
+        typeof window.saveSetting ===
+        "function"
+      ) {
+
+        window.saveSetting(
+          key,
+          value
+        );
+
+      } else {
+
+        localStorage.setItem(
+          key,
+          String(
+            value
+          )
+        );
+
+      }
+
+    }
+
+
+
+    /* =====================================================
+       ÎNCARCĂ SETĂRILE
+    ====================================================== */
+
+    function loadSettings() {
+
+      firstNameInput.value =
+        localStorage.getItem(
+          "firstName"
+        ) ||
+        "Alex";
+
+
+      secondNameInput.value =
+        localStorage.getItem(
+          "secondName"
+        ) ||
+        "Bianca";
+
+
+      relationshipInput.value =
+        localStorage.getItem(
+          "relationshipStartDate"
+        ) ||
+        "";
+
+
+      quoteInput.value =
+        localStorage.getItem(
+          "coupleQuote"
+        ) ||
+        "În fiecare zi aleg din nou să te iubesc.";
+
+
+      const savedBearAIName =
+        localStorage.getItem(
+          "bearAIName"
+        ) ||
+        "Teddy";
+
+
+      bearAINameInput.value =
+        savedBearAIName;
+
+
+      bearAINamePreview.textContent =
+        savedBearAIName;
+
+
+      fontSelect.value =
+        localStorage.getItem(
+          "appFont"
+        ) ||
+        "system";
+
+
+      fontSizeRange.value =
+        localStorage.getItem(
+          "appFontSize"
+        ) ||
+        "100";
+
+
+      fontSizeValue.textContent =
+        fontSizeRange.value +
+        "%";
+
+
+      const savedPhoto =
+        localStorage.getItem(
+          "couplePhoto"
+        );
+
+
+      if (
+        savedPhoto
+      ) {
+
+        photoPreview.src =
+          savedPhoto;
+
+      }
+
+
+      updateSelectedBackground();
+
+    }
+
+
+
+    /* =====================================================
+       PARTENER - MESAJ
+    ====================================================== */
+
+    let partnerMessageTimer =
+      null;
+
+
+    function showPartnerMessage(
+      message
+    ) {
+
+      partnerMessage.textContent =
+        message;
+
+
+      clearTimeout(
+        partnerMessageTimer
+      );
+
+
+      partnerMessageTimer =
+        setTimeout(
+          function () {
+
+            partnerMessage.textContent =
+              "";
+
+          },
+          3500
+        );
+
+    }
+
+
+
+    /* =====================================================
+       PARTENER - STARE BUTOANE
+    ====================================================== */
+
+    function setPartnerBusy(
+      busy
+    ) {
+
+      createInviteButton.disabled =
+        busy;
+
+
+      joinCoupleButton.disabled =
+        busy;
+
+
+      partnerCodeInput.disabled =
+        busy;
+
+
+      copyInviteCode.disabled =
+        busy;
+
+    }
+
+
+
+    /* =====================================================
+       PARTENER - AFIȘARE STARE
+    ====================================================== */
+
+    function showNoPartnerConnection() {
+
+      partnerStatusDot.className =
+        "partner-status-dot";
+
+
+      partnerStatusTitle.textContent =
+        "Încă nu sunteți conectați";
+
+
+      partnerStatusText.textContent =
+        "Generează un cod sau introdu codul primit de la partener.";
+
+
+      partnerControls.hidden =
+        false;
+
+
+      inviteCodeBox.hidden =
+        true;
+
+    }
+
+
+
+    function showWaitingPartner(
+      code
+    ) {
+
+      partnerStatusDot.className =
+        "partner-status-dot waiting";
+
+
+      partnerStatusTitle.textContent =
+        "Așteptăm partenerul 💌";
+
+
+      partnerStatusText.textContent =
+        "Spațiul vostru comun este creat. Trimite codul partenerei.";
+
+
+      partnerControls.hidden =
+        true;
+
+
+      inviteCodeBox.hidden =
+        false;
+
+
+      inviteCodeText.textContent =
+        code ||
+        "--------";
+
+    }
+
+
+
+    function showConnectedPartner(
+      partnerEmail = ""
+    ) {
+
+      partnerStatusDot.className =
+        "partner-status-dot connected";
+
+
+      partnerStatusTitle.textContent =
+        partnerEmail ||
+        "Partener conectat ❤️";
+
+
+      partnerStatusText.textContent =
+        partnerEmail
+          ? "Partener conectat ❤️ Datele voastre sunt salvate în același spațiu de cuplu."
+          : "Sunteți conectați. Modificările voastre sunt salvate în același spațiu de cuplu.";
+
+
+      partnerControls.hidden =
+        true;
+
+
+      inviteCodeBox.hidden =
+        true;
+
+    }
+
+
+
+    /* =====================================================
+       VERIFICĂ LEGĂTURA CU PARTENERUL
+    ====================================================== */
+
+    async function loadPartnerConnection() {
+
+      if (
+        typeof window.getCoupleInfo !==
+        "function"
+      ) {
+
+        partnerStatusTitle.textContent =
+          "Sincronizarea nu este disponibilă";
+
+
+        partnerStatusText.textContent =
+          "Verifică dacă ai pus noul cloud-sync.js.";
+
+
+        return;
+
+      }
+
+
+      const info =
+        await window
+          .getCoupleInfo();
+
+
+      if (
+        !info ||
+        !info.connected
+      ) {
+
+        showNoPartnerConnection();
+
+        return;
+
+      }
+
+
+      if (
+        info.partnerConnected
+      ) {
+
+        showConnectedPartner(
+          info.partnerEmail ||
+          ""
+        );
+
+        return;
+
+      }
+
+
+      showWaitingPartner(
+        info.inviteCode
+      );
+
+    }
+
+
+
+    /* =====================================================
+       GENEREAZĂ COD
+    ====================================================== */
+
+    createInviteButton
+      .addEventListener(
+        "click",
+        async function () {
+
+          if (
+            typeof window.createCoupleInvite !==
+            "function"
+          ) {
+
+            showPartnerMessage(
+              "Funcția de invitație nu este disponibilă."
+            );
+
+
+            return;
+
+          }
+
+
+          setPartnerBusy(
+            true
+          );
+
+
+          showPartnerMessage(
+            "Se generează codul... ❤️"
+          );
+
+
+          const result =
+            await window
+              .createCoupleInvite();
+
+
+          setPartnerBusy(
+            false
+          );
+
+
+          if (
+            !result ||
+            !result.success
+          ) {
+
+            showPartnerMessage(
+              result &&
+              result.error
+                ? result.error
+                : "Nu s-a putut genera codul."
+            );
+
+
+            return;
+
+          }
+
+
+          showWaitingPartner(
+            result.inviteCode
+          );
+
+
+          if (
+            typeof window.addCoupleActivity ===
+            "function"
+          ) {
+
+            await window
+              .addCoupleActivity(
+                "couple_created",
+                {
+                  text:
+                    "Spațiul comun al cuplului a fost creat."
+                }
+              );
+
+          }
+
+
+          showPartnerMessage(
+            "Codul de invitație este gata ❤️"
+          );
+
+        }
+      );
+
+
+
+    /* =====================================================
+       INTRODUCE CODUL PARTENERULUI
+    ====================================================== */
+
+    partnerCodeInput
+      .addEventListener(
+        "input",
+        function () {
+
+          this.value =
+            this.value
+              .toUpperCase()
+              .replace(
+                /[^A-Z0-9]/g,
+                ""
+              )
+              .slice(
+                0,
+                8
+              );
+
+        }
+      );
+
+
+
+    async function joinPartnerCouple() {
+
+      const code =
+        partnerCodeInput.value
+          .trim()
+          .toUpperCase();
+
+
+      if (
+        !code
+      ) {
+
+        showPartnerMessage(
+          "Introdu codul primit de la partener."
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        typeof window.joinCoupleByCode !==
+        "function"
+      ) {
+
+        showPartnerMessage(
+          "Funcția de conectare nu este disponibilă."
+        );
+
+
+        return;
+
+      }
+
+
+      setPartnerBusy(
+        true
+      );
+
+
+      showPartnerMessage(
+        "Se conectează conturile... ❤️"
+      );
+
+
+      const result =
+        await window
+          .joinCoupleByCode(
+            code
+          );
+
+
+      if (
+        !result ||
+        !result.success
+      ) {
+
+        setPartnerBusy(
+          false
+        );
+
+
+        showPartnerMessage(
+          result &&
+          result.error
+            ? result.error
+            : "Codul nu a putut fi folosit."
+        );
+
+
+        return;
+
+      }
+
+
+      /*
+        După conectare, datele comune
+        au fost deja descărcate de
+        cloud-sync.js.
+      */
+
+      loadSettings();
+
+
+      if (
+        typeof window.applyGlobalBackground ===
+        "function"
+      ) {
+
+        window.applyGlobalBackground();
+
+      }
+
+
+      if (
+        typeof window.applyGlobalFont ===
+        "function"
+      ) {
+
+        window.applyGlobalFont();
+
+      }
+
+
+      if (
+        typeof window.addCoupleActivity ===
+        "function"
+      ) {
+
+        await window
+          .addCoupleActivity(
+            "partner_joined",
+            {
+              text:
+                "Partenerul s-a conectat la aplicație."
+            }
+          );
+
+      }
+
+
+      partnerCodeInput.value =
+        "";
+
+
+      await loadPartnerConnection();
+
+
+      setPartnerBusy(
+        false
+      );
+
+
+      showPartnerMessage(
+        "❤️ Conturile voastre au fost conectate!"
+      );
+
+    }
+
+
+
+    joinCoupleButton
+      .addEventListener(
+        "click",
+        joinPartnerCouple
+      );
+
+
+    partnerCodeInput
+      .addEventListener(
+        "keydown",
+        function (
+          event
+        ) {
+
+          if (
+            event.key ===
+            "Enter"
+          ) {
+
+            event.preventDefault();
+
+
+            joinPartnerCouple();
+
+          }
+
+        }
+      );
+
+
+
+    /* =====================================================
+       COPIAZĂ CODUL
+    ====================================================== */
+
+    copyInviteCode
+      .addEventListener(
+        "click",
+        async function () {
+
+          const code =
+            inviteCodeText
+              .textContent
+              .trim();
+
+
+          if (
+            !code ||
+            code ===
+            "--------"
+          ) {
+
+            return;
+
+          }
+
+
+          let copied =
+            false;
+
+
+          try {
+
+            if (
+              navigator.clipboard &&
+              typeof navigator.clipboard.writeText ===
+              "function"
+            ) {
+
+              await navigator
+                .clipboard
+                .writeText(
+                  code
+                );
+
+
+              copied =
+                true;
+
+            }
+
+          } catch (error) {
+
+            copied =
+              false;
+
+          }
+
+
+          /*
+            Fallback pentru unele versiuni iOS.
+          */
+
+          if (
+            !copied
+          ) {
+
+            const area =
+              document.createElement(
+                "textarea"
+              );
+
+
+            area.value =
+              code;
+
+
+            area.style.position =
+              "fixed";
+
+
+            area.style.opacity =
+              "0";
+
+
+            document.body.appendChild(
+              area
+            );
+
+
+            area.focus();
+
+            area.select();
+
+
+            try {
+
+              copied =
+                document.execCommand(
+                  "copy"
+                );
+
+            } catch (error) {
+
+              copied =
+                false;
+
+            }
+
+
+            area.remove();
+
+          }
+
+
+          showPartnerMessage(
+            copied
+              ? "Cod copiat ❤️"
+              : "Codul este: " +
+                code
+          );
+
+        }
+      );
+
+
+
+
+    /* =====================================================
+       NOTIFICĂRI - WEB PUSH REAL 🔔
+       Controlul notificărilor este acum doar în Setări.
+    ====================================================== */
+
+    const VAPID_PUBLIC_KEY =
+      "BDQssT-KT3UCg28cUIUwzzgDLM2hhF7yRzVNCZPz0-RhO_Sjgsfzj2NkiQID3YWFZMwGH8_YNIhPk6Mx40ldx98";
+
+
+    let notificationRegistration =
+      null;
+
+
+    let notificationMessageTimer =
+      null;
+
+
+
+    function showNotificationMessage(
+      message
+    ) {
+
+      notificationMessage.textContent =
+        message;
+
+
+      clearTimeout(
+        notificationMessageTimer
+      );
+
+
+      notificationMessageTimer =
+        setTimeout(
+          function () {
+
+            notificationMessage.textContent =
+              "";
+
+          },
+          3500
+        );
+
+    }
+
+
+
+    function isIOSDevice() {
+
+      return /iphone|ipad|ipod/i.test(
+        navigator.userAgent
+      );
+
+    }
+
+
+
+    function isStandaloneApp() {
+
+      return (
+        window.matchMedia &&
+        window.matchMedia(
+          "(display-mode: standalone)"
+        ).matches
+      ) ||
+      window.navigator.standalone ===
+        true;
+
+    }
+
+
+
+    function urlBase64ToUint8Array(
+      base64String
+    ) {
+
+      const padding =
+        "=".repeat(
+          (
+            4 -
+            base64String.length % 4
+          ) % 4
+        );
+
+
+      const base64 =
+        (
+          base64String +
+          padding
+        )
+          .replace(
+            /-/g,
+            "+"
+          )
+          .replace(
+            /_/g,
+            "/"
+          );
+
+
+      const rawData =
+        window.atob(
+          base64
+        );
+
+
+      const outputArray =
+        new Uint8Array(
+          rawData.length
+        );
+
+
+      for (
+        let i = 0;
+        i < rawData.length;
+        i++
+      ) {
+
+        outputArray[i] =
+          rawData.charCodeAt(
+            i
+          );
+
+      }
+
+
+      return outputArray;
+
+    }
+
+
+
+    async function savePushSubscriptionToSupabase(
+      subscription
+    ) {
+
+      if (
+        !subscription ||
+        typeof supabaseClient ===
+          "undefined"
+      ) {
+
+        return {
+          success:
+            false,
+
+          error:
+            "Supabase sau abonamentul push lipsește."
+        };
+
+      }
+
+
+      const {
+        data:
+          sessionData,
+
+        error:
+          sessionError
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      if (
+        sessionError ||
+        !sessionData ||
+        !sessionData.session
+      ) {
+
+        return {
+          success:
+            false,
+
+          error:
+            "Nu există utilizator conectat."
+        };
+
+      }
+
+
+      const user =
+        sessionData.session.user;
+
+
+      const json =
+        subscription.toJSON();
+
+
+      const p256dh =
+        json.keys &&
+        json.keys.p256dh
+          ? json.keys.p256dh
+          : "";
+
+
+      const auth =
+        json.keys &&
+        json.keys.auth
+          ? json.keys.auth
+          : "";
+
+
+      if (
+        !json.endpoint ||
+        !p256dh ||
+        !auth
+      ) {
+
+        return {
+          success:
+            false,
+
+          error:
+            "Abonamentul push nu conține toate cheile necesare."
+        };
+
+      }
+
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from(
+            "push_subscriptions"
+          )
+          .upsert(
+            {
+              user_id:
+                user.id,
+
+              endpoint:
+                json.endpoint,
+
+              p256dh:
+                p256dh,
+
+              auth:
+                auth,
+
+              updated_at:
+                new Date()
+                  .toISOString()
+            },
+            {
+              onConflict:
+                "endpoint"
+            }
+          );
+
+
+      if (
+        error
+      ) {
+
+        console.error(
+          "Eroare salvare push subscription:",
+          error
+        );
+
+
+        return {
+          success:
+            false,
+
+          error:
+            error.message ||
+            "Abonamentul nu a putut fi salvat."
+        };
+
+      }
+
+
+      return {
+        success:
+          true
+      };
+
+    }
+
+
+
+    async function getCurrentPushSubscription() {
+
+      if (
+        !(
+          "serviceWorker" in
+          navigator
+        ) ||
+        !(
+          "PushManager" in
+          window
+        )
+      ) {
+
+        return null;
+
+      }
+
+
+      try {
+
+        const registration =
+          notificationRegistration ||
+          await navigator
+            .serviceWorker
+            .ready;
+
+
+        return await registration
+          .pushManager
+          .getSubscription();
+
+      } catch (error) {
+
+        console.warn(
+          "Nu am putut verifica abonamentul push:",
+          error
+        );
+
+
+        return null;
+
+      }
+
+    }
+
+
+
+    async function updateNotificationStatus() {
+
+      const supportsNotifications =
+        "Notification" in window;
+
+
+      const supportsServiceWorker =
+        "serviceWorker" in navigator;
+
+
+      const supportsPush =
+        "PushManager" in window;
+
+
+      if (
+        !supportsNotifications ||
+        !supportsServiceWorker ||
+        !supportsPush
+      ) {
+
+        notificationStatusDot.className =
+          "notification-status-dot blocked";
+
+
+        notificationStatusTitle.textContent =
+          "Notificări indisponibile";
+
+
+        notificationStatusText.textContent =
+          "Acest dispozitiv nu oferă Web Push pentru aplicație.";
+
+
+        enableNotificationsButton.disabled =
+          true;
+
+
+        testNotificationButton.disabled =
+          true;
+
+
+        return;
+
+      }
+
+
+      if (
+        isIOSDevice() &&
+        !isStandaloneApp()
+      ) {
+
+        notificationStatusDot.className =
+          "notification-status-dot waiting";
+
+
+        notificationStatusTitle.textContent =
+          "Deschide aplicația instalată";
+
+
+        notificationStatusText.textContent =
+          "Pe iPhone, deschide Povestea Noastră de pe ecranul principal pentru a activa notificările.";
+
+
+        enableNotificationsButton.disabled =
+          true;
+
+
+        testNotificationButton.disabled =
+          true;
+
+
+        return;
+
+      }
+
+
+      const permission =
+        Notification.permission;
+
+
+      if (
+        permission ===
+        "denied"
+      ) {
+
+        notificationStatusDot.className =
+          "notification-status-dot blocked";
+
+
+        notificationStatusTitle.textContent =
+          "Notificări blocate";
+
+
+        notificationStatusText.textContent =
+          "Permisiunea este blocată. Activeaz-o din setările iPhone pentru această aplicație.";
+
+
+        enableNotificationsButton.textContent =
+          "🔕 Notificări blocate";
+
+
+        enableNotificationsButton.disabled =
+          true;
+
+
+        testNotificationButton.disabled =
+          true;
+
+
+        localStorage.removeItem(
+          "relationshipNotificationsEnabled"
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        permission !==
+        "granted"
+      ) {
+
+        notificationStatusDot.className =
+          "notification-status-dot waiting";
+
+
+        notificationStatusTitle.textContent =
+          "Notificări neactivate";
+
+
+        notificationStatusText.textContent =
+          "Apasă pe Activează notificările și acceptă permisiunea.";
+
+
+        enableNotificationsButton.textContent =
+          "🔔 Activează notificările";
+
+
+        enableNotificationsButton.disabled =
+          false;
+
+
+        testNotificationButton.disabled =
+          true;
+
+
+        localStorage.removeItem(
+          "relationshipNotificationsEnabled"
+        );
+
+
+        return;
+
+      }
+
+
+      const subscription =
+        await getCurrentPushSubscription();
+
+
+      if (
+        subscription
+      ) {
+
+        notificationStatusDot.className =
+          "notification-status-dot active";
+
+
+        notificationStatusTitle.textContent =
+          "Notificări active ❤️";
+
+
+        notificationStatusText.textContent =
+          "Telefonul este abonat și poate primi notificarea automată de la 00:00.";
+
+
+        enableNotificationsButton.textContent =
+          "✅ Notificări activate";
+
+
+        enableNotificationsButton.disabled =
+          true;
+
+
+        testNotificationButton.disabled =
+          false;
+
+
+        localStorage.setItem(
+          "relationshipNotificationsEnabled",
+          "true"
+        );
+
+
+        return;
+
+      }
+
+
+      notificationStatusDot.className =
+        "notification-status-dot waiting";
+
+
+      notificationStatusTitle.textContent =
+        "Permisiune acordată";
+
+
+      notificationStatusText.textContent =
+        "Mai trebuie conectat acest telefon la notificările automate.";
+
+
+      enableNotificationsButton.textContent =
+        "🔔 Conectează notificările";
+
+
+      enableNotificationsButton.disabled =
+        false;
+
+
+      testNotificationButton.disabled =
+        true;
+
+
+      localStorage.removeItem(
+        "relationshipNotificationsEnabled"
+      );
+
+    }
+
+
+
+    async function registerNotificationServiceWorker() {
+
+      if (
+        !(
+          "serviceWorker" in
+          navigator
+        )
+      ) {
+
+        await updateNotificationStatus();
+
+        return null;
+
+      }
+
+
+      try {
+
+        notificationRegistration =
+          await navigator
+            .serviceWorker
+            .register(
+              "./service-worker.js",
+              {
+                scope:
+                  "./"
+              }
+            );
+
+
+        await notificationRegistration
+          .update()
+          .catch(
+            function () {
+            }
+          );
+
+
+        notificationRegistration =
+          await navigator
+            .serviceWorker
+            .ready;
+
+
+        await updateNotificationStatus();
+
+
+        return notificationRegistration;
+
+      } catch (error) {
+
+        console.error(
+          "Eroare Service Worker:",
+          error
+        );
+
+
+        notificationStatusDot.className =
+          "notification-status-dot blocked";
+
+
+        notificationStatusTitle.textContent =
+          "Service Worker indisponibil";
+
+
+        notificationStatusText.textContent =
+          "Verifică dacă service-worker.js există lângă index.html.";
+
+
+        enableNotificationsButton.disabled =
+          true;
+
+
+        testNotificationButton.disabled =
+          true;
+
+
+        return null;
+
+      }
+
+    }
+
+
+
+    async function subscribeToRelationshipPush() {
+
+      if (
+        !(
+          "serviceWorker" in
+          navigator
+        ) ||
+        !(
+          "PushManager" in
+          window
+        )
+      ) {
+
+        return {
+          success:
+            false,
+
+          error:
+            "Web Push nu este disponibil."
+        };
+
+      }
+
+
+      const registration =
+        notificationRegistration ||
+        await navigator
+          .serviceWorker
+          .ready;
+
+
+      let subscription =
+        await registration
+          .pushManager
+          .getSubscription();
+
+
+      if (
+        !subscription
+      ) {
+
+        subscription =
+          await registration
+            .pushManager
+            .subscribe(
+              {
+                userVisibleOnly:
+                  true,
+
+                applicationServerKey:
+                  urlBase64ToUint8Array(
+                    VAPID_PUBLIC_KEY
+                  )
+              }
+            );
+
+      }
+
+
+      return await savePushSubscriptionToSupabase(
+        subscription
+      );
+
+    }
+
+
+
+    async function enableRelationshipNotifications() {
+
+      if (
+        !(
+          "Notification" in
+          window
+        ) ||
+        !(
+          "serviceWorker" in
+          navigator
+        ) ||
+        !(
+          "PushManager" in
+          window
+        )
+      ) {
+
+        showNotificationMessage(
+          "Notificările nu sunt disponibile pe acest dispozitiv."
+        );
+
+
+        await updateNotificationStatus();
+
+
+        return;
+
+      }
+
+
+      if (
+        isIOSDevice() &&
+        !isStandaloneApp()
+      ) {
+
+        showNotificationMessage(
+          "Pe iPhone, deschide aplicația instalată pe ecranul principal."
+        );
+
+
+        return;
+
+      }
+
+
+      enableNotificationsButton.disabled =
+        true;
+
+
+      enableNotificationsButton.textContent =
+        "⏳ Activez notificările...";
+
+
+      showNotificationMessage(
+        "Se conectează telefonul... 🔔"
+      );
+
+
+      try {
+
+        if (
+          !notificationRegistration
+        ) {
+
+          notificationRegistration =
+            await registerNotificationServiceWorker();
+
+        }
+
+
+        if (
+          !notificationRegistration
+        ) {
+
+          return;
+
+        }
+
+
+        let permission =
+          Notification.permission;
+
+
+        if (
+          permission !==
+          "granted"
+        ) {
+
+          permission =
+            await Notification
+              .requestPermission();
+
+        }
+
+
+        if (
+          permission !==
+          "granted"
+        ) {
+
+          await updateNotificationStatus();
+
+
+          showNotificationMessage(
+            permission ===
+              "denied"
+              ? "Notificările au fost blocate."
+              : "Permisiunea nu a fost acordată."
+          );
+
+
+          return;
+
+        }
+
+
+        const result =
+          await subscribeToRelationshipPush();
+
+
+        if (
+          !result ||
+          !result.success
+        ) {
+
+          throw new Error(
+            result &&
+            result.error
+              ? result.error
+              : "Telefonul nu a putut fi abonat."
+          );
+
+        }
+
+
+        localStorage.setItem(
+          "relationshipNotificationsEnabled",
+          "true"
+        );
+
+
+        await updateNotificationStatus();
+
+
+        showNotificationMessage(
+          "Notificările automate de la 00:00 sunt active ❤️"
+        );
+
+
+        const registration =
+          notificationRegistration ||
+          await navigator
+            .serviceWorker
+            .ready;
+
+
+        await registration
+          .showNotification(
+            "❤️ Notificări activate",
+            {
+              body:
+                "Telefonul este abonat la notificările Povestea Noastră.",
+
+              icon:
+                "./icon-192.png",
+
+              badge:
+                "./icon-192.png",
+
+              tag:
+                "relationship-notifications-enabled",
+
+              data: {
+                url:
+                  "./setari.html"
+              }
+            }
+          );
+
+      } catch (error) {
+
+        console.error(
+          "Eroare activare notificări:",
+          error
+        );
+
+
+        showNotificationMessage(
+          error &&
+          error.message
+            ? error.message
+            : "Notificările nu au putut fi activate."
+        );
+
+
+        await updateNotificationStatus();
+
+      }
+
+    }
+
+
+
+    function getRelationshipDaysForNotification() {
+
+      const saved =
+        localStorage.getItem(
+          "relationshipStartDate"
+        ) ||
+        "2026-03-10";
+
+
+      const match =
+        String(
+          saved
+        ).match(
+          /(\d{4})-(\d{2})-(\d{2})/
+        );
+
+
+      if (
+        !match
+      ) {
+
+        return null;
+
+      }
+
+
+      const formatter =
+        new Intl.DateTimeFormat(
+          "en-CA",
+          {
+            timeZone:
+              "Europe/Bucharest",
+
+            year:
+              "numeric",
+
+            month:
+              "2-digit",
+
+            day:
+              "2-digit"
+          }
+        );
+
+
+      const parts =
+        {};
+
+
+      formatter
+        .formatToParts(
+          new Date()
+        )
+        .forEach(
+          function (
+            part
+          ) {
+
+            if (
+              part.type !==
+              "literal"
+            ) {
+
+              parts[
+                part.type
+              ] =
+                Number(
+                  part.value
+                );
+
+            }
+
+          }
+        );
+
+
+      const start =
+        Date.UTC(
+          Number(
+            match[1]
+          ),
+          Number(
+            match[2]
+          ) - 1,
+          Number(
+            match[3]
+          )
+        );
+
+
+      const today =
+        Date.UTC(
+          parts.year,
+          parts.month - 1,
+          parts.day
+        );
+
+
+      return Math.max(
+        0,
+        Math.floor(
+          (
+            today -
+            start
+          ) /
+          86400000
+        )
+      );
+
+    }
+
+
+
+    async function sendTestRelationshipNotification() {
+
+      if (
+        !(
+          "Notification" in
+          window
+        ) ||
+        Notification.permission !==
+          "granted"
+      ) {
+
+        showNotificationMessage(
+          "Activează mai întâi notificările."
+        );
+
+
+        await updateNotificationStatus();
+
+
+        return;
+
+      }
+
+
+      const subscription =
+        await getCurrentPushSubscription();
+
+
+      if (
+        !subscription
+      ) {
+
+        showNotificationMessage(
+          "Conectează mai întâi telefonul la notificările automate."
+        );
+
+
+        await updateNotificationStatus();
+
+
+        return;
+
+      }
+
+
+      try {
+
+        const registration =
+          notificationRegistration ||
+          await navigator
+            .serviceWorker
+            .ready;
+
+
+        const days =
+          getRelationshipDaysForNotification();
+
+
+        const body =
+          days ===
+          null
+            ? "Notificările funcționează! 🥰"
+            : "Astăzi aveți " +
+              days +
+              " zile împreună. 🥰";
+
+
+        await registration
+          .showNotification(
+            "🧪 Test notificare ❤️",
+            {
+              body:
+                body,
+
+              icon:
+                "./icon-192.png",
+
+              badge:
+                "./icon-192.png",
+
+              tag:
+                "relationship-settings-test",
+
+              data: {
+                url:
+                  "./setari.html"
+              }
+            }
+          );
+
+
+        showNotificationMessage(
+          "Notificarea de test a fost trimisă ❤️"
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Eroare test notificare:",
+          error
+        );
+
+
+        showNotificationMessage(
+          "Testul nu a putut fi trimis."
+        );
+
+      }
+
+    }
+
+
+
+    enableNotificationsButton
+      .addEventListener(
+        "click",
+        enableRelationshipNotifications
+      );
+
+
+    testNotificationButton
+      .addEventListener(
+        "click",
+        sendTestRelationshipNotification
+      );
+
+
+
+    /* =====================================================
+       DATA RELAȚIEI
+    ====================================================== */
+
+    function saveRelationshipDate() {
+
+      const value =
+        relationshipInput.value;
+
+
+      saveCloudSetting(
+        "relationshipStartDate",
+        value
+      );
+
+
+      showSaved(
+        "Data și ora au fost salvate ❤️"
+      );
+
+    }
+
+
+    relationshipInput.addEventListener(
+      "change",
+      saveRelationshipDate
+    );
+
+
+    relationshipInput.addEventListener(
+      "input",
+      saveRelationshipDate
+    );
+
+
+
+    /* =====================================================
+       NUMELE CUPLULUI
+    ====================================================== */
+
+    firstNameInput.addEventListener(
+      "input",
+      function () {
+
+        saveCloudSetting(
+          "firstName",
+          this.value.trim()
+        );
+
+      }
+    );
+
+
+    secondNameInput.addEventListener(
+      "input",
+      function () {
+
+        saveCloudSetting(
+          "secondName",
+          this.value.trim()
+        );
+
+      }
+    );
+
+
+
+    /* =====================================================
+       CITAT
+    ====================================================== */
+
+    quoteInput.addEventListener(
+      "input",
+      function () {
+
+        saveCloudSetting(
+          "coupleQuote",
+          this.value
+        );
+
+      }
+    );
+
+
+
+    /* =====================================================
+       NUMELE URSULEȚULUI AI
+    ====================================================== */
+
+    bearAINameInput.addEventListener(
+      "input",
+      function () {
+
+        const name =
+          this.value
+            .trim();
+
+
+        bearAINamePreview.textContent =
+          name ||
+          "Teddy";
+
+
+        saveCloudSetting(
+          "bearAIName",
+          name
+        );
+
+      }
+    );
+
+
+    bearAINameInput.addEventListener(
+      "change",
+      function () {
+
+        let name =
+          this.value
+            .trim();
+
+
+        if (
+          !name
+        ) {
+
+          name =
+            "Teddy";
+
+
+          this.value =
+            name;
+
+
+          bearAINamePreview.textContent =
+            name;
+
+        }
+
+
+        saveCloudSetting(
+          "bearAIName",
+          name
+        );
+
+
+        showSaved(
+          "Numele ursulețului a fost salvat ❤️"
+        );
+
+      }
+    );
+
+
+
+    /* =====================================================
+       POZA CUPLULUI - SUPABASE STORAGE
+       COMUNĂ PENTRU AMÂNDOI
+    ====================================================== */
+
+    let couplePhotoUploading =
+      false;
+
+
+    photoInput.addEventListener(
+      "change",
+      async function () {
+
+        const file =
+          this.files &&
+          this.files[0];
+
+
+        this.value =
+          "";
+
+
+        if (
+          !file ||
+          couplePhotoUploading
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          !file.type ||
+          !file.type.startsWith(
+            "image/"
+          )
+        ) {
+
+          alert(
+            "Alege o imagine din galerie."
+          );
+
+
+          return;
+
+        }
+
+
+        if (
+          typeof window.uploadCouplePhotoBlob !==
+          "function"
+        ) {
+
+          alert(
+            "Actualizează cloud-sync.js înainte să schimbi poza."
+          );
+
+
+          return;
+
+        }
+
+
+        couplePhotoUploading =
+          true;
+
+
+        const photoButton =
+          document.querySelector(
+            '.settings-photo-button[for="couplePhotoInput"]'
+          );
+
+
+        const oldButtonText =
+          photoButton
+            ? photoButton.textContent
+            : "";
+
+
+        if (
+          photoButton
+        ) {
+
+          photoButton.textContent =
+            "⏳ Se salvează...";
+
+
+          photoButton.style.pointerEvents =
+            "none";
+
+        }
+
+
+        showSaved(
+          "Se încarcă poza pentru amândoi... ❤️"
+        );
+
+
+        try {
+
+          const compressedBlob =
+            await compressCouplePhoto(
+              file
+            );
+
+
+          if (
+            !compressedBlob
+          ) {
+
+            throw new Error(
+              "Imaginea nu a putut fi procesată."
+            );
+
+          }
+
+
+          const result =
+            await window
+              .uploadCouplePhotoBlob(
+                compressedBlob
+              );
+
+
+          if (
+            !result ||
+            !result.success
+          ) {
+
+            throw new Error(
+              result &&
+              result.error
+                ? result.error
+                : "Poza nu s-a putut salva."
+            );
+
+          }
+
+
+          if (
+            result.url
+          ) {
+
+            photoPreview.src =
+              result.url;
+
+          } else {
+
+            const savedPhoto =
+              localStorage.getItem(
+                "couplePhoto"
+              );
+
+
+            if (
+              savedPhoto
+            ) {
+
+              photoPreview.src =
+                savedPhoto;
+
+            }
+
+          }
+
+
+          showSaved(
+            "Poza a fost salvată pentru amândoi ❤️"
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Eroare salvare poză cuplu:",
+            error
+          );
+
+
+          alert(
+            error &&
+            error.message
+              ? error.message
+              : "Poza nu s-a putut salva."
+          );
+
+        } finally {
+
+          couplePhotoUploading =
+            false;
+
+
+          if (
+            photoButton
+          ) {
+
+            photoButton.textContent =
+              oldButtonText ||
+              "📷 Alege poza";
+
+
+            photoButton.style.pointerEvents =
+              "";
+
+          }
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       COMPRIMĂ POZA ÎNAINTE DE STORAGE
+    ====================================================== */
+
+    function compressCouplePhoto(
+      file
+    ) {
+
+      return new Promise(
+        function (
+          resolve,
+          reject
+        ) {
+
+          const reader =
+            new FileReader();
+
+
+          reader.onerror =
+            function () {
+
+              reject(
+                new Error(
+                  "Imaginea nu a putut fi citită."
+                )
+              );
+
+            };
+
+
+          reader.onload =
+            function (
+              event
+            ) {
+
+              const image =
+                new Image();
+
+
+              image.onerror =
+                function () {
+
+                  reject(
+                    new Error(
+                      "Imaginea nu este validă."
+                    )
+                  );
+
+                };
+
+
+              image.onload =
+                function () {
+
+                  const maxSize =
+                    1400;
+
+
+                  const scale =
+                    Math.min(
+                      1,
+                      maxSize /
+                      Math.max(
+                        image.width,
+                        image.height
+                      )
+                    );
+
+
+                  const canvas =
+                    document.createElement(
+                      "canvas"
+                    );
+
+
+                  canvas.width =
+                    Math.max(
+                      1,
+                      Math.round(
+                        image.width *
+                        scale
+                      )
+                    );
+
+
+                  canvas.height =
+                    Math.max(
+                      1,
+                      Math.round(
+                        image.height *
+                        scale
+                      )
+                    );
+
+
+                  const context =
+                    canvas.getContext(
+                      "2d"
+                    );
+
+
+                  if (
+                    !context
+                  ) {
+
+                    reject(
+                      new Error(
+                        "Imaginea nu a putut fi procesată."
+                      )
+                    );
+
+
+                    return;
+
+                  }
+
+
+                  context.drawImage(
+                    image,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                  );
+
+
+                  canvas.toBlob(
+                    function (
+                      blob
+                    ) {
+
+                      if (
+                        !blob
+                      ) {
+
+                        reject(
+                          new Error(
+                            "Imaginea nu a putut fi comprimată."
+                          )
+                        );
+
+
+                        return;
+
+                      }
+
+
+                      resolve(
+                        blob
+                      );
+
+                    },
+                    "image/jpeg",
+                    0.80
+                  );
+
+                };
+
+
+              image.src =
+                event.target.result;
+
+            };
+
+
+          reader.readAsDataURL(
+            file
+          );
+
+        }
+      );
+
+    }
+
+
+
+    /* =====================================================
+       FONT
+    ====================================================== */
+
+    fontSelect.addEventListener(
+      "change",
+      function () {
+
+        saveCloudSetting(
+          "appFont",
+          this.value
+        );
+
+
+        if (
+          typeof window.applyGlobalFont ===
+          "function"
+        ) {
+
+          window.applyGlobalFont();
+
+        }
+
+
+        showSaved(
+          "Fontul a fost salvat ❤️"
+        );
+
+      }
+    );
+
+
+    fontSizeRange.addEventListener(
+      "input",
+      function () {
+
+        fontSizeValue.textContent =
+          this.value +
+          "%";
+
+
+        saveCloudSetting(
+          "appFontSize",
+          this.value
+        );
+
+
+        if (
+          typeof window.applyGlobalFont ===
+          "function"
+        ) {
+
+          window.applyGlobalFont();
+
+        }
+
+      }
+    );
+
+
+
+    /* =====================================================
+       FUNDAL
+    ====================================================== */
+
+    function updateSelectedBackground() {
+
+      const selected =
+        localStorage.getItem(
+          "selectedTheme"
+        ) ||
+        "dark";
+
+
+      backgroundButtons.forEach(
+        function (
+          button
+        ) {
+
+          button.classList.toggle(
+            "selected",
+            button.dataset.theme ===
+              selected
+          );
+
+        }
+      );
+
+    }
+
+
+
+    backgroundButtons.forEach(
+      function (
+        button
+      ) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            saveCloudSetting(
+              "selectedTheme",
+              this.dataset.theme
+            );
+
+
+            localStorage.removeItem(
+              "customBackground"
+            );
+
+
+            updateSelectedBackground();
+
+
+            if (
+              typeof window.applyGlobalBackground ===
+              "function"
+            ) {
+
+              window.applyGlobalBackground();
+
+            }
+
+
+            showSaved(
+              "Fundalul a fost salvat ❤️"
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+
+    /* =====================================================
+       FUNDAL DIN GALERIE
+       ÎNCĂ LOCAL
+    ====================================================== */
+
+    backgroundInput.addEventListener(
+      "change",
+      function () {
+
+        const file =
+          this.files &&
+          this.files[0];
+
+
+        if (
+          !file
+        ) {
+
+          return;
+
+        }
+
+
+        const reader =
+          new FileReader();
+
+
+        reader.onload =
+          function (
+            event
+          ) {
+
+            const image =
+              new Image();
+
+
+            image.onload =
+              function () {
+
+                const maxSize =
+                  1400;
+
+
+                const scale =
+                  Math.min(
+                    1,
+                    maxSize /
+                    Math.max(
+                      image.width,
+                      image.height
+                    )
+                  );
+
+
+                const canvas =
+                  document.createElement(
+                    "canvas"
+                  );
+
+
+                canvas.width =
+                  Math.round(
+                    image.width *
+                    scale
+                  );
+
+
+                canvas.height =
+                  Math.round(
+                    image.height *
+                    scale
+                  );
+
+
+                canvas
+                  .getContext(
+                    "2d"
+                  )
+                  .drawImage(
+                    image,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                  );
+
+
+                const background =
+                  canvas.toDataURL(
+                    "image/jpeg",
+                    0.68
+                  );
+
+
+                try {
+
+                  localStorage.setItem(
+                    "customBackground",
+                    background
+                  );
+
+
+                  saveCloudSetting(
+                    "selectedTheme",
+                    "custom"
+                  );
+
+
+                  updateSelectedBackground();
+
+
+                  if (
+                    typeof window.applyGlobalBackground ===
+                    "function"
+                  ) {
+
+                    window.applyGlobalBackground();
+
+                  }
+
+
+                  showSaved(
+                    "Fundalul din galerie a fost aplicat ❤️"
+                  );
+
+                } catch (error) {
+
+                  alert(
+                    "Imaginea este prea mare."
+                  );
+
+                }
+
+              };
+
+
+            image.src =
+              event.target.result;
+
+          };
+
+
+        reader.readAsDataURL(
+          file
+        );
+
+
+        this.value =
+          "";
+
+      }
+    );
+
+
+
+    /* =====================================================
+       ȘTERGE FUNDAL PERSONALIZAT
+    ====================================================== */
+
+    document
+      .getElementById(
+        "removeBackgroundButton"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          localStorage.removeItem(
+            "customBackground"
+          );
+
+
+          saveCloudSetting(
+            "selectedTheme",
+            "dark"
+          );
+
+
+          updateSelectedBackground();
+
+
+          if (
+            typeof window.applyGlobalBackground ===
+            "function"
+          ) {
+
+            window.applyGlobalBackground();
+
+          }
+
+
+          showSaved(
+            "Fundalul personalizat a fost șters."
+          );
+
+        }
+      );
+
+
+
+    /* =====================================================
+       SALVEAZĂ TOT
+    ====================================================== */
+
+    document
+      .getElementById(
+        "saveAllSettings"
+      )
+      .addEventListener(
+        "click",
+        async function () {
+
+          const finalBearName =
+            bearAINameInput.value
+              .trim() ||
+            "Teddy";
+
+
+          bearAINameInput.value =
+            finalBearName;
+
+
+          bearAINamePreview.textContent =
+            finalBearName;
+
+
+          saveCloudSetting(
+            "firstName",
+            firstNameInput.value.trim()
+          );
+
+
+          saveCloudSetting(
+            "secondName",
+            secondNameInput.value.trim()
+          );
+
+
+          saveCloudSetting(
+            "relationshipStartDate",
+            relationshipInput.value
+          );
+
+
+          saveCloudSetting(
+            "coupleQuote",
+            quoteInput.value
+          );
+
+
+          saveCloudSetting(
+            "bearAIName",
+            finalBearName
+          );
+
+
+          saveCloudSetting(
+            "appFont",
+            fontSelect.value
+          );
+
+
+          saveCloudSetting(
+            "appFontSize",
+            fontSizeRange.value
+          );
+
+
+          if (
+            typeof window.forceCloudSave ===
+            "function"
+          ) {
+
+            const saved =
+              await window
+                .forceCloudSave();
+
+
+            showSaved(
+              saved
+                ? "Totul a fost salvat ❤️"
+                : "Salvat pe telefon. Verifică conexiunea."
+            );
+
+
+            return;
+
+          }
+
+
+          if (
+            typeof window.saveAppDataToCloud ===
+            "function"
+          ) {
+
+            const saved =
+              await window
+                .saveAppDataToCloud();
+
+
+            showSaved(
+              saved
+                ? "Totul a fost salvat ❤️"
+                : "Salvat pe telefon. Verifică conexiunea."
+            );
+
+          } else {
+
+            showSaved(
+              "Setările au fost salvate ❤️"
+            );
+
+          }
+
+        }
+      );
+
+
+
+    /* =====================================================
+       MESAJ SALVAT
+    ====================================================== */
+
+    let saveTimer;
+
+
+    function showSaved(
+      message
+    ) {
+
+      savedMessage.textContent =
+        message;
+
+
+      clearTimeout(
+        saveTimer
+      );
+
+
+      saveTimer =
+        setTimeout(
+          function () {
+
+            savedMessage.textContent =
+              "";
+
+          },
+          2200
+        );
+
+    }
+
+
+
+    /* =====================================================
+       CONT SUPABASE
+    ====================================================== */
+
+    async function loadAccount() {
+
+      const account =
+        document.getElementById(
+          "userAccount"
+        );
+
+
+      if (
+        typeof supabaseClient ===
+        "undefined"
+      ) {
+
+        account.textContent =
+          "Cont indisponibil";
+
+
+        return false;
+
+      }
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .auth
+            .getSession();
+
+
+        if (
+          error ||
+          !data ||
+          !data.session
+        ) {
+
+          account.textContent =
+            "Neconectat";
+
+
+          return false;
+
+        }
+
+
+        account.textContent =
+          data.session.user.email ||
+          "Cont conectat";
+
+
+        return true;
+
+      } catch (error) {
+
+        account.textContent =
+          "Cont indisponibil";
+
+
+        return false;
+
+      }
+
+    }
+
+
+
+    /* =====================================================
+       LOGOUT
+    ====================================================== */
+
+    document
+      .getElementById(
+        "logoutButton"
+      )
+      .addEventListener(
+        "click",
+        async function () {
+
+          if (
+            typeof window.forceCloudSave ===
+            "function"
+          ) {
+
+            await window
+              .forceCloudSave();
+
+          } else if (
+            typeof window.saveAppDataToCloud ===
+            "function"
+          ) {
+
+            await window
+              .saveAppDataToCloud();
+
+          }
+
+
+          if (
+            typeof supabaseClient !==
+            "undefined"
+          ) {
+
+            await supabaseClient
+              .auth
+              .signOut();
+
+          }
+
+
+          window.location.href =
+            "./login.html";
+
+        }
+      );
+
+
+
+    /* =====================================================
+       BLOCARE ZOOM
+    ====================================================== */
+
+    let lastTouchEnd =
+      0;
+
+
+    document.addEventListener(
+      "touchend",
+      function (
+        event
+      ) {
+
+        const now =
+          Date.now();
+
+
+        if (
+          now -
+          lastTouchEnd <=
+          300
+        ) {
+
+          event.preventDefault();
+
+        }
+
+
+        lastTouchEnd =
+          now;
+
+      },
+      {
+        passive:
+          false
+      }
+    );
+
+
+    document.addEventListener(
+      "gesturestart",
+      function (
+        event
+      ) {
+
+        event.preventDefault();
+
+      },
+      {
+        passive:
+          false
+      }
+    );
+
+
+    document.addEventListener(
+      "touchmove",
+      function (
+        event
+      ) {
+
+        if (
+          event.touches &&
+          event.touches.length >
+          1
+        ) {
+
+          event.preventDefault();
+
+        }
+
+      },
+      {
+        passive:
+          false
+      }
+    );
+
+
+
+    /* =====================================================
+       PORNIRE SETĂRI + CLOUD
+    ====================================================== */
+
+    async function startSettings() {
+
+      const connected =
+        await loadAccount();
+
+
+      if (
+        !connected
+      ) {
+
+        loadSettings();
+
+        showNoPartnerConnection();
+
+        return;
+
+      }
+
+
+      /*
+        Înregistrăm Service Worker-ul pentru notificări.
+      */
+
+      await registerNotificationServiceWorker();
+
+
+      /*
+        Descărcăm fie datele personale,
+        fie datele comune ale cuplului.
+      */
+
+      if (
+        typeof window.loadAppDataFromCloud ===
+        "function"
+      ) {
+
+        await window
+          .loadAppDataFromCloud();
+
+      }
+
+
+      loadSettings();
+
+
+      /*
+        Reîmprospătăm starea după ce avem
+        data relației din cloud.
+      */
+
+      await updateNotificationStatus();
+
+
+      /*
+        Verificăm codul personal de acces.
+      */
+
+      await loadSecuritySettings();
+
+
+      if (
+        typeof window.applyGlobalBackground ===
+        "function"
+      ) {
+
+        window.applyGlobalBackground();
+
+      }
+
+
+      if (
+        typeof window.applyGlobalFont ===
+        "function"
+      ) {
+
+        window.applyGlobalFont();
+
+      }
+
+
+      /*
+        Verificăm dacă există partener.
+      */
+
+      await loadPartnerConnection();
+
+    }
+
+
+
+    /* =====================================================
+       MENIU JOS
+    ====================================================== */
+
+    document
+      .querySelectorAll(
+        ".bottom-nav .nav-item[data-page]"
+      )
+      .forEach(
+        function (
+          button
+        ) {
+
+          button.addEventListener(
+            "click",
+            function () {
+
+              const page =
+                this.dataset.page;
+
+              if (
+                page
+              ) {
+
+                window.location.href =
+                  "./" + page;
+
+              }
+
+            }
+          );
+
+        }
+      );
+
+
+
+    /* =====================================================
+       START
+    ====================================================== */
+
+    startSettings();
+
+  </script>
+
+
+</body>
+
+</html>

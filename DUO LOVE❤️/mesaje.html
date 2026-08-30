@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mesajele Noastre 💌</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="app">
+
+    <a href="index.html" class="back-button">
+      ← Înapoi
+    </a>
+
+    <section class="hero-card">
+
+      <p class="eyebrow">
+        💌 MESAJELE NOASTRE
+      </p>
+
+      <h1>Cuvinte pentru tine</h1>
+
+      <p class="subtitle">
+        Scrie un mesaj sau lasă botul iubirii să te inspire. ❤️
+      </p>
+
+      <div class="message-buttons">
+
+        <button id="addMessageButton" class="add-memory-button">
+          + Scrie mesaj
+        </button>
+
+        <button id="aiMessageButton" class="ai-message-button">
+          ✨ Botul iubirii
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- MESAJE SALVATE -->
+
+    <section
+      id="messagesList"
+      class="messages-list">
+    </section>
+
+  </main>
+
+
+  <!-- FEREASTRA PENTRU MESAJ NORMAL -->
+
+  <div
+    id="messageModal"
+    class="message-modal hidden">
+
+    <div class="message-modal-card">
+
+      <button
+        id="closeModal"
+        class="close-modal">
+        ×
+      </button>
+
+      <h2>Mesaj nou 💌</h2>
+
+      <input
+        id="messageTitle"
+        type="text"
+        placeholder="Titlul mesajului">
+
+      <textarea
+        id="messageText"
+        placeholder="Scrie aici mesajul tău...">
+      </textarea>
+
+      <button
+        id="saveMessage"
+        class="save-message">
+        Salvează mesajul ❤️
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- BOTUL IUBIRII -->
+
+  <div
+    id="aiModal"
+    class="message-modal hidden">
+
+    <div class="message-modal-card ai-card">
+
+      <button
+        id="closeAiModal"
+        class="close-modal">
+        ×
+      </button>
+
+      <div class="bot-heart">
+        💗
+      </div>
+
+      <h2>Botul iubirii</h2>
+
+      <p class="ai-description">
+        Spune-mi ce fel de mesaj vrei să scrii.
+      </p>
+
+
+      <label class="ai-label">
+        Pentru cine este?
+      </label>
+
+      <input
+        id="partnerName"
+        type="text"
+        placeholder="Ex: Maria">
+
+
+      <label class="ai-label">
+        Ce fel de mesaj vrei?
+      </label>
+
+
+      <div class="ai-options">
+
+        <button
+          class="ai-option active"
+          data-type="romantic">
+          💗 Romantic
+        </button>
+
+        <button
+          class="ai-option"
+          data-type="emotional">
+          🥺 Emoționant
+        </button>
+
+        <button
+          class="ai-option"
+          data-type="funny">
+          😄 Amuzant
+        </button>
+
+        <button
+          class="ai-option"
+          data-type="morning">
+          ☀️ Bună dimineața
+        </button>
+
+        <button
+          class="ai-option"
+          data-type="night">
+          🌙 Noapte bună
+        </button>
+
+        <button
+          class="ai-option"
+          data-type="miss">
+          🫶 Mi-e dor de tine
+        </button>
+
+      </div>
+
+
+      <label class="ai-label">
+        Ce ai vrea să menționezi?
+      </label>
+
+      <textarea
+        id="aiDetails"
+        class="ai-details"
+        placeholder="Ex: spune-i că îmi este dor de ea și că abia aștept să o văd...">
+      </textarea>
+
+
+      <button
+        id="generateMessage"
+        class="generate-message">
+        ✨ Generează mesaj
+      </button>
+
+
+      <!-- MESAJ GENERAT -->
+
+      <div
+        id="generatedArea"
+        class="generated-area hidden">
+
+        <p class="generated-label">
+          Mesajul tău ❤️
+        </p>
+
+        <div
+          id="generatedMessage"
+          class="generated-message">
+        </div>
+
+
+        <div class="generated-buttons">
+
+          <button
+            id="regenerateMessage"
+            class="secondary-button">
+            🔄 Alt mesaj
+          </button>
+
+          <button
+            id="useMessage"
+            class="use-message">
+            💌 Folosește mesajul
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="mesaje.js"></script>
+
+</body>
+</html>

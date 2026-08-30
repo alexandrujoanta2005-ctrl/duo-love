@@ -1,0 +1,1304 @@
+/* =========================================================
+   SETĂRI - STIL COMPLET
+========================================================= */
+
+body.settings-page {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  overflow-x: hidden;
+}
+
+
+body.settings-page .app {
+  width:
+    min(
+      calc(100% - 20px),
+      430px
+    );
+
+  margin:
+    0 auto;
+
+  padding:
+    calc(
+      env(safe-area-inset-top) + 10px
+    )
+    0
+    calc(
+      110px +
+      env(safe-area-inset-bottom)
+    );
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.settings-header {
+  margin-bottom: 15px;
+
+  padding: 20px;
+
+  border-radius: 25px;
+
+  background:
+    rgba(
+      14,
+      9,
+      18,
+      .84
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .09
+    );
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+
+.settings-header h1 {
+  margin:
+    5px
+    0
+    7px;
+
+  font-size: 34px;
+}
+
+
+.settings-header p {
+  margin: 0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .68
+    );
+}
+
+
+/* =========================================================
+   CARDURI
+========================================================= */
+
+.settings-card {
+  margin-bottom: 15px;
+
+  padding: 18px;
+
+  border-radius: 25px;
+
+  background:
+    rgba(
+      14,
+      9,
+      18,
+      .84
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .09
+    );
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+
+.settings-small {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #ef93bd;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+
+.settings-card h2 {
+  margin:
+    0
+    0
+    15px;
+
+  font-size: 28px;
+}
+
+
+.settings-card-description {
+  margin:
+    -6px
+    0
+    12px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .64
+    );
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   INPUTURI
+========================================================= */
+
+.settings-label {
+  display: block;
+
+  margin:
+    17px
+    0
+    7px;
+
+  color: #ef93bd;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+
+.settings-input,
+.settings-textarea,
+.settings-select {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 14px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .13
+    );
+
+  border-radius: 16px;
+
+  outline: none;
+
+  background:
+    rgba(
+      10,
+      7,
+      15,
+      .55
+    );
+
+  color: white;
+
+  font: inherit;
+  font-size: 16px;
+}
+
+
+.settings-input:focus,
+.settings-textarea:focus,
+.settings-select:focus {
+  border-color:
+    rgba(
+      220,
+      102,
+      154,
+      .65
+    );
+
+  box-shadow:
+    0 0 0 2px
+    rgba(
+      220,
+      102,
+      154,
+      .10
+    );
+}
+
+
+.settings-textarea {
+  min-height: 110px;
+
+  resize: vertical;
+}
+
+
+/* =========================================================
+   POZA CUPLU
+========================================================= */
+
+.settings-photo {
+  position: relative;
+
+  overflow: hidden;
+
+  width: 100%;
+  height: 240px;
+
+  margin-top: 15px;
+
+  border-radius: 23px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .05
+    );
+}
+
+
+.settings-photo img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+.settings-photo-button {
+  position: absolute;
+
+  right: 15px;
+  bottom: 15px;
+
+  padding:
+    11px
+    15px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .14
+    );
+
+  border-radius: 16px;
+
+  background:
+    rgba(
+      5,
+      5,
+      10,
+      .72
+    );
+
+  color: white;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+
+/* =========================================================
+   CONT
+========================================================= */
+
+.account-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 14px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .10
+    );
+
+  border-radius: 18px;
+}
+
+
+#userAccount {
+  min-width: 0;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.logout-button,
+.save-button,
+.remove-background,
+.partner-button,
+.copy-code-button {
+  appearance: none;
+  -webkit-appearance: none;
+
+  border: 0;
+
+  cursor: pointer;
+
+  font: inherit;
+}
+
+
+.logout-button {
+  flex: 0 0 auto;
+
+  padding:
+    11px
+    14px;
+
+  border-radius: 15px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .08
+    );
+
+  color: white;
+}
+
+
+/* =========================================================
+   PARTENER
+========================================================= */
+
+.partner-status {
+  margin-top: 13px;
+
+  padding: 14px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .10
+    );
+
+  border-radius: 19px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .04
+    );
+}
+
+
+.partner-status-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 6px;
+}
+
+
+.partner-status-dot {
+  flex:
+    0 0
+    10px;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #909090;
+
+  box-shadow:
+    0 0 10px
+    rgba(
+      255,
+      255,
+      255,
+      .10
+    );
+}
+
+
+.partner-status-dot.waiting {
+  background: #f1b457;
+}
+
+
+.partner-status-dot.connected {
+  background: #55db86;
+
+  box-shadow:
+    0 0 12px
+    rgba(
+      85,
+      219,
+      134,
+      .35
+    );
+}
+
+
+.partner-status strong {
+  min-width: 0;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  font-size: 16px;
+}
+
+
+.partner-status p {
+  margin: 0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .62
+    );
+
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+
+.partner-controls {
+  margin-top: 16px;
+}
+
+
+.partner-button {
+  width: 100%;
+
+  min-height: 50px;
+
+  padding:
+    12px
+    14px;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #c95887,
+      #993f6b
+    );
+
+  color: white;
+
+  font-weight: 700;
+}
+
+
+.partner-button.secondary {
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .09
+    );
+}
+
+
+.partner-button:disabled,
+.copy-code-button:disabled {
+  cursor: default;
+
+  opacity: .55;
+}
+
+
+.partner-divider {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin:
+    17px
+    0
+    3px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .40
+    );
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+}
+
+
+.partner-divider::before,
+.partner-divider::after {
+  content: "";
+
+  flex: 1;
+
+  height: 1px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .08
+    );
+}
+
+
+.partner-code-input {
+  text-transform: uppercase;
+
+  letter-spacing: 3px;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+
+.partner-input-row {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  gap: 8px;
+}
+
+
+.partner-input-row .partner-button {
+  width: auto;
+
+  min-width: 112px;
+}
+
+
+.invite-code-box {
+  margin-top: 15px;
+
+  padding: 16px;
+
+  border:
+    1px solid
+    rgba(
+      239,
+      147,
+      189,
+      .24
+    );
+
+  border-radius: 19px;
+
+  background:
+    rgba(
+      181,
+      71,
+      121,
+      .09
+    );
+
+  text-align: center;
+}
+
+
+.invite-code-box[hidden],
+.partner-controls[hidden] {
+  display: none !important;
+}
+
+
+.invite-code-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #ef93bd;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+
+.invite-code {
+  display: block;
+
+  margin:
+    3px
+    0
+    12px;
+
+  color: white;
+
+  font-size: 28px;
+  font-weight: 800;
+
+  letter-spacing: 5px;
+
+  word-break: break-all;
+}
+
+
+.copy-code-button {
+  min-height: 43px;
+
+  padding:
+    10px
+    16px;
+
+  border-radius: 14px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .10
+    );
+
+  color: white;
+}
+
+
+.invite-code-help {
+  margin:
+    12px
+    0
+    0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .55
+    );
+
+  font-size: 12px;
+
+  line-height: 1.45;
+}
+
+
+.partner-message {
+  min-height: 20px;
+
+  margin:
+    12px
+    0
+    0;
+
+  color: #ffb8d4;
+
+  font-size: 13px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   NOTIFICĂRI
+========================================================= */
+
+.notification-status {
+  margin-top: 13px;
+
+  padding: 14px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .10
+    );
+
+  border-radius: 19px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .04
+    );
+}
+
+
+.notification-status-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 6px;
+}
+
+
+.notification-status-dot {
+  flex:
+    0 0
+    10px;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #909090;
+}
+
+
+.notification-status-dot.waiting {
+  background: #f1b457;
+}
+
+
+.notification-status-dot.active {
+  background: #55db86;
+
+  box-shadow:
+    0 0 12px
+    rgba(
+      85,
+      219,
+      134,
+      .35
+    );
+}
+
+
+.notification-status-dot.blocked {
+  background: #e86474;
+
+  box-shadow:
+    0 0 12px
+    rgba(
+      232,
+      100,
+      116,
+      .30
+    );
+}
+
+
+.notification-status strong {
+  font-size: 16px;
+}
+
+
+.notification-status p {
+  margin: 0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .62
+    );
+
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+
+.notification-actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 9px;
+
+  margin-top: 14px;
+}
+
+
+.notification-button {
+  appearance: none;
+  -webkit-appearance: none;
+
+  min-height: 50px;
+
+  padding:
+    12px
+    14px;
+
+  border: 0;
+  border-radius: 16px;
+
+  color: white;
+
+  font: inherit;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+.notification-button.primary {
+  background:
+    linear-gradient(
+      135deg,
+      #c95887,
+      #993f6b
+    );
+}
+
+
+.notification-button.secondary {
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .09
+    );
+}
+
+
+.notification-button:disabled {
+  cursor: default;
+
+  opacity: .52;
+}
+
+
+.notification-message {
+  min-height: 20px;
+
+  margin:
+    12px
+    0
+    0;
+
+  color: #ffb8d4;
+
+  font-size: 13px;
+
+  text-align: center;
+}
+
+
+.notification-note {
+  margin:
+    12px
+    0
+    0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .47
+    );
+
+  font-size: 12px;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   URSULEȚ AI
+========================================================= */
+
+.bear-ai-settings-preview {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  margin-top: 14px;
+
+  padding: 13px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .10
+    );
+
+  border-radius: 18px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .04
+    );
+}
+
+
+.bear-ai-settings-circle {
+  flex:
+    0 0
+    62px;
+
+  width: 62px;
+  height: 62px;
+
+  overflow: hidden;
+
+  border:
+    2px solid
+    rgba(
+      255,
+      184,
+      214,
+      .60
+    );
+
+  border-radius: 50%;
+
+  background:
+    rgba(
+      10,
+      7,
+      15,
+      .70
+    );
+}
+
+
+.bear-ai-settings-circle img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+.bear-ai-settings-info {
+  min-width: 0;
+}
+
+
+.bear-ai-settings-info strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  overflow: hidden;
+
+  color: white;
+
+  font-size: 17px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.bear-ai-settings-info span {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .60
+    );
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   FONT
+========================================================= */
+
+.font-size-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 17px;
+  margin-bottom: 7px;
+}
+
+
+#fontSizeRange {
+  width: 100%;
+
+  accent-color: #d56191;
+}
+
+
+/* =========================================================
+   FUNDAL
+========================================================= */
+
+.background-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 9px;
+
+  margin-top: 15px;
+}
+
+
+.background-option {
+  min-height: 52px;
+
+  padding: 10px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .08
+    );
+
+  border-radius: 16px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .06
+    );
+
+  color: white;
+
+  font: inherit;
+
+  cursor: pointer;
+}
+
+
+.background-option.selected {
+  border-color: #d76696;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(
+      215,
+      102,
+      150,
+      .17
+    );
+}
+
+
+.background-upload {
+  display: block;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  margin-top: 13px;
+
+  padding: 13px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .10
+    );
+
+  border-radius: 16px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .07
+    );
+
+  color: white;
+
+  text-align: center;
+
+  cursor: pointer;
+}
+
+
+.remove-background {
+  width: 100%;
+
+  margin-top: 9px;
+
+  padding: 12px;
+
+  border-radius: 16px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .05
+    );
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .72
+    );
+}
+
+
+.save-button {
+  width: 100%;
+
+  margin:
+    5px
+    0
+    15px;
+
+  padding: 15px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #c95887,
+      #993f6b
+    );
+
+  color: white;
+
+  font-weight: 700;
+}
+
+
+.saved-message {
+  min-height: 22px;
+
+  margin:
+    0
+    0
+    10px;
+
+  color: #ffb8d4;
+
+  text-align: center;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   TELEFOANE MICI
+========================================================= */
+
+@media (
+  max-width: 360px
+) {
+
+  .partner-input-row {
+    grid-template-columns: 1fr;
+  }
+
+
+  .partner-input-row .partner-button {
+    width: 100%;
+  }
+
+
+  .invite-code {
+    font-size: 23px;
+
+    letter-spacing: 3px;
+  }
+
+
+  .notification-actions {
+    grid-template-columns: 1fr;
+  }
+
+}

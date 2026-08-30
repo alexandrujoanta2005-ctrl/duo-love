@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#08070d">
+
+  <title>Cod nou · DUO LOVE ❤️</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html,
+    body {
+      margin: 0;
+
+      min-height: 100%;
+    }
+
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding:
+        calc(env(safe-area-inset-top) + 18px)
+        18px
+        calc(env(safe-area-inset-bottom) + 18px);
+
+      background:
+        radial-gradient(circle at 15% 15%, rgba(220,70,135,.30), transparent 35%),
+        radial-gradient(circle at 85% 80%, rgba(95,65,210,.28), transparent 40%),
+        linear-gradient(160deg, #07060c, #170b17 55%, #08070d);
+
+      color: white;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+
+    .card {
+      width:
+        min(
+          100%,
+          390px
+        );
+
+      padding:
+        25px
+        20px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.11);
+
+      border-radius:
+        28px;
+
+      background:
+        rgba(12,8,17,.91);
+
+      box-shadow:
+        0 24px 65px
+        rgba(0,0,0,.40);
+
+      text-align:
+        center;
+    }
+
+
+    .heart {
+      font-size:
+        48px;
+    }
+
+
+    h1 {
+      margin:
+        8px
+        0
+        8px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        31px;
+
+      font-weight:
+        500;
+    }
+
+
+    p {
+      color:
+        rgba(255,255,255,.63);
+
+      font-size:
+        14px;
+
+      line-height:
+        1.5;
+    }
+
+
+    label {
+      display:
+        block;
+
+      margin:
+        14px
+        0
+        7px;
+
+      color:
+        #ee91ba;
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1.5px;
+
+      text-align:
+        left;
+    }
+
+
+    input {
+      width:
+        100%;
+
+      min-height:
+        54px;
+
+      padding:
+        12px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.12);
+
+      border-radius:
+        16px;
+
+      outline:
+        none;
+
+      background:
+        rgba(255,255,255,.07);
+
+      color:
+        white;
+
+      font-size:
+        21px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        7px;
+
+      text-align:
+        center;
+    }
+
+
+    button {
+      width:
+        100%;
+
+      min-height:
+        52px;
+
+      margin-top:
+        15px;
+
+      border:
+        0;
+
+      border-radius:
+        16px;
+
+      background:
+        linear-gradient(135deg, #c95887, #993f6b);
+
+      color:
+        white;
+
+      font:
+        inherit;
+
+      font-weight:
+        800;
+    }
+
+
+    #message {
+      min-height:
+        21px;
+
+      color:
+        #ffb4d2;
+    }
+
+
+    #form[hidden] {
+      display:
+        none !important;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <main class="card">
+
+    <div class="heart">
+      ❤️
+    </div>
+
+    <h1>
+      DUO LOVE
+    </h1>
+
+    <p>
+      Email verificat. Alege un cod nou.
+    </p>
+
+
+    <div id="loading">
+      Se verifică linkul...
+    </div>
+
+
+    <div
+      id="form"
+      hidden
+    >
+
+      <label for="newPin">
+        COD NOU
+      </label>
+
+      <input
+        id="newPin"
+        type="password"
+        inputmode="numeric"
+        maxlength="6"
+        autocomplete="off"
+      >
+
+
+      <label for="confirmPin">
+        REPETĂ CODUL
+      </label>
+
+      <input
+        id="confirmPin"
+        type="password"
+        inputmode="numeric"
+        maxlength="6"
+        autocomplete="off"
+      >
+
+
+      <button
+        id="saveButton"
+        type="button"
+      >
+        Salvează codul nou ❤️
+      </button>
+
+    </div>
+
+
+    <p id="message"></p>
+
+
+    <button
+      id="homeButton"
+      type="button"
+    >
+      Înapoi în aplicație
+    </button>
+
+  </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="./supabase.js?v=33"></script>
+
+
+  <script>
+
+    const loading =
+      document.getElementById(
+        "loading"
+      );
+
+
+
+    function getSupabaseClient() {
+
+      if (
+        window.supabaseClient
+      ) {
+        return window.supabaseClient;
+      }
+
+
+      try {
+
+        if (
+          typeof supabaseClient !==
+          "undefined"
+        ) {
+          return supabaseClient;
+        }
+
+      } catch (_) {}
+
+
+      return null;
+
+    }
+
+
+    const form =
+      document.getElementById(
+        "form"
+      );
+
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+
+    const newPin =
+      document.getElementById(
+        "newPin"
+      );
+
+
+    const confirmPin =
+      document.getElementById(
+        "confirmPin"
+      );
+
+
+    function cleanPin(
+      input
+    ) {
+
+      input.value =
+        input.value
+          .replace(
+            /\D/g,
+            ""
+          )
+          .slice(
+            0,
+            6
+          );
+
+    }
+
+
+    newPin.addEventListener(
+      "input",
+      function () {
+
+        cleanPin(
+          this
+        );
+
+      }
+    );
+
+
+    confirmPin.addEventListener(
+      "input",
+      function () {
+
+        cleanPin(
+          this
+        );
+
+      }
+    );
+
+
+    async function prepareSession() {
+
+      const client =
+        getSupabaseClient();
+
+
+      if (
+        !client
+      ) {
+
+        loading.textContent =
+          "";
+
+
+        message.textContent =
+          "Supabase nu este disponibil.";
+
+
+        return;
+
+      }
+
+
+      try {
+
+        const url =
+          new URL(
+            window.location.href
+          );
+
+
+        const code =
+          url.searchParams.get(
+            "code"
+          );
+
+
+        if (
+          code &&
+          typeof supabaseClient.auth
+            .exchangeCodeForSession ===
+          "function"
+        ) {
+
+          await client.auth
+            .exchangeCodeForSession(
+              code
+            );
+
+        }
+
+
+        for (
+          let i = 0;
+          i < 30;
+          i++
+        ) {
+
+          const {
+            data
+          } =
+            await client.auth
+              .getSession();
+
+
+          if (
+            data &&
+            data.session &&
+            data.session.user
+          ) {
+
+            loading.textContent =
+              "";
+
+
+            form.hidden =
+              false;
+
+
+            message.textContent =
+              "Poți seta un PIN de 4, 5 sau 6 cifre.";
+
+
+            return;
+
+          }
+
+
+          await new Promise(
+            resolve =>
+              setTimeout(
+                resolve,
+                150
+              )
+          );
+
+        }
+
+
+        loading.textContent =
+          "";
+
+
+        message.textContent =
+          "Linkul a expirat. Cere un link nou din aplicație.";
+
+      } catch (
+        error
+      ) {
+
+        loading.textContent =
+          "";
+
+
+        message.textContent =
+          error?.message ||
+          "Linkul nu a putut fi verificat.";
+
+      }
+
+    }
+
+
+    document
+      .getElementById(
+        "saveButton"
+      )
+      .addEventListener(
+        "click",
+        async function () {
+
+          const pin =
+            newPin.value;
+
+
+          const confirm =
+            confirmPin.value;
+
+
+          if (
+            !/^\d{4,6}$/.test(
+              pin
+            )
+          ) {
+
+            message.textContent =
+              "Introdu un cod de 4, 5 sau 6 cifre.";
+
+
+            return;
+
+          }
+
+
+          if (
+            pin !==
+            confirm
+          ) {
+
+            message.textContent =
+              "Codurile nu sunt identice.";
+
+
+            return;
+
+          }
+
+
+          this.disabled =
+            true;
+
+
+          this.textContent =
+            "Se salvează...";
+
+
+          const {
+            error
+          } =
+            await getSupabaseClient().rpc(
+              "set_my_access_pin",
+              {
+                pin_value:
+                  pin
+              }
+            );
+
+
+          if (
+            error
+          ) {
+
+            message.textContent =
+              error.message;
+
+
+            this.disabled =
+              false;
+
+
+            this.textContent =
+              "Salvează codul nou ❤️";
+
+
+            return;
+
+          }
+
+
+          message.textContent =
+            "Codul nou a fost salvat ❤️";
+
+
+          this.textContent =
+            "✅ Salvat";
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "homeButton"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          window.location.href =
+            "./index.html";
+
+        }
+      );
+
+
+    prepareSession();
+
+  </script>
+
+</body>
+
+</html>

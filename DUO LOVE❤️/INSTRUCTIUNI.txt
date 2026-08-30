@@ -1,0 +1,27 @@
+DUO LOVE ❤️ - PIN 4 SAU 6 CIFRE - v25
+
+1. Supabase -> SQL Editor:
+   rulează din nou TOT access-pin.sql.
+   Asta actualizează funcțiile ca să accepte PIN de 4 SAU 6 cifre.
+
+2. În VS Code înlocuiește:
+   - index.html
+   - setari.html
+   - security.js
+   - reset-pin.html
+
+3. În service-worker.js:
+   const CACHE_VERSION = "duo-love-v25";
+
+4. Dacă security.js este inclus și în alte pagini:
+   <script src="./security.js?v=25"></script>
+
+5. Deploy pe Netlify cu folderul complet.
+
+CUM FUNCȚIONEAZĂ:
+- Poți seta PIN de 4 cifre, ex. 2580.
+- Poți seta PIN de 6 cifre, ex. 258036.
+- Pe ecranul de blocare:
+  * la 4 cifre apeși „Deblochează ❤️”
+  * la 6 cifre verificarea pornește automat.
+- PIN de 5 cifre nu este acceptat.
