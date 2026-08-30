@@ -1,4 +1,4 @@
-console.log("❤️ DUO LOVE BUILD v18 - CLOUD SYNC");
+console.log("❤️ DUO LOVE BUILD v34 - CLOUD SYNC + XP 20/50 + EFFECTS");
 
 /* =========================================================
    SINCRONIZARE CONT + CUPLU - SUPABASE
@@ -63,7 +63,13 @@ const PRIVATE_LOCAL_KEYS = [
 
   "couplePhotoSignedPath",
 
-  "couplePhotoSignedAt"
+  "couplePhotoSignedAt",
+
+  "rewardEffectHearts",
+  "rewardEffectSparkles",
+  "rewardEffectPulse",
+  "rewardEffectStars",
+  "rewardEffectTogether"
 
 ];
 
@@ -3513,6 +3519,26 @@ function cacheCoupleXP(
       : "false"
   );
 
+
+  try {
+
+    window.dispatchEvent(
+      new CustomEvent(
+        "duolove:xp-updated",
+        {
+          detail: {
+            totalXP,
+            availableXP,
+            usersToday,
+            unlocked1000
+          }
+        }
+      )
+    );
+
+  } catch (error) {
+  }
+
 }
 
 
@@ -4085,3 +4111,46 @@ window.getCachedCoupleXP =
 
 window.invalidateCloudContextCache =
   invalidateCloudContextCache;
+
+/* =========================================================
+   RECOMPENSE ANIMATE - ÎNCĂRCARE GLOBALĂ ✨
+   Se încarcă automat pe paginile care folosesc cloud-sync.js.
+========================================================= */
+
+(function loadRewardEffectsScript() {
+
+  if (
+    typeof document === "undefined" ||
+    document.getElementById(
+      "duoLoveRewardEffectsScript"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  script.id =
+    "duoLoveRewardEffectsScript";
+
+
+  script.src =
+    "./reward-effects.js?v=34";
+
+
+  script.defer =
+    true;
+
+
+  document.head.appendChild(
+    script
+  );
+
+})();
