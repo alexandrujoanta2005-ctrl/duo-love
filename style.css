@@ -9025,3 +9025,1486 @@ body > .bottom-nav .nav-item.active {
       var(--app-font-scale, 1)
     );
 }
+/* =========================================================
+   FIX PROIECT FINAL 2026-08-28
+   - meniu jos de tot pe toate paginile
+   - chat fix, doar mesajele fac scroll
+   - același fundal pe Chat / Amintiri / Evenimente / Setări
+========================================================= */
+
+html,
+body {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  -webkit-text-size-adjust: 100% !important;
+}
+
+html {
+  min-height: 100% !important;
+  background: #07070d !important;
+}
+
+body {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  background-color: #07070d !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  overscroll-behavior-x: none !important;
+  touch-action: manipulation;
+}
+
+* {
+  box-sizing: border-box !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fundalurile alese din Setări se văd pe orice pagină. */
+body > main,
+body > .app,
+.page-chat .chat-app,
+.page-amintiri .app,
+.page-evenimente .app,
+.page-setari .app {
+  background: transparent !important;
+}
+
+body.bg-aurora,
+body.bg-mesh,
+body.bg-starlight,
+body.bg-silk,
+body.bg-plain,
+body.bg-nature,
+body.bg-stars,
+body.bg-moon,
+body.bg-clouds,
+body.bg-cozy,
+body.bg-pastel,
+body.bg-dark,
+body.bg-custom {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Container compact și uniform pe toate paginile. */
+.app {
+  width: min(94%, 420px) !important;
+  margin: 0 auto !important;
+  padding-top: calc(env(safe-area-inset-top) + 6px) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 84px !important;
+}
+
+/* Cardurile lasă tema să se vadă în spate. */
+.home-section,
+.love-note,
+.hero-card,
+.chat-card,
+.event-card,
+.memory-card,
+.empty-memories,
+.settings-big-card,
+.page-header,
+.chat-header,
+.settings-header {
+  background: rgba(14, 9, 18, 0.82) !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  color: #fff !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+/* =========================================================
+   MENIU GLOBAL - CHIAR JOS DE TOT
+========================================================= */
+
+body > .bottom-nav {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  bottom: -1px !important;
+  transform: none !important;
+
+  width: 100% !important;
+  max-width: none !important;
+  height: 72px !important;
+  min-height: 72px !important;
+
+  margin: 0 !important;
+  padding: 4px 7px 0 !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  align-items: end !important;
+  gap: 2px !important;
+
+  background: rgba(7, 5, 12, 0.99) !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: 22px 22px 0 0 !important;
+  box-shadow: 0 -8px 30px rgba(0,0,0,.34) !important;
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+
+  z-index: 2147483647 !important;
+}
+
+body > .bottom-nav .nav-item {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 64px !important;
+  min-height: 64px !important;
+
+  margin: 0 !important;
+  padding: 8px 2px 2px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 18px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 4px !important;
+
+  background: transparent !important;
+  color: rgba(255,255,255,.70) !important;
+  font-family: inherit !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+}
+
+body > .bottom-nav .nav-icon {
+  display: block !important;
+  margin: 0 !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+}
+
+body > .bottom-nav .nav-item.active {
+  background: rgba(105, 35, 74, 0.78) !important;
+  color: #ffd0e4 !important;
+}
+
+/* =========================================================
+   CHAT - PAGINA FIXĂ, DOAR TEXTUL/MESAJELE FAC SCROLL
+========================================================= */
+
+body.page-chat,
+body.chat-page-body {
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
+}
+
+body.page-chat .chat-app,
+body.chat-page-body .chat-app {
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+  padding-top: calc(env(safe-area-inset-top) + 6px) !important;
+  padding-bottom: 76px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+body.page-chat .chat-header,
+body.chat-page-body .chat-header {
+  flex: 0 0 auto !important;
+  margin: 0 0 10px !important;
+  padding: 17px !important;
+  border-radius: 24px !important;
+}
+
+body.page-chat .chat-header h1,
+body.chat-page-body .chat-header h1 {
+  margin: 4px 0 6px !important;
+}
+
+body.page-chat .chat-card,
+body.chat-page-body .chat-card {
+  flex: 1 1 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 12px !important;
+  border-radius: 24px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+body.page-chat .chat-messages,
+body.chat-page-body .chat-messages,
+body.page-chat #chatMessages,
+body.chat-page-body #chatMessages {
+  flex: 1 1 0 !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 4px 4px 10px !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain !important;
+  touch-action: pan-y !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+}
+
+body.page-chat .chat-messages::-webkit-scrollbar,
+body.chat-page-body .chat-messages::-webkit-scrollbar,
+body.page-chat #chatMessages::-webkit-scrollbar,
+body.chat-page-body #chatMessages::-webkit-scrollbar {
+  width: 0 !important;
+  display: none !important;
+}
+
+body.page-chat .chat-quick,
+body.chat-page-body .chat-quick {
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  margin: 5px 0 7px !important;
+  padding: 0 !important;
+}
+
+body.page-chat .chat-input-row,
+body.chat-page-body .chat-input-row {
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+body.page-chat .chat-input-row textarea,
+body.chat-page-body .chat-input-row textarea {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+  height: 54px !important;
+  min-height: 54px !important;
+  max-height: 54px !important;
+  margin: 0 !important;
+  padding: 15px !important;
+  resize: none !important;
+  border-radius: 18px !important;
+  font-size: 16px !important;
+}
+
+body.page-chat .chat-input-row button,
+body.chat-page-body .chat-input-row button {
+  flex: 0 0 54px !important;
+  width: 54px !important;
+  height: 54px !important;
+  min-width: 54px !important;
+  min-height: 54px !important;
+  margin: 0 !important;
+  border-radius: 18px !important;
+}
+
+/* =========================================================
+   AMINTIRI - ACELAȘI FUNDAL CA RESTUL APLICAȚIEI
+========================================================= */
+
+body.page-amintiri .memories-page,
+body.page-amintiri .memories-gallery,
+body.page-amintiri main {
+  background-color: transparent !important;
+}
+
+body.page-amintiri .memories-page {
+  background: rgba(14, 9, 18, 0.82) !important;
+  color: #fff !important;
+  border-radius: 24px !important;
+}
+
+body.page-amintiri .memories-gallery {
+  display: grid !important;
+  gap: 12px !important;
+  margin-top: 12px !important;
+}
+
+body.page-amintiri .empty-memories,
+body.page-amintiri .memory-card {
+  background: rgba(14, 9, 18, 0.84) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.09) !important;
+  border-radius: 22px !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+body.page-amintiri .empty-memories {
+  padding: 28px 18px !important;
+  text-align: center !important;
+}
+
+body.page-amintiri .memory-photo {
+  width: 100% !important;
+  max-height: 340px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* Evenimente și Setări folosesc aceeași transparență peste temă. */
+body.page-evenimente .events-list,
+body.page-setari .settings-app {
+  background: transparent !important;
+}
+
+/* Telefon mic: bara rămâne jos și compactă. */
+@media (max-width: 390px) {
+  .app {
+    width: calc(100% - 14px) !important;
+  }
+
+  body > .bottom-nav {
+    height: 70px !important;
+    min-height: 70px !important;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+
+  body > .bottom-nav .nav-item {
+    height: 62px !important;
+    min-height: 62px !important;
+    font-size: 9px !important;
+  }
+
+  body > .bottom-nav .nav-icon {
+    font-size: 23px !important;
+  }
+
+  body.page-chat .chat-app,
+  body.chat-page-body .chat-app {
+    padding-bottom: 74px !important;
+  }
+}
+/* =========================================================
+   FONT + ACCENT DIN SETĂRI
+   ADAUGĂ ULTIMUL DE TOT ÎN style.css
+========================================================= */
+
+:root {
+
+  --app-font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  --app-font-scale:
+    1;
+
+  --app-accent:
+    #d96898;
+
+  --app-accent-rgb:
+    217,
+    104,
+    152;
+
+  --app-accent-soft:
+    rgba(
+      217,
+      104,
+      152,
+      .22
+    );
+
+}
+
+
+/* =========================================================
+   FONT GLOBAL
+========================================================= */
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family:
+    var(
+      --app-font-family
+    ) !important;
+}
+
+
+/* =========================================================
+   HOME
+   SCHIMBĂ FONTUL DAR NU MUTĂ POZA / CONTORUL
+========================================================= */
+
+body.home-page #coupleNames,
+body.home-page .couple-title,
+body.home-page .together-title,
+body.home-page .counter-item strong,
+body.home-page .love-note,
+body.home-page .home-section h2,
+body.home-page .home-section p {
+
+  font-family:
+    var(
+      --app-font-family
+    ) !important;
+
+}
+
+
+/* =========================================================
+   MĂRIME TEXT
+   NU SCHIMBĂ POZA ȘI CARDUL PRINCIPAL HOME
+========================================================= */
+
+body:not(.home-page)
+.settings-big-card,
+
+body:not(.home-page)
+.chat-card,
+
+body:not(.home-page)
+.event-card,
+
+body:not(.home-page)
+.memory-card {
+
+  font-size:
+    calc(
+      16px *
+      var(
+        --app-font-scale,
+        1
+      )
+    ) !important;
+
+}
+
+
+body.home-page .love-note,
+body.home-page .home-section {
+
+  font-size:
+    calc(
+      16px *
+      var(
+        --app-font-scale,
+        1
+      )
+    ) !important;
+
+}
+
+
+/* =========================================================
+   ACCENT GLOBAL
+========================================================= */
+
+.home-small,
+.settings-label,
+.settings-account-label,
+.save-confirmation {
+
+  color:
+    var(
+      --app-accent
+    ) !important;
+
+}
+
+
+/* =========================================================
+   MENIU ACTIV
+========================================================= */
+
+.bottom-nav .nav-item.active {
+
+  background:
+    rgba(
+      var(
+        --app-accent-rgb
+      ),
+      .30
+    ) !important;
+
+  color:
+    #ffffff !important;
+
+}
+
+
+/* =========================================================
+   BUTOANE SELECTATE
+========================================================= */
+
+.background-option.selected,
+.typography-option.selected,
+.accent-option.selected {
+
+  border-color:
+    var(
+      --app-accent
+    ) !important;
+
+  box-shadow:
+    inset
+    0
+    0
+    0
+    1px
+    var(
+      --app-accent
+    ) !important;
+
+}
+
+
+/* =========================================================
+   BUTOANE PRINCIPALE
+========================================================= */
+
+.save-all-settings,
+.chat-input-row button,
+.send-button,
+#sendButton {
+
+  background:
+    var(
+      --app-accent
+    ) !important;
+
+}
+
+
+/* =========================================================
+   INIMA CITAT
+========================================================= */
+
+.heart-icon {
+
+  color:
+    var(
+      --app-accent
+    ) !important;
+
+}
+
+
+/* =========================================================
+   URSULEȚ PROGRES
+========================================================= */
+
+.bear-progress-fill {
+
+  background:
+    linear-gradient(
+      90deg,
+      var(
+        --app-accent
+      ),
+      rgba(
+        var(
+          --app-accent-rgb
+        ),
+        .55
+      )
+    ) !important;
+
+}
+
+
+/* =========================================================
+   SLIDER
+========================================================= */
+
+input[type="range"] {
+
+  accent-color:
+    var(
+      --app-accent
+    ) !important;
+
+}
+
+
+/* =========================================================
+   FĂRĂ FLASH ALB PE IPHONE
+========================================================= */
+
+.bottom-nav,
+.bottom-nav *,
+.background-option,
+.typography-option,
+.accent-option {
+
+  -webkit-tap-highlight-color:
+    transparent !important;
+
+}
+/* =========================================================
+   HOME - CARDUL CU POZA + DATA MAI MIC ȘI MAI STRÂNS
+========================================================= */
+
+body.home-page .love-hero {
+  width: 94% !important;
+
+  margin:
+    0 auto
+    14px !important;
+
+  padding:
+    0
+    14px
+    16px !important;
+
+  border-radius:
+    24px !important;
+}
+
+
+/* POZA MAI MICĂ */
+
+body.home-page .hero-photo-wrap {
+  width:
+    calc(100% + 28px) !important;
+
+  height:
+    260px !important;
+
+  min-height:
+    260px !important;
+
+  max-height:
+    260px !important;
+
+  margin-left:
+    -14px !important;
+
+  margin-right:
+    -14px !important;
+}
+
+
+body.home-page .couple-photo {
+  width:
+    100% !important;
+
+  height:
+    100% !important;
+
+  object-fit:
+    cover !important;
+}
+
+
+/* INIMA */
+
+body.home-page .hero-heart {
+  font-size:
+    38px !important;
+
+  margin:
+    -19px auto
+    7px !important;
+}
+
+
+/* NUMELE */
+
+body.home-page #coupleNames,
+body.home-page .couple-title {
+  font-size:
+    28px !important;
+
+  margin:
+    5px
+    0
+    14px !important;
+}
+
+
+/* ÎMPREUNĂ DE... */
+
+body.home-page .together-title {
+  font-size:
+    21px !important;
+
+  margin:
+    0
+    0
+    18px !important;
+}
+
+
+/* CONTORUL MAI STRÂNS */
+
+body.home-page .love-counter-grid {
+  gap:
+    8px !important;
+}
+
+
+/* CĂSUȚELE CU ANI/LUNI/ZILE */
+
+body.home-page .counter-item {
+  height:
+    88px !important;
+
+  min-height:
+    88px !important;
+
+  max-height:
+    88px !important;
+
+  padding:
+    8px
+    3px !important;
+
+  border-radius:
+    18px !important;
+}
+
+
+/* NUMERELE */
+
+body.home-page .counter-item strong {
+  font-size:
+    27px !important;
+
+  margin-bottom:
+    7px !important;
+}
+
+
+/* ANI / LUNI / ZILE / ORE */
+
+body.home-page .counter-item span {
+  font-size:
+    7px !important;
+
+  letter-spacing:
+    2px !important;
+}
+
+/* =========================================================
+   FIX DEFINITIV MENIU JOS - ACEEAȘI POZIȚIE PE TOATE PAGINILE
+   2026-08-29
+========================================================= */
+
+html,
+body {
+  margin: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.bottom-nav,
+body > .bottom-nav {
+  position: fixed !important;
+
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  bottom: 0 !important;
+
+  transform: none !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  height:
+    calc(
+      72px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  min-height:
+    calc(
+      72px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  max-height:
+    calc(
+      72px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  margin: 0 !important;
+
+  padding:
+    4px
+    6px
+    calc(
+      4px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(
+      5,
+      minmax(0, 1fr)
+    ) !important;
+
+  align-items: start !important;
+  align-content: start !important;
+
+  gap: 2px !important;
+
+  background:
+    rgba(
+      7,
+      5,
+      12,
+      0.99
+    ) !important;
+
+  border: 0 !important;
+
+  border-top:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.10
+    ) !important;
+
+  border-radius:
+    22px
+    22px
+    0
+    0 !important;
+
+  box-shadow:
+    0 -8px 30px
+    rgba(
+      0,
+      0,
+      0,
+      0.34
+    ) !important;
+
+  backdrop-filter:
+    blur(22px) !important;
+
+  -webkit-backdrop-filter:
+    blur(22px) !important;
+
+  z-index:
+    2147483647 !important;
+}
+
+.bottom-nav .nav-item,
+body > .bottom-nav .nav-item {
+  position: relative !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  height: 64px !important;
+  min-height: 64px !important;
+  max-height: 64px !important;
+
+  margin: 0 !important;
+
+  padding:
+    7px
+    2px
+    3px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  border-radius:
+    18px !important;
+
+  display: flex !important;
+
+  flex-direction:
+    column !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  gap: 4px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.70
+    ) !important;
+
+  font-family:
+    inherit !important;
+
+  font-size:
+    10px !important;
+
+  line-height:
+    1 !important;
+
+  text-align:
+    center !important;
+
+  text-decoration:
+    none !important;
+
+  cursor:
+    pointer !important;
+
+  transform:
+    none !important;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease !important;
+
+  touch-action:
+    manipulation !important;
+
+  -webkit-tap-highlight-color:
+    transparent !important;
+}
+
+.bottom-nav .nav-icon,
+body > .bottom-nav .nav-icon {
+  display: block !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-size:
+    23px !important;
+
+  line-height:
+    1 !important;
+
+  transform:
+    none !important;
+}
+
+.bottom-nav .nav-item.active,
+body > .bottom-nav .nav-item.active {
+  background:
+    rgba(
+      var(
+        --app-accent-rgb,
+        217,
+        104,
+        152
+      ),
+      0.30
+    ) !important;
+
+  color:
+    #ffffff !important;
+
+  transform:
+    none !important;
+}
+
+.bottom-nav .nav-item:active,
+body > .bottom-nav .nav-item:active {
+  transform:
+    none !important;
+}
+
+.app,
+.chat-app,
+.settings-app {
+  padding-bottom:
+    calc(
+      90px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+body.page-chat .chat-app,
+body.chat-page-body .chat-app,
+body:has(.chat-card) .app {
+  padding-bottom:
+    calc(
+      82px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+@media (max-width: 390px) {
+  .bottom-nav,
+  body > .bottom-nav {
+    height:
+      calc(
+        70px +
+        env(safe-area-inset-bottom)
+      ) !important;
+
+    min-height:
+      calc(
+        70px +
+        env(safe-area-inset-bottom)
+      ) !important;
+
+    max-height:
+      calc(
+        70px +
+        env(safe-area-inset-bottom)
+      ) !important;
+  }
+
+  .bottom-nav .nav-item,
+  body > .bottom-nav .nav-item {
+    height: 62px !important;
+    min-height: 62px !important;
+    max-height: 62px !important;
+
+    font-size:
+      9px !important;
+  }
+
+  .bottom-nav .nav-icon,
+  body > .bottom-nav .nav-icon {
+    font-size:
+      23px !important;
+  }
+}
+
+
+/* =========================================================
+   DUO LOVE - FIX FINAL MENIU JOS v29
+   Butoanele rămân permanent lipite jos.
+   Nici active / focus / hover / tap nu le mai ridică.
+========================================================= */
+
+.bottom-nav,
+body > .bottom-nav {
+  position: fixed !important;
+
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  bottom: 0 !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+
+  transform:
+    translate3d(0, 0, 0) !important;
+
+  -webkit-transform:
+    translate3d(0, 0, 0) !important;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr)) !important;
+
+  align-items: end !important;
+  align-content: end !important;
+
+  z-index:
+    2147483647 !important;
+
+  will-change:
+    auto !important;
+}
+
+
+/* TOATE BUTOANELE AU EXACT ACEEAȘI POZIȚIE */
+
+.bottom-nav .nav-item,
+body > .bottom-nav .nav-item,
+.bottom-nav .nav-item.active,
+body > .bottom-nav .nav-item.active,
+.bottom-nav .nav-item:active,
+body > .bottom-nav .nav-item:active,
+.bottom-nav .nav-item:focus,
+body > .bottom-nav .nav-item:focus,
+.bottom-nav .nav-item:focus-visible,
+body > .bottom-nav .nav-item:focus-visible,
+.bottom-nav .nav-item:hover,
+body > .bottom-nav .nav-item:hover {
+  position: relative !important;
+
+  top: 0 !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
+  transform:
+    translate3d(0, 0, 0) !important;
+
+  -webkit-transform:
+    translate3d(0, 0, 0) !important;
+
+  scale:
+    1 !important;
+
+  translate:
+    0 0 !important;
+
+  animation:
+    none !important;
+
+  outline:
+    none !important;
+}
+
+
+/* ICONIȚA ȘI TEXTUL NU SE MAI MIȘCĂ */
+
+.bottom-nav .nav-item .nav-icon,
+body > .bottom-nav .nav-item .nav-icon,
+.bottom-nav .nav-item span,
+body > .bottom-nav .nav-item span {
+  position: static !important;
+
+  top: auto !important;
+  bottom: auto !important;
+
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
+  transform:
+    none !important;
+
+  -webkit-transform:
+    none !important;
+
+  animation:
+    none !important;
+}
+
+
+/* DOAR CULOAREA ARATĂ PAGINA ACTIVĂ */
+
+.bottom-nav .nav-item.active,
+body > .bottom-nav .nav-item.active {
+  background:
+    rgba(
+      var(
+        --app-accent-rgb,
+        217,
+        104,
+        152
+      ),
+      .30
+    ) !important;
+
+  color:
+    #ffffff !important;
+}
+
+
+/* PE IPHONE NU LĂSĂM TAP-UL SĂ SCALEZE BUTONUL */
+
+.bottom-nav button,
+body > .bottom-nav button {
+  -webkit-tap-highlight-color:
+    transparent !important;
+
+  touch-action:
+    manipulation !important;
+}
+
+
+/* =========================================================
+   DUO LOVE - MENIU JOS FIX REAL v31
+   IMPORTANT: ACEST BLOC TREBUIE SĂ RĂMÂNĂ ULTIMUL ÎN CSS.
+   Elimină orice ridicare a butoanelor și orice safe-area
+   adăugat în bara de navigare.
+========================================================= */
+
+html,
+body {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+
+/* BARA RĂMÂNE LIPITĂ DE PARTEA DE JOS */
+
+.bottom-nav,
+body > .bottom-nav,
+.bottom-nav.five-items,
+body > .bottom-nav.five-items {
+  position: fixed !important;
+
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  bottom: 0 !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  height: 74px !important;
+  min-height: 74px !important;
+  max-height: 74px !important;
+
+  margin: 0 !important;
+
+  /* NU mai folosim env(safe-area-inset-bottom) aici */
+  padding: 4px 6px 2px !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+
+  gap: 2px !important;
+
+  align-items: stretch !important;
+  align-content: stretch !important;
+
+  transform: none !important;
+  -webkit-transform: none !important;
+
+  translate: none !important;
+  scale: 1 !important;
+
+  background: rgba(7, 5, 12, .99) !important;
+
+  border: 0 !important;
+  border-top: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: 22px 22px 0 0 !important;
+
+  box-shadow: 0 -8px 30px rgba(0,0,0,.34) !important;
+
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+
+  z-index: 2147483647 !important;
+
+  overflow: hidden !important;
+}
+
+
+/* TOATE CELE 5 BUTOANE AU EXACT ACEEAȘI DIMENSIUNE ȘI POZIȚIE */
+
+.bottom-nav .nav-item,
+body > .bottom-nav .nav-item,
+.bottom-nav.five-items .nav-item,
+body > .bottom-nav.five-items .nav-item,
+.bottom-nav .nav-item.active,
+body > .bottom-nav .nav-item.active,
+.bottom-nav .nav-item:active,
+body > .bottom-nav .nav-item:active,
+.bottom-nav .nav-item:focus,
+body > .bottom-nav .nav-item:focus,
+.bottom-nav .nav-item:focus-visible,
+body > .bottom-nav .nav-item:focus-visible,
+.bottom-nav .nav-item:hover,
+body > .bottom-nav .nav-item:hover {
+  position: static !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  height: 68px !important;
+  min-height: 68px !important;
+  max-height: 68px !important;
+
+  margin: 0 !important;
+
+  padding: 5px 2px 2px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  border-radius: 18px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 4px !important;
+
+  color: rgba(255,255,255,.70) !important;
+
+  font-family: inherit !important;
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+
+  text-align: center !important;
+  text-decoration: none !important;
+
+  transform: none !important;
+  -webkit-transform: none !important;
+
+  translate: none !important;
+  scale: 1 !important;
+
+  animation: none !important;
+
+  transition:
+    background-color .15s ease,
+    color .15s ease !important;
+
+  touch-action: manipulation !important;
+
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+
+/* ICONIȚA NU SE MIȘCĂ */
+
+.bottom-nav .nav-item .nav-icon,
+body > .bottom-nav .nav-item .nav-icon,
+.bottom-nav .nav-item.active .nav-icon,
+body > .bottom-nav .nav-item.active .nav-icon {
+  position: static !important;
+
+  display: block !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-size: 23px !important;
+  line-height: 1 !important;
+
+  transform: none !important;
+  -webkit-transform: none !important;
+
+  translate: none !important;
+  scale: 1 !important;
+
+  animation: none !important;
+}
+
+
+/* TEXTUL NU SE MIȘCĂ */
+
+.bottom-nav .nav-item span,
+body > .bottom-nav .nav-item span {
+  position: static !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+  -webkit-transform: none !important;
+
+  translate: none !important;
+  scale: 1 !important;
+
+  animation: none !important;
+}
+
+
+/* ACTIV = DOAR CULOARE, FĂRĂ SCHIMBARE DE POZIȚIE */
+
+.bottom-nav .nav-item.active,
+body > .bottom-nav .nav-item.active {
+  background:
+    rgba(
+      var(--app-accent-rgb, 217, 104, 152),
+      .30
+    ) !important;
+
+  color: #ffffff !important;
+
+  font-weight: 400 !important;
+
+  transform: none !important;
+  -webkit-transform: none !important;
+}
+
+
+/* IPHONE: ANULĂM TOATE REGULILE VECHI CU SAFE AREA DIN MENIU */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+
+  .bottom-nav,
+  body > .bottom-nav,
+  .bottom-nav.five-items,
+  body > .bottom-nav.five-items {
+    bottom: 0 !important;
+
+    height: 74px !important;
+    min-height: 74px !important;
+    max-height: 74px !important;
+
+    padding: 4px 6px 2px !important;
+  }
+
+}
+
+
+/* TELEFOANE MICI */
+
+@media (max-width: 390px) {
+
+  .bottom-nav,
+  body > .bottom-nav,
+  .bottom-nav.five-items,
+  body > .bottom-nav.five-items {
+    height: 72px !important;
+    min-height: 72px !important;
+    max-height: 72px !important;
+
+    padding: 3px 4px 1px !important;
+  }
+
+
+  .bottom-nav .nav-item,
+  body > .bottom-nav .nav-item {
+    height: 68px !important;
+    min-height: 68px !important;
+    max-height: 68px !important;
+
+    font-size: 9px !important;
+  }
+
+}

@@ -11,145 +11,422 @@ const loginStatus =
   document.getElementById("loginStatus");
 
 
+const PRODUCTION_ORIGIN =
+  "https://duo-love.netlify.app";
 
-/* ===================================== */
-/* VERIFICĂ DACĂ ESTE DEJA CONECTAT */
-/* ===================================== */
+
+let loginInProgress =
+  false;
+
+
+/* =========================================================
+   REDIRECȚIONARE HOME
+========================================================= */
+
+function goToHome() {
+
+  window.location.replace(
+    "./index.html"
+  );
+
+}
+
+
+/* =========================================================
+   VERIFICĂ DACĂ EȘTI PE VERSIUNEA NETLIFY
+========================================================= */
+
+function isProductionVersion() {
+
+  return (
+    window.location.origin ===
+    PRODUCTION_ORIGIN
+  );
+
+}
+
+
+/* =========================================================
+   VERIFICĂ SESIUNEA EXISTENTĂ
+========================================================= */
 
 async function checkExistingSession() {
 
-  const {
-    data,
-    error
-  } =
-    await supabaseClient.auth.getSession();
+  if (
+    typeof supabaseClient ===
+    "undefined"
+  ) {
 
-
-  if (error) {
-
-    console.error(error);
+    loginStatus.textContent =
+      "Supabase nu este disponibil.";
 
     return;
 
   }
 
 
-  if (data.session) {
-
-    window.location.href =
-      "index.html";
-
-  }
-
-}
-
-
-
-checkExistingSession();
-
-
-
-/* ===================================== */
-/* GUEST */
-/* ===================================== */
-
-guestButton.addEventListener(
-  "click",
-  async function () {
-
-    loginStatus.textContent =
-      "Se creează spațiul tău... ❤️";
-
-    guestButton.disabled =
-      true;
-
+  try {
 
     const {
       data,
       error
     } =
       await supabaseClient.auth
-        .signInAnonymously();
+        .getSession();
 
 
-    if (error) {
+    if (
+      error
+    ) {
 
-      console.error(error);
-
-      loginStatus.textContent =
-        "A apărut o problemă: " +
-        error.message;
-
-      guestButton.disabled =
-        false;
+      console.error(
+        "Eroare sesiune:",
+        error
+      );
 
       return;
 
     }
 
 
-    console.log(
-      "Guest conectat:",
-      data.user
+    if (
+      data &&
+      data.session &&
+      data.session.user
+    ) {
+
+      console.log(
+        "❤️ Sesiune existentă:",
+        data.session.user.id
+      );
+
+
+      goToHome();
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Eroare verificare sesiune:",
+      error
     );
+
+  }
+
+}
+
+
+/* =========================================================
+   ASCULTĂ SCHIMBĂRILE DE AUTENTIFICARE
+========================================================= */
+
+supabaseClient.auth
+  .onAuthStateChange(
+    function (
+      event,
+      session
+    ) {
+
+      console.log(
+        "Auth:",
+        event
+      );
+
+
+      if (
+        session &&
+        session.user &&
+        (
+          event ===
+            "SIGNED_IN" ||
+          event ===
+            "TOKEN_REFRESHED"
+        )
+      ) {
+
+        console.log(
+          "❤️ Utilizator autentificat:",
+          session.user.id
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   GUEST
+========================================================= */
+
+guestButton.addEventListener(
+  "click",
+  async function () {
+
+    if (
+      loginInProgress
+    ) {
+
+      return;
+
+    }
+
+
+    loginInProgress =
+      true;
+
+
+    guestButton.disabled =
+      true;
+
+    googleButton.disabled =
+      true;
+
+    appleButton.disabled =
+      true;
 
 
     loginStatus.textContent =
-      "Gata ❤️";
+      "Se creează spațiul tău... ❤️";
 
 
-    setTimeout(
-      function () {
+    try {
 
-        window.location.href =
-          "index.html";
+      const {
+        data,
+        error
+      } =
+        await supabaseClient.auth
+          .signInAnonymously();
 
-      },
-      400
-    );
+
+      if (
+        error
+      ) {
+
+        throw error;
+
+      }
+
+
+      if (
+        !data ||
+        !data.session ||
+        !data.user
+      ) {
+
+        throw new Error(
+          "Sesiunea nu a fost creată."
+        );
+
+      }
+
+
+      console.log(
+        "Guest conectat:",
+        data.user.id
+      );
+
+
+      await new Promise(
+        function (
+          resolve
+        ) {
+
+          setTimeout(
+            resolve,
+            250
+          );
+
+        }
+      );
+
+
+      const {
+        data:
+          sessionData,
+        error:
+          sessionError
+      } =
+        await supabaseClient.auth
+          .getSession();
+
+
+      if (
+        sessionError
+      ) {
+
+        throw sessionError;
+
+      }
+
+
+      if (
+        !sessionData ||
+        !sessionData.session
+      ) {
+
+        throw new Error(
+          "Sesiunea nu a rămas salvată."
+        );
+
+      }
+
+
+      loginStatus.textContent =
+        "Gata ❤️";
+
+
+      setTimeout(
+        function () {
+
+          goToHome();
+
+        },
+        250
+      );
+
+    } catch (error) {
+
+      console.error(
+        "Eroare Guest:",
+        error
+      );
+
+
+      loginStatus.textContent =
+        "A apărut o problemă: " +
+        (
+          error.message ||
+          "Nu s-a putut face autentificarea."
+        );
+
+
+      loginInProgress =
+        false;
+
+
+      guestButton.disabled =
+        false;
+
+      googleButton.disabled =
+        false;
+
+      appleButton.disabled =
+        false;
+
+    }
 
   }
 );
 
 
-
-/* ===================================== */
-/* GOOGLE */
-/* ===================================== */
+/* =========================================================
+   GOOGLE
+========================================================= */
 
 googleButton.addEventListener(
   "click",
   async function () {
 
+    if (
+      loginInProgress
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      !isProductionVersion()
+    ) {
+
+      loginStatus.textContent =
+        "Deschide aplicația de pe duo-love.netlify.app pentru Google.";
+
+      return;
+
+    }
+
+
+    loginInProgress =
+      true;
+
+
+    guestButton.disabled =
+      true;
+
+    googleButton.disabled =
+      true;
+
+    appleButton.disabled =
+      true;
+
+
     loginStatus.textContent =
       "Se deschide Google...";
 
 
-    const {
-      error
-    } =
-      await supabaseClient.auth
-        .signInWithOAuth({
+    try {
 
-          provider: "google",
+      const {
+        error
+      } =
+        await supabaseClient.auth
+          .signInWithOAuth({
 
-          options: {
+            provider:
+              "google",
 
-            redirectTo:
-              window.location.origin +
-              "/index.html"
+            options: {
 
-          }
+              redirectTo:
+                PRODUCTION_ORIGIN +
+                "/index.html"
 
-        });
+            }
+
+          });
 
 
-    if (error) {
+      if (
+        error
+      ) {
 
-      console.error(error);
+        throw error;
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Eroare Google:",
+        error
+      );
+
 
       loginStatus.textContent =
-        "Google nu este configurat încă.";
+        "Google nu a putut fi deschis: " +
+        (
+          error.message ||
+          "eroare necunoscută"
+        );
+
+
+      loginInProgress =
+        false;
+
+
+      guestButton.disabled =
+        false;
+
+      googleButton.disabled =
+        false;
+
+      appleButton.disabled =
+        false;
 
     }
 
@@ -157,46 +434,120 @@ googleButton.addEventListener(
 );
 
 
-
-/* ===================================== */
-/* APPLE */
-/* ===================================== */
+/* =========================================================
+   APPLE
+========================================================= */
 
 appleButton.addEventListener(
   "click",
   async function () {
 
+    if (
+      loginInProgress
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      !isProductionVersion()
+    ) {
+
+      loginStatus.textContent =
+        "Deschide aplicația de pe duo-love.netlify.app pentru Apple.";
+
+      return;
+
+    }
+
+
+    loginInProgress =
+      true;
+
+
+    guestButton.disabled =
+      true;
+
+    googleButton.disabled =
+      true;
+
+    appleButton.disabled =
+      true;
+
+
     loginStatus.textContent =
       "Se deschide Apple...";
 
 
-    const {
-      error
-    } =
-      await supabaseClient.auth
-        .signInWithOAuth({
+    try {
 
-          provider: "apple",
+      const {
+        error
+      } =
+        await supabaseClient.auth
+          .signInWithOAuth({
 
-          options: {
+            provider:
+              "apple",
 
-            redirectTo:
-              window.location.origin +
-              "/index.html"
+            options: {
 
-          }
+              redirectTo:
+                PRODUCTION_ORIGIN +
+                "/index.html"
 
-        });
+            }
+
+          });
 
 
-    if (error) {
+      if (
+        error
+      ) {
 
-      console.error(error);
+        throw error;
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Eroare Apple:",
+        error
+      );
+
 
       loginStatus.textContent =
-        "Apple nu este configurat încă.";
+        "Apple nu a putut fi deschis: " +
+        (
+          error.message ||
+          "eroare necunoscută"
+        );
+
+
+      loginInProgress =
+        false;
+
+
+      guestButton.disabled =
+        false;
+
+      googleButton.disabled =
+        false;
+
+      appleButton.disabled =
+        false;
 
     }
 
   }
 );
+
+
+/* =========================================================
+   START
+========================================================= */
+
+checkExistingSession();

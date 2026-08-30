@@ -1,8 +1,20 @@
 /* =========================================================
-   TEMA GLOBALĂ + FONT + NAVIGARE PWA + BLOCARE ZOOM
+   TEMA GLOBALĂ + FONT + ACCENT + MENIU PWA + BLOCARE ZOOM
+   VARIANTĂ FINALĂ
 ========================================================= */
 
 (function () {
+
+  if (window.__loveAppThemeStarted) {
+    return;
+  }
+
+  window.__loveAppThemeStarted = true;
+
+
+  /* =========================================================
+     TEME
+  ========================================================= */
 
   const THEMES = [
     "aurora",
@@ -22,22 +34,150 @@
 
 
   /* =========================================================
-     ȘTERGE TEMELE VECHI
+     PAGINI MENIU
+  ========================================================= */
+
+  const PAGES = [
+    {
+      file: "index.html",
+      icon: "🏠",
+      name: "Acasă"
+    },
+
+    {
+      file: "chat.html",
+      icon: "💬",
+      name: "Chat"
+    },
+
+    {
+      file: "amintiri.html",
+      icon: "📸",
+      name: "Amintiri"
+    },
+
+    {
+      file: "evenimente.html",
+      icon: "📅",
+      name: "Evenimente"
+    },
+
+    {
+      file: "setari.html",
+      icon: "⚙️",
+      name: "Setări"
+    }
+  ];
+
+
+  /* =========================================================
+     FONTURI
+  ========================================================= */
+
+  const FONT_MAP = {
+
+    "romantic-serif":
+      'Georgia, "Times New Roman", serif',
+
+    "editorial":
+      '"Times New Roman", Times, serif',
+
+    "refined":
+      'Baskerville, "Palatino Linotype", Palatino, serif',
+
+    "modern":
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif',
+
+    "classic":
+      'Garamond, Georgia, "Times New Roman", serif',
+
+    "handwritten":
+      '"Snell Roundhand", "Segoe Script", "Brush Script MT", cursive',
+
+
+    /* compatibilitate cu valorile vechi */
+
+    "system":
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif',
+
+    "serif":
+      'Georgia, "Times New Roman", serif',
+
+    "rounded":
+      '"Arial Rounded MT Bold", Arial, sans-serif',
+
+    "romantic":
+      'Georgia, "Times New Roman", serif'
+
+  };
+
+
+  /* =========================================================
+     CULORI ACCENT
+  ========================================================= */
+
+  const ACCENTS = {
+
+    rose: {
+      hex: "#d96898",
+      rgb: "217,104,152"
+    },
+
+    coral: {
+      hex: "#df716b",
+      rgb: "223,113,107"
+    },
+
+    lavender: {
+      hex: "#8b72d8",
+      rgb: "139,114,216"
+    },
+
+    ocean: {
+      hex: "#2f97ad",
+      rgb: "47,151,173"
+    },
+
+    champagne: {
+      hex: "#c79b32",
+      rgb: "199,155,50"
+    },
+
+    evergreen: {
+      hex: "#419171",
+      rgb: "65,145,113"
+    }
+
+  };
+
+
+  let navigationLocked = false;
+
+
+  /* =========================================================
+     ȘTERGE TEME VECHI
   ========================================================= */
 
   function clearThemes() {
 
-    THEMES.forEach(function (theme) {
+    if (!document.body) {
+      return;
+    }
 
-      document.body.classList.remove(
-        "bg-" + theme
-      );
 
-      document.body.classList.remove(
-        "theme-" + theme
-      );
+    THEMES.forEach(
+      function (theme) {
 
-    });
+        document.body.classList.remove(
+          "bg-" + theme
+        );
+
+        document.body.classList.remove(
+          "theme-" + theme
+        );
+
+      }
+    );
 
 
     document.body.style.removeProperty(
@@ -89,6 +229,8 @@
     clearThemes();
 
 
+    /* FUNDAL DIN GALERIE */
+
     if (
       selectedTheme === "custom" &&
       customBackground
@@ -101,9 +243,12 @@
 
       document.body.style.setProperty(
         "background-image",
-        "linear-gradient(rgba(5,5,10,.25), rgba(5,5,10,.45)), url('" +
+        "linear-gradient(" +
+          "rgba(5,5,10,.25)," +
+          "rgba(5,5,10,.45)" +
+        "), url('" +
           customBackground +
-          "')",
+        "')",
         "important"
       );
 
@@ -140,12 +285,36 @@
     }
 
 
+    /* DACĂ FUNDALUL CUSTOM NU MAI EXISTĂ */
+
     if (
       selectedTheme === "custom" &&
       !customBackground
     ) {
 
-      selectedTheme = "dark";
+      selectedTheme =
+        "dark";
+
+
+      localStorage.setItem(
+        "selectedTheme",
+        "dark"
+      );
+
+    }
+
+
+    /* VERIFICĂ TEMA */
+
+    if (
+      !THEMES.includes(
+        selectedTheme
+      )
+    ) {
+
+      selectedTheme =
+        "dark";
+
 
       localStorage.setItem(
         "selectedTheme",
@@ -163,6 +332,50 @@
 
 
   /* =========================================================
+     NORMALIZEAZĂ FONT VECHI
+  ========================================================= */
+
+  function normalizeFont(
+    font
+  ) {
+
+    const aliases = {
+
+      system:
+        "modern",
+
+      serif:
+        "romantic-serif",
+
+      rounded:
+        "modern",
+
+      romantic:
+        "romantic-serif"
+
+    };
+
+
+    const candidate =
+      aliases[font] ||
+      font;
+
+
+    if (
+      FONT_MAP[candidate]
+    ) {
+
+      return candidate;
+
+    }
+
+
+    return "modern";
+
+  }
+
+
+  /* =========================================================
      FONT GLOBAL
   ========================================================= */
 
@@ -174,33 +387,67 @@
 
 
     const savedFont =
-      localStorage.getItem(
-        "appFont"
-      ) || "system";
-
-
-    const savedSize =
-      Number(
+      normalizeFont(
         localStorage.getItem(
-          "appFontSize"
-        ) || "100"
+          "appFont"
+        ) ||
+        "romantic-serif"
       );
 
 
-    const fontClasses = [
+    let savedSize =
+      Number(
+        localStorage.getItem(
+          "appFontSize"
+        ) ||
+        "100"
+      );
+
+
+    if (
+      !Number.isFinite(
+        savedSize
+      )
+    ) {
+
+      savedSize =
+        100;
+
+    }
+
+
+    savedSize =
+      Math.max(
+        85,
+        Math.min(
+          130,
+          savedSize
+        )
+      );
+
+
+    const classes = [
+
+      "font-romantic-serif",
+      "font-editorial",
+      "font-refined",
+      "font-modern",
+      "font-classic",
+      "font-handwritten",
+
       "font-system",
       "font-serif",
       "font-rounded",
-      "font-classic",
       "font-romantic"
+
     ];
 
 
-    fontClasses.forEach(
-      function (fontClass) {
+    classes.forEach(
+      function (className) {
 
         document.body.classList.remove(
-          fontClass
+          className
         );
 
       }
@@ -213,30 +460,91 @@
 
 
     document.body.style.setProperty(
+      "--app-font-family",
+      FONT_MAP[savedFont]
+    );
+
+
+    document.body.style.setProperty(
       "--app-font-scale",
-      savedSize / 100
+      String(
+        savedSize /
+        100
+      )
     );
 
   }
 
 
   /* =========================================================
-     MENIU PWA
-     ÎNLOCUIEȘTE AUTOMAT BARA DE JOS
+     ACCENT GLOBAL
   ========================================================= */
 
-  function createPWANavigation() {
+  function applyGlobalAccent() {
 
-    const nav =
-      document.querySelector(
-        ".bottom-nav"
-      );
-
-
-    if (!nav) {
+    if (!document.body) {
       return;
     }
 
+
+    let accent =
+      localStorage.getItem(
+        "appAccent"
+      ) ||
+      "rose";
+
+
+    if (
+      !ACCENTS[accent]
+    ) {
+
+      accent =
+        "rose";
+
+
+      localStorage.setItem(
+        "appAccent",
+        accent
+      );
+
+    }
+
+
+    const value =
+      ACCENTS[accent];
+
+
+    document.body.dataset.accent =
+      accent;
+
+
+    document.body.style.setProperty(
+      "--app-accent",
+      value.hex
+    );
+
+
+    document.body.style.setProperty(
+      "--app-accent-rgb",
+      value.rgb
+    );
+
+
+    document.body.style.setProperty(
+      "--app-accent-soft",
+      "rgba(" +
+        value.rgb +
+        ", .22)"
+    );
+
+  }
+
+
+  /* =========================================================
+     PAGINA CURENTĂ
+  ========================================================= */
+
+  function getCurrentPage() {
 
     let currentPage =
       window.location.pathname
@@ -249,48 +557,78 @@
       !currentPage ||
       currentPage === "/"
     ) {
-      currentPage = "index.html";
+
+      currentPage =
+        "index.html";
+
     }
 
 
-    const pages = [
-      {
-        file: "index.html",
-        icon: "🏠",
-        name: "Acasă"
-      },
+    return currentPage;
 
-      {
-        file: "chat.html",
-        icon: "💬",
-        name: "Chat"
-      },
-
-      {
-        file: "amintiri.html",
-        icon: "📸",
-        name: "Amintiri"
-      },
-
-      {
-        file: "evenimente.html",
-        icon: "📅",
-        name: "Evenimente"
-      },
-
-      {
-        file: "setari.html",
-        icon: "⚙️",
-        name: "Setări"
-      }
-    ];
+  }
 
 
-    nav.innerHTML = "";
+  /* =========================================================
+     MUTĂ MENIUL DIRECT ÎN BODY
+  ========================================================= */
+
+  function moveNavigationToBody() {
+
+    const nav =
+      document.querySelector(
+        ".bottom-nav"
+      );
 
 
-    pages.forEach(
+    if (!nav) {
+      return null;
+    }
+
+
+    if (
+      nav.parentElement !==
+      document.body
+    ) {
+
+      document.body.appendChild(
+        nav
+      );
+
+    }
+
+
+    return nav;
+
+  }
+
+
+  /* =========================================================
+     MENIU GLOBAL
+  ========================================================= */
+
+  function createPWANavigation() {
+
+    const nav =
+      moveNavigationToBody();
+
+
+    if (!nav) {
+      return;
+    }
+
+
+    const currentPage =
+      getCurrentPage();
+
+
+    nav.innerHTML =
+      "";
+
+
+    PAGES.forEach(
       function (page) {
+
 
         const button =
           document.createElement(
@@ -298,19 +636,39 @@
           );
 
 
-        button.type = "button";
+        button.type =
+          "button";
 
 
         button.className =
           "nav-item";
 
 
+        button.dataset.page =
+          page.file;
+
+
+        button.setAttribute(
+          "aria-label",
+          page.name
+        );
+
+
+        /* ACTIV */
+
         if (
-          currentPage === page.file
+          currentPage ===
+          page.file
         ) {
 
           button.classList.add(
             "active"
+          );
+
+
+          button.setAttribute(
+            "aria-current",
+            "page"
           );
 
         }
@@ -318,27 +676,57 @@
 
         button.innerHTML =
           '<span class="nav-icon">' +
-          page.icon +
+            page.icon +
           "</span>" +
+
           "<span>" +
-          page.name +
+            page.name +
           "</span>";
 
+
+        /* CLICK */
 
         button.addEventListener(
           "click",
           function (event) {
+
 
             event.preventDefault();
 
             event.stopPropagation();
 
 
-            /*
-              IMPORTANT:
-              folosim aceeași origine,
-              același IP și același port.
-            */
+            const actualPage =
+              getCurrentPage();
+
+
+            /* DACĂ EȘTI DEJA PE PAGINA ASTA,
+               NU MAI DĂ RELOAD */
+
+            if (
+              actualPage ===
+              page.file
+            ) {
+
+              return;
+
+            }
+
+
+            /* BLOCARE CLICKURI FOARTE RAPIDE */
+
+            if (
+              navigationLocked
+            ) {
+
+              return;
+
+            }
+
+
+            navigationLocked =
+              true;
+
 
             const currentURL =
               new URL(
@@ -346,16 +734,18 @@
               );
 
 
-            let path =
+            const currentPath =
               currentURL.pathname;
 
 
             const lastSlash =
-              path.lastIndexOf("/");
+              currentPath.lastIndexOf(
+                "/"
+              );
 
 
             const folder =
-              path.substring(
+              currentPath.substring(
                 0,
                 lastSlash + 1
               );
@@ -367,8 +757,18 @@
               page.file;
 
 
-            window.location.replace(
-              destination
+            window.location.href =
+              destination;
+
+
+            setTimeout(
+              function () {
+
+                navigationLocked =
+                  false;
+
+              },
+              700
             );
 
           }
@@ -386,7 +786,7 @@
 
 
   /* =========================================================
-     ELIMINĂ TARGET BLANK
+     ȘTERGE TARGET BLANK
   ========================================================= */
 
   function removeExternalTargets() {
@@ -409,41 +809,10 @@
 
 
   /* =========================================================
-     BLOCARE PINCH ZOOM / DOUBLE TAP
+     BLOCARE ZOOM
   ========================================================= */
 
   function disableZoom() {
-
-    let lastTouchEnd = 0;
-
-
-    document.addEventListener(
-      "touchend",
-      function (event) {
-
-        const now =
-          Date.now();
-
-
-        if (
-          now -
-          lastTouchEnd <=
-          300
-        ) {
-
-          event.preventDefault();
-
-        }
-
-
-        lastTouchEnd =
-          now;
-
-      },
-      {
-        passive: false
-      }
-    );
 
 
     document.addEventListener(
@@ -491,7 +860,8 @@
 
         if (
           event.touches &&
-          event.touches.length > 1
+          event.touches.length >
+          1
         ) {
 
           event.preventDefault();
@@ -503,6 +873,145 @@
         passive: false
       }
     );
+
+
+    document.addEventListener(
+      "dblclick",
+      function (event) {
+
+        event.preventDefault();
+
+      },
+      {
+        passive: false
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     FIX TAP IPHONE
+  ========================================================= */
+
+  function fixNavigationTap() {
+
+    const nav =
+      document.querySelector(
+        ".bottom-nav"
+      );
+
+
+    if (!nav) {
+      return;
+    }
+
+
+    nav.style.setProperty(
+      "-webkit-tap-highlight-color",
+      "transparent",
+      "important"
+    );
+
+
+    nav.style.setProperty(
+      "-webkit-user-select",
+      "none",
+      "important"
+    );
+
+
+    nav.style.setProperty(
+      "user-select",
+      "none",
+      "important"
+    );
+
+
+    nav
+      .querySelectorAll(
+        ".nav-item"
+      )
+      .forEach(
+        function (button) {
+
+
+          button.style.setProperty(
+            "-webkit-tap-highlight-color",
+            "transparent",
+            "important"
+          );
+
+
+          button.style.setProperty(
+            "touch-action",
+            "manipulation",
+            "important"
+          );
+
+        }
+      );
+
+  }
+
+
+  /* =========================================================
+     BUTON ACTIV
+  ========================================================= */
+
+  function updateActiveNavigation() {
+
+    const currentPage =
+      getCurrentPage();
+
+
+    document
+      .querySelectorAll(
+        ".bottom-nav .nav-item"
+      )
+      .forEach(
+        function (button) {
+
+
+          const page =
+            (
+              button.dataset.page ||
+              ""
+            ).toLowerCase();
+
+
+          const active =
+            page ===
+            currentPage;
+
+
+          button.classList.toggle(
+            "active",
+            active
+          );
+
+
+          if (
+            active
+          ) {
+
+            button.setAttribute(
+              "aria-current",
+              "page"
+            );
+
+          }
+
+          else {
+
+            button.removeAttribute(
+              "aria-current"
+            );
+
+          }
+
+        }
+      );
 
   }
 
@@ -517,11 +1026,17 @@
 
     applyGlobalFont();
 
+    applyGlobalAccent();
+
     removeExternalTargets();
 
     createPWANavigation();
 
+    fixNavigationTap();
+
     disableZoom();
+
+    updateActiveNavigation();
 
   }
 
@@ -533,15 +1048,51 @@
 
     document.addEventListener(
       "DOMContentLoaded",
-      startAppGlobal
+      startAppGlobal,
+      {
+        once: true
+      }
     );
 
-  } else {
+  }
+
+  else {
 
     startAppGlobal();
 
   }
 
+
+  /* =========================================================
+     IOS CACHE
+  ========================================================= */
+
+  window.addEventListener(
+    "pageshow",
+    function () {
+
+
+      navigationLocked =
+        false;
+
+
+      applyGlobalBackground();
+
+      applyGlobalFont();
+
+      applyGlobalAccent();
+
+      updateActiveNavigation();
+
+      fixNavigationTap();
+
+    }
+  );
+
+
+  /* =========================================================
+     FUNCȚII PUBLICE
+  ========================================================= */
 
   window.applyGlobalBackground =
     applyGlobalBackground;
@@ -550,69 +1101,12 @@
   window.applyGlobalFont =
     applyGlobalFont;
 
+
+  window.applyGlobalAccent =
+    applyGlobalAccent;
+
+
+  window.updateActiveNavigation =
+    updateActiveNavigation;
+
 })();
-/* =========================================================
-   MENIU PWA LIPIT DE ECRAN
-========================================================= */
-
-function fixBottomNavigation() {
-
-  const nav =
-    document.querySelector(".bottom-nav");
-
-  if (!nav) {
-    return;
-  }
-
-  /*
-    Mutăm meniul direct în BODY.
-    Astfel position:fixed este raportat
-    la ecranul telefonului.
-  */
-  if (nav.parentElement !== document.body) {
-    document.body.appendChild(nav);
-  }
-
-}
-
-
-if (document.readyState === "loading") {
-
-  document.addEventListener(
-    "DOMContentLoaded",
-    fixBottomNavigation
-  );
-
-} else {
-
-  fixBottomNavigation();
-
-}
-/* MENIUL ESTE MUTAT DIRECT ÎN BODY */
-
-function moveBottomNavToScreen() {
-
-  const nav =
-    document.querySelector(".bottom-nav");
-
-  if (!nav) return;
-
-  if (nav.parentElement !== document.body) {
-    document.body.appendChild(nav);
-  }
-
-}
-
-
-if (document.readyState === "loading") {
-
-  document.addEventListener(
-    "DOMContentLoaded",
-    moveBottomNavToScreen
-  );
-
-} else {
-
-  moveBottomNavToScreen();
-
-}
