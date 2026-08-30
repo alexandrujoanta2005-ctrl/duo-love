@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#0b0912">
+
+  <title>Setări ❤️</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    html,
+    body {
+      touch-action: manipulation;
+      overscroll-behavior: none;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+
+    .settings-account-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 14px;
+
+      padding: 17px;
+
+      border-radius: 20px;
+
+      background:
+        rgba(255,255,255,.055);
+
+      border:
+        1px solid
+        rgba(255,255,255,.09);
+    }
+
+
+    .settings-account-info {
+      min-width: 0;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+    }
+
+
+    .settings-account-icon {
+      width: 48px;
+      height: 48px;
+
+      flex-shrink: 0;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,.08);
+
+      font-size: 21px;
+    }
+
+
+    .settings-account-label {
+      display: block;
+
+      margin-bottom: 5px;
+
+      color: #efa5c1;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: 2px;
+    }
+
+
+    #userAccount {
+      max-width: 190px;
+
+      margin: 0;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+
+      color: white;
+
+      font-size: 13px;
+    }
+
+
+    .settings-logout-button {
+      min-height: 43px;
+
+      flex-shrink: 0;
+
+      padding: 0 16px;
+
+      border-radius: 14px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.14);
+
+      background:
+        rgba(255,255,255,.07);
+
+      color: white;
+
+      font: inherit;
+
+      cursor: pointer;
+    }
+
+
+    .settings-photo-preview {
+      position: relative;
+
+      width: 100%;
+      height: 250px;
+
+      margin-bottom: 25px;
+
+      overflow: hidden;
+
+      border-radius: 25px;
+
+      background:
+        rgba(255,255,255,.05);
+    }
+
+
+    .settings-photo-preview img {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+    }
+
+
+    .settings-photo-button {
+      position: absolute;
+
+      right: 15px;
+      bottom: 15px;
+
+      padding: 11px 15px;
+
+      border-radius: 15px;
+
+      background:
+        rgba(0,0,0,.58);
+
+      border:
+        1px solid
+        rgba(255,255,255,.15);
+
+      color: white;
+
+      font-size: 13px;
+
+      cursor: pointer;
+    }
+
+
+    .settings-select {
+      width: 100%;
+
+      min-height: 56px;
+
+      padding: 0 16px;
+
+      border-radius: 14px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.18);
+
+      outline: none;
+
+      background: #15121d;
+
+      color: white;
+
+      font: inherit;
+    }
+
+
+    .font-size-row {
+      display: flex;
+
+      align-items: center;
+
+      gap: 15px;
+
+      margin-top: 12px;
+    }
+
+
+    .font-size-row input {
+      flex: 1;
+
+      accent-color: #df729e;
+    }
+
+
+    .font-small {
+      font-size: 14px;
+    }
+
+
+    .font-big {
+      font-size: 29px;
+    }
+
+
+    .font-size-value {
+      margin-top: 12px;
+
+      text-align: center;
+
+      color:
+        rgba(255,255,255,.65);
+
+      font-size: 13px;
+    }
+
+
+    .font-size-value strong {
+      color: #efa5c1;
+    }
+
+
+    .font-preview {
+      margin-top: 20px;
+
+      padding: 27px 15px;
+
+      text-align: center;
+
+      border-radius: 21px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
+      background:
+        rgba(255,255,255,.055);
+
+      color: white;
+
+      font-size: 27px;
+    }
+
+
+    .custom-background-preview {
+      position: relative;
+
+      width: 100%;
+      min-height: 180px;
+
+      margin-top: 18px;
+
+      overflow: hidden;
+
+      border-radius: 23px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      background:
+        rgba(255,255,255,.05);
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+    }
+
+
+    .custom-background-preview img {
+      width: 100%;
+      height: 210px;
+
+      display: none;
+
+      object-fit: cover;
+    }
+
+
+    .custom-background-placeholder {
+      padding: 25px;
+
+      text-align: center;
+
+      color:
+        rgba(255,255,255,.55);
+
+      font-size: 13px;
+    }
+
+
+    .custom-background-buttons {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 10px;
+
+      margin-top: 14px;
+    }
+
+
+    .custom-background-button {
+      min-height: 48px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 0 12px;
+
+      border-radius: 15px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.12);
+
+      background:
+        rgba(255,255,255,.07);
+
+      color: white;
+
+      font: inherit;
+
+      font-size: 12px;
+
+      cursor: pointer;
+    }
+
+
+    .remove-custom-background {
+      min-height: 48px;
+
+      border-radius: 15px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.12);
+
+      background:
+        rgba(255,80,100,.08);
+
+      color: #ffc3cf;
+
+      font: inherit;
+
+      font-size: 12px;
+
+      cursor: pointer;
+    }
+
+
+    body.font-system,
+    .preview-system {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+
+    body.font-serif,
+    .preview-serif {
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+    }
+
+
+    body.font-rounded,
+    .preview-rounded {
+      font-family:
+        "Arial Rounded MT Bold",
+        Arial,
+        sans-serif;
+    }
+
+
+    body.font-classic,
+    .preview-classic {
+      font-family:
+        "Times New Roman",
+        Times,
+        serif;
+    }
+
+
+    body.font-romantic,
+    .preview-romantic {
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-style: italic;
+    }
+
+
+    .settings-textarea {
+      min-height: 115px !important;
+
+      padding-top: 15px !important;
+
+      resize: vertical;
+    }
+
+  </style>
+
+</head>
+
+
+<body class="settings-body">
+
+
+  <main class="app settings-app">
+
+
+    <header class="settings-header">
+
+      <h1>
+        Setări
+      </h1>
+
+      <p>
+        Personalizează spațiul vostru ❤️
+      </p>
+
+    </header>
+
+
+
+    <!-- CONT -->
+
+    <section class="settings-big-card">
+
+      <span class="home-small">
+        👤 CONT
+      </span>
+
+      <h2>
+        Contul tău
+      </h2>
+
+
+      <div class="settings-account-card">
+
+
+        <div class="settings-account-info">
+
+          <div class="settings-account-icon">
+            👤
+          </div>
+
+
+          <div>
+
+            <span class="settings-account-label">
+              CONECTAT
+            </span>
+
+            <p id="userAccount">
+              Se verifică...
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          id="logoutButton"
+          class="settings-logout-button"
+          type="button"
+        >
+          Ieși
+        </button>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- CUPLU -->
+
+    <section class="settings-big-card">
+
+      <span class="home-small">
+        ❤️ CUPLUL NOSTRU
+      </span>
+
+      <h2>
+        Povestea voastră
+      </h2>
+
+
+      <div class="settings-photo-preview">
+
+        <img
+          id="settingsCouplePhoto"
+          src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=80"
+          alt="Poza noastră"
+        >
+
+
+        <label
+          class="settings-photo-button"
+          for="couplePhotoInput"
+        >
+          📷 Alege poza
+        </label>
+
+
+        <input
+          id="couplePhotoInput"
+          type="file"
+          accept="image/*"
+          hidden
+        >
+
+      </div>
+
+
+
+      <label
+        class="settings-label"
+        for="firstNameInput"
+      >
+        PRIMUL NUME
+      </label>
+
+      <input
+        id="firstNameInput"
+        class="settings-input"
+        type="text"
+        placeholder="Alex"
+      >
+
+
+
+      <label
+        class="settings-label"
+        for="secondNameInput"
+      >
+        AL DOILEA NUME
+      </label>
+
+      <input
+        id="secondNameInput"
+        class="settings-input"
+        type="text"
+        placeholder="Bianca"
+      >
+
+
+
+      <label
+        class="settings-label"
+        for="relationshipDateInput"
+      >
+        DATA ȘI ORA RELAȚIEI
+      </label>
+
+      <input
+        id="relationshipDateInput"
+        class="settings-input"
+        type="datetime-local"
+      >
+
+
+
+      <label
+        class="settings-label"
+        for="coupleQuoteInput"
+      >
+        CITATUL VOSTRU
+      </label>
+
+      <textarea
+        id="coupleQuoteInput"
+        class="settings-input settings-textarea"
+        placeholder="În fiecare zi aleg din nou să te iubesc."
+      ></textarea>
+
+    </section>
+
+
+
+    <!-- FONT -->
+
+    <section class="settings-big-card">
+
+      <span class="home-small">
+        🔤 TEXT
+      </span>
+
+      <h2>
+        Fontul aplicației
+      </h2>
+
+
+      <label
+        class="settings-label"
+        for="fontSelect"
+      >
+        FONT
+      </label>
+
+
+      <select
+        id="fontSelect"
+        class="settings-select"
+      >
+
+        <option value="system">
+          Modern
+        </option>
+
+        <option value="serif">
+          Elegant
+        </option>
+
+        <option value="rounded">
+          Rotunjit
+        </option>
+
+        <option value="classic">
+          Clasic
+        </option>
+
+        <option value="romantic">
+          Romantic
+        </option>
+
+      </select>
+
+
+
+      <label
+        class="settings-label"
+        for="fontSizeRange"
+      >
+        DIMENSIUNE FONT
+      </label>
+
+
+      <div class="font-size-row">
+
+        <span class="font-small">
+          A
+        </span>
+
+
+        <input
+          id="fontSizeRange"
+          type="range"
+          min="85"
+          max="130"
+          step="5"
+          value="100"
+        >
+
+
+        <span class="font-big">
+          A
+        </span>
+
+      </div>
+
+
+      <p class="font-size-value">
+
+        Dimensiune:
+
+        <strong id="fontSizeValue">
+          100%
+        </strong>
+
+      </p>
+
+
+      <div
+        id="fontPreview"
+        class="font-preview"
+      >
+        Alex 💙 & Bianca 💙
+      </div>
+
+    </section>
+
+
+
+    <!-- FUNDAL -->
+
+    <section class="settings-big-card">
+
+      <span class="home-small">
+        🎨 APARENȚĂ
+      </span>
+
+      <h2>
+        Fundalul aplicației
+      </h2>
+
+
+      <div class="background-grid">
+
+
+        <button
+          class="background-option"
+          data-theme="aurora"
+          type="button"
+        >
+          <span>🌈</span>
+          Aurora
+        </button>
+
+
+        <button
+          class="background-option"
+          data-theme="mesh"
+          type="button"
+        >
+          <span>🕸️</span>
+          Mesh
+        </button>
+
+
+        <button
+          class="background-option"
+          data-theme="starlight"
+          type="button"
+        >
+          <span>✨</span>
+          Starlight
+        </button>
+
+
+        <button
+          class="background-option"
+          data-theme="silk"
+          type="button"
+        >
+          <span>🎀</span>
+          Silk
+        </button>
+
+
+        <button
+          class="background-option"
+          data-theme="nature"
+          type="button"
+        >
+          <span>🌿</span>
+          Nature
+        </button>
+
+
+        <button
+          class="background-option"
+          data-theme="stars"
+          type="button"
+        >
+          <span>⭐</span>
+          Stars
+        </button>
+
+
+        <button
+          class="background-option"
+          data-theme="moon"
+          type="button"
+        >
+          <span>🌙</span>
+          Moon
+        </button>
+
+
+        <button
+          class="background-option"
+          data-theme="clouds"
+          type="button"
+        >
+          <span>☁️</span>
+          Clouds
+        </button>
+
+
+        <button
+          class="background-option"
+          data-theme="cozy"
+          type="button"
+        >
+          <span>🕯️</span>
+          Cozy
+        </button>
+
+
+        <button
+          class="background-option"
+          data-theme="pastel"
+          type="button"
+        >
+          <span>🌸</span>
+          Pastel
+        </button>
+
+
+        <button
+          class="background-option"
+          data-theme="dark"
+          type="button"
+        >
+          <span>🌑</span>
+          Dark
+        </button>
+
+
+        <button
+          class="background-option"
+          data-theme="plain"
+          type="button"
+        >
+          <span>🤍</span>
+          Simplu
+        </button>
+
+
+      </div>
+
+
+
+      <!-- FUNDAL DIN GALERIE -->
+
+      <label class="settings-label">
+        FUNDAL PERSONALIZAT
+      </label>
+
+
+      <div class="custom-background-preview">
+
+
+        <img
+          id="customBackgroundPreview"
+          alt="Fundal ales"
+        >
+
+
+        <div
+          id="customBackgroundPlaceholder"
+          class="custom-background-placeholder"
+        >
+          🖼️ Alege o fotografie din galerie pentru fundalul întregii aplicații.
+        </div>
+
+
+      </div>
+
+
+      <div class="custom-background-buttons">
+
+
+        <label
+          for="backgroundImageInput"
+          class="custom-background-button"
+        >
+          🖼️ Din galerie
+        </label>
+
+
+        <input
+          id="backgroundImageInput"
+          type="file"
+          accept="image/*"
+          hidden
+        >
+
+
+        <button
+          id="removeBackgroundButton"
+          class="remove-custom-background"
+          type="button"
+        >
+          🗑 Elimină fundal
+        </button>
+
+
+      </div>
+
+    </section>
+
+
+
+    <button
+      id="saveAllSettings"
+      class="save-all-settings"
+      type="button"
+    >
+      ❤️ Salvează toate setările
+    </button>
+
+
+    <p
+      id="saveConfirmation"
+      class="save-confirmation"
+    ></p>
+
+
+    <div style="height: 130px;"></div>
+
+  </main>
+
+
+
+  <!-- MENIU JOS -->
+
+  <nav class="bottom-nav five-items">
+
+
+    <a
+      href="index.html"
+      class="nav-item"
+    >
+      <span class="nav-icon">🏠</span>
+      <span>Acasă</span>
+    </a>
+
+
+    <a
+      href="chat.html"
+      class="nav-item"
+    >
+      <span class="nav-icon">💬</span>
+      <span>Chat</span>
+    </a>
+
+
+    <a
+      href="amintiri.html"
+      class="nav-item"
+    >
+      <span class="nav-icon">📸</span>
+      <span>Amintiri</span>
+    </a>
+
+
+    <a
+      href="evenimente.html"
+      class="nav-item"
+    >
+      <span class="nav-icon">📅</span>
+      <span>Evenimente</span>
+    </a>
+
+
+    <a
+      href="setari.html"
+      class="nav-item active"
+    >
+      <span class="nav-icon">⚙️</span>
+      <span>Setări</span>
+    </a>
+
+
+  </nav>
+
+
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="supabase.js"></script>
+
+  <script src="tema.js"></script>
+
+
+
+  <script>
+
+    /* ================================
+       ANTI ZOOM
+    ================================= */
+
+    let lastTouchEnd = 0;
+
+    document.addEventListener(
+      "touchend",
+      function (event) {
+
+        const now =
+          Date.now();
+
+
+        if (
+          now -
+          lastTouchEnd <=
+          300
+        ) {
+
+          event.preventDefault();
+
+        }
+
+
+        lastTouchEnd =
+          now;
+
+      },
+      {
+        passive: false
+      }
+    );
+
+
+    document.addEventListener(
+      "gesturestart",
+      function (event) {
+
+        event.preventDefault();
+
+      },
+      {
+        passive: false
+      }
+    );
+
+
+    document.addEventListener(
+      "touchmove",
+      function (event) {
+
+        if (
+          event.touches.length >
+          1
+        ) {
+
+          event.preventDefault();
+
+        }
+
+      },
+      {
+        passive: false
+      }
+    );
+
+
+
+    /* ================================
+       ELEMENTE
+    ================================= */
+
+    const userAccount =
+      document.getElementById(
+        "userAccount"
+      );
+
+
+    const logoutButton =
+      document.getElementById(
+        "logoutButton"
+      );
+
+
+    const firstNameInput =
+      document.getElementById(
+        "firstNameInput"
+      );
+
+
+    const secondNameInput =
+      document.getElementById(
+        "secondNameInput"
+      );
+
+
+    const relationshipDateInput =
+      document.getElementById(
+        "relationshipDateInput"
+      );
+
+
+    const coupleQuoteInput =
+      document.getElementById(
+        "coupleQuoteInput"
+      );
+
+
+    const couplePhotoInput =
+      document.getElementById(
+        "couplePhotoInput"
+      );
+
+
+    const settingsCouplePhoto =
+      document.getElementById(
+        "settingsCouplePhoto"
+      );
+
+
+    const fontSelect =
+      document.getElementById(
+        "fontSelect"
+      );
+
+
+    const fontSizeRange =
+      document.getElementById(
+        "fontSizeRange"
+      );
+
+
+    const fontSizeValue =
+      document.getElementById(
+        "fontSizeValue"
+      );
+
+
+    const fontPreview =
+      document.getElementById(
+        "fontPreview"
+      );
+
+
+    const backgroundImageInput =
+      document.getElementById(
+        "backgroundImageInput"
+      );
+
+
+    const customBackgroundPreview =
+      document.getElementById(
+        "customBackgroundPreview"
+      );
+
+
+    const customBackgroundPlaceholder =
+      document.getElementById(
+        "customBackgroundPlaceholder"
+      );
+
+
+    const removeBackgroundButton =
+      document.getElementById(
+        "removeBackgroundButton"
+      );
+
+
+    const saveButton =
+      document.getElementById(
+        "saveAllSettings"
+      );
+
+
+    const saveConfirmation =
+      document.getElementById(
+        "saveConfirmation"
+      );
+
+
+
+    /* ================================
+       CONT
+    ================================= */
+
+    async function loadConnectedAccount() {
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.getSession();
+
+
+        if (
+          error ||
+          !data.session
+        ) {
+
+          window.location.href =
+            "login.html";
+
+          return;
+
+        }
+
+
+        const user =
+          data.session.user;
+
+
+        if (
+          user.is_anonymous
+        ) {
+
+          userAccount.textContent =
+            "Guest 👤";
+
+        }
+
+        else {
+
+          userAccount.textContent =
+            user.email ||
+            "Cont conectat ❤️";
+
+        }
+
+      }
+
+      catch (error) {
+
+        console.log(
+          error
+        );
+
+      }
+
+    }
+
+
+    loadConnectedAccount();
+
+
+
+    logoutButton.addEventListener(
+      "click",
+      async function () {
+
+        const answer =
+          confirm(
+            "Vrei să ieși din cont?"
+          );
+
+
+        if (!answer) {
+          return;
+        }
+
+
+        await supabaseClient.auth.signOut();
+
+
+        window.location.href =
+          "login.html";
+
+      }
+    );
+
+
+
+    /* ================================
+       ÎNCĂRCARE SETĂRI
+    ================================= */
+
+    function loadSettings() {
+
+
+      firstNameInput.value =
+        localStorage.getItem(
+          "firstName"
+        ) || "";
+
+
+      secondNameInput.value =
+        localStorage.getItem(
+          "secondName"
+        ) || "";
+
+
+      coupleQuoteInput.value =
+        localStorage.getItem(
+          "coupleQuote"
+        ) ||
+        "În fiecare zi aleg din nou să te iubesc.";
+
+
+
+      const savedDate =
+        localStorage.getItem(
+          "relationshipStartDate"
+        );
+
+
+      if (savedDate) {
+
+        relationshipDateInput.value =
+          savedDate.substring(
+            0,
+            16
+          );
+
+      }
+
+
+
+      const savedPhoto =
+        localStorage.getItem(
+          "couplePhoto"
+        );
+
+
+      if (savedPhoto) {
+
+        settingsCouplePhoto.src =
+          savedPhoto;
+
+      }
+
+
+
+      fontSelect.value =
+        localStorage.getItem(
+          "appFont"
+        ) ||
+        "system";
+
+
+      fontSizeRange.value =
+        localStorage.getItem(
+          "appFontSize"
+        ) ||
+        "100";
+
+
+      applyFontPreview();
+
+
+
+      const customBackground =
+        localStorage.getItem(
+          "customBackground"
+        );
+
+
+      if (customBackground) {
+
+        showBackgroundPreview(
+          customBackground
+        );
+
+      }
+
+
+      const selectedTheme =
+        localStorage.getItem(
+          "selectedTheme"
+        ) ||
+        "dark";
+
+
+      selectThemeButton(
+        selectedTheme
+      );
+
+    }
+
+
+
+    /* ================================
+       COMPRESIE IMAGINE
+    ================================= */
+
+    function compressImage(
+      file,
+      maxSide,
+      quality,
+      callback
+    ) {
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function (event) {
+
+
+          const image =
+            new Image();
+
+
+          image.onload =
+            function () {
+
+
+              const scale =
+                Math.min(
+                  1,
+                  maxSide /
+                  Math.max(
+                    image.width,
+                    image.height
+                  )
+                );
+
+
+              const width =
+                Math.round(
+                  image.width *
+                  scale
+                );
+
+
+              const height =
+                Math.round(
+                  image.height *
+                  scale
+                );
+
+
+              const canvas =
+                document.createElement(
+                  "canvas"
+                );
+
+
+              canvas.width =
+                width;
+
+
+              canvas.height =
+                height;
+
+
+              const context =
+                canvas.getContext(
+                  "2d"
+                );
+
+
+              context.drawImage(
+                image,
+                0,
+                0,
+                width,
+                height
+              );
+
+
+              const imageData =
+                canvas.toDataURL(
+                  "image/jpeg",
+                  quality
+                );
+
+
+              callback(
+                imageData
+              );
+
+            };
+
+
+          image.src =
+            event.target.result;
+
+        };
+
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+
+
+
+    /* ================================
+       POZA CUPLULUI
+    ================================= */
+
+    couplePhotoInput.addEventListener(
+      "change",
+      function () {
+
+
+        const file =
+          this.files &&
+          this.files[0];
+
+
+        if (
+          !file ||
+          !file.type.startsWith(
+            "image/"
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        compressImage(
+          file,
+          1400,
+          .82,
+          function (imageData) {
+
+
+            settingsCouplePhoto.src =
+              imageData;
+
+
+            try {
+
+              localStorage.setItem(
+                "couplePhoto",
+                imageData
+              );
+
+            }
+
+            catch (error) {
+
+              alert(
+                "Poza este prea mare."
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+
+    /* ================================
+       FONT
+    ================================= */
+
+    function applyFontPreview() {
+
+
+      const selectedFont =
+        fontSelect.value;
+
+
+      const size =
+        fontSizeRange.value;
+
+
+      fontSizeValue.textContent =
+        size +
+        "%";
+
+
+      fontPreview.className =
+        "font-preview preview-" +
+        selectedFont;
+
+
+      fontPreview.style.fontSize =
+        (
+          27 *
+          Number(size) /
+          100
+        ) +
+        "px";
+
+    }
+
+
+    fontSelect.addEventListener(
+      "change",
+      applyFontPreview
+    );
+
+
+    fontSizeRange.addEventListener(
+      "input",
+      applyFontPreview
+    );
+
+
+
+    /* ================================
+       TEME
+    ================================= */
+
+    const themeButtons =
+      document.querySelectorAll(
+        ".background-option"
+      );
+
+
+    function selectThemeButton(
+      theme
+    ) {
+
+
+      themeButtons.forEach(
+        function (button) {
+
+
+          button.classList.toggle(
+            "selected",
+            button.dataset.theme ===
+            theme
+          );
+
+        }
+      );
+
+    }
+
+
+
+    themeButtons.forEach(
+      function (button) {
+
+
+        button.addEventListener(
+          "click",
+          function () {
+
+
+            const theme =
+              this.dataset.theme;
+
+
+            localStorage.setItem(
+              "selectedTheme",
+              theme
+            );
+
+
+            localStorage.removeItem(
+              "customBackground"
+            );
+
+
+            customBackgroundPreview.style.display =
+              "none";
+
+
+            customBackgroundPlaceholder.style.display =
+              "block";
+
+
+            selectThemeButton(
+              theme
+            );
+
+
+            if (
+              window.applyGlobalBackground
+            ) {
+
+              window.applyGlobalBackground();
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+
+    /* ================================
+       FUNDAL DIN GALERIE
+    ================================= */
+
+    backgroundImageInput.addEventListener(
+      "change",
+      function () {
+
+
+        const file =
+          this.files &&
+          this.files[0];
+
+
+        if (!file) {
+          return;
+        }
+
+
+        if (
+          !file.type.startsWith(
+            "image/"
+          )
+        ) {
+
+          alert(
+            "Alege o imagine."
+          );
+
+          return;
+
+        }
+
+
+        compressImage(
+          file,
+          1600,
+          .72,
+          function (imageData) {
+
+
+            try {
+
+
+              localStorage.setItem(
+                "customBackground",
+                imageData
+              );
+
+
+              localStorage.setItem(
+                "selectedTheme",
+                "custom"
+              );
+
+
+              showBackgroundPreview(
+                imageData
+              );
+
+
+              selectThemeButton(
+                "custom"
+              );
+
+
+              if (
+                window.applyGlobalBackground
+              ) {
+
+                window.applyGlobalBackground();
+
+              }
+
+
+            }
+
+            catch (error) {
+
+              alert(
+                "Fundalul este prea mare. Încearcă o imagine mai mică."
+              );
+
+            }
+
+
+          }
+        );
+
+      }
+    );
+
+
+
+    function showBackgroundPreview(
+      imageData
+    ) {
+
+
+      customBackgroundPreview.src =
+        imageData;
+
+
+      customBackgroundPreview.style.display =
+        "block";
+
+
+      customBackgroundPlaceholder.style.display =
+        "none";
+
+    }
+
+
+
+    /* ================================
+       ELIMINĂ FUNDAL
+    ================================= */
+
+    removeBackgroundButton.addEventListener(
+      "click",
+      function () {
+
+
+        localStorage.removeItem(
+          "customBackground"
+        );
+
+
+        localStorage.setItem(
+          "selectedTheme",
+          "dark"
+        );
+
+
+        customBackgroundPreview.src =
+          "";
+
+
+        customBackgroundPreview.style.display =
+          "none";
+
+
+        customBackgroundPlaceholder.style.display =
+          "block";
+
+
+        selectThemeButton(
+          "dark"
+        );
+
+
+        if (
+          window.applyGlobalBackground
+        ) {
+
+          window.applyGlobalBackground();
+
+        }
+
+      }
+    );
+
+
+
+    /* ================================
+       SALVARE
+    ================================= */
+
+    saveButton.addEventListener(
+      "click",
+      function () {
+
+
+        localStorage.setItem(
+          "firstName",
+          firstNameInput.value.trim()
+        );
+
+
+        localStorage.setItem(
+          "secondName",
+          secondNameInput.value.trim()
+        );
+
+
+        localStorage.setItem(
+          "coupleQuote",
+          coupleQuoteInput.value.trim()
+        );
+
+
+        if (
+          relationshipDateInput.value
+        ) {
+
+          localStorage.setItem(
+            "relationshipStartDate",
+            relationshipDateInput.value
+          );
+
+        }
+
+
+        localStorage.setItem(
+          "appFont",
+          fontSelect.value
+        );
+
+
+        localStorage.setItem(
+          "appFontSize",
+          fontSizeRange.value
+        );
+
+
+        saveConfirmation.textContent =
+          "❤️ Setările au fost salvate!";
+
+
+        setTimeout(
+          function () {
+
+            saveConfirmation.textContent =
+              "";
+
+          },
+          2500
+        );
+
+      }
+    );
+
+
+
+    loadSettings();
+
+  </script>
+
+
+</body>
+
+</html>

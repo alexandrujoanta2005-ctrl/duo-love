@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>Evenimente ❤️</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="app">
+
+    <section class="hero-card">
+
+      <p class="eyebrow">
+        📅 EVENIMENTE
+      </p>
+
+      <h1>
+        Date importante
+      </h1>
+
+      <p class="subtitle">
+        Ziua ei, aniversări și toate zilele pe care nu vrem să le uităm. ❤️
+      </p>
+
+      <button
+        id="openEventModal"
+        class="add-memory-button"
+      >
+        + Adaugă eveniment
+      </button>
+
+    </section>
+
+
+    <section
+      id="eventsList"
+      class="events-list"
+    ></section>
+
+  </main>
+
+
+  <div
+    id="eventModal"
+    class="message-modal hidden"
+  >
+
+    <div class="message-modal-card">
+
+      <button
+        id="closeEventModal"
+        class="close-modal"
+      >
+        ×
+      </button>
+
+      <h2>
+        Eveniment nou 📅
+      </h2>
+
+      <input
+        id="eventTitle"
+        type="text"
+        placeholder="Ex: Ziua ei 🎂"
+      >
+
+      <input
+        id="eventDate"
+        type="date"
+      >
+
+      <textarea
+        id="eventNote"
+        placeholder="Detalii..."
+      ></textarea>
+
+      <button
+        id="saveEvent"
+        class="save-message"
+      >
+        Salvează ❤️
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <nav class="bottom-nav five-items">
+
+    <a href="index.html" class="nav-item">
+      <span class="nav-icon">🏠</span>
+      <span>Acasă</span>
+    </a>
+
+    <a href="chat.html" class="nav-item">
+      <span class="nav-icon">💬</span>
+      <span>Chat</span>
+    </a>
+
+    <a href="amintiri.html" class="nav-item">
+      <span class="nav-icon">📸</span>
+      <span>Amintiri</span>
+    </a>
+
+    <a href="evenimente.html" class="nav-item active">
+      <span class="nav-icon">📅</span>
+      <span>Evenimente</span>
+    </a>
+
+    <a href="setari.html" class="nav-item">
+      <span class="nav-icon">⚙️</span>
+      <span>Setări</span>
+    </a>
+
+  </nav>
+
+
+  <script src="tema.js"></script>
+  <script src="evenimente.js"></script>
+
+</body>
+</html>

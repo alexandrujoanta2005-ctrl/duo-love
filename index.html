@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#07070d">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+
+  <title>Povestea Noastră ❤️</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" <link rel="stylesheet" href="./style.css?v=31"> rel="stylesheet" href="./style.css?v=31">">
+</head>
+
+
+<body>
+
+  <main class="app">
+
+    <!-- POZA + CONTOR -->
+    <section class="hero-card love-hero">
+
+      <div class="hero-photo-wrap">
+
+        <img
+          id="couplePhoto"
+          class="couple-photo"
+          src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=85"
+          alt="Poza noastră"
+        >
+
+        <div class="hero-photo-shade"></div>
+
+        <label
+          for="couplePhotoInput"
+          class="hero-photo-button"
+        >
+          📷
+        </label>
+
+        <input
+          id="couplePhotoInput"
+          type="file"
+          accept="image/*"
+          hidden
+        >
+
+      </div>
+
+
+      <div class="hero-heart">
+        🩵
+      </div>
+
+
+      <h1
+        class="couple-title"
+        id="coupleNames"
+      >
+        Alex💙 & Bianca💙
+      </h1>
+
+
+      <p class="together-title">
+        Împreună de
+        <strong id="totalDaysText">
+          0
+        </strong>
+        zile ❤️
+      </p>
+
+
+      <div class="counter-grid love-counter-grid">
+
+        <div class="counter-item">
+          <strong id="counterYears">0</strong>
+          <span>ANI</span>
+        </div>
+
+        <div class="counter-item">
+          <strong id="counterMonths">0</strong>
+          <span>LUNI</span>
+        </div>
+
+        <div class="counter-item">
+          <strong id="days">0</strong>
+          <span>ZILE</span>
+        </div>
+
+        <div class="counter-item">
+          <strong id="hours">00</strong>
+          <span>ORE</span>
+        </div>
+
+        <div class="counter-item">
+          <strong id="minutes">00</strong>
+          <span>MINUTE</span>
+        </div>
+
+        <div class="counter-item">
+          <strong id="seconds">00</strong>
+          <span>SECUNDE</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CITAT -->
+    <section class="love-note">
+
+      <span class="heart-icon">
+        ♡
+      </span>
+
+      <p id="homeCoupleQuote">
+        În fiecare zi aleg din nou să te iubesc.
+      </p>
+
+    </section>
+
+
+    <!-- URSULEȚ -->
+    <section class="home-section bear-section">
+
+      <span class="home-small">
+        🧸 URSULEȚUL NOSTRU
+      </span>
+
+      <h2>
+        Ursulețul iubirii ❤️
+      </h2>
+
+      <p class="home-description">
+        Apasă de 2 ori pentru un citat și de 3 ori pentru o inimă.
+      </p>
+
+
+      <div class="bear-stage">
+
+        <div
+          id="loveBear"
+          class="real-bear-wrap"
+        >
+
+          <img
+            src="ursulet.png"
+            alt="Ursuleț"
+            class="real-bear"
+            id="realBear"
+            draggable="false"
+          >
+
+        </div>
+
+        <div
+          id="bearAccessory"
+          class="bear-accessory"
+        ></div>
+
+      </div>
+
+
+      <div class="bear-info">
+
+        <strong id="bearLevel">
+          Nivel 1
+        </strong>
+
+        <span id="bearAge">
+          Pui de urs
+        </span>
+
+      </div>
+
+
+      <div class="bear-happiness">
+
+        <span>
+          ❤️ Fericire
+        </span>
+
+        <div class="bear-progress">
+
+          <div
+            id="bearProgress"
+            class="bear-progress-fill"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="bear-actions">
+
+        <button
+          id="petBear"
+          type="button"
+        >
+          ❤️ Mângâie
+        </button>
+
+        <button
+          id="changeBearItem"
+          type="button"
+        >
+          🎁 Obiect
+        </button>
+
+      </div>
+
+
+      <p
+        id="bearMessage"
+        class="home-description"
+      >
+        Apasă pe ursuleț și vezi ce face. 🧸
+      </p>
+
+    </section>
+
+
+    <!-- ISTORIC -->
+    <section class="home-section">
+
+      <span class="home-small">
+        🕘 ISTORIC
+      </span>
+
+      <h2>
+        Activitatea noastră
+      </h2>
+
+      <div
+        id="activityHistory"
+        class="activity-history"
+      ></div>
+
+    </section>
+
+
+    <!-- EVENIMENT -->
+    <section class="home-section">
+
+      <span class="home-small">
+        📅 URMĂTORUL EVENIMENT
+      </span>
+
+      <h2 id="nextEventTitle">
+        Niciun eveniment
+      </h2>
+
+      <p
+        id="nextEventDate"
+        class="home-description"
+      >
+        Adaugă un moment important.
+      </p>
+
+      <div
+        id="nextEventCountdown"
+        class="home-event-countdown"
+      ></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- MENIU -->
+  <nav class="bottom-nav">
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="index.html"
+    >
+      <span class="nav-icon">🏠</span>
+      <span>Acasă</span>
+    </button>
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="chat.html"
+    >
+      <span class="nav-icon">💬</span>
+      <span>Chat</span>
+    </button>
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="amintiri.html"
+    >
+      <span class="nav-icon">📸</span>
+      <span>Amintiri</span>
+    </button>
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="evenimente.html"
+    >
+      <span class="nav-icon">📅</span>
+      <span>Evenimente</span>
+    </button>
+
+    <button
+      type="button"
+      class="nav-item"
+      data-page="setari.html"
+    >
+      <span class="nav-icon">⚙️</span>
+      <span>Setări</span>
+    </button>
+
+  </nav>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./supabase.js"></script>
+  <script src="./tema.js"></script>
+  <script src="./ursulet.js"></script>
+
+
+  <script>
+    async function checkAuthentication() {
+
+      if (
+        typeof supabaseClient === "undefined"
+      ) {
+        return;
+      }
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient.auth.getSession();
+
+      if (
+        error ||
+        !data.session
+      ) {
+        window.location.href =
+          "./login.html";
+      }
+    }
+
+    checkAuthentication();
+
+
+    function loadHomeData() {
+
+      const firstName =
+        localStorage.getItem("firstName") ||
+        "Alex";
+
+      const secondName =
+        localStorage.getItem("secondName") ||
+        "Bianca";
+
+      const names =
+        document.getElementById(
+          "coupleNames"
+        );
+
+      names.textContent =
+        firstName +
+        "💙 & " +
+        secondName +
+        "💙";
+
+
+      const savedPhoto =
+        localStorage.getItem(
+          "couplePhoto"
+        );
+
+      if (savedPhoto) {
+        document.getElementById(
+          "couplePhoto"
+        ).src = savedPhoto;
+      }
+
+
+      const quote =
+        localStorage.getItem(
+          "coupleQuote"
+        );
+
+      if (quote) {
+        document.getElementById(
+          "homeCoupleQuote"
+        ).textContent = quote;
+      }
+
+
+      loadActivityHistory();
+      loadNextEvent();
+    }
+
+
+    function loadActivityHistory() {
+
+      const box =
+        document.getElementById(
+          "activityHistory"
+        );
+
+      const history =
+        JSON.parse(
+          localStorage.getItem(
+            "loveHistory"
+          ) || "[]"
+        );
+
+      if (!history.length) {
+
+        box.innerHTML = `
+          <div class="history-item">
+            <span>❤️</span>
+
+            <div>
+              <strong>Povestea voastră</strong>
+              <p>Încă nu există activitate.</p>
+            </div>
+          </div>
+        `;
+
+        return;
+      }
+
+      box.innerHTML =
+        history
+          .slice(0, 6)
+          .map(function (item) {
+
+            return `
+              <div class="history-item">
+
+                <span>
+                  ${item.icon || "❤️"}
+                </span>
+
+                <div>
+
+                  <strong>
+                    ${item.title || ""}
+                  </strong>
+
+                  <p>
+                    ${item.text || ""}
+                  </p>
+
+                </div>
+
+              </div>
+            `;
+
+          })
+          .join("");
+    }
+
+
+    function loadNextEvent() {
+
+      const events =
+        JSON.parse(
+          localStorage.getItem(
+            "loveEvents"
+          ) || "[]"
+        );
+
+      const title =
+        document.getElementById(
+          "nextEventTitle"
+        );
+
+      const date =
+        document.getElementById(
+          "nextEventDate"
+        );
+
+      const countdown =
+        document.getElementById(
+          "nextEventCountdown"
+        );
+
+      const today =
+        new Date();
+
+      today.setHours(0, 0, 0, 0);
+
+
+      const future =
+        events
+          .filter(function (event) {
+
+            return new Date(
+              event.date + "T00:00:00"
+            ) >= today;
+
+          })
+          .sort(function (a, b) {
+
+            return (
+              new Date(a.date) -
+              new Date(b.date)
+            );
+
+          });
+
+
+      if (!future.length) {
+
+        title.textContent =
+          "Niciun eveniment";
+
+        date.textContent =
+          "Adaugă un moment important.";
+
+        countdown.textContent = "";
+
+        return;
+      }
+
+
+      const next =
+        future[0];
+
+      const target =
+        new Date(
+          next.date + "T00:00:00"
+        );
+
+      const days =
+        Math.ceil(
+          (target - today) /
+          86400000
+        );
+
+
+      title.textContent =
+        next.title;
+
+
+      date.textContent =
+        target.toLocaleDateString(
+          "ro-RO",
+          {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+          }
+        );
+
+
+      countdown.textContent =
+        days === 0
+          ? "🎉 Este astăzi! ❤️"
+          : "❤️ Mai sunt " +
+            days +
+            " zile";
+    }
+
+
+    const photoInput =
+      document.getElementById(
+        "couplePhotoInput"
+      );
+
+
+    photoInput.addEventListener(
+      "change",
+      function () {
+
+        const file =
+          this.files &&
+          this.files[0];
+
+        if (!file) return;
+
+
+        const reader =
+          new FileReader();
+
+
+        reader.onload =
+          function (event) {
+
+            const image =
+              new Image();
+
+
+            image.onload =
+              function () {
+
+                const max = 1400;
+
+                const scale =
+                  Math.min(
+                    1,
+                    max /
+                    Math.max(
+                      image.width,
+                      image.height
+                    )
+                  );
+
+
+                const canvas =
+                  document.createElement(
+                    "canvas"
+                  );
+
+
+                canvas.width =
+                  Math.round(
+                    image.width *
+                    scale
+                  );
+
+
+                canvas.height =
+                  Math.round(
+                    image.height *
+                    scale
+                  );
+
+
+                canvas
+                  .getContext("2d")
+                  .drawImage(
+                    image,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                  );
+
+
+                const result =
+                  canvas.toDataURL(
+                    "image/jpeg",
+                    0.82
+                  );
+
+
+                localStorage.setItem(
+                  "couplePhoto",
+                  result
+                );
+
+
+                document.getElementById(
+                  "couplePhoto"
+                ).src = result;
+
+              };
+
+
+            image.src =
+              event.target.result;
+
+          };
+
+
+        reader.readAsDataURL(
+          file
+        );
+
+      }
+    );
+
+
+    function relationshipStart() {
+
+      const saved =
+        localStorage.getItem(
+          "relationshipStartDate"
+        );
+
+      const date =
+        saved
+          ? new Date(saved)
+          : new Date(
+              "2026-03-10T00:00:00"
+            );
+
+      return date;
+    }
+
+
+    function updateCounter() {
+
+      const start =
+        relationshipStart();
+
+      const now =
+        new Date();
+
+      if (
+        Number.isNaN(
+          start.getTime()
+        ) ||
+        now < start
+      ) {
+        return;
+      }
+
+
+      const totalDays =
+        Math.floor(
+          (now - start) /
+          86400000
+        );
+
+
+      let years =
+        now.getFullYear() -
+        start.getFullYear();
+
+      let months =
+        now.getMonth() -
+        start.getMonth();
+
+      let days =
+        now.getDate() -
+        start.getDate();
+
+      let hours =
+        now.getHours() -
+        start.getHours();
+
+      let minutes =
+        now.getMinutes() -
+        start.getMinutes();
+
+      let seconds =
+        now.getSeconds() -
+        start.getSeconds();
+
+
+      if (seconds < 0) {
+        seconds += 60;
+        minutes--;
+      }
+
+      if (minutes < 0) {
+        minutes += 60;
+        hours--;
+      }
+
+      if (hours < 0) {
+        hours += 24;
+        days--;
+      }
+
+      if (days < 0) {
+
+        days +=
+          new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            0
+          ).getDate();
+
+        months--;
+      }
+
+      if (months < 0) {
+        months += 12;
+        years--;
+      }
+
+
+      document.getElementById(
+        "totalDaysText"
+      ).textContent =
+        totalDays;
+
+      document.getElementById(
+        "counterYears"
+      ).textContent =
+        years;
+
+      document.getElementById(
+        "counterMonths"
+      ).textContent =
+        months;
+
+      document.getElementById(
+        "days"
+      ).textContent =
+        days;
+
+      document.getElementById(
+        "hours"
+      ).textContent =
+        String(hours).padStart(
+          2,
+          "0"
+        );
+
+      document.getElementById(
+        "minutes"
+      ).textContent =
+        String(minutes).padStart(
+          2,
+          "0"
+        );
+
+      document.getElementById(
+        "seconds"
+      ).textContent =
+        String(seconds).padStart(
+          2,
+          "0"
+        );
+    }
+
+
+    loadHomeData();
+    updateCounter();
+
+    setInterval(
+      updateCounter,
+      1000
+    );
+  </script>
+
+</body>
+</html>

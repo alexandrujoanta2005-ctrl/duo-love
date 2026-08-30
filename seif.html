@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>Seiful Nostru 🔐</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="app">
+
+    <section class="hero-card">
+
+      <p class="eyebrow">
+        🔐 SEIFUL NOSTRU
+      </p>
+
+      <h1>
+        Doar pentru noi
+      </h1>
+
+      <p class="subtitle">
+        Mesaje și amintiri private.
+      </p>
+
+    </section>
+
+
+    <section
+      id="vaultLocked"
+      class="vault-card"
+    >
+
+      <h2>
+        🔒 Introdu PIN-ul
+      </h2>
+
+      <input
+        id="vaultPin"
+        type="password"
+        maxlength="4"
+        inputmode="numeric"
+        class="settings-input"
+        placeholder="••••"
+      >
+
+      <button
+        id="unlockVault"
+        class="save-all-settings"
+      >
+        Deblochează
+      </button>
+
+    </section>
+
+
+    <section
+      id="vaultContent"
+      class="vault-card hidden"
+    >
+
+      <h2>
+        ❤️ Seiful este deschis
+      </h2>
+
+      <textarea
+        id="vaultText"
+        placeholder="Scrie ceva doar pentru voi..."
+      ></textarea>
+
+      <button
+        id="saveVault"
+        class="save-all-settings"
+      >
+        Salvează
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <nav class="bottom-nav five-items">
+
+    <a href="index.html" class="nav-item">
+      <span class="nav-icon">🏠</span>
+      <span>Acasă</span>
+    </a>
+
+    <a href="chat.html" class="nav-item">
+      <span class="nav-icon">💬</span>
+      <span>Chat</span>
+    </a>
+
+    <a href="amintiri.html" class="nav-item">
+      <span class="nav-icon">📸</span>
+      <span>Amintiri</span>
+    </a>
+
+    <a href="evenimente.html" class="nav-item">
+      <span class="nav-icon">📅</span>
+      <span>Evenimente</span>
+    </a>
+
+    <a href="setari.html" class="nav-item">
+      <span class="nav-icon">⚙️</span>
+      <span>Setări</span>
+    </a>
+
+  </nav>
+
+
+  <script src="tema.js"></script>
+  <script src="seif.js"></script>
+
+</body>
+</html>

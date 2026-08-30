@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Amintirile Noastre ❤️</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="app">
+
+    <a href="index.html" class="back-button">← Înapoi</a>
+
+    <section class="hero-card memories-page">
+      <p class="eyebrow">📸 AMINTIRILE NOASTRE</p>
+
+      <h1>Momentele noastre</h1>
+
+      <p class="subtitle">
+        Păstrăm aici toate clipele noastre speciale. ❤️
+      </p>
+
+      <label for="photoInput" class="add-memory-button">
+        + Adaugă o poză
+      </label>
+
+      <input
+        type="file"
+        id="photoInput"
+        accept="image/*"
+        multiple
+        hidden
+      >
+    </section>
+
+    <section
+      class="memories-gallery"
+      id="memoriesGallery"
+    ></section>
+
+  </main>
+
+  <script src="amintiri.js"></script>
+
+</body>
+</html>
