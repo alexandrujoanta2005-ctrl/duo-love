@@ -1,9 +1,10 @@
 /* =========================================================
    DUO LOVE ❤️ - RECOMPENSE ANIMATE
-   v34
+   v35
 
    Deblocări:
    100 XP  - Inimi Animate
+   150 XP  - Muzică Ambientală
    200 XP  - Touch Sparkles
    300 XP  - Love Pulse
    400 XP  - Stele Căzătoare
@@ -23,6 +24,14 @@
       icon: "🎆",
       title: "Inimi Animate",
       description: "Inimioare animate apar discret în aplicație."
+    },
+    {
+      id: "music",
+      storageKey: "rewardAmbientMusic",
+      xp: 150,
+      icon: "🎵",
+      title: "Muzică Ambientală",
+      description: "Muzică instrumentală discretă, cu volum reglabil."
     },
     {
       id: "sparkles",
@@ -70,6 +79,19 @@
   let starsTimer = null;
   let touchBound = false;
   let togetherShownThisRun = false;
+
+  let ambientAudioContext = null;
+  let ambientMasterGain = null;
+  let ambientTimer = null;
+  let ambientChordIndex = 0;
+  let ambientGestureBound = false;
+
+  const AMBIENT_CHORDS = [
+    [220.00, 261.63, 329.63],
+    [196.00, 246.94, 293.66],
+    [174.61, 220.00, 261.63],
+    [196.00, 246.94, 329.63]
+  ];
 
 
   function getPreference(
@@ -615,6 +637,65 @@
       }
 
 
+      .reward-music-controls {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns:
+          minmax(0, 1fr)
+          auto;
+        align-items: center;
+        gap: 9px;
+        margin-top: 3px;
+        padding-top: 10px;
+        border-top:
+          1px solid
+          rgba(255,255,255,.07);
+      }
+
+
+      .reward-music-volume {
+        display: grid;
+        grid-template-columns:
+          auto
+          minmax(0, 1fr)
+          auto;
+        align-items: center;
+        gap: 8px;
+        color:
+          rgba(255,255,255,.62);
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+
+      .reward-music-volume input {
+        width: 100%;
+        accent-color: #d56191;
+      }
+
+
+      .reward-music-button {
+        min-height: 36px;
+        padding:
+          8px 11px;
+        border: 0;
+        border-radius: 12px;
+        background:
+          rgba(201,88,135,.20);
+        color: white;
+        font: inherit;
+        font-size: 10px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+
+      .reward-music-button:disabled {
+        opacity: .45;
+        cursor: default;
+      }
+
+
       @media (
         prefers-reduced-motion:
         reduce
@@ -680,6 +761,540 @@
 
 
     return layer;
+
+  }
+
+
+  function getAmbientMusicVolume() {
+
+    const saved =
+      Number(
+        localStorage.getItem(
+          "rewardAmbientMusicVolume"
+        )
+      );
+
+
+    if (
+      Number.isFinite(
+        saved
+      )
+    ) {
+
+      return Math.min(
+        1,
+        Math.max(
+          0.05,
+          saved
+        )
+      );
+
+    }
+
+
+    return 0.35;
+
+  }
+
+
+  function setAmbientMusicVolume(
+    value
+  ) {
+
+    const safe =
+      Math.min(
+        1,
+        Math.max(
+          0.05,
+          Number(
+            value
+          ) || 0.35
+        )
+      );
+
+
+    localStorage.setItem(
+      "rewardAmbientMusicVolume",
+      String(
+        safe
+      )
+    );
+
+
+    if (
+      ambientMasterGain &&
+      ambientAudioContext
+    ) {
+
+      const now =
+        ambientAudioContext
+          .currentTime;
+
+
+      ambientMasterGain
+        .gain
+        .cancelScheduledValues(
+          now
+        );
+
+
+      ambientMasterGain
+        .gain
+        .setTargetAtTime(
+          safe * 0.30,
+          now,
+          0.08
+        );
+
+    }
+
+
+    renderSettingsCard();
+
+  }
+
+
+  function getAudioContextClass() {
+
+    return (
+      window.AudioContext ||
+      window.webkitAudioContext ||
+      null
+    );
+
+  }
+
+
+  function ensureAmbientAudioContext() {
+
+    if (
+      ambientAudioContext
+    ) {
+
+      return ambientAudioContext;
+
+    }
+
+
+    const AudioContextClass =
+      getAudioContextClass();
+
+
+    if (
+      !AudioContextClass
+    ) {
+
+      return null;
+
+    }
+
+
+    ambientAudioContext =
+      new AudioContextClass();
+
+
+    ambientMasterGain =
+      ambientAudioContext
+        .createGain();
+
+
+    ambientMasterGain
+      .gain
+      .value =
+      getAmbientMusicVolume() *
+      0.30;
+
+
+    ambientMasterGain
+      .connect(
+        ambientAudioContext.destination
+      );
+
+
+    return ambientAudioContext;
+
+  }
+
+
+  function playAmbientChord() {
+
+    const effect =
+      getEffect(
+        "music"
+      );
+
+
+    if (
+      !effect ||
+      !isEnabled(
+        effect
+      ) ||
+      !ambientAudioContext ||
+      ambientAudioContext.state !==
+        "running" ||
+      !ambientMasterGain
+    ) {
+
+      return;
+
+    }
+
+
+    const chord =
+      AMBIENT_CHORDS[
+        ambientChordIndex %
+        AMBIENT_CHORDS.length
+      ];
+
+
+    ambientChordIndex++;
+
+
+    const now =
+      ambientAudioContext
+        .currentTime;
+
+
+    chord.forEach(
+      function (
+        frequency,
+        index
+      ) {
+
+        const oscillator =
+          ambientAudioContext
+            .createOscillator();
+
+
+        const gain =
+          ambientAudioContext
+            .createGain();
+
+
+        oscillator.type =
+          index === 0
+            ? "sine"
+            : "triangle";
+
+
+        oscillator.frequency
+          .setValueAtTime(
+            frequency,
+            now
+          );
+
+
+        gain.gain
+          .setValueAtTime(
+            0.0001,
+            now
+          );
+
+
+        gain.gain
+          .exponentialRampToValueAtTime(
+            index === 0
+              ? 0.12
+              : 0.07,
+            now + 0.9
+          );
+
+
+        gain.gain
+          .setValueAtTime(
+            index === 0
+              ? 0.12
+              : 0.07,
+            now + 2.1
+          );
+
+
+        gain.gain
+          .exponentialRampToValueAtTime(
+            0.0001,
+            now + 3.5
+          );
+
+
+        oscillator
+          .connect(
+            gain
+          );
+
+
+        gain
+          .connect(
+            ambientMasterGain
+          );
+
+
+        oscillator
+          .start(
+            now
+          );
+
+
+        oscillator
+          .stop(
+            now + 3.6
+          );
+
+      }
+    );
+
+  }
+
+
+  function bindAmbientGestureResume() {
+
+    if (
+      ambientGestureBound
+    ) {
+
+      return;
+
+    }
+
+
+    ambientGestureBound =
+      true;
+
+
+    const resume =
+      async function () {
+
+        const effect =
+          getEffect(
+            "music"
+          );
+
+
+        if (
+          !effect ||
+          !isEnabled(
+            effect
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        await startAmbientMusic(
+          true
+        );
+
+
+        if (
+          ambientAudioContext &&
+          ambientAudioContext.state ===
+            "running"
+        ) {
+
+          document.removeEventListener(
+            "pointerdown",
+            resume
+          );
+
+
+          document.removeEventListener(
+            "touchend",
+            resume
+          );
+
+
+          ambientGestureBound =
+            false;
+
+        }
+
+      };
+
+
+    document.addEventListener(
+      "pointerdown",
+      resume,
+      {
+        passive:
+          true
+      }
+    );
+
+
+    document.addEventListener(
+      "touchend",
+      resume,
+      {
+        passive:
+          true
+      }
+    );
+
+  }
+
+
+  async function startAmbientMusic(
+    fromUserGesture = false
+  ) {
+
+    const effect =
+      getEffect(
+        "music"
+      );
+
+
+    if (
+      !effect ||
+      !isEnabled(
+        effect
+      )
+    ) {
+
+      stopAmbientMusic();
+
+      return false;
+
+    }
+
+
+    const context =
+      ensureAmbientAudioContext();
+
+
+    if (
+      !context
+    ) {
+
+      return false;
+
+    }
+
+
+    if (
+      context.state ===
+        "suspended"
+    ) {
+
+      try {
+
+        await context.resume();
+
+      } catch (error) {
+      }
+
+    }
+
+
+    if (
+      context.state !==
+        "running"
+    ) {
+
+      bindAmbientGestureResume();
+
+      return false;
+
+    }
+
+
+    if (
+      ambientTimer
+    ) {
+
+      return true;
+
+    }
+
+
+    playAmbientChord();
+
+
+    ambientTimer =
+      setInterval(
+        playAmbientChord,
+        3300
+      );
+
+
+    return true;
+
+  }
+
+
+  function stopAmbientMusic() {
+
+    if (
+      ambientTimer
+    ) {
+
+      clearInterval(
+        ambientTimer
+      );
+
+
+      ambientTimer =
+        null;
+
+    }
+
+
+    if (
+      ambientMasterGain &&
+      ambientAudioContext
+    ) {
+
+      const now =
+        ambientAudioContext
+          .currentTime;
+
+
+      ambientMasterGain
+        .gain
+        .cancelScheduledValues(
+          now
+        );
+
+
+      ambientMasterGain
+        .gain
+        .setTargetAtTime(
+          0.0001,
+          now,
+          0.05
+        );
+
+    }
+
+  }
+
+
+  function updateAmbientMusic() {
+
+    const effect =
+      getEffect(
+        "music"
+      );
+
+
+    if (
+      effect &&
+      isEnabled(
+        effect
+      )
+    ) {
+
+      startAmbientMusic(
+        false
+      );
+
+
+      return;
+
+    }
+
+
+    stopAmbientMusic();
 
   }
 
@@ -1500,6 +2115,8 @@
 
     startHearts();
 
+    updateAmbientMusic();
+
     updateTouchSparkles();
 
     updateLovePulse();
@@ -1759,6 +2376,53 @@
 
                 </label>
 
+
+                ${
+                  effect.id === "music"
+                    ? `
+
+                      <div class="reward-music-controls">
+
+                        <label class="reward-music-volume">
+                          <span>🔉</span>
+
+                          <input
+                            type="range"
+                            min="5"
+                            max="100"
+                            step="5"
+                            value="${Math.round(
+                              getAmbientMusicVolume() *
+                              100
+                            )}"
+                            data-reward-music-volume
+                            ${unlocked ? "" : "disabled"}
+                          >
+
+                          <span>
+                            ${Math.round(
+                              getAmbientMusicVolume() *
+                              100
+                            )}%
+                          </span>
+                        </label>
+
+
+                        <button
+                          type="button"
+                          class="reward-music-button"
+                          data-reward-music-start
+                          ${unlocked && checked ? "" : "disabled"}
+                        >
+                          ▶️ Pornește
+                        </button>
+
+                      </div>
+
+                    `
+                    : ""
+                }
+
               </div>
 
             `;
@@ -1807,7 +2471,87 @@
               );
 
 
+              if (
+                effect.id ===
+                  "music"
+              ) {
+
+                if (
+                  this.checked
+                ) {
+
+                  startAmbientMusic(
+                    true
+                  );
+
+                } else {
+
+                  stopAmbientMusic();
+
+                }
+
+              }
+
+
               applyEffects();
+
+            }
+          );
+
+        }
+      );
+
+
+    list
+      .querySelectorAll(
+        "input[data-reward-music-volume]"
+      )
+      .forEach(
+        function (
+          input
+        ) {
+
+          input.addEventListener(
+            "input",
+            function () {
+
+              setAmbientMusicVolume(
+                Number(
+                  this.value
+                ) /
+                100
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    list
+      .querySelectorAll(
+        "button[data-reward-music-start]"
+      )
+      .forEach(
+        function (
+          button
+        ) {
+
+          button.addEventListener(
+            "click",
+            async function () {
+
+              const started =
+                await startAmbientMusic(
+                  true
+                );
+
+
+              this.textContent =
+                started
+                  ? "🎵 Pornește muzica"
+                  : "▶️ Pornește";
 
             }
           );

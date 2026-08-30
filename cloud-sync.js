@@ -1,4 +1,4 @@
-console.log("❤️ DUO LOVE BUILD v34 - CLOUD SYNC + XP 20/50 + EFFECTS");
+console.log("❤️ DUO LOVE BUILD v35 - CLOUD SYNC + XP 20/50 + EFFECTS + MUSIC");
 
 /* =========================================================
    SINCRONIZARE CONT + CUPLU - SUPABASE
@@ -4142,7 +4142,7 @@ window.invalidateCloudContextCache =
 
 
   script.src =
-    "./reward-effects.js?v=34";
+    "./reward-effects.js?v=35";
 
 
   script.defer =
