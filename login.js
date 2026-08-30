@@ -11,9 +11,10 @@ const loginStatus =
   document.getElementById("loginStatus");
 
 
-const PRODUCTION_ORIGIN =
-  "https://duo-love.netlify.app";
-
+const PRODUCTION_ORIGINS = [
+  "https://duo-love.netlify.app",
+  "https://alexandrujoanta2005-ctrl.github.io"
+];
 
 let loginInProgress =
   false;
@@ -37,14 +38,10 @@ function goToHome() {
 ========================================================= */
 
 function isProductionVersion() {
-
-  return (
-    window.location.origin ===
-    PRODUCTION_ORIGIN
+  return PRODUCTION_ORIGINS.includes(
+    window.location.origin
   );
-
 }
-
 
 /* =========================================================
    VERIFICĂ SESIUNEA EXISTENTĂ
@@ -374,22 +371,14 @@ googleButton.addEventListener(
       const {
         error
       } =
-        await supabaseClient.auth
-          .signInWithOAuth({
+       await supabaseClient.auth
+  .signInWithOAuth({
+    provider: "google",
 
-            provider:
-              "google",
-
-            options: {
-
-              redirectTo:
-                PRODUCTION_ORIGIN +
-                "/index.html"
-
-            }
-
-          });
-
+    options: {
+      redirectTo: new URL("./index.html", window.location.href).href
+    }
+  });
 
       if (
         error
@@ -487,21 +476,13 @@ appleButton.addEventListener(
         error
       } =
         await supabaseClient.auth
-          .signInWithOAuth({
+  .signInWithOAuth({
+    provider: "apple",
 
-            provider:
-              "apple",
-
-            options: {
-
-              redirectTo:
-                PRODUCTION_ORIGIN +
-                "/index.html"
-
-            }
-
-          });
-
+    options: {
+      redirectTo: new URL("./index.html", window.location.href).href
+    }
+  });
 
       if (
         error
