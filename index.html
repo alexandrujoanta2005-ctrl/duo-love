@@ -1895,6 +1895,250 @@
     }
 
 
+
+    /* =====================================================
+       FOC FLOTANT PE HOME 🔥
+       v38
+    ====================================================== */
+
+    #appStreakCard.streak-card {
+      --streak-color: #ff9a3c;
+      --streak-glow: rgba(255, 154, 60, .48);
+
+      position: fixed !important;
+      left: 14px !important;
+      right: auto !important;
+
+      bottom:
+        calc(
+          94px +
+          env(safe-area-inset-bottom)
+        ) !important;
+
+      z-index: 2147482998 !important;
+
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 4px !important;
+
+      width: 78px !important;
+      min-width: 78px !important;
+      height: 94px !important;
+
+      margin: 0 !important;
+      padding: 7px 7px 8px !important;
+
+      box-sizing: border-box !important;
+
+      border:
+        1px solid
+        color-mix(
+          in srgb,
+          var(--streak-color) 45%,
+          rgba(255,255,255,.10)
+        ) !important;
+
+      border-radius: 27px !important;
+
+      background:
+        linear-gradient(
+          160deg,
+          rgba(24, 15, 29, .97),
+          rgba(10, 8, 15, .97)
+        ) !important;
+
+      box-shadow:
+        0 12px 34px
+        rgba(0,0,0,.42),
+        0 0 22px
+        var(--streak-glow),
+        inset 0 1px 0
+        rgba(255,255,255,.06) !important;
+
+      cursor: pointer !important;
+
+      -webkit-tap-highlight-color:
+        transparent !important;
+
+      touch-action:
+        manipulation !important;
+
+      user-select: none !important;
+      -webkit-user-select: none !important;
+    }
+
+
+    #appStreakCard.streak-card:active {
+      transform:
+        scale(.95) !important;
+    }
+
+
+    #appStreakCard.streak-card
+    .streak-flame-wrap {
+      flex: 0 0 54px !important;
+
+      width: 54px !important;
+      height: 54px !important;
+
+      margin: 0 !important;
+
+      border-radius: 19px !important;
+
+      background:
+        color-mix(
+          in srgb,
+          var(--streak-color) 12%,
+          rgba(255,255,255,.045)
+        ) !important;
+
+      pointer-events: none !important;
+    }
+
+
+    #appStreakCard.streak-card
+    .streak-flame {
+      width: 35px !important;
+      height: 43px !important;
+    }
+
+
+    #appStreakCard.streak-card
+    .streak-main {
+      display: flex !important;
+      align-items: baseline !important;
+      justify-content: center !important;
+      gap: 3px !important;
+
+      width: 100% !important;
+
+      text-align: center !important;
+
+      pointer-events: none !important;
+    }
+
+
+    #appStreakCard.streak-card
+    .streak-label,
+    #appStreakCard.streak-card
+    .streak-help,
+    #appStreakCard.streak-card
+    .streak-best {
+      display: none !important;
+    }
+
+
+    #appStreakCard.streak-card
+    .streak-number-row {
+      display: flex !important;
+      align-items: baseline !important;
+      justify-content: center !important;
+      gap: 3px !important;
+
+      width: 100% !important;
+    }
+
+
+    #appStreakCard.streak-card
+    .streak-number {
+      font-size: 16px !important;
+      line-height: 1 !important;
+
+      color:
+        var(--streak-color) !important;
+
+      text-shadow:
+        0 0 10px
+        var(--streak-glow) !important;
+    }
+
+
+    #appStreakCard.streak-card
+    .streak-days-text {
+      font-size: 10px !important;
+      line-height: 1 !important;
+
+      color:
+        rgba(255,255,255,.88) !important;
+    }
+
+
+    #appStreakCard.streak-card::after {
+      content: "apasă";
+
+      position: absolute !important;
+      left: 50% !important;
+      top: -8px !important;
+
+      transform:
+        translateX(-50%) !important;
+
+      padding:
+        3px 6px !important;
+
+      border-radius: 999px !important;
+
+      background:
+        rgba(9, 7, 13, .94) !important;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08) !important;
+
+      color:
+        rgba(255,255,255,.62) !important;
+
+      font-size: 7px !important;
+      font-weight: 800 !important;
+      letter-spacing: .6px !important;
+
+      white-space: nowrap !important;
+    }
+
+
+    #appStreakCard.streak-card.just-increased {
+      animation:
+        streakFloatingClaim
+        .78s
+        ease !important;
+    }
+
+
+    @keyframes streakFloatingClaim {
+
+      0% {
+        transform:
+          scale(.92);
+      }
+
+      45% {
+        transform:
+          scale(1.10);
+      }
+
+      100% {
+        transform:
+          scale(1);
+      }
+
+    }
+
+
+    @media (max-width: 390px) {
+
+      #appStreakCard.streak-card {
+        left: 10px !important;
+
+        width: 72px !important;
+        min-width: 72px !important;
+        height: 89px !important;
+      }
+
+    }
+
+
     /* =====================================================
        XP COMUN AL CUPLULUI ⭐
     ====================================================== */
@@ -2493,7 +2737,7 @@
 </head>
 
 
-<body class="duo-splash-active" data-build="v36">
+<body class="duo-splash-active" data-build="v38">
 
   <script>
     /*
@@ -2690,14 +2934,15 @@
       <div
         id="appStreakCard"
         class="streak-card orange"
+        role="button"
+        tabindex="0"
+        aria-label="Deschide calendarul focului"
       >
 
         <div
           id="appStreakFlameButton"
           class="streak-flame-wrap"
-          role="button"
-          tabindex="0"
-          aria-label="Deschide culorile focului și calendarul seriei"
+          aria-hidden="true"
         >
 
           <svg
@@ -3531,7 +3776,7 @@
 
   <script>
 
-    console.log("❤️ DUO LOVE BUILD v36 - HOME + STREAK CALENDAR");
+    console.log("❤️ DUO LOVE BUILD v38 - HOME + FLOATING STREAK CALENDAR");
 
     /* =====================================================
        AUTENTIFICARE
@@ -6082,14 +6327,14 @@
 
 
 
-    appStreakFlameButton
+    appStreakCard
       .addEventListener(
         "click",
         openStreakCalendar
       );
 
 
-    appStreakFlameButton
+    appStreakCard
       .addEventListener(
         "keydown",
         function (
