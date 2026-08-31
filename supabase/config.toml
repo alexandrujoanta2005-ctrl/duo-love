@@ -1,0 +1,2 @@
+[functions.love-image]
+verify_jwt = true

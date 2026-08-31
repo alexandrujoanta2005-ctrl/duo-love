@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#09070d">
-<link rel="stylesheet" href="./style.css?v=31">
+<link rel="stylesheet" href="./style.css?v=54">
 <title>Evenimente ❤️</title>
 <style>
 
@@ -141,6 +141,56 @@ body.bg-custom{
 }
 </style>
 
+
+<style id="duo-love-ai-bottom-nav-v52">
+.bottom-nav{
+  grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+  gap:3px !important;
+}
+.bottom-nav a{
+  min-width:0 !important;
+  padding-left:2px !important;
+  padding-right:2px !important;
+}
+.bottom-nav a .ico{
+  font-size:18px !important;
+}
+.bottom-nav a > span:last-child{
+  font-size:8.5px !important;
+  white-space:nowrap !important;
+}
+.bottom-nav .love-ai-nav{
+  color:#f5a4ce !important;
+}
+</style>
+
+
+<style id="duo-v53-six-nav">
+  .bottom-nav{
+    display:grid !important;
+    grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+    gap:2px !important;
+  }
+  .bottom-nav .nav-item,
+  .bottom-nav a{
+    min-width:0 !important;
+    padding-left:2px !important;
+    padding-right:2px !important;
+  }
+  .bottom-nav .nav-icon,
+  .bottom-nav .ico{
+    font-size:18px !important;
+  }
+  .bottom-nav .nav-item > span:last-child,
+  .bottom-nav a > span:last-child{
+    font-size:8.5px !important;
+    white-space:nowrap !important;
+  }
+  .bottom-nav .love-ai-nav{
+    color:#f3a4cd !important;
+  }
+</style>
+
 </head>
 <body>
 <main class="page">
@@ -206,12 +256,13 @@ body.bg-custom{
 <nav class="bottom-nav">
   <a href="./index.html"><span class="ico">🏠</span><span>Acasă</span></a>
   <a href="./chat.html"><span class="ico">💬</span><span>Chat</span></a>
+  <a class="love-ai-nav" href="./love-studio.html"><span class="ico">✨</span><span>Love AI</span></a>
   <a href="./amintiri.html"><span class="ico">📸</span><span>Amintiri</span></a>
   <a class="active" href="./evenimente.html"><span class="ico">📅</span><span>Evenimente</span></a>
   <a href="./setari.html"><span class="ico">⚙️</span><span>Setări</span></a>
 </nav>
 
-<script src="./tema.js?v=28"></script>
+<script src="./tema.js?v=54"></script>
 <script>
 window.addEventListener("pageshow", function(){
   if (typeof window.applyGlobalBackground === "function") window.applyGlobalBackground();

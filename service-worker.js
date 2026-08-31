@@ -1,4 +1,4 @@
-const CACHE_VERSION = "duo-love-v51";
+const CACHE_VERSION = "duo-love-v54";
 
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PAGE_CACHE = `${CACHE_VERSION}-pages`;
@@ -50,7 +50,6 @@ const STATIC_FILES = [
   "./amintiri.js",
   "./evenimente.js",
   "./mesaje.js",
-  "./self.js",
   "./setari.js",
   "./recompense.js",
 

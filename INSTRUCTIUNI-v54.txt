@@ -1,0 +1,78 @@
+DUO LOVE v54 — PROIECTUL TĂU VERIFICAT ȘI REPARAT
+
+AM VERIFICAT ZIP-UL TRIMIS DE TINE ȘI AM MODIFICAT DIRECT PROIECTUL.
+
+REPARAREA IMPORTANTĂ
+Problema pentru care Love AI nu rămânea jos lângă Chat era în tema.js:
+tema.js reconstruia automat bara de navigare cu doar 5 butoane și elimina Love AI.
+
+Acum meniul global este:
+🏠 Acasă
+💬 Chat
+✨ Love AI
+📸 Amintiri
+📅 Evenimente
+⚙️ Setări
+
+Am modificat:
+- tema.js — Love AI este parte din meniul global
+- style.css — bara este făcută pentru 6 butoane
+- service-worker.js — cache v54
+- index.html — Love AI nu mai este buton mare în fereastra Teddy
+- love-studio.html — mesaje + emoji + copiere + imagini
+- chat.html — mesajele create pot fi puse în Chat
+- paginile cu meniu jos — Love AI apare lângă Chat
+- icon-512.png și apple-touch-icon.png — reparate dacă lipseau
+
+LOVE AI — MESAJE
+Poți crea:
+- mesaj romantic
+- scrisoare de dragoste
+- bună dimineața
+- noapte bună
+- mi-e dor de tine
+- mulțumire
+- aniversare
+- împăcare
+
+Ai:
+- stil Romantic / Drăguț / Profund / Intens / Simplu
+- lungime scurtă / medie / lungă
+- emoji rapide
+- Copiază
+- Altă variantă
+- Pune în Chat
+
+LOVE AI — IMAGINI
+Pagina permite:
+- prompt liber
+- stil Automat / Fotorealist / Anime / Acuarelă / 3D / Poster / Fantasy / Desen / Logo / Produs
+- Pătrat / Portret / Peisaj
+- calitate Low / Medium / High
+- generare cu GPT-Image-2
+- descărcare PNG
+
+BACKEND PENTRU IMAGINI
+Am adăugat în proiect:
+supabase/functions/love-image/index.ts
+supabase/config.toml
+
+IMPORTANT:
+Cheia OpenAI NU este pusă în HTML și NU trebuie pusă pe GitHub.
+
+Ca generarea reală să funcționeze trebuie, o singură dată:
+1. În Supabase -> Edge Functions / Secrets, setezi OPENAI_API_KEY.
+2. Deploy funcția love-image.
+
+Dacă folosești Supabase CLI:
+supabase secrets set OPENAI_API_KEY=CHEIA_TA
+supabase functions deploy love-image
+
+PENTRU GITHUB
+Deschide folderul DUO LOVE❤️ din acest ZIP și încarcă fișierele lui peste proiectul existent.
+Apoi Commit changes.
+
+După publicare:
+- închide complet aplicația/browserul
+- redeschide aplicația
+Cache-ul este v54, ca să nu mai apară meniul vechi.

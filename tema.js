@@ -51,6 +51,12 @@
     },
 
     {
+      file: "love-studio.html",
+      icon: "✨",
+      name: "Love AI"
+    },
+
+    {
       file: "amintiri.html",
       icon: "📸",
       name: "Amintiri"
