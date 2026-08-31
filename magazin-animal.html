@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#ffe5d4">
+<title>Magazinul animalului 🛒</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}
+body{
+  min-height:100vh;min-height:100dvh;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:#523743;background:linear-gradient(180deg,#fff8f1,#fde9dc 50%,#f8ddea);
+  padding:calc(env(safe-area-inset-top) + 14px) 14px calc(env(safe-area-inset-bottom) + 30px)
+}
+.page{width:min(100%,760px);margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:10px}.group{display:flex;align-items:center;gap:8px}
+.back,.wallet{min-height:45px;border:0;border-radius:16px;background:#fff;box-shadow:0 8px 22px rgba(87,54,48,.10);color:#523743}.back{width:46px;font-size:21px;cursor:pointer}.wallet{display:flex;align-items:center;gap:6px;padding:0 12px;font-weight:900}
+h1{margin:16px 2px 5px;font-size:29px}.sub{margin:0 2px 14px;color:#967582;font-size:12px;line-height:1.5}
+.inventory{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:12px;padding:11px;border-radius:21px;background:rgba(255,255,255,.72)}
+.inventory div{text-align:center;font-size:9px;color:#997781}.inventory strong{display:block;margin-top:3px;color:#523743;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.card{padding:13px;border-radius:25px;background:rgba(255,255,255,.88);box-shadow:0 12px 28px rgba(87,54,48,.10);border:1px solid rgba(255,255,255,.9)}
+.art{height:105px;display:grid;place-items:center;border-radius:19px;background:linear-gradient(145deg,#fff8fa,#f9e3df);font-size:55px}
+.card h2{margin:10px 0 4px;font-size:16px}.card p{margin:0;min-height:32px;color:#9a7886;font-size:10px;line-height:1.45}.price{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}.price strong{font-size:14px}
+.buy{border:0;border-radius:13px;padding:10px 12px;background:linear-gradient(135deg,#ef7e9f,#df5d88);color:white;font-weight:900;cursor:pointer}.buy:active{transform:scale(.98)}
+.toast{position:fixed;z-index:20;left:50%;bottom:24px;transform:translate(-50%,20px);padding:11px 15px;border-radius:16px;background:#4c3440;color:#fff;font-size:12px;font-weight:800;opacity:0;transition:.2s ease}.toast.show{opacity:1;transform:translate(-50%,0)}
+.nav{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.nav a{padding:13px;border-radius:17px;background:#fff;text-align:center;text-decoration:none;color:#8e5871;font-weight:900;box-shadow:0 8px 20px rgba(87,54,48,.08)}
+@media(max-width:420px){.grid{grid-template-columns:1fr}.inventory{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="top">
+    <div class="group">
+      <button class="back" type="button" onclick="location.href='./camera-animal.html'">←</button>
+      <div class="wallet">🪙 <span id="coins">0</span></div>
+    </div>
+    <div class="wallet">💗 <span id="hearts">0</span></div>
+  </header>
+
+  <h1>Magazinul animalului 🛒</h1>
+  <p class="sub">Cumpără mâncare și lucruri pentru animal. Monedele se câștigă din misiuni.</p>
+
+  <section class="inventory">
+    <div>🍲 Mâncare<strong id="foodStock">0</strong></div>
+    <div>🍖 Premium<strong id="premiumStock">0</strong></div>
+    <div>🍪 Gustări<strong id="treatStock">0</strong></div>
+    <div>🧴 Șampon<strong id="shampooStock">0</strong></div>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <div class="art">🍲</div><h2>Mâncare</h2><p>+30 hrană când folosești Hrănește.</p>
+      <div class="price"><strong>🪙 25</strong><button class="buy" data-item="food" data-qty="1" data-price="25" data-food="1">Cumpără</button></div>
+    </article>
+
+    <article class="card">
+      <div class="art">📦</div><h2>Pachet x3</h2><p>3 porții de mâncare la preț mai bun.</p>
+      <div class="price"><strong>🪙 60</strong><button class="buy" data-item="food" data-qty="3" data-price="60" data-food="3">Cumpără</button></div>
+    </article>
+
+    <article class="card">
+      <div class="art">🍖</div><h2>Hrană premium</h2><p>+45 hrană. Se folosește automat dacă nu mai ai mâncare normală.</p>
+      <div class="price"><strong>🪙 65</strong><button class="buy" data-item="premium" data-qty="1" data-price="65" data-food="1">Cumpără</button></div>
+    </article>
+
+    <article class="card">
+      <div class="art">🍪</div><h2>Gustare</h2><p>+18 hrană. Bună pentru o gustare rapidă.</p>
+      <div class="price"><strong>🪙 35</strong><button class="buy" data-item="treat" data-qty="1" data-price="35" data-food="1">Cumpără</button></div>
+    </article>
+
+    <article class="card">
+      <div class="art">🧴</div><h2>Șampon</h2><p>Ai nevoie de el când apeși Spală.</p>
+      <div class="price"><strong>🪙 30</strong><button class="buy" data-item="shampoo" data-qty="1" data-price="30">Cumpără</button></div>
+    </article>
+
+    <article class="card">
+      <div class="art">🎾</div><h2>Jucărie</h2><p>Intră în inventar. O poți strânge pentru viitoare funcții.</p>
+      <div class="price"><strong>🪙 45</strong><button class="buy" data-item="toy" data-qty="1" data-price="45">Cumpără</button></div>
+    </article>
+  </section>
+
+  <section class="nav">
+    <a href="./camera-animal.html">🐾 Camera</a>
+    <a href="./misiuni-animal.html">📋 Misiuni</a>
+  </section>
+</main>
+<div id="toast" class="toast">Cumpărat ✅</div>
+
+<script src="./pet-system.js"></script>
+<script>
+(function(){
+  const toast=document.getElementById("toast");
+  let t;
+
+  function show(text){
+    clearTimeout(t);
+    toast.textContent=text;
+    toast.classList.add("show");
+    t=setTimeout(()=>toast.classList.remove("show"),2100);
+  }
+
+  function render(){
+    const inv=DuoPet.getInventory();
+    document.getElementById("coins").textContent=DuoPet.getCoins();
+    document.getElementById("hearts").textContent=DuoPet.getHearts();
+    document.getElementById("foodStock").textContent=inv.food;
+    document.getElementById("premiumStock").textContent=inv.premium;
+    document.getElementById("treatStock").textContent=inv.treat;
+    document.getElementById("shampooStock").textContent=inv.shampoo;
+  }
+
+  document.querySelectorAll(".buy").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const price=Number(btn.dataset.price||0);
+      const qty=Number(btn.dataset.qty||1);
+      const item=btn.dataset.item;
+
+      if(!DuoPet.spendCoins(price)){
+        show("Nu ai suficiente monede 🪙");
+        return;
+      }
+
+      DuoPet.addInventory(item,qty);
+
+      const foodCount=Number(btn.dataset.food||0);
+      if(foodCount>0) DuoPet.recordAction("buyFood",foodCount);
+
+      show("Cumpărat ✅  +"+qty);
+      if(navigator.vibrate) navigator.vibrate(35);
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

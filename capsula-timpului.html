@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#eee7ff">
+<title>Capsula timpului ⏳❤️</title>
+<style>
+
+:root{
+  --ink:#553447;
+  --muted:#987487;
+  --pink:#ec73a5;
+  --pink2:#f6b8d3;
+  --purple:#8f78d6;
+  --card:rgba(255,255,255,.86);
+  --line:rgba(101,65,83,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  color:var(--ink);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 10% 3%,rgba(255,255,255,.98),transparent 26%),
+    radial-gradient(circle at 94% 13%,rgba(246,184,211,.55),transparent 28%),
+    linear-gradient(180deg,#fff8fb,#f9e3f1 55%,#e9edff);
+  padding:
+    calc(env(safe-area-inset-top) + 14px)
+    14px
+    calc(96px + env(safe-area-inset-bottom));
+}
+button,input,textarea,select{font:inherit}
+button{touch-action:manipulation}
+.page{width:min(100%,760px);margin:0 auto}
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.top-left{display:flex;align-items:center;gap:10px;min-width:0}
+.back{
+  flex:0 0 46px;
+  width:46px;
+  height:46px;
+  border:0;
+  border-radius:50%;
+  background:#fff;
+  color:var(--ink);
+  box-shadow:0 8px 24px rgba(83,48,67,.10);
+  font-size:22px;
+  cursor:pointer;
+}
+.kicker{color:#cf6393;font-size:10px;font-weight:950;letter-spacing:1.5px}
+h1{margin:3px 0 0;font-size:28px;line-height:1.1}
+.card{
+  margin-top:12px;
+  padding:14px;
+  border:1px solid rgba(255,255,255,.78);
+  border-radius:25px;
+  background:var(--card);
+  box-shadow:0 12px 30px rgba(83,48,67,.08);
+}
+.card h2{margin:0 0 5px;font-size:18px}
+.muted{color:var(--muted);font-size:11px;line-height:1.5}
+.field{margin-top:10px}
+.field label{
+  display:block;
+  margin-bottom:5px;
+  color:#b15a82;
+  font-size:10px;
+  font-weight:900;
+}
+.field input,.field textarea,.field select{
+  width:100%;
+  min-height:46px;
+  padding:11px 12px;
+  border:1px solid rgba(93,59,76,.11);
+  border-radius:15px;
+  outline:none;
+  background:#fff;
+  color:var(--ink);
+}
+.field textarea{min-height:100px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.primary,.secondary,.danger{
+  min-height:46px;
+  border:0;
+  border-radius:15px;
+  padding:10px 13px;
+  font-weight:900;
+  cursor:pointer;
+}
+.primary{background:linear-gradient(135deg,#ee7caa,#d85c91);color:#fff}
+.secondary{background:#fff0f6;color:#bf5f89}
+.danger{background:#fff0f1;color:#ca5962}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:2px 0 5px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:0 0 auto;
+  min-height:38px;
+  border:1px solid rgba(101,65,83,.09);
+  border-radius:999px;
+  padding:8px 12px;
+  background:#fff;
+  color:#765467;
+  font-size:11px;
+  font-weight:850;
+  cursor:pointer;
+}
+.chip.active{background:#f6d4e5;color:#a34270;border-color:#efa7c8}
+.empty{
+  margin-top:12px;
+  padding:28px 16px;
+  border-radius:24px;
+  background:rgba(255,255,255,.58);
+  text-align:center;
+  color:var(--muted);
+}
+.empty span{display:block;font-size:40px;margin-bottom:6px}
+.bottom-nav{
+  position:fixed;
+  z-index:100;
+  left:50%;
+  bottom:calc(9px + env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  width:min(calc(100% - 20px),760px);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:5px;
+  padding:7px;
+  border:1px solid rgba(101,65,83,.09);
+  border-radius:22px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(16px);
+  box-shadow:0 12px 30px rgba(77,42,62,.12);
+}
+.bottom-nav a{
+  min-width:0;
+  padding:7px 2px;
+  border-radius:15px;
+  color:#987487;
+  text-decoration:none;
+  text-align:center;
+  font-size:9px;
+}
+.bottom-nav a span{display:block}
+.bottom-nav a .ico{font-size:19px;margin-bottom:2px}
+.bottom-nav a.active{background:#f7dce9;color:#b2507c}
+.toast{
+  position:fixed;
+  z-index:300;
+  left:50%;
+  bottom:100px;
+  transform:translate(-50%,18px);
+  max-width:calc(100% - 30px);
+  padding:11px 15px;
+  border-radius:16px;
+  background:#4f3443;
+  color:#fff;
+  font-size:12px;
+  font-weight:850;
+  text-align:center;
+  opacity:0;
+  transition:.2s ease;
+  pointer-events:none;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:500px){
+  .two{grid-template-columns:1fr}
+}
+
+body{background:radial-gradient(circle at 20% 0%,rgba(255,255,255,.98),transparent 28%),radial-gradient(circle at 90% 15%,rgba(174,151,235,.35),transparent 28%),linear-gradient(180deg,#fff8fc,#f0e8ff 55%,#e5edff)}
+.hero{background:linear-gradient(135deg,rgba(148,123,220,.88),rgba(224,117,171,.86));color:#fff}
+.hero .muted{color:rgba(255,255,255,.80)}
+.capsules{display:grid;gap:10px;margin-top:12px}
+.capsule{
+  padding:14px;border-radius:24px;background:rgba(255,255,255,.90);box-shadow:0 12px 30px rgba(73,50,94,.09)
+}
+.capsule-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.capsule h3{margin:0;font-size:16px}
+.lock{font-size:30px}
+.timer{margin-top:8px;padding:9px 10px;border-radius:14px;background:#f0e9ff;color:#7655aa;font-size:11px;font-weight:900;text-align:center}
+.unlocked .timer{background:#e9f8ee;color:#4d9464}
+.preview{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px}
+.preview img{width:100%;height:110px;object-fit:cover;border-radius:12px}
+.capsule-message{margin-top:10px;color:#73576a;font-size:12px;line-height:1.55;white-space:pre-wrap}
+.capsule-actions{display:flex;gap:8px;margin-top:10px}
+.capsule-actions button{flex:1}
+.locked-copy{margin-top:10px;color:#9a7890;font-size:11px;line-height:1.5}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="top">
+    <div class="top-left">
+      <button class="back" type="button" onclick="location.href='./index.html'">←</button>
+      <div><span class="kicker">⏳ CAPSULA TIMPULUI</span><h1>Pentru noi, în viitor</h1></div>
+    </div>
+  </header>
+
+  <section class="card hero">
+    <h2>Sigilează un moment ❤️</h2>
+    <p class="muted">Scrie un mesaj, pune mai multe poze și alege când va putea fi deschisă capsula.</p>
+  </section>
+
+  <section class="card">
+    <div class="field"><label>NUMELE CAPSULEI</label><input id="capTitle" placeholder="Ex: Pentru aniversarea noastră"></div>
+    <div class="field"><label>MESAJ PENTRU VIITOR</label><textarea id="capMessage" placeholder="Ce vrei să vă spuneți atunci? ❤️"></textarea></div>
+    <div class="field"><label>SE DESCHIDE LA</label><input id="capUnlock" type="datetime-local"></div>
+    <div class="field">
+      <label>POZE — POȚI ALEGE MAI MULTE</label>
+      <input id="capPhotos" type="file" accept="image/*" multiple>
+      <p id="capFileNote" class="muted">Nicio poză selectată</p>
+    </div>
+    <button id="sealCapsule" class="primary" type="button" style="width:100%;margin-top:10px">🔒 Sigilează capsula</button>
+  </section>
+
+  <section id="capsules" class="capsules"></section>
+</main>
+<div id="toast" class="toast">Capsulă sigilată ❤️</div>
+
+<nav class="bottom-nav">
+  <a href="./index.html"><span class="ico">🏠</span><span>Acasă</span></a>
+  <a href="./chat.html"><span class="ico">💬</span><span>Chat</span></a>
+  <a href="./amintiri.html"><span class="ico">📸</span><span>Amintiri</span></a>
+  <a href="./evenimente.html"><span class="ico">📅</span><span>Evenimente</span></a>
+  <a href="./setari.html"><span class="ico">⚙️</span><span>Setări</span></a>
+</nav>
+
+
+<script src="./duo-media.js"></script>
+<script>
+(function(){
+  const KEY="duoTimeCapsulesV46";
+  const title=document.getElementById("capTitle");
+  const message=document.getElementById("capMessage");
+  const unlock=document.getElementById("capUnlock");
+  const photos=document.getElementById("capPhotos");
+  const list=document.getElementById("capsules");
+  const toast=document.getElementById("toast");
+  let urls=[];
+
+  const future=new Date(Date.now()+86400000);
+  unlock.value=new Date(future.getTime()-future.getTimezoneOffset()*60000).toISOString().slice(0,16);
+
+  function esc(s){const d=document.createElement("div");d.textContent=String(s??"");return d.innerHTML}
+  function getCaps(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")||[]}catch(e){return[]}}
+  function saveCaps(v){localStorage.setItem(KEY,JSON.stringify(v))}
+  function show(t){toast.textContent=t;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),2300)}
+
+  function remaining(ms){
+    if(ms<=0) return "Capsula poate fi deschisă acum ❤️";
+    const total=Math.floor(ms/1000);
+    const days=Math.floor(total/86400);
+    const hours=Math.floor((total%86400)/3600);
+    const mins=Math.floor((total%3600)/60);
+    if(days>0) return `${days} zile · ${hours} ore · ${mins} min`;
+    return `${hours} ore · ${mins} min`;
+  }
+
+  async function render(){
+    urls.forEach(URL.revokeObjectURL); urls=[];
+    const caps=getCaps().sort((a,b)=>Number(a.unlockAt)-Number(b.unlockAt));
+    list.innerHTML="";
+
+    if(!caps.length){
+      list.innerHTML='<div class="empty"><span>⏳</span>Nu ai încă nicio capsulă a timpului.</div>';
+      return;
+    }
+
+    for(const cap of caps){
+      const open=Date.now()>=Number(cap.unlockAt);
+      const media=open ? await DuoMedia.listOwner(cap.id) : [];
+      const card=document.createElement("article");
+      card.className="capsule "+(open?"unlocked":"locked");
+
+      let preview="";
+      if(open && media.length){
+        const showMedia=media.slice(0,6);
+        preview='<div class="preview">'+showMedia.map(r=>{
+          const u=DuoMedia.objectURL(r); urls.push(u); return `<img src="${u}" alt="">`;
+        }).join("")+'</div>';
+      }
+
+      card.innerHTML=`
+        <div class="capsule-top">
+          <div>
+            <h3>${esc(cap.title||"Capsula noastră ❤️")}</h3>
+            <p class="muted">Creată ${new Date(cap.createdAt).toLocaleDateString("ro-RO")}</p>
+          </div>
+          <div class="lock">${open?"💌":"🔒"}</div>
+        </div>
+        <div class="timer" data-unlock="${cap.unlockAt}">${remaining(Number(cap.unlockAt)-Date.now())}</div>
+        ${open ? `<div class="capsule-message">${esc(cap.message||"")}</div>${preview}` : `<div class="locked-copy">Conținutul este ascuns până la ${new Date(Number(cap.unlockAt)).toLocaleString("ro-RO")}.</div>`}
+        <div class="capsule-actions">
+          <button class="danger delete" type="button">Șterge</button>
+        </div>
+      `;
+      card.querySelector(".delete").addEventListener("click",async()=>{
+        if(!confirm("Ștergi capsula și toate pozele ei?")) return;
+        saveCaps(getCaps().filter(x=>x.id!==cap.id));
+        await DuoMedia.deleteOwner(cap.id);
+        render();
+      });
+      list.appendChild(card);
+    }
+  }
+
+  photos.addEventListener("change",()=>{
+    const n=photos.files.length;
+    document.getElementById("capFileNote").textContent=n ? n+" "+(n===1?"poză selectată":"poze selectate") : "Nicio poză selectată";
+  });
+
+  document.getElementById("sealCapsule").addEventListener("click",async()=>{
+    const when=new Date(unlock.value).getTime();
+    if(!title.value.trim()){
+      show("Scrie numele capsulei.");
+      return;
+    }
+    if(!when || when<=Date.now()){
+      show("Alege o dată din viitor.");
+      return;
+    }
+
+    const btn=document.getElementById("sealCapsule");
+    btn.disabled=true; btn.textContent="Se sigilează...";
+
+    try{
+      const cap={
+        id:DuoMedia.uid("capsule"),
+        title:title.value.trim(),
+        message:message.value.trim(),
+        unlockAt:when,
+        createdAt:Date.now()
+      };
+      const caps=getCaps(); caps.unshift(cap); saveCaps(caps);
+      if(photos.files.length) await DuoMedia.saveFiles(cap.id,"capsule",photos.files);
+
+      title.value=""; message.value=""; photos.value="";
+      document.getElementById("capFileNote").textContent="Nicio poză selectată";
+      show("Capsula a fost sigilată 🔒❤️");
+      render();
+    }catch(e){
+      console.error(e); show("Nu am putut salva capsula.");
+    }finally{
+      btn.disabled=false; btn.textContent="🔒 Sigilează capsula";
+    }
+  });
+
+  render();
+  setInterval(()=>{
+    document.querySelectorAll(".timer[data-unlock]").forEach(el=>{
+      el.textContent=remaining(Number(el.dataset.unlock)-Date.now());
+    });
+    const hasJustOpened=getCaps().some(c=>Date.now()>=Number(c.unlockAt) && Date.now()-Number(c.unlockAt)<65000);
+    if(hasJustOpened) render();
+  },60000);
+})();
+</script>
+</body>
+</html>

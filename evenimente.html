@@ -1,2165 +1,387 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ro">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
-  >
-
-  <meta name="theme-color" content="#07070d">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  >
-
-  <title>Evenimente ❤️</title>
-
-  <link
-    rel="manifest"
-    href="./manifest.json"
-  >
-
-  <link
-    rel="stylesheet"
-    href="./style.css?v=31"
-  >
-
-
-  <style>
-
-    body.events-page {
-      margin: 0 !important;
-      padding: 0 !important;
-
-      min-height: 100vh;
-      min-height: 100dvh;
-
-      overflow-x: hidden;
-
-      background-color: transparent;
-    }
-
-
-    body.events-page .app {
-      width:
-        min(
-          calc(100% - 20px),
-          430px
-        ) !important;
-
-      margin:
-        0 auto !important;
-
-      padding:
-        calc(
-          env(safe-area-inset-top) + 10px
-        )
-        0
-        calc(
-          95px +
-          env(safe-area-inset-bottom)
-        ) !important;
-    }
-
-
-    /* =====================================================
-       HEADER
-    ====================================================== */
-
-    .events-header {
-      margin:
-        0
-        0
-        14px !important;
-
-      padding:
-        22px
-        18px !important;
-
-      border-radius:
-        25px !important;
-
-      background:
-        rgba(
-          14,
-          9,
-          18,
-          0.84
-        ) !important;
-
-      border:
-        1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.09
-        ) !important;
-
-      backdrop-filter:
-        blur(18px) !important;
-
-      -webkit-backdrop-filter:
-        blur(18px) !important;
-    }
-
-
-    .events-small {
-      display: block;
-
-      margin-bottom: 8px;
-
-      color: #ef93bd;
-
-      font-size: 11px;
-      font-weight: 700;
-
-      letter-spacing: 3px;
-    }
-
-
-    .events-header h1 {
-      margin:
-        0
-        0
-        8px !important;
-
-      font-size:
-        32px !important;
-
-      color:
-        white !important;
-    }
-
-
-    .events-header p {
-      margin:
-        0
-        0
-        18px;
-
-      color:
-        rgba(
-          255,
-          255,
-          255,
-          0.70
-        ) !important;
-
-      line-height:
-        1.5;
-    }
-
-
-    .add-event-button {
-      width: 100%;
-
-      min-height: 52px;
-
-      padding: 12px;
-
-      border:
-        1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.10
-        );
-
-      border-radius:
-        17px;
-
-      background:
-        rgba(
-          112,
-          38,
-          77,
-          0.68
-        );
-
-      color:
-        white;
-
-      font:
-        inherit;
-
-      font-weight:
-        700;
-
-      cursor:
-        pointer;
-
-      appearance:
-        none;
-
-      -webkit-appearance:
-        none;
-    }
-
-
-    /* =====================================================
-       LISTĂ
-    ====================================================== */
-
-    .events-list {
-      display: grid !important;
-
-      grid-template-columns:
-        1fr !important;
-
-      gap:
-        12px !important;
-
-      width:
-        100% !important;
-
-      margin:
-        0 !important;
-
-      padding:
-        0 !important;
-    }
-
-
-    /*
-      IMPORTANT:
-      style.css avea o regulă veche cu
-      .event-card { display:flex; }
-      Aici o anulăm.
-    */
-
-    .event-card {
-      display:
-        block !important;
-
-      width:
-        100% !important;
-
-      min-height:
-        0 !important;
-
-      margin:
-        0 !important;
-
-      padding:
-        17px !important;
-
-      gap:
-        0 !important;
-
-      box-sizing:
-        border-box !important;
-
-      border-radius:
-        22px !important;
-
-      background:
-        rgba(
-          14,
-          9,
-          18,
-          0.84
-        ) !important;
-
-      border:
-        1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.09
-        ) !important;
-
-      color:
-        white !important;
-
-      backdrop-filter:
-        blur(18px) !important;
-
-      -webkit-backdrop-filter:
-        blur(18px) !important;
-    }
-
-
-    .event-card-top {
-      width:
-        100% !important;
-
-      display:
-        flex !important;
-
-      justify-content:
-        space-between !important;
-
-      align-items:
-        flex-start !important;
-
-      gap:
-        12px !important;
-    }
-
-
-    .event-content {
-      flex:
-        1 1 auto;
-
-      min-width:
-        0;
-    }
-
-
-    .event-card h2 {
-      margin:
-        0
-        0
-        6px !important;
-
-      color:
-        white !important;
-
-      font-size:
-        25px !important;
-
-      line-height:
-        1.15 !important;
-
-      overflow-wrap:
-        anywhere;
-    }
-
-
-    .event-date {
-      margin:
-        0
-        0
-        10px;
-
-      color:
-        #ef93bd !important;
-
-      font-weight:
-        700;
-    }
-
-
-    .event-note {
-      margin:
-        0;
-
-      color:
-        rgba(
-          255,
-          255,
-          255,
-          0.68
-        ) !important;
-
-      line-height:
-        1.5;
-
-      overflow-wrap:
-        anywhere;
-    }
-
-
-    .event-countdown {
-      display:
-        block !important;
-
-      width:
-        100% !important;
-
-      margin-top:
-        14px !important;
-
-      padding-top:
-        13px !important;
-
-      border-top:
-        1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.08
-        ) !important;
-
-      color:
-        #ffbdd8 !important;
-
-      font-weight:
-        700;
-
-      font-size:
-        17px;
-
-      line-height:
-        1.35;
-    }
-
-
-    .delete-event {
-      flex:
-        0 0
-        42px !important;
-
-      width:
-        42px !important;
-
-      height:
-        42px !important;
-
-      margin:
-        0 !important;
-
-      padding:
-        0 !important;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      border:
-        1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.08
-        ) !important;
-
-      border-radius:
-        14px !important;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.06
-        ) !important;
-
-      color:
-        white !important;
-
-      font-size:
-        18px;
-
-      cursor:
-        pointer;
-
-      appearance:
-        none;
-
-      -webkit-appearance:
-        none;
-    }
-
-
-    /* =====================================================
-       FĂRĂ EVENIMENTE
-    ====================================================== */
-
-    .events-empty {
-      padding:
-        24px;
-
-      text-align:
-        center;
-
-      border-radius:
-        22px;
-
-      background:
-        rgba(
-          14,
-          9,
-          18,
-          0.84
-        );
-
-      border:
-        1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.09
-        );
-
-      color:
-        white;
-    }
-
-
-    .events-empty span {
-      display:
-        block;
-
-      margin-bottom:
-        10px;
-
-      font-size:
-        34px;
-    }
-
-
-    .events-empty h2 {
-      margin:
-        0
-        0
-        7px !important;
-
-      color:
-        white !important;
-    }
-
-
-    .events-empty p {
-      margin:
-        0;
-
-      color:
-        rgba(
-          255,
-          255,
-          255,
-          0.65
-        );
-    }
-
-
-    /* =====================================================
-       MODAL
-    ====================================================== */
-
-    .event-modal {
-      position:
-        fixed;
-
-      inset:
-        0;
-
-      z-index:
-        2147483647;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      padding:
-        18px;
-
-      box-sizing:
-        border-box;
-
-      background:
-        rgba(
-          0,
-          0,
-          0,
-          0.65
-        );
-
-      backdrop-filter:
-        blur(10px);
-
-      -webkit-backdrop-filter:
-        blur(10px);
-    }
-
-
-    .event-modal.hidden {
-      display:
-        none !important;
-    }
-
-
-    .event-modal-card {
-      position:
-        relative;
-
-      width:
-        min(
-          100%,
-          390px
-        );
-
-      max-height:
-        calc(
-          100dvh -
-          40px
-        );
-
-      overflow-y:
-        auto;
-
-      padding:
-        22px;
-
-      box-sizing:
-        border-box;
-
-      border-radius:
-        25px;
-
-      background:
-        rgba(
-          17,
-          10,
-          21,
-          0.98
-        );
-
-      border:
-        1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.11
-        );
-
-      color:
-        white;
-    }
-
-
-    .event-modal-card h2 {
-      margin:
-        0
-        0
-        18px !important;
-
-      color:
-        white !important;
-
-      font-size:
-        25px !important;
-    }
-
-
-    .event-modal-card input,
-    .event-modal-card textarea {
-      width:
-        100%;
-
-      box-sizing:
-        border-box;
-
-      margin-bottom:
-        11px;
-
-      padding:
-        14px;
-
-      border:
-        1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.12
-        );
-
-      border-radius:
-        16px;
-
-      outline:
-        none;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.06
-        );
-
-      color:
-        white;
-
-      font:
-        inherit;
-    }
-
-
-    #eventDate {
-      color-scheme:
-        dark;
-    }
-
-
-    .event-modal-card textarea {
-      min-height:
-        100px;
-
-      resize:
-        none;
-    }
-
-
-    .close-event-modal {
-      position:
-        absolute;
-
-      top:
-        14px;
-
-      right:
-        14px;
-
-      width:
-        38px;
-
-      height:
-        38px;
-
-      border:
-        0;
-
-      border-radius:
-        50%;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.08
-        );
-
-      color:
-        white;
-
-      font-size:
-        24px;
-
-      cursor:
-        pointer;
-    }
-
-
-    .save-event-button {
-      width:
-        100%;
-
-      min-height:
-        50px;
-
-      padding:
-        14px;
-
-      border:
-        0;
-
-      border-radius:
-        17px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #c95887,
-          #993f6b
-        );
-
-      color:
-        white;
-
-      font:
-        inherit;
-
-      font-weight:
-        700;
-
-      cursor:
-        pointer;
-    }
-
-
-    /* =====================================================
-       MENIU
-    ====================================================== */
-
-    body.events-page > .bottom-nav {
-      position:
-        fixed !important;
-
-      left:
-        0 !important;
-
-      right:
-        0 !important;
-
-      top:
-        auto !important;
-
-      bottom:
-        0 !important;
-
-      transform:
-        none !important;
-
-      width:
-        100% !important;
-
-      max-width:
-        none !important;
-
-      margin:
-        0 !important;
-
-      z-index:
-        2147483646 !important;
-    }
-
-
-    @media (
-      max-width: 390px
-    ) {
-
-      body.events-page .app {
-        width:
-          calc(
-            100% -
-            14px
-          ) !important;
-      }
-
-
-      .events-header {
-        padding:
-          18px
-          16px !important;
-      }
-
-
-      .event-card {
-        padding:
-          16px !important;
-      }
-
-
-      .event-card h2 {
-        font-size:
-          23px !important;
-      }
-
-
-      .event-countdown {
-        font-size:
-          16px;
-      }
-
-    }
-
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#09070d">
+<link rel="stylesheet" href="./style.css?v=31">
+<title>Evenimente ❤️</title>
+<style>
+
+:root{
+  --bg:#09070d;
+  --panel:rgba(22,12,25,.86);
+  --panel2:rgba(255,255,255,.055);
+  --line:rgba(255,255,255,.10);
+  --text:#fff7fb;
+  --muted:rgba(255,235,246,.64);
+  --pink:#e25291;
+  --pink2:#f18fbd;
+  --purple:#8a5bd3;
+}
+*{box-sizing:border-box}
+html{background:var(--bg);color-scheme:dark}
+body{
+  margin:0;
+  min-height:100vh;
+  min-height:100dvh;
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 18% 15%,rgba(226,77,142,.24),transparent 32%),
+    radial-gradient(circle at 84% 28%,rgba(116,83,221,.22),transparent 34%),
+    linear-gradient(160deg,#08070d,#190d19 55%,#09070d);
+  background-attachment:fixed;
+  padding:calc(env(safe-area-inset-top) + 14px) 14px calc(96px + env(safe-area-inset-bottom));
+}
+button,input,textarea,select{font:inherit}
+button{touch-action:manipulation}
+a{color:inherit}
+.page{width:min(100%,760px);margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.top-left{display:flex;align-items:center;gap:10px;min-width:0}
+.back{
+  flex:0 0 46px;width:46px;height:46px;border:1px solid var(--line);border-radius:50%;
+  background:rgba(255,255,255,.07);color:white;font-size:22px;cursor:pointer
+}
+.kicker{display:block;color:#ef91bd;font-size:10px;font-weight:950;letter-spacing:1.5px}
+h1{margin:3px 0 0;font-size:28px;line-height:1.1}
+.card,.empty,.memory,.event{
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+  box-shadow:0 14px 34px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.035);
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+}
+.card{margin-top:12px;padding:14px;border-radius:25px}
+.card h2{margin:0 0 5px;font-size:18px}
+.muted{color:var(--muted);font-size:11px;line-height:1.5}
+.field{margin-top:10px}
+.field label{display:block;margin-bottom:5px;color:#ef91bd;font-size:10px;font-weight:900}
+.field input,.field textarea,.field select{
+  width:100%;min-height:46px;padding:11px 12px;border:1px solid var(--line);border-radius:15px;
+  outline:none;background:rgba(7,6,12,.66);color:white
+}
+.field textarea{min-height:100px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,240,247,.42)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.primary,.secondary,.danger{
+  min-height:44px;border:0;border-radius:14px;padding:10px 12px;font-weight:900;cursor:pointer
+}
+.primary{background:linear-gradient(135deg,#df4f91,#8a58d3);color:white}
+.secondary{border:1px solid var(--line);background:rgba(255,255,255,.07);color:white}
+.danger{background:rgba(225,87,101,.13);color:#ffb9c0;border:1px solid rgba(225,87,101,.18)}
+.empty{margin-top:12px;padding:28px 16px;border-radius:24px;text-align:center;color:var(--muted)}
+.empty span{display:block;font-size:40px;margin-bottom:6px}
+.toast{
+  position:fixed;z-index:300;left:50%;bottom:100px;transform:translate(-50%,18px);
+  max-width:calc(100% - 30px);padding:11px 15px;border:1px solid var(--line);border-radius:16px;
+  background:rgba(15,9,18,.96);color:#fff;font-size:12px;font-weight:850;text-align:center;
+  opacity:0;transition:.2s ease;pointer-events:none
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.bottom-nav{
+  position:fixed;z-index:100;left:50%;bottom:calc(9px + env(safe-area-inset-bottom));
+  transform:translateX(-50%);width:min(calc(100% - 20px),760px);
+  display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:7px;
+  border:1px solid var(--line);border-radius:22px;background:rgba(12,8,16,.94);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 12px 32px rgba(0,0,0,.34)
+}
+.bottom-nav a{min-width:0;padding:7px 2px;border-radius:15px;color:rgba(255,240,247,.60);text-decoration:none;text-align:center;font-size:9px}
+.bottom-nav a span{display:block}
+.bottom-nav .ico{font-size:19px;margin-bottom:2px}
+.bottom-nav a.active{background:rgba(226,77,142,.16);color:white}
+@media(max-width:500px){.two{grid-template-columns:1fr}}
+
+.chips{display:flex;gap:7px;overflow-x:auto;padding:2px 0 5px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:0 0 auto;min-height:38px;border:1px solid var(--line);border-radius:999px;padding:8px 12px;
+  background:rgba(255,255,255,.06);color:white;font-size:11px;font-weight:850;cursor:pointer
+}
+.chip.active{border-color:rgba(239,145,189,.42);background:rgba(226,77,142,.17)}
+.quick-title{margin:10px 0 6px;color:#ef91bd;font-size:10px;font-weight:900}
+.event-list{display:grid;gap:10px;margin-top:12px}
+.event{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:11px;align-items:center;padding:13px;border-radius:23px}
+.event-icon{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;background:rgba(226,77,142,.13);font-size:26px}
+.event-copy{min-width:0}
+.event-copy h3{margin:0;font-size:15px}
+.event-copy p{margin:4px 0 0;color:var(--muted);font-size:10px;line-height:1.4}
+.countdown{display:inline-block;margin-top:6px;padding:5px 8px;border-radius:999px;background:rgba(226,77,142,.15);color:#ffc0dd;font-size:9px;font-weight:900}
+.del{width:40px;height:40px;border:1px solid rgba(225,87,101,.18);border-radius:13px;background:rgba(225,87,101,.13);color:#ffb9c0;cursor:pointer}
+@media(max-width:470px){.event{grid-template-columns:48px minmax(0,1fr)}.event-icon{width:48px;height:48px}.del{grid-column:2;width:100%}}
+</style>
+
+<style id="duo-theme-sync-v49">
+html{
+  background:#08070d;
+}
+
+/*
+  IMPORTANT:
+  Fundalul real NU mai este stabilit de această pagină.
+  El vine din style.css + tema.js, exact ca pe Home, Chat și Setări.
+*/
+body.bg-aurora,
+body.bg-mesh,
+body.bg-starlight,
+body.bg-silk,
+body.bg-plain,
+body.bg-nature,
+body.bg-stars,
+body.bg-moon,
+body.bg-clouds,
+body.bg-cozy,
+body.bg-pastel,
+body.bg-dark,
+body.bg-custom{
+  min-height:100vh;
+  min-height:100dvh;
+}
+</style>
 
 </head>
+<body>
+<main class="page">
+  <header class="top">
+    <div class="top-left">
+      <button class="back" type="button" onclick="location.href='./index.html'">←</button>
+      <div><span class="kicker">📅 EVENIMENTE</span><h1>Creează simplu</h1></div>
+    </div>
+  </header>
 
+  <section class="card">
+    <h2>Eveniment nou ❤️</h2>
+    <p class="muted">Alegi tipul, data și salvezi. Detaliile sunt opționale.</p>
 
-<body
-  class="events-page page-evenimente"
-  data-build="v21"
->
-
-
-  <main class="app">
-
-
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
-
-    <section class="events-header">
-
-      <span class="events-small">
-        📅 EVENIMENTE
-      </span>
-
-
-      <h1>
-        Date importante
-      </h1>
-
-
-      <p>
-        Ziua ei, aniversări și toate zilele pe care nu vrem să le uităm. ❤️
-      </p>
-
-
-      <button
-        id="openEventModal"
-        class="add-event-button"
-        type="button"
-      >
-        + Adaugă eveniment
-      </button>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         LISTĂ
-    ====================================================== -->
-
-    <section
-      id="eventsList"
-      class="events-list"
-    ></section>
-
-
-  </main>
-
-
-
-  <!-- =====================================================
-       MODAL
-  ====================================================== -->
-
-  <div
-    id="eventModal"
-    class="event-modal hidden"
-  >
-
-    <div class="event-modal-card">
-
-
-      <button
-        id="closeEventModal"
-        class="close-event-modal"
-        type="button"
-        aria-label="Închide"
-      >
-        ×
-      </button>
-
-
-      <h2>
-        Eveniment nou 📅
-      </h2>
-
-
-      <input
-        id="eventTitle"
-        type="text"
-        placeholder="Ex: Ziua ei 🎂"
-        autocomplete="off"
-      >
-
-
-      <input
-        id="eventDate"
-        type="date"
-      >
-
-
-      <textarea
-        id="eventNote"
-        placeholder="Detalii..."
-      ></textarea>
-
-
-      <button
-        id="saveEvent"
-        class="save-event-button"
-        type="button"
-      >
-        Salvează ❤️
-      </button>
-
-
+    <div class="quick-title">ALEGE TIPUL</div>
+    <div class="chips" id="typeChips">
+      <button class="chip" data-title="Aniversarea noastră ❤️" data-icon="💞">💞 Aniversare</button>
+      <button class="chip" data-title="Date night ❤️" data-icon="🌹">🌹 Date</button>
+      <button class="chip" data-title="Zi de naștere 🎂" data-icon="🎂">🎂 Zi de naștere</button>
+      <button class="chip" data-title="Vacanță ✈️" data-icon="✈️">✈️ Vacanță</button>
+      <button class="chip" data-title="" data-icon="❤️">❤️ Altceva</button>
     </div>
 
-  </div>
-
-
-
-  <!-- =====================================================
-       MENIU
-  ====================================================== -->
-
-  <nav class="bottom-nav">
-
-
-    <button
-      type="button"
-      class="nav-item"
-      data-page="index.html"
-    >
-      <span class="nav-icon">
-        🏠
-      </span>
-
-      <span>
-        Acasă
-      </span>
-    </button>
-
-
-    <button
-      type="button"
-      class="nav-item"
-      data-page="chat.html"
-    >
-      <span class="nav-icon">
-        💬
-      </span>
-
-      <span>
-        Chat
-      </span>
-    </button>
-
-
-    <button
-      type="button"
-      class="nav-item"
-      data-page="amintiri.html"
-    >
-      <span class="nav-icon">
-        📸
-      </span>
-
-      <span>
-        Amintiri
-      </span>
-    </button>
-
-
-    <button
-      type="button"
-      class="nav-item active"
-      data-page="evenimente.html"
-    >
-      <span class="nav-icon">
-        📅
-      </span>
-
-      <span>
-        Evenimente
-      </span>
-    </button>
-
-
-    <button
-      type="button"
-      class="nav-item"
-      data-page="setari.html"
-    >
-      <span class="nav-icon">
-        ⚙️
-      </span>
-
-      <span>
-        Setări
-      </span>
-    </button>
-
-
-  </nav>
-
-
-
-  <!-- =====================================================
-       SCRIPTURI
-  ====================================================== -->
-
- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase.js?v=31"></script>
-<script src="./security.js?v=32"></script>
-  <script src="./cloud-sync.js?v=21"></script>
-
-  <script src="./tema.js?v=21"></script>
-
-
-
-  <script>
-
-    console.log(
-      "❤️ DUO LOVE BUILD v21 - EVENIMENTE"
-    );
-
-
-    /* =====================================================
-       ELEMENTE
-    ====================================================== */
-
-    const eventsList =
-      document.getElementById(
-        "eventsList"
-      );
-
-
-    const eventModal =
-      document.getElementById(
-        "eventModal"
-      );
-
-
-    const openEventModal =
-      document.getElementById(
-        "openEventModal"
-      );
-
-
-    const closeEventModal =
-      document.getElementById(
-        "closeEventModal"
-      );
-
-
-    const eventTitle =
-      document.getElementById(
-        "eventTitle"
-      );
-
-
-    const eventDate =
-      document.getElementById(
-        "eventDate"
-      );
-
-
-    const eventNote =
-      document.getElementById(
-        "eventNote"
-      );
-
-
-    const saveEventButton =
-      document.getElementById(
-        "saveEvent"
-      );
-
-
-
-    /* =====================================================
-       MENIUL DE JOS
-    ====================================================== */
-
-    document
-      .querySelectorAll(
-        ".bottom-nav .nav-item[data-page]"
-      )
-      .forEach(
-        function (
-          button
-        ) {
-
-          button.addEventListener(
-            "click",
-            function () {
-
-              const page =
-                this.dataset.page;
-
-
-              if (
-                page
-              ) {
-
-                window.location.href =
-                  "./" +
-                  page;
-
-              }
-
-            }
-          );
-
-        }
-      );
-
-
-
-    /* =====================================================
-       AUTENTIFICARE
-    ====================================================== */
-
-    async function checkAuthentication() {
-
-      if (
-        typeof supabaseClient ===
-        "undefined"
-      ) {
-
-        return false;
-
-      }
-
-
-      try {
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient
-            .auth
-            .getSession();
-
-
-        if (
-          error ||
-          !data ||
-          !data.session
-        ) {
-
-          window.location.href =
-            "./login.html";
-
-
-          return false;
-
-        }
-
-
-        return true;
-
-      } catch (
-        error
-      ) {
-
-        console.error(
-          "Eroare autentificare:",
-          error
-        );
-
-
-        return false;
-
-      }
-
+    <div class="field"><label>NUME EVENIMENT</label><input id="title" placeholder="Ex: Cina noastră ❤️"></div>
+
+    <div class="quick-title">DATA RAPIDĂ</div>
+    <div class="chips" id="dateChips">
+      <button class="chip" data-days="0">Astăzi</button>
+      <button class="chip" data-days="1">Mâine</button>
+      <button class="chip" data-days="7">Peste 7 zile</button>
+      <button class="chip" data-weekend="1">Weekend</button>
+    </div>
+
+    <div class="two">
+      <div class="field"><label>DATA</label><input id="date" type="date"></div>
+      <div class="field"><label>ICON</label>
+        <select id="icon">
+          <option value="❤️">❤️ Iubire</option>
+          <option value="💞">💞 Aniversare</option>
+          <option value="🌹">🌹 Date</option>
+          <option value="🎂">🎂 Zi de naștere</option>
+          <option value="✈️">✈️ Vacanță</option>
+          <option value="🎁">🎁 Cadou</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field"><label>DETALII — OPȚIONAL</label><textarea id="note" placeholder="Loc, oră, ce vreți să faceți..."></textarea></div>
+
+    <label style="display:flex;align-items:center;gap:9px;margin-top:10px;color:rgba(255,235,246,.72);font-size:11px">
+      <input id="repeat" type="checkbox" style="width:18px;height:18px">
+      Repetă în fiecare an
+    </label>
+
+    <button id="save" class="primary" type="button" style="width:100%;margin-top:10px">Salvează evenimentul ❤️</button>
+  </section>
+
+  <section id="list" class="event-list"></section>
+</main>
+
+<div id="toast" class="toast">Eveniment salvat ❤️</div>
+
+<nav class="bottom-nav">
+  <a href="./index.html"><span class="ico">🏠</span><span>Acasă</span></a>
+  <a href="./chat.html"><span class="ico">💬</span><span>Chat</span></a>
+  <a href="./amintiri.html"><span class="ico">📸</span><span>Amintiri</span></a>
+  <a class="active" href="./evenimente.html"><span class="ico">📅</span><span>Evenimente</span></a>
+  <a href="./setari.html"><span class="ico">⚙️</span><span>Setări</span></a>
+</nav>
+
+<script src="./tema.js?v=28"></script>
+<script>
+window.addEventListener("pageshow", function(){
+  if (typeof window.applyGlobalBackground === "function") window.applyGlobalBackground();
+  if (typeof window.applyGlobalFont === "function") window.applyGlobalFont();
+});
+window.addEventListener("storage", function(event){
+  if (event.key === "selectedTheme" || event.key === "customBackground") {
+    if (typeof window.applyGlobalBackground === "function") window.applyGlobalBackground();
+  }
+});
+</script>
+<script>
+(function(){
+  const KEY="loveEvents";
+  const title=document.getElementById("title");
+  const date=document.getElementById("date");
+  const icon=document.getElementById("icon");
+  const note=document.getElementById("note");
+  const repeat=document.getElementById("repeat");
+  const list=document.getElementById("list");
+  const toast=document.getElementById("toast");
+
+  function localISO(d=new Date()){
+    const x=new Date(d.getTime()-d.getTimezoneOffset()*60000);
+    return x.toISOString().slice(0,10);
+  }
+
+  date.value=localISO();
+
+  function esc(s){const d=document.createElement("div");d.textContent=String(s??"");return d.innerHTML}
+  function getEvents(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")||[]}catch(e){return[]}}
+  function saveEvents(v){localStorage.setItem(KEY,JSON.stringify(v))}
+  function show(msg){toast.textContent=msg;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),2200)}
+
+  function getNext(e){
+    const base=new Date(e.date+"T12:00:00");
+    if(!e.repeatYearly) return base;
+
+    const now=new Date();
+    now.setHours(0,0,0,0);
+
+    let candidate=new Date(now.getFullYear(),base.getMonth(),base.getDate(),12,0,0);
+    if(candidate<now){
+      candidate=new Date(now.getFullYear()+1,base.getMonth(),base.getDate(),12,0,0);
+    }
+    return candidate;
+  }
+
+  function remaining(target){
+    const now=new Date();
+    now.setHours(0,0,0,0);
+
+    const t=new Date(target);
+    t.setHours(0,0,0,0);
+
+    const days=Math.round((t-now)/86400000);
+
+    if(days===0) return "Este astăzi! 🎉";
+    if(days===1) return "Mai este 1 zi ❤️";
+    if(days>1) return "Mai sunt "+days+" zile";
+    if(days===-1) return "A fost ieri";
+    return "A trecut de "+Math.abs(days)+" zile";
+  }
+
+  function render(){
+    const source=getEvents();
+    const events=source
+      .map((e,index)=>({...e,_index:index,_next:getNext(e)}))
+      .sort((a,b)=>a._next-b._next);
+
+    list.innerHTML="";
+
+    if(!events.length){
+      list.innerHTML='<div class="empty"><span>📅</span>Nu ai încă evenimente.</div>';
+      return;
     }
 
+    events.forEach(e=>{
+      const card=document.createElement("article");
+      card.className="event";
+      card.innerHTML=`
+        <div class="event-icon">${esc(e.icon||"❤️")}</div>
+        <div class="event-copy">
+          <h3>${esc(e.title||"Eveniment ❤️")}</h3>
+          <p>📅 ${e._next.toLocaleDateString("ro-RO",{day:"numeric",month:"long",year:"numeric"})}${e.repeatYearly?" · 🔁 anual":""}</p>
+          ${e.note?`<p>${esc(e.note)}</p>`:""}
+          <span class="countdown">${remaining(e._next)}</span>
+        </div>
+        <button class="del" type="button">🗑️</button>
+      `;
 
+      card.querySelector(".del").addEventListener("click",()=>{
+        if(!confirm("Ștergi evenimentul?")) return;
+        const arr=getEvents();
+        arr.splice(e._index,1);
+        saveEvents(arr);
+        render();
+      });
 
-    /* =====================================================
-       CITEȘTE EVENIMENTE
-    ====================================================== */
+      list.appendChild(card);
+    });
+  }
 
-    function getEvents() {
+  document.querySelectorAll("#typeChips .chip").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      title.value=btn.dataset.title||"";
+      icon.value=btn.dataset.icon||"❤️";
+      document.querySelectorAll("#typeChips .chip").forEach(x=>x.classList.toggle("active",x===btn));
+      if(!btn.dataset.title) title.focus();
+    });
+  });
 
-      try {
+  document.querySelectorAll("#dateChips .chip").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const d=new Date();
 
-        const events =
-          JSON.parse(
-            localStorage.getItem(
-              "loveEvents"
-            ) ||
-            "[]"
-          );
-
-
-        return Array.isArray(
-          events
-        )
-          ? events
-          : [];
-
-      } catch (
-        error
-      ) {
-
-        return [];
-
+      if(btn.dataset.weekend){
+        const day=d.getDay();
+        let add=(6-day+7)%7;
+        if(add===0) add=7;
+        d.setDate(d.getDate()+add);
+      }else{
+        d.setDate(d.getDate()+Number(btn.dataset.days||0));
       }
 
+      date.value=localISO(d);
+      document.querySelectorAll("#dateChips .chip").forEach(x=>x.classList.toggle("active",x===btn));
+    });
+  });
+
+  document.getElementById("save").addEventListener("click",()=>{
+    const ttl=title.value.trim();
+
+    if(!ttl){
+      show("Scrie numele evenimentului.");
+      title.focus();
+      return;
     }
 
-
-
-    /* =====================================================
-       SALVEAZĂ LOCAL + CLOUD
-    ====================================================== */
-
-    function saveEvents(
-      events
-    ) {
-
-      if (
-        typeof window.saveJSON ===
-        "function"
-      ) {
-
-        window.saveJSON(
-          "loveEvents",
-          events
-        );
-
-      } else {
-
-        localStorage.setItem(
-          "loveEvents",
-          JSON.stringify(
-            events
-          )
-        );
-
-      }
-
+    if(!date.value){
+      show("Alege data.");
+      return;
     }
 
-
-
-    /* =====================================================
-       ID UNIC
-    ====================================================== */
-
-    function createEventId() {
-
-      if (
-        window.crypto &&
-        typeof window.crypto.randomUUID ===
-        "function"
-      ) {
-
-        return window.crypto
-          .randomUUID();
-
-      }
-
-
-      return (
-        Date.now() +
-        "-" +
-        Math.random()
-          .toString(
-            36
-          )
-          .slice(
-            2
-          )
-      );
-
-    }
-
-
-
-    /* =====================================================
-       FORMATARE DATĂ
-    ====================================================== */
-
-    function formatDate(
-      value
-    ) {
-
-      if (
-        !value
-      ) {
-
-        return "";
-
-      }
-
-
-      const date =
-        new Date(
-          value +
-          "T00:00:00"
-        );
-
-
-      if (
-        Number.isNaN(
-          date.getTime()
-        )
-      ) {
-
-        return value;
-
-      }
-
-
-      return date
-        .toLocaleDateString(
-          "ro-RO",
-          {
-            day:
-              "numeric",
-
-            month:
-              "long",
-
-            year:
-              "numeric"
-          }
-        );
-
-    }
-
-
-
-    /* =====================================================
-       NUMĂR ZILE
-    ====================================================== */
-
-    function getCountdownText(
-      value
-    ) {
-
-      const today =
-        new Date();
-
-
-      today.setHours(
-        0,
-        0,
-        0,
-        0
-      );
-
-
-      const target =
-        new Date(
-          value +
-          "T00:00:00"
-        );
-
-
-      if (
-        Number.isNaN(
-          target.getTime()
-        )
-      ) {
-
-        return "";
-
-      }
-
-
-      const difference =
-        Math.ceil(
-          (
-            target -
-            today
-          ) /
-          86400000
-        );
-
-
-      if (
-        difference === 0
-      ) {
-
-        return "🎉 Este astăzi! ❤️";
-
-      }
-
-
-      if (
-        difference === 1
-      ) {
-
-        return "❤️ Mai este 1 zi";
-
-      }
-
-
-      if (
-        difference > 1
-      ) {
-
-        return (
-          "❤️ Mai sunt " +
-          difference +
-          " zile"
-        );
-
-      }
-
-
-      const passed =
-        Math.abs(
-          difference
-        );
-
-
-      if (
-        passed === 1
-      ) {
-
-        return "A fost ieri ❤️";
-
-      }
-
-
-      return (
-        "Au trecut " +
-        passed +
-        " zile"
-      );
-
-    }
-
-
-
-    /* =====================================================
-       RANDARE
-    ====================================================== */
-
-    function renderEvents() {
-
-      const events =
-        getEvents();
-
-
-      eventsList.innerHTML =
-        "";
-
-
-      if (
-        !events.length
-      ) {
-
-        eventsList.innerHTML = `
-
-          <div class="events-empty">
-
-            <span>
-              📅
-            </span>
-
-            <h2>
-              Niciun eveniment
-            </h2>
-
-            <p>
-              Adaugă o dată importantă pentru voi. ❤️
-            </p>
-
-          </div>
-
-        `;
-
-
-        return;
-
-      }
-
-
-      const sortedEvents =
-        [
-          ...events
-        ]
-          .sort(
-            function (
-              a,
-              b
-            ) {
-
-              return (
-                new Date(
-                  a.date +
-                  "T00:00:00"
-                ) -
-                new Date(
-                  b.date +
-                  "T00:00:00"
-                )
-              );
-
-            }
-          );
-
-
-      sortedEvents
-        .forEach(
-          function (
-            event
-          ) {
-
-            const card =
-              document.createElement(
-                "article"
-              );
-
-
-            card.className =
-              "event-card";
-
-
-            const top =
-              document.createElement(
-                "div"
-              );
-
-
-            top.className =
-              "event-card-top";
-
-
-            const content =
-              document.createElement(
-                "div"
-              );
-
-
-            content.className =
-              "event-content";
-
-
-            const title =
-              document.createElement(
-                "h2"
-              );
-
-
-            title.textContent =
-              event.title ||
-              "Eveniment ❤️";
-
-
-            const date =
-              document.createElement(
-                "p"
-              );
-
-
-            date.className =
-              "event-date";
-
-
-            date.textContent =
-              formatDate(
-                event.date
-              );
-
-
-            content.appendChild(
-              title
-            );
-
-
-            content.appendChild(
-              date
-            );
-
-
-            if (
-              event.note
-            ) {
-
-              const note =
-                document.createElement(
-                  "p"
-                );
-
-
-              note.className =
-                "event-note";
-
-
-              note.textContent =
-                event.note;
-
-
-              content.appendChild(
-                note
-              );
-
-            }
-
-
-            const deleteButton =
-              document.createElement(
-                "button"
-              );
-
-
-            deleteButton.type =
-              "button";
-
-
-            deleteButton.className =
-              "delete-event";
-
-
-            deleteButton.textContent =
-              "🗑";
-
-
-            deleteButton.setAttribute(
-              "aria-label",
-              "Șterge evenimentul"
-            );
-
-
-            deleteButton.addEventListener(
-              "click",
-              function () {
-
-                deleteEvent(
-                  event.id
-                );
-
-              }
-            );
-
-
-            top.appendChild(
-              content
-            );
-
-
-            top.appendChild(
-              deleteButton
-            );
-
-
-            const countdown =
-              document.createElement(
-                "div"
-              );
-
-
-            countdown.className =
-              "event-countdown";
-
-
-            countdown.textContent =
-              getCountdownText(
-                event.date
-              );
-
-
-            card.appendChild(
-              top
-            );
-
-
-            card.appendChild(
-              countdown
-            );
-
-
-            eventsList.appendChild(
-              card
-            );
-
-          }
-        );
-
-    }
-
-
-
-    /* =====================================================
-       DESCHIDE MODAL
-    ====================================================== */
-
-    openEventModal
-      .addEventListener(
-        "click",
-        function () {
-
-          eventModal
-            .classList
-            .remove(
-              "hidden"
-            );
-
-
-          setTimeout(
-            function () {
-
-              eventTitle
-                .focus();
-
-            },
-            150
-          );
-
-        }
-      );
-
-
-
-    /* =====================================================
-       ÎNCHIDE MODAL
-    ====================================================== */
-
-    function closeModal() {
-
-      eventModal
-        .classList
-        .add(
-          "hidden"
-        );
-
-
-      eventTitle.value =
-        "";
-
-
-      eventDate.value =
-        "";
-
-
-      eventNote.value =
-        "";
-
-    }
-
-
-    closeEventModal
-      .addEventListener(
-        "click",
-        closeModal
-      );
-
-
-    eventModal
-      .addEventListener(
-        "click",
-        function (
-          event
-        ) {
-
-          if (
-            event.target ===
-            eventModal
-          ) {
-
-            closeModal();
-
-          }
-
-        }
-      );
-
-
-
-    /* =====================================================
-       SALVEAZĂ EVENIMENT
-    ====================================================== */
-
-    saveEventButton
-      .addEventListener(
-        "click",
-        async function () {
-
-          const title =
-            eventTitle.value
-              .trim();
-
-
-          const date =
-            eventDate.value;
-
-
-          const note =
-            eventNote.value
-              .trim();
-
-
-          if (
-            !title
-          ) {
-
-            alert(
-              "Scrie numele evenimentului."
-            );
-
-
-            return;
-
-          }
-
-
-          if (
-            !date
-          ) {
-
-            alert(
-              "Alege data evenimentului."
-            );
-
-
-            return;
-
-          }
-
-
-          const events =
-            getEvents();
-
-
-          events.push(
-            {
-              id:
-                createEventId(),
-
-              title:
-                title,
-
-              date:
-                date,
-
-              note:
-                note,
-
-              createdAt:
-                new Date()
-                  .toISOString()
-            }
-          );
-
-
-          saveEvents(
-            events
-          );
-
-
-          if (
-            typeof window.forceCloudSave ===
-            "function"
-          ) {
-
-            await window
-              .forceCloudSave();
-
-          } else if (
-            typeof window.saveAppDataToCloud ===
-            "function"
-          ) {
-
-            await window
-              .saveAppDataToCloud();
-
-          }
-
-
-          closeModal();
-
-
-          renderEvents();
-
-        }
-      );
-
-
-
-    /* =====================================================
-       ȘTERGE EVENIMENT
-    ====================================================== */
-
-    async function deleteEvent(
-      id
-    ) {
-
-      const events =
-        getEvents();
-
-
-      const updated =
-        events.filter(
-          function (
-            event
-          ) {
-
-            return (
-              event.id !==
-              id
-            );
-
-          }
-        );
-
-
-      saveEvents(
-        updated
-      );
-
-
-      if (
-        typeof window.forceCloudSave ===
-        "function"
-      ) {
-
-        await window
-          .forceCloudSave();
-
-      } else if (
-        typeof window.saveAppDataToCloud ===
-        "function"
-      ) {
-
-        await window
-          .saveAppDataToCloud();
-
-      }
-
-
-      renderEvents();
-
-    }
-
-
-
-    /* =====================================================
-       MIGRARE EVENIMENTE VECHI
-    ====================================================== */
-
-    async function migrateOldEvents() {
-
-      const events =
-        getEvents();
-
-
-      let changed =
-        false;
-
-
-      const updated =
-        events.map(
-          function (
-            event
-          ) {
-
-            if (
-              event.id
-            ) {
-
-              return event;
-
-            }
-
-
-            changed =
-              true;
-
-
-            return {
-              ...event,
-
-              id:
-                createEventId()
-            };
-
-          }
-        );
-
-
-      if (
-        changed
-      ) {
-
-        saveEvents(
-          updated
-        );
-
-
-        if (
-          typeof window.forceCloudSave ===
-          "function"
-        ) {
-
-          await window
-            .forceCloudSave();
-
-        } else if (
-          typeof window.saveAppDataToCloud ===
-          "function"
-        ) {
-
-          await window
-            .saveAppDataToCloud();
-
-        }
-
-      }
-
-    }
-
-
-
-    /* =====================================================
-       START
-    ====================================================== */
-
-    async function startEvents() {
-
-      const authenticated =
-        await checkAuthentication();
-
-
-      if (
-        !authenticated
-      ) {
-
-        return;
-
-      }
-
-
-      if (
-        typeof window.loadAppDataFromCloud ===
-        "function"
-      ) {
-
-        await window
-          .loadAppDataFromCloud();
-
-      }
-
-
-      if (
-        typeof window.applyGlobalBackground ===
-        "function"
-      ) {
-
-        window
-          .applyGlobalBackground();
-
-      }
-
-
-      if (
-        typeof window.applyGlobalFont ===
-        "function"
-      ) {
-
-        window
-          .applyGlobalFont();
-
-      }
-
-
-      await migrateOldEvents();
-
-
-      renderEvents();
-
-    }
-
-
-
-    startEvents();
-
-  </script>
-
-
+    const arr=getEvents();
+    arr.unshift({
+      id:"event_"+Date.now()+"_"+Math.random().toString(36).slice(2),
+      title:ttl,
+      date:date.value,
+      icon:icon.value||"❤️",
+      note:note.value.trim(),
+      repeatYearly:repeat.checked,
+      createdAt:Date.now()
+    });
+
+    saveEvents(arr);
+
+    title.value="";
+    note.value="";
+    repeat.checked=false;
+    icon.value="❤️";
+    date.value=localISO();
+
+    document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
+    show("Eveniment salvat ❤️");
+    render();
+  });
+
+  render();
+})();
+</script>
 </body>
-
 </html>

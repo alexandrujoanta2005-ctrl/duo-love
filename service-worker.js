@@ -1,4 +1,4 @@
-const CACHE_VERSION = "duo-love-v41";
+const CACHE_VERSION = "duo-love-v51";
 
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PAGE_CACHE = `${CACHE_VERSION}-pages`;
@@ -12,10 +12,16 @@ const IMAGE_CACHE = `${CACHE_VERSION}-images`;
 const PAGE_FILES = [
   "./",
   "./index.html",
+  "./animale.html",
+  "./camera-animal.html",
+  "./magazin-animal.html",
+  "./misiuni-animal.html",
   "./login.html",
   "./chat.html",
   "./amintiri.html",
   "./evenimente.html",
+  "./love-studio.html",
+  "./capsula-timpului.html",
   "./mesaje.html",
   "./setari.html",
   "./despre-noi.html",
@@ -37,6 +43,8 @@ const STATIC_FILES = [
   "./reward-effects.js",
   "./tema.js",
   "./ursulet.js",
+  "./pet-system.js",
+  "./duo-media.js",
 
   "./chat.js",
   "./amintiri.js",
@@ -53,7 +61,9 @@ const STATIC_FILES = [
   "./maskable-icon-512.png",
   "./apple-touch-icon.png",
 
-  "./ursulet.png"
+  "./ursulet.png",
+  "./animal-dog-real.png",
+  "./animal-cat-real.png",
 ];
 
 

@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#fae6da">
+<title>Camera animalului ❤️</title>
+<style>
+:root{--ink:#513343;--muted:#927184;--pink:#ef759f;--orange:#f5a340;--green:#7bbf5a;--blue:#66b9d8}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}
+body{
+  min-height:100vh;min-height:100dvh;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);background:linear-gradient(180deg,#fff7f0,#f9e6dc 68%,#ead4be);
+  padding-bottom:calc(28px + env(safe-area-inset-bottom))
+}
+.app{width:min(100%,760px);margin:auto}
+.top{
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+  padding:calc(env(safe-area-inset-top) + 12px) 14px 10px
+}
+.group{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.icon,.wallet{
+  min-height:44px;border:1px solid rgba(111,74,58,.10);border-radius:15px;background:rgba(255,255,255,.88);
+  color:var(--ink);box-shadow:0 7px 18px rgba(91,58,47,.09)
+}
+.icon{width:46px;font-size:19px;cursor:pointer}.wallet{display:flex;align-items:center;gap:6px;padding:0 11px;font-weight:900;font-size:12px}
+.pet-head{
+  margin:0 14px 10px;padding:10px 13px;border-radius:25px;background:rgba(255,255,255,.80);
+  box-shadow:0 10px 28px rgba(89,55,44,.09);display:flex;align-items:center;gap:12px
+}
+.avatar{width:68px;height:68px;flex:0 0 68px;border-radius:50%;overflow:hidden;background:#fff;border:3px solid #fff;box-shadow:0 0 0 3px rgba(239,117,159,.15)}
+.avatar img{width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.pet-copy{min-width:0;flex:1}.pet-copy strong{display:block;font-size:22px}.pet-copy span{display:block;margin-top:3px;color:var(--muted);font-size:11px}
+.change{border:0;border-radius:14px;background:#fff0f6;color:#c85886;font-weight:900;padding:10px 11px;cursor:pointer}
+.stock{
+  margin:0 14px 10px;padding:10px 12px;border-radius:20px;background:rgba(255,255,255,.73);
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;box-shadow:0 8px 22px rgba(89,55,44,.07)
+}
+.stock div{text-align:center;font-size:10px;color:var(--muted)}.stock strong{display:block;margin-top:3px;color:var(--ink);font-size:13px}
+.room{
+  position:relative;overflow:hidden;min-height:520px;margin:0 14px;border-radius:30px;border:1px solid rgba(132,86,61,.10);
+  background:linear-gradient(180deg,transparent 0 69%,rgba(194,142,100,.22) 69% 70%,transparent 70%),linear-gradient(180deg,#fff8ef 0 69%,#dfb98f 69% 100%);
+  box-shadow:0 16px 38px rgba(89,55,44,.13)
+}
+.window{position:absolute;left:50%;top:34px;transform:translateX(-50%);width:42%;height:180px;border:12px solid #f5e9dd;border-radius:12px;background:linear-gradient(180deg,#bfe5fa,#e8f7ff 70%,#9dd17c)}
+.window:before,.window:after{content:"";position:absolute;background:#f5e9dd}.window:before{left:50%;top:0;bottom:0;width:8px;transform:translateX(-50%)}.window:after{left:0;right:0;top:50%;height:8px;transform:translateY(-50%)}
+.curtain{position:absolute;top:23px;width:70px;height:225px;background:linear-gradient(90deg,#f7c9d8,#ffe1ea);border-radius:9px 9px 30px 30px}.curtain.left{left:16%}.curtain.right{right:16%}
+.plant{position:absolute;left:22px;bottom:135px;width:70px;height:130px}.plant:before{content:"🌿";font-size:72px;position:absolute;bottom:35px;left:-3px}.plant:after{content:"";position:absolute;left:16px;bottom:0;width:48px;height:48px;border-radius:8px 8px 20px 20px;background:#d49b78}
+.bed{position:absolute;right:20px;bottom:55px;width:130px;height:72px;border-radius:50% 50% 24px 24px;background:#f3a8b6;border:8px solid #f8cad2}.bed:after{content:"★";position:absolute;right:27px;top:10px;color:#fff4ba;font-size:32px}
+.bowl{position:absolute;left:24px;bottom:48px;width:95px;height:48px;border-radius:8px 8px 38px 38px;background:#ec8fa4;border-bottom:8px solid #d86f89}.bowl:before{content:"● ● ● ●";position:absolute;top:-7px;left:13px;color:#805b3f;font-size:15px}
+.tub{position:absolute;right:19px;top:245px;width:120px;height:74px;border-radius:10px 10px 35px 35px;background:#f7b9c6;border:6px solid #ffdce4;opacity:.92}.tub:after{content:"🫧";position:absolute;left:25px;top:-38px;font-size:45px}
+.pet-stage{position:absolute;z-index:5;left:50%;bottom:50px;transform:translateX(-50%);width:310px;height:315px;display:grid;place-items:end center}
+.pet-img{max-width:100%;max-height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 16px 14px rgba(69,48,39,.20));transform-origin:50% 100%;animation:idle 2.5s ease-in-out infinite}
+.pet-stage.action .pet-img{animation:action .55s ease}.pet-stage.sleep .pet-img{animation:sleep 1.7s ease-in-out infinite}
+.pet-stage.wash:after{content:"🫧 🫧 🫧";position:absolute;left:50%;top:35%;transform:translate(-50%,-50%);font-size:34px;animation:bubbles 1s ease infinite}
+.message{position:absolute;z-index:8;left:50%;top:230px;transform:translateX(-50%);min-width:180px;max-width:72%;padding:10px 14px;border-radius:18px;background:rgba(255,255,255,.95);box-shadow:0 8px 20px rgba(80,48,41,.10);text-align:center;font-size:12px;font-weight:900;opacity:0;transition:.2s ease}
+.message.show{opacity:1;transform:translateX(-50%) translateY(-5px)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:12px 14px 0;padding:13px;border-radius:24px;background:rgba(255,255,255,.88);box-shadow:0 10px 26px rgba(89,55,44,.09)}
+.stat{min-width:0;text-align:center}.stat strong{display:block;font-size:10px;white-space:nowrap}.bar{height:9px;margin:7px 0 4px;border-radius:999px;background:#f0e5de;overflow:hidden}.fill{height:100%;width:50%;border-radius:inherit;transition:width .35s ease}
+.food .fill{background:var(--pink)}.happy .fill{background:var(--orange)}.energy .fill{background:var(--green)}.clean .fill{background:var(--blue)}.stat span{font-size:12px;font-weight:900}
+.actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 14px 0}
+.action{min-height:112px;border:0;border-radius:22px;color:#513343;box-shadow:0 10px 25px rgba(89,55,44,.10);font-weight:900;cursor:pointer}.action span{display:block;font-size:33px;margin-bottom:8px}
+.feed{background:linear-gradient(180deg,#ffc6d2,#f29bb0)}.play{background:linear-gradient(180deg,#ffe3a4,#ffc95f)}.wash-btn{background:linear-gradient(180deg,#c7efff,#77cbe9)}.sleep-btn{background:linear-gradient(180deg,#dfd0ff,#b79cea)}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 14px 0}.quick a{padding:13px;border-radius:18px;text-align:center;text-decoration:none;font-weight:900;background:rgba(255,255,255,.90);box-shadow:0 8px 20px rgba(89,55,44,.08)}.quick .shop{color:#ad6c24}.quick .missions{color:#b65280}
+.home{display:block;margin:9px 14px 0;padding:13px;border-radius:18px;text-align:center;text-decoration:none;background:rgba(255,255,255,.88);color:#805b70;font-weight:900}
+@keyframes idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}@keyframes action{0%{transform:scale(1)}40%{transform:scale(1.08) rotate(-2deg)}75%{transform:scale(.98) rotate(2deg)}100%{transform:scale(1)}}@keyframes sleep{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(2px) scale(.985)}}@keyframes bubbles{0%{opacity:.3;transform:translate(-50%,10px)}50%{opacity:1}100%{opacity:.2;transform:translate(-50%,-30px)}}
+@media(max-width:520px){.room{min-height:500px}.pet-stage{width:255px;height:270px;bottom:48px}.window{width:48%}.curtain.left{left:9%}.curtain.right{right:9%}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.actions{grid-template-columns:repeat(2,minmax(0,1fr))}.action{min-height:100px}.stock{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <div class="group">
+      <button class="icon" type="button" onclick="location.href='./index.html'">←</button>
+      <div class="wallet">🪙 <span id="coins">0</span></div>
+      <div class="wallet">💗 <span id="hearts">0</span></div>
+    </div>
+    <div class="group">
+      <button class="icon" type="button" onclick="location.href='./misiuni-animal.html'" title="Misiuni">📋</button>
+      <button class="icon" type="button" onclick="location.href='./magazin-animal.html'" title="Magazin">🛒</button>
+      <button class="icon" type="button" onclick="location.href='./animale.html'" title="Schimbă animalul">🐾</button>
+    </div>
+  </header>
+
+  <section class="pet-head">
+    <div class="avatar"><img id="petAvatar" src="./ursulet.png" alt=""></div>
+    <div class="pet-copy"><strong id="petName">Teddy</strong><span id="petType">Camera lui</span></div>
+    <button class="change" type="button" onclick="location.href='./animale.html'">Schimbă</button>
+  </section>
+
+  <section class="stock">
+    <div>🍲 Mâncare<strong id="stockFood">0</strong></div>
+    <div>🍖 Premium<strong id="stockPremium">0</strong></div>
+    <div>🍪 Gustări<strong id="stockTreat">0</strong></div>
+    <div>🧴 Șampon<strong id="stockShampoo">0</strong></div>
+  </section>
+
+  <section class="room">
+    <div class="window"></div><div class="curtain left"></div><div class="curtain right"></div>
+    <div class="plant"></div><div class="bed"></div><div class="bowl"></div><div class="tub"></div>
+    <div id="petMessage" class="message">Bună! ❤️</div>
+    <div id="petStage" class="pet-stage"><img id="petImage" class="pet-img" src="./ursulet.png" alt="Teddy"></div>
+  </section>
+
+  <section class="stats">
+    <div class="stat food"><strong>🍲 Hrană</strong><div class="bar"><div id="foodBar" class="fill"></div></div><span id="foodValue">0%</span></div>
+    <div class="stat happy"><strong>💖 Fericire</strong><div class="bar"><div id="happyBar" class="fill"></div></div><span id="happyValue">0%</span></div>
+    <div class="stat energy"><strong>⚡ Energie</strong><div class="bar"><div id="energyBar" class="fill"></div></div><span id="energyValue">0%</span></div>
+    <div class="stat clean"><strong>🫧 Curățenie</strong><div class="bar"><div id="cleanBar" class="fill"></div></div><span id="cleanValue">0%</span></div>
+  </section>
+
+  <section class="actions">
+    <button class="action feed" type="button" data-action="feed"><span>🍲</span>Hrănește</button>
+    <button class="action play" type="button" data-action="play"><span>🎈</span>Joacă</button>
+    <button class="action wash-btn" type="button" data-action="wash"><span>🛁</span>Spală</button>
+    <button class="action sleep-btn" type="button" data-action="sleep"><span>🌙</span>Nani</button>
+  </section>
+
+  <section class="quick">
+    <a class="missions" href="./misiuni-animal.html">📋 Misiuni</a>
+    <a class="shop" href="./magazin-animal.html">🛒 Cumpără mâncare</a>
+  </section>
+  <a class="home" href="./index.html">❤️ Înapoi la DUO LOVE</a>
+</main>
+
+<script src="./pet-system.js"></script>
+<script>
+(function(){
+  const petKey=DuoPet.selectedPet();
+  const pet=DuoPet.PETS[petKey];
+  let stats=DuoPet.getStats(petKey);
+
+  const stage=document.getElementById("petStage");
+  const image=document.getElementById("petImage");
+  const avatar=document.getElementById("petAvatar");
+  const message=document.getElementById("petMessage");
+
+  document.getElementById("petName").textContent=pet.name;
+  document.getElementById("petType").textContent=pet.type+" · Camera lui";
+  image.src=pet.image; image.alt=pet.name;
+  avatar.src=pet.image; avatar.alt=pet.name;
+
+  function render(){
+    const inv=DuoPet.getInventory();
+
+    document.getElementById("coins").textContent=DuoPet.getCoins();
+    document.getElementById("hearts").textContent=DuoPet.getHearts();
+    document.getElementById("stockFood").textContent=inv.food;
+    document.getElementById("stockPremium").textContent=inv.premium;
+    document.getElementById("stockTreat").textContent=inv.treat;
+    document.getElementById("stockShampoo").textContent=inv.shampoo;
+
+    ["food","happy","energy","clean"].forEach(k=>{
+      document.getElementById(k+"Bar").style.width=stats[k]+"%";
+      document.getElementById(k+"Value").textContent=DuoPet.statText(stats[k]);
+    });
+
+    DuoPet.recordCareIfEligible(stats);
+  }
+
+  let timer;
+  function say(text){
+    clearTimeout(timer);
+    message.textContent=text;
+    message.classList.add("show");
+    timer=setTimeout(()=>message.classList.remove("show"),2600);
+  }
+
+  function animate(kind){
+    stage.classList.remove("action","sleep","wash");
+    void stage.offsetWidth;
+    if(kind==="sleep"){
+      stage.classList.add("sleep");
+      setTimeout(()=>stage.classList.remove("sleep"),2200);
+    }else if(kind==="wash"){
+      stage.classList.add("wash","action");
+      setTimeout(()=>stage.classList.remove("wash","action"),1500);
+    }else{
+      stage.classList.add("action");
+      setTimeout(()=>stage.classList.remove("action"),700);
+    }
+  }
+
+  function fullMessage(label){
+    say(label+" este FULL ✅");
+  }
+
+  function feed(){
+    if(stats.food>=100){
+      fullMessage("Hrana");
+      return;
+    }
+
+    const inv=DuoPet.getInventory();
+    let item=null;
+    let amount=0;
+    let label="";
+
+    if(inv.food>0){ item="food"; amount=30; label="mâncare"; }
+    else if(inv.treat>0){ item="treat"; amount=18; label="gustare"; }
+    else if(inv.premium>0){ item="premium"; amount=45; label="hrană premium"; }
+
+    if(!item){
+      say("Nu mai ai mâncare. Deschid magazinul 🛒");
+      setTimeout(()=>location.href="./magazin-animal.html",900);
+      return;
+    }
+
+    DuoPet.useInventory(item,1);
+    stats.food=DuoPet.clamp(stats.food+amount);
+    stats.happy=DuoPet.clamp(stats.happy+4);
+    DuoPet.addHearts(2);
+    DuoPet.recordAction("feed");
+    DuoPet.saveStats(petKey,stats);
+    animate("feed");
+
+    if(stats.food>=100) say(pet.name+" este FULL 🍲❤️");
+    else say(pet.name+" a primit "+label+". Yum! 🍲");
+
+    render();
+  }
+
+  function play(){
+    if(stats.happy>=100){
+      fullMessage("Fericirea");
+      return;
+    }
+    if(stats.energy<=8){
+      say(pet.name+" este prea obosit. Pune-l la nani 🌙");
+      return;
+    }
+
+    stats.happy=DuoPet.clamp(stats.happy+24);
+    stats.energy=DuoPet.clamp(stats.energy-10);
+    stats.food=DuoPet.clamp(stats.food-6);
+    stats.clean=DuoPet.clamp(stats.clean-4);
+    DuoPet.addHearts(3);
+    DuoPet.recordAction("play");
+    DuoPet.saveStats(petKey,stats);
+    animate("play");
+
+    if(stats.happy>=100) say("Fericirea este FULL 🎈❤️");
+    else say(pet.name+" se distrează! 🎈");
+    render();
+  }
+
+  function wash(){
+    if(stats.clean>=100){
+      fullMessage("Curățenia");
+      return;
+    }
+
+    const inv=DuoPet.getInventory();
+    if(inv.shampoo<=0){
+      say("Nu mai ai șampon. Deschid magazinul 🛒");
+      setTimeout(()=>location.href="./magazin-animal.html",900);
+      return;
+    }
+
+    DuoPet.useInventory("shampoo",1);
+    stats.clean=DuoPet.clamp(stats.clean+38);
+    stats.happy=DuoPet.clamp(stats.happy+3);
+    DuoPet.addHearts(2);
+    DuoPet.recordAction("wash");
+    DuoPet.saveStats(petKey,stats);
+    animate("wash");
+
+    if(stats.clean>=100) say("Curățenia este FULL 🫧✅");
+    else say(pet.name+" este curat și parfumat! 🫧");
+    render();
+  }
+
+  function sleep(){
+    if(stats.energy>=100){
+      fullMessage("Energia");
+      return;
+    }
+
+    stats.energy=DuoPet.clamp(stats.energy+40);
+    stats.food=DuoPet.clamp(stats.food-5);
+    DuoPet.addHearts(2);
+    DuoPet.recordAction("sleep");
+    DuoPet.saveStats(petKey,stats);
+    animate("sleep");
+
+    if(stats.energy>=100) say("Energia este FULL 🌙✅");
+    else say("Somn ușor, "+pet.name+"! 🌙");
+    render();
+  }
+
+  document.querySelector('[data-action="feed"]').addEventListener("click",feed);
+  document.querySelector('[data-action="play"]').addEventListener("click",play);
+  document.querySelector('[data-action="wash"]').addEventListener("click",wash);
+  document.querySelector('[data-action="sleep"]').addEventListener("click",sleep);
+
+  render();
+
+  setTimeout(()=>{
+    if(stats.food<=30) say(pet.name+" este flămând. 🍲");
+    else if(stats.clean<=35) say(pet.name+" are nevoie de o baie. 🛁");
+    else if(stats.energy<=30) say(pet.name+" este somnoros. 🌙");
+    else if(stats.happy<=35) say(pet.name+" vrea să se joace. 🎈");
+    else if(stats.food>=100 && stats.happy>=100 && stats.energy>=100 && stats.clean>=100) say("Totul este FULL! 👑❤️");
+    else say(pet.name+" te așteaptă! ❤️");
+  },500);
+})();
+</script>
+</body>
+</html>

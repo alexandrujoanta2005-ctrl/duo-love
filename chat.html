@@ -1638,5 +1638,23 @@
 
   </script>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  setTimeout(function(){
+    try{
+      const draft=localStorage.getItem("duoDraftChatMessage");
+      const input=document.getElementById("chatInput");
+
+      if(draft && input){
+        input.value=draft;
+        localStorage.removeItem("duoDraftChatMessage");
+        input.focus();
+      }
+    }catch(e){}
+  },700);
+});
+</script>
+
 </body>
 </html>

@@ -499,6 +499,66 @@
 
 
     /* =====================================================
+       CITAT TEDDY LA INTRAREA ÎN APLICAȚIE 🧸💬
+       v42
+    ====================================================== */
+
+    .teddy-entry-quote {
+      position: fixed !important;
+      right: 94px !important;
+      bottom: calc(112px + env(safe-area-inset-bottom)) !important;
+      z-index: 2147483001 !important;
+      width: min(245px, calc(100vw - 120px)) !important;
+      padding: 12px 14px !important;
+      box-sizing: border-box !important;
+      border: 1px solid rgba(255,255,255,.12) !important;
+      border-radius: 18px 18px 6px 18px !important;
+      background: rgba(14,9,19,.97) !important;
+      color: white !important;
+      box-shadow: 0 12px 32px rgba(0,0,0,.42) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      font-size: 12px !important;
+      line-height: 1.45 !important;
+      opacity: 0 !important;
+      transform: translateY(8px) scale(.96) !important;
+      pointer-events: none !important;
+      transition: opacity .28s ease, transform .28s ease !important;
+    }
+
+    .teddy-entry-quote.show {
+      opacity: 1 !important;
+      transform: translateY(0) scale(1) !important;
+    }
+
+    .teddy-entry-quote::after {
+      content: "";
+      position: absolute;
+      right: -8px;
+      bottom: 14px;
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 9px solid rgba(14,9,19,.97);
+    }
+
+    .teddy-entry-quote strong {
+      display: block !important;
+      margin-bottom: 4px !important;
+      color: #ffb8d4 !important;
+      font-size: 10px !important;
+      letter-spacing: 1px !important;
+    }
+
+    @media (max-width: 360px) {
+      .teddy-entry-quote {
+        right: 88px !important;
+        width: min(220px, calc(100vw - 108px)) !important;
+      }
+    }
+
+    /* =====================================================
        FEREASTRĂ URSULEȚ AI
     ====================================================== */
 
@@ -693,6 +753,41 @@
       cursor: pointer !important;
     }
 
+
+
+
+    .bear-ai-tools-row {
+      flex: 0 0 auto !important;
+      padding: 8px 10px 0 !important;
+    }
+
+    .bear-ai-create-btn {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-height: 44px !important;
+      padding: 10px 12px !important;
+      border: 1px solid rgba(255,255,255,.16) !important;
+      border-radius: 14px !important;
+      background: linear-gradient(
+        135deg,
+        #df4f91,
+        #8a58d3
+      ) !important;
+      box-shadow:
+        0 8px 20px rgba(171,67,139,.25) !important;
+      color: white !important;
+      text-align: center !important;
+      text-decoration: none !important;
+      font-size: 12px !important;
+      font-weight: 950 !important;
+      line-height: 1.2 !important;
+    }
+
+    .bear-ai-create-btn:active {
+      transform: scale(.985) !important;
+    }
 
 
     /* =====================================================
@@ -4397,10 +4492,38 @@
 
   </style>
 
+
+<style id="duo-love-ai-nav-v51">
+  .bottom-nav{
+    display:grid !important;
+    grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+    gap:2px !important;
+  }
+
+  .bottom-nav .nav-item{
+    min-width:0 !important;
+    padding-left:2px !important;
+    padding-right:2px !important;
+  }
+
+  .bottom-nav .nav-item .nav-icon{
+    font-size:18px !important;
+  }
+
+  .bottom-nav .nav-item > span:last-child{
+    font-size:9px !important;
+    white-space:nowrap !important;
+  }
+
+  .bottom-nav .nav-love-studio{
+    color:#f4a3cc !important;
+  }
+</style>
+
 </head>
 
 
-<body class="duo-splash-active" data-build="v41">
+<body class="duo-splash-active" data-build="v42">
 
   <script>
     /*
@@ -5241,20 +5364,23 @@
         🧸 URSULEȚUL NOSTRU
       </span>
 
-      <h2>
-        Ursulețul iubirii ❤️
+      <h2 id="selectedPetTitle">
+        Teddy ❤️
       </h2>
 
       <p class="home-description">
-        Apasă de 2 ori pentru un citat și de 3 ori pentru o inimă.
+        Apasă pe animal ca să intri în camera lui. 🐾
       </p>
 
 
       <div class="bear-stage">
 
-        <div
+        <a
           id="loveBear"
           class="real-bear-wrap"
+          href="./camera-animal.html"
+          aria-label="Alege alt animal"
+          style="text-decoration:none;color:inherit"
         >
 
           <img
@@ -5267,7 +5393,7 @@
             decoding="async"
           >
 
-        </div>
+        </a>
 
 
         <div
@@ -5285,7 +5411,7 @@
         </strong>
 
         <span id="bearAge">
-          Pui de urs
+          Teddy
         </span>
 
       </div>
@@ -5333,7 +5459,7 @@
         id="bearMessage"
         class="home-description"
       >
-        Apasă pe ursuleț și vezi ce face. 🧸
+        Apasă pe Teddy ca să alegi alt animal. 🐾
       </p>
 
     </section>
@@ -5391,6 +5517,40 @@
 
     </section>
 
+
+    <!-- =====================================================
+         CAPSULA TIMPULUI
+    ====================================================== -->
+
+    <section class="home-section">
+      <span class="home-small">⏳ CAPSULA TIMPULUI</span>
+
+      <h2>
+        Un mesaj pentru voi, în viitor ❤️
+      </h2>
+
+      <p class="home-description">
+        Scrie un mesaj, adaugă mai multe poze și alege ziua în care se va debloca.
+      </p>
+
+      <a
+        href="./capsula-timpului.html"
+        style="
+          display:grid;
+          place-items:center;
+          min-height:48px;
+          margin-top:10px;
+          border-radius:16px;
+          background:linear-gradient(135deg,#8c73d2,#c85f91);
+          color:white;
+          text-decoration:none;
+          font-weight:900;
+        "
+      >
+        🔒 Creează o capsulă
+      </a>
+    </section>
+
   </main>
 
 
@@ -5398,6 +5558,16 @@
   <!-- =====================================================
        URSULEȚ AI FLOTANT
   ====================================================== -->
+
+  <div
+    id="teddyEntryQuote"
+    class="teddy-entry-quote"
+    aria-live="polite"
+  >
+    <strong>🧸 TEDDY</strong>
+    <span id="teddyEntryQuoteText">❤️</span>
+  </div>
+
 
   <div
     id="bearAIFloating"
@@ -5484,6 +5654,13 @@
     </div>
 
 
+
+    <div class="bear-ai-tools-row">
+      <a href="./love-studio.html" class="bear-ai-create-btn">
+        ✨ Creează mesaj, scrisoare sau imagine
+      </a>
+    </div>
+
     <div
       id="bearAIMessages"
       class="bear-ai-messages"
@@ -5540,6 +5717,18 @@
     </button>
 
 
+
+    <button
+      type="button"
+      class="nav-item nav-love-studio"
+      onclick="window.location.href='./love-studio.html'"
+      aria-label="Love AI"
+    >
+      <span class="nav-icon">✨</span>
+      <span>Love AI</span>
+    </button>
+
+
     <button
       type="button"
       class="nav-item"
@@ -5590,7 +5779,7 @@
 
   <script>
 
-    console.log("❤️ DUO LOVE BUILD v41 - FIXED FIRE + 3D ANIMATED FRAMES");
+    console.log("❤️ DUO LOVE BUILD v42 - TEDDY ENTRY QUOTES");
 
     /* =====================================================
        AUTENTIFICARE
@@ -9475,6 +9664,61 @@
        NUMELE URSULEȚULUI AI
     ====================================================== */
 
+    const teddyEntryQuote =
+      document.getElementById("teddyEntryQuote");
+
+    const teddyEntryQuoteText =
+      document.getElementById("teddyEntryQuoteText");
+
+    const teddyEntryQuotes = [
+      "Te-aș alege din nou, în fiecare viață. ❤️",
+      "Acasă este oriunde suntem împreună. 🫶",
+      "Iubirea adevărată se construiește în fiecare zi. ❤️",
+      "Cele mai frumoase amintiri sunt cele făcute împreună. ✨",
+      "Uneori, o îmbrățișare spune mai mult decât o mie de cuvinte. 🫂❤️",
+      "Tu ești partea mea preferată din fiecare zi. 🥰",
+      "Dragostea crește atunci când doi oameni aleg să rămână aproape. ❤️",
+      "Nu avem nevoie de o poveste perfectă, ci de povestea noastră. 💕",
+      "Un «te iubesc» spus din inimă nu se demodează niciodată. ❤️",
+      "Fiecare zi împreună mai scrie o pagină din povestea voastră. 📖❤️",
+      "Cele mai mici momente pot deveni cele mai mari amintiri. ✨",
+      "Când două inimi se aleg în fiecare zi, iubirea devine acasă. ❤️",
+      "Să vă iubiți și în zilele simple, nu doar în cele speciale. 🧸❤️",
+      "Dorul arată cât de mult contează cineva pentru tine. 🥹❤️",
+      "Iubirea nu înseamnă perfecțiune, ci să vă alegeți iar și iar. 💞",
+      "Zâmbetul persoanei iubite poate schimba o zi întreagă. 😊❤️",
+      "Cea mai frumoasă destinație este un viitor construit împreună. ✨❤️",
+      "Păstrați-vă aproape chiar și atunci când ziua este grea. 🫂",
+      "O poveste frumoasă se scrie cu răbdare, încredere și iubire. ❤️",
+      "Să nu uitați niciodată de ce v-ați ales. 🧸💕"
+    ];
+
+    function getRandomTeddyEntryQuote() {
+      let lastIndex = Number(localStorage.getItem("teddyLastEntryQuoteIndex"));
+      if (!Number.isInteger(lastIndex)) lastIndex = -1;
+      let index = Math.floor(Math.random() * teddyEntryQuotes.length);
+      if (teddyEntryQuotes.length > 1 && index === lastIndex) {
+        index = (index + 1) % teddyEntryQuotes.length;
+      }
+      localStorage.setItem("teddyLastEntryQuoteIndex", String(index));
+      return teddyEntryQuotes[index];
+    }
+
+    function showTeddyEntryQuote() {
+      if (!teddyEntryQuote || !teddyEntryQuoteText) return;
+      try {
+        if (sessionStorage.getItem("teddyEntryQuoteShown") === "1") return;
+        sessionStorage.setItem("teddyEntryQuoteShown", "1");
+      } catch (error) {}
+
+      teddyEntryQuoteText.textContent = getRandomTeddyEntryQuote();
+      teddyEntryQuote.classList.add("show");
+
+      setTimeout(function () {
+        teddyEntryQuote.classList.remove("show");
+      }, 6500);
+    }
+
     function getBearAIName() {
 
       const name =
@@ -10903,6 +11147,13 @@
         }
       );
 
+
+      /* Teddy spune automat un citat după splash. */
+      setTimeout(
+        showTeddyEntryQuote,
+        2350
+      );
+
     }
 
 
@@ -11140,6 +11391,50 @@
     }
 
   </script>
+
+
+<script>
+(function(){
+  const PET_KEY = "duoSelectedPet";
+
+  const pets = {
+    teddy:{name:"Teddy",image:"./ursulet.png",age:"Ursuleț",emoji:"🧸"},
+    dog:{name:"Mochi",image:"./animal-dog-real.png",age:"Cățeluș",emoji:"🐶"},
+    cat:{name:"Luna",image:"./animal-cat-real.png",age:"Pisicuță",emoji:"🐱"}
+  };
+
+  function applySelectedPet(){
+    const key = localStorage.getItem(PET_KEY) || "teddy";
+    const pet = pets[key] || pets.teddy;
+    if(!pets[key]) localStorage.setItem(PET_KEY,"teddy");
+
+    const image = document.getElementById("realBear");
+    const title = document.getElementById("selectedPetTitle");
+    const age = document.getElementById("bearAge");
+    const message = document.getElementById("bearMessage");
+
+    if(image){
+      image.src = pet.image;
+      image.alt = pet.name;
+    }
+
+    if(title){
+      title.textContent = pet.name + " ❤️";
+    }
+
+    if(age){
+      age.textContent = pet.age;
+    }
+
+    if(message){
+      message.textContent = "Apasă pe " + pet.name + " ca să intri în camera lui. " + pet.emoji;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", applySelectedPet);
+  window.addEventListener("pageshow", applySelectedPet);
+})();
+</script>
 
 </body>
 

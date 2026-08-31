@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#f2dbe9">
+<link rel="stylesheet" href="./style.css?v=31">
+<title>Love AI Studio ❤️</title>
+<style>
+
+:root{
+  --ink:#553447;
+  --muted:#987487;
+  --pink:#ec73a5;
+  --pink2:#f6b8d3;
+  --purple:#8f78d6;
+  --card:rgba(255,255,255,.86);
+  --line:rgba(101,65,83,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  color:var(--ink);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 10% 3%,rgba(255,255,255,.98),transparent 26%),
+    radial-gradient(circle at 94% 13%,rgba(246,184,211,.55),transparent 28%),
+    linear-gradient(180deg,#fff8fb,#f9e3f1 55%,#e9edff);
+  padding:
+    calc(env(safe-area-inset-top) + 14px)
+    14px
+    calc(96px + env(safe-area-inset-bottom));
+}
+button,input,textarea,select{font:inherit}
+button{touch-action:manipulation}
+.page{width:min(100%,760px);margin:0 auto}
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.top-left{display:flex;align-items:center;gap:10px;min-width:0}
+.back{
+  flex:0 0 46px;
+  width:46px;
+  height:46px;
+  border:0;
+  border-radius:50%;
+  background:#fff;
+  color:var(--ink);
+  box-shadow:0 8px 24px rgba(83,48,67,.10);
+  font-size:22px;
+  cursor:pointer;
+}
+.kicker{color:#cf6393;font-size:10px;font-weight:950;letter-spacing:1.5px}
+h1{margin:3px 0 0;font-size:28px;line-height:1.1}
+.card{
+  margin-top:12px;
+  padding:14px;
+  border:1px solid rgba(255,255,255,.78);
+  border-radius:25px;
+  background:var(--card);
+  box-shadow:0 12px 30px rgba(83,48,67,.08);
+}
+.card h2{margin:0 0 5px;font-size:18px}
+.muted{color:var(--muted);font-size:11px;line-height:1.5}
+.field{margin-top:10px}
+.field label{
+  display:block;
+  margin-bottom:5px;
+  color:#b15a82;
+  font-size:10px;
+  font-weight:900;
+}
+.field input,.field textarea,.field select{
+  width:100%;
+  min-height:46px;
+  padding:11px 12px;
+  border:1px solid rgba(93,59,76,.11);
+  border-radius:15px;
+  outline:none;
+  background:#fff;
+  color:var(--ink);
+}
+.field textarea{min-height:100px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.primary,.secondary,.danger{
+  min-height:46px;
+  border:0;
+  border-radius:15px;
+  padding:10px 13px;
+  font-weight:900;
+  cursor:pointer;
+}
+.primary{background:linear-gradient(135deg,#ee7caa,#d85c91);color:#fff}
+.secondary{background:#fff0f6;color:#bf5f89}
+.danger{background:#fff0f1;color:#ca5962}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:2px 0 5px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:0 0 auto;
+  min-height:38px;
+  border:1px solid rgba(101,65,83,.09);
+  border-radius:999px;
+  padding:8px 12px;
+  background:#fff;
+  color:#765467;
+  font-size:11px;
+  font-weight:850;
+  cursor:pointer;
+}
+.chip.active{background:#f6d4e5;color:#a34270;border-color:#efa7c8}
+.empty{
+  margin-top:12px;
+  padding:28px 16px;
+  border-radius:24px;
+  background:rgba(255,255,255,.58);
+  text-align:center;
+  color:var(--muted);
+}
+.empty span{display:block;font-size:40px;margin-bottom:6px}
+.bottom-nav{
+  position:fixed;
+  z-index:100;
+  left:50%;
+  bottom:calc(9px + env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  width:min(calc(100% - 20px),760px);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:5px;
+  padding:7px;
+  border:1px solid rgba(101,65,83,.09);
+  border-radius:22px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(16px);
+  box-shadow:0 12px 30px rgba(77,42,62,.12);
+}
+.bottom-nav a{
+  min-width:0;
+  padding:7px 2px;
+  border-radius:15px;
+  color:#987487;
+  text-decoration:none;
+  text-align:center;
+  font-size:9px;
+}
+.bottom-nav a span{display:block}
+.bottom-nav a .ico{font-size:19px;margin-bottom:2px}
+.bottom-nav a.active{background:#f7dce9;color:#b2507c}
+.toast{
+  position:fixed;
+  z-index:300;
+  left:50%;
+  bottom:100px;
+  transform:translate(-50%,18px);
+  max-width:calc(100% - 30px);
+  padding:11px 15px;
+  border-radius:16px;
+  background:#4f3443;
+  color:#fff;
+  font-size:12px;
+  font-weight:850;
+  text-align:center;
+  opacity:0;
+  transition:.2s ease;
+  pointer-events:none;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:500px){
+  .two{grid-template-columns:1fr}
+}
+
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.tab{border:0;border-radius:16px;padding:12px;background:#fff;color:#8a6075;font-weight:900;cursor:pointer}
+.tab.active{background:linear-gradient(135deg,#ed7ca9,#ce6999);color:#fff}
+.panel{display:none}.panel.active{display:block}
+.output{
+  min-height:180px;margin-top:11px;padding:14px;border-radius:20px;background:#fff;
+  color:#634456;line-height:1.6;white-space:pre-wrap;box-shadow:inset 0 0 0 1px rgba(101,65,83,.08)
+}
+.output-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}
+.output-actions button{min-width:0}
+.canvas-wrap{margin-top:11px;padding:9px;border-radius:22px;background:#fff;box-shadow:0 10px 25px rgba(83,48,67,.08)}
+canvas{display:block;width:100%;height:auto;border-radius:16px;background:#f7dce9}
+.theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:9px}
+.theme{height:44px;border:3px solid #fff;border-radius:14px;box-shadow:0 0 0 1px rgba(85,52,71,.08);cursor:pointer}
+.theme.active{box-shadow:0 0 0 3px #e876a5}
+.t1{background:linear-gradient(135deg,#ffd9e8,#bba3ff)}.t2{background:linear-gradient(135deg,#180d21,#8b3e68)}.t3{background:linear-gradient(135deg,#ffb28d,#ff5c87)}.t4{background:linear-gradient(135deg,#bde7ff,#f9cfeb)}
+.note{margin-top:8px;color:#9a7888;font-size:10px;line-height:1.45}
+@media(max-width:500px){.output-actions{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="top">
+    <div class="top-left">
+      <button class="back" type="button" onclick="location.href='./index.html'">←</button>
+      <div><span class="kicker">✨ LOVE AI</span><h1>Studio de iubire</h1></div>
+    </div>
+  </header>
+
+  <section class="tabs">
+    <button class="tab active" data-tab="text" type="button">💌 Mesaje & scrisori</button>
+    <button class="tab" data-tab="image" type="button">🖼️ Imagine romantică</button>
+  </section>
+
+  <section id="panelText" class="panel active">
+    <div class="card">
+      <h2>Creează text ❤️</h2>
+      <div class="two">
+        <div class="field"><label>CE VREI?</label>
+          <select id="kind">
+            <option value="message">Mesaj romantic</option>
+            <option value="letter">Scrisoare de dragoste</option>
+            <option value="morning">Bună dimineața</option>
+            <option value="night">Noapte bună</option>
+            <option value="anniversary">Aniversare</option>
+            <option value="sorry">Mesaj de împăcare</option>
+          </select>
+        </div>
+        <div class="field"><label>STIL</label>
+          <select id="tone">
+            <option value="romantic">Romantic</option>
+            <option value="cute">Drăguț</option>
+            <option value="deep">Profund</option>
+            <option value="simple">Simplu</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>NUMELE PARTENERULUI — OPȚIONAL</label><input id="partner" placeholder="Ex: Maria"></div>
+      <div class="field"><label>UN DETALIU DESPRE VOI — OPȚIONAL</label><textarea id="detail" placeholder="Ex: Îmi place că mă faci să râd chiar și în zilele grele."></textarea></div>
+      <button id="generateText" class="primary" type="button" style="width:100%;margin-top:10px">✨ Creează</button>
+
+      <div id="output" class="output">Aici va apărea mesajul creat pentru voi. ❤️</div>
+      <div class="output-actions">
+        <button id="copyText" class="secondary" type="button">📋 Copiază</button>
+        <button id="sendChat" class="secondary" type="button">💬 Pune în Chat</button>
+        <button id="useImage" class="secondary" type="button">🖼️ Fă imagine</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="panelImage" class="panel">
+    <div class="card">
+      <h2>Creează un card-imagine ❤️</h2>
+      <p class="muted">Poți transforma mesajul într-o imagine pătrată și o poți salva pe telefon.</p>
+      <div class="field"><label>TEXT PE IMAGINE</label><textarea id="imageText" placeholder="Scrie mesajul..."></textarea></div>
+      <div class="field"><label>POZĂ DE FUNDAL — OPȚIONAL</label><input id="backgroundPhoto" type="file" accept="image/*"></div>
+
+      <div class="theme-grid">
+        <button class="theme t1 active" data-theme="1" type="button"></button>
+        <button class="theme t2" data-theme="2" type="button"></button>
+        <button class="theme t3" data-theme="3" type="button"></button>
+        <button class="theme t4" data-theme="4" type="button"></button>
+      </div>
+
+      <div class="canvas-wrap"><canvas id="cardCanvas" width="1080" height="1080"></canvas></div>
+      <div class="two" style="margin-top:9px">
+        <button id="drawCard" class="primary" type="button">✨ Generează imaginea</button>
+        <button id="downloadCard" class="secondary" type="button">⬇️ Salvează PNG</button>
+      </div>
+      <p class="note">Imaginea este creată direct în browser ca un card romantic. Nu folosește un serviciu extern de generare foto.</p>
+    </div>
+  </section>
+</main>
+<div id="toast" class="toast">Gata ❤️</div>
+
+<nav class="bottom-nav">
+  <a href="./index.html"><span class="ico">🏠</span><span>Acasă</span></a>
+  <a href="./chat.html"><span class="ico">💬</span><span>Chat</span></a>
+  <a href="./amintiri.html"><span class="ico">📸</span><span>Amintiri</span></a>
+  <a href="./evenimente.html"><span class="ico">📅</span><span>Evenimente</span></a>
+  <a href="./setari.html"><span class="ico">⚙️</span><span>Setări</span></a>
+</nav>
+
+
+<script>
+(function(){
+  const tabs=document.querySelectorAll(".tab");
+  const pText=document.getElementById("panelText");
+  const pImage=document.getElementById("panelImage");
+  const output=document.getElementById("output");
+  const imageText=document.getElementById("imageText");
+  const toast=document.getElementById("toast");
+  const canvas=document.getElementById("cardCanvas");
+  const ctx=canvas.getContext("2d");
+  let theme=1;
+  let backgroundImage=null;
+
+  function show(t){toast.textContent=t;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),2200)}
+
+  tabs.forEach(btn=>btn.addEventListener("click",()=>{
+    tabs.forEach(x=>x.classList.toggle("active",x===btn));
+    const isText=btn.dataset.tab==="text";
+    pText.classList.toggle("active",isText);
+    pImage.classList.toggle("active",!isText);
+  }));
+
+  const intros={
+    romantic:["Iubirea mea","Dragostea mea","Sufletul meu"],
+    cute:["Hei, iubire","Puiul meu","Omul meu preferat"],
+    deep:["Iubirea mea","Suflet drag","Pentru tine"],
+    simple:["Iubire","Dragă","Hei"]
+  };
+
+  const bodies={
+    romantic:[
+      "În fiecare zi îmi dau seama cât de norocos/norocoasă sunt că te am lângă mine.",
+      "Cu tine, lucrurile simple devin amintiri pe care vreau să le păstrez pentru totdeauna.",
+      "Îmi place felul în care lumea mea se simte mai caldă atunci când ești în ea."
+    ],
+    cute:[
+      "Doar voiam să-ți amintesc că ești partea mea preferată din zi. 🥰",
+      "Dacă aș putea să aleg din nou, tot pe tine te-aș alege. De fiecare dată. 💗",
+      "Ai talentul ăsta special de a-mi face ziua mai frumoasă fără să încerci."
+    ],
+    deep:[
+      "Nu iubesc doar momentele frumoase dintre noi, ci și felul în care alegem să rămânem unul lângă altul când lucrurile sunt grele.",
+      "Pentru mine, iubirea noastră înseamnă siguranță, creștere și alegerea de a ne regăsi în fiecare zi.",
+      "Unele persoane trec prin viața noastră. Tu ai devenit parte din felul în care îmi imaginez viitorul."
+    ],
+    simple:[
+      "Mă bucur că ești în viața mea.",
+      "Mi-e dor de tine și abia aștept să te văd.",
+      "Te iubesc și voiam doar să știi asta. ❤️"
+    ]
+  };
+
+  function pick(a){return a[Math.floor(Math.random()*a.length)]}
+  function namePart(){
+    const n=document.getElementById("partner").value.trim();
+    return n ? ", "+n : "";
+  }
+  function detailPart(){
+    const d=document.getElementById("detail").value.trim();
+    return d ? "\n\nȘi încă ceva: "+d : "";
+  }
+
+  function generate(){
+    const kind=document.getElementById("kind").value;
+    const tone=document.getElementById("tone").value;
+    const hello=pick(intros[tone])+namePart();
+    const body=pick(bodies[tone]);
+    const detail=detailPart();
+
+    let text="";
+    if(kind==="message") text=`${hello} ❤️\n\n${body}${detail}`;
+    if(kind==="letter") text=`${hello},\n\n${body} ${pick(bodies[tone])}${detail}\n\nÎți mulțumesc pentru tot ce construim împreună. Te aleg azi și vreau să te aleg și mâine. ❤️\n\nCu toată iubirea mea.`;
+    if(kind==="morning") text=`Bună dimineața${namePart()} ☀️❤️\n\n${body} Sper să ai o zi frumoasă și să nu uiți că cineva se gândește la tine chiar acum.${detail}`;
+    if(kind==="night") text=`Noapte bună${namePart()} 🌙❤️\n\nÎnchei ziua cu gândul la tine. ${body} Dormi liniștit/ă și visează frumos.${detail}`;
+    if(kind==="anniversary") text=`La mulți ani nouă${namePart()}! 🥂❤️\n\n${body} Sunt recunoscător/recunoscătoare pentru tot ce am trăit și entuziasmat/ă pentru tot ce urmează.${detail}`;
+    if(kind==="sorry") text=`${hello},\n\nÎmi pare rău pentru ce s-a întâmplat. Nu vreau să câștig o ceartă; vreau să avem grijă de noi. ${body}${detail}\n\nCând ești pregătit/ă, vreau să vorbim cu calm. ❤️`;
+
+    output.textContent=text;
+    imageText.value=text;
+  }
+
+  document.getElementById("generateText").addEventListener("click",generate);
+  document.getElementById("copyText").addEventListener("click",async()=>{
+    await navigator.clipboard.writeText(output.textContent);
+    show("Mesaj copiat 📋");
+  });
+  document.getElementById("sendChat").addEventListener("click",()=>{
+    const text=output.textContent.trim();
+    if(!text || text.startsWith("Aici va apărea")){show("Creează mai întâi un mesaj.");return;}
+    localStorage.setItem("duoDraftChatMessage",text);
+    location.href="./chat.html";
+  });
+  document.getElementById("useImage").addEventListener("click",()=>{
+    imageText.value=output.textContent;
+    document.querySelector('[data-tab="image"]').click();
+    draw();
+  });
+
+  document.querySelectorAll(".theme").forEach(btn=>btn.addEventListener("click",()=>{
+    theme=Number(btn.dataset.theme);
+    document.querySelectorAll(".theme").forEach(x=>x.classList.toggle("active",x===btn));
+    draw();
+  }));
+
+  document.getElementById("backgroundPhoto").addEventListener("change",e=>{
+    const file=e.target.files[0];
+    if(!file){backgroundImage=null;draw();return;}
+    const img=new Image();
+    img.onload=()=>{backgroundImage=img;draw()};
+    img.src=URL.createObjectURL(file);
+  });
+
+  function roundedRect(x,y,w,h,r){
+    ctx.beginPath();
+    ctx.roundRect(x,y,w,h,r);
+  }
+
+  function wrapText(text,maxWidth,fontSize){
+    const paragraphs=String(text||"").split(/\n+/);
+    const lines=[];
+    ctx.font=`700 ${fontSize}px system-ui,-apple-system,sans-serif`;
+
+    paragraphs.forEach((p,pi)=>{
+      const words=p.split(/\s+/).filter(Boolean);
+      let line="";
+      words.forEach(word=>{
+        const test=line?line+" "+word:word;
+        if(ctx.measureText(test).width>maxWidth && line){
+          lines.push(line); line=word;
+        }else line=test;
+      });
+      if(line) lines.push(line);
+      if(pi<paragraphs.length-1) lines.push("");
+    });
+    return lines;
+  }
+
+  function draw(){
+    const w=canvas.width,h=canvas.height;
+    ctx.clearRect(0,0,w,h);
+
+    if(backgroundImage){
+      const scale=Math.max(w/backgroundImage.width,h/backgroundImage.height);
+      const dw=backgroundImage.width*scale, dh=backgroundImage.height*scale;
+      ctx.drawImage(backgroundImage,(w-dw)/2,(h-dh)/2,dw,dh);
+      ctx.fillStyle="rgba(38,18,30,.38)";
+      ctx.fillRect(0,0,w,h);
+    }else{
+      const palettes={
+        1:["#ffd9e8","#bba3ff"],
+        2:["#180d21","#8b3e68"],
+        3:["#ffb28d","#ff5c87"],
+        4:["#bde7ff","#f9cfeb"]
+      };
+      const colors=palettes[theme]||palettes[1];
+      const g=ctx.createLinearGradient(0,0,w,h);
+      g.addColorStop(0,colors[0]); g.addColorStop(1,colors[1]);
+      ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+    }
+
+    // decor
+    ctx.globalAlpha=.18;
+    ctx.fillStyle="#fff";
+    for(let i=0;i<20;i++){
+      ctx.beginPath();
+      const x=(i*173)%w, y=(i*97)%h, r=18+(i%4)*8;
+      ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+    }
+    ctx.globalAlpha=1;
+
+    ctx.fillStyle="rgba(255,255,255,.17)";
+    roundedRect(80,100,w-160,h-200,60); ctx.fill();
+
+    ctx.textAlign="center";
+    ctx.fillStyle="#fff";
+    ctx.font="900 70px system-ui,-apple-system,sans-serif";
+    ctx.fillText("DUO LOVE ❤️",w/2,205);
+
+    const text=imageText.value.trim() || "Tu ești locul meu preferat. ❤️";
+    let fontSize=52;
+    let lines=wrapText(text,w-260,fontSize);
+    while(lines.length>11 && fontSize>34){
+      fontSize-=3; lines=wrapText(text,w-260,fontSize);
+    }
+
+    ctx.font=`700 ${fontSize}px system-ui,-apple-system,sans-serif`;
+    ctx.fillStyle="#fff";
+    const lineH=fontSize*1.35;
+    const total=lines.length*lineH;
+    let y=(h-total)/2+55;
+    lines.forEach(line=>{
+      if(line) ctx.fillText(line,w/2,y,w-260);
+      y+=lineH;
+    });
+
+    ctx.font="600 28px system-ui,-apple-system,sans-serif";
+    ctx.fillStyle="rgba(255,255,255,.86)";
+    ctx.fillText("făcut cu iubire",w/2,h-125);
+  }
+
+  document.getElementById("drawCard").addEventListener("click",()=>{draw();show("Imagine creată ❤️")});
+  document.getElementById("downloadCard").addEventListener("click",()=>{
+    draw();
+    const a=document.createElement("a");
+    a.download="duo-love-card.png";
+    a.href=canvas.toDataURL("image/png");
+    a.click();
+  });
+
+  generate();
+  draw();
+})();
+</script>
+<script src="./tema.js?v=28"></script>
+<script>
+window.addEventListener("pageshow", function(){
+  if (typeof window.applyGlobalBackground === "function") {
+    window.applyGlobalBackground();
+  }
+  if (typeof window.applyGlobalFont === "function") {
+    window.applyGlobalFont();
+  }
+});
+</script>
+</body>
+</html>
