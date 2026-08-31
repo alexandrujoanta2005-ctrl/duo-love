@@ -1,4 +1,4 @@
-console.log("❤️ DUO LOVE BUILD v39 - CLOUD SYNC + FRAME + XP + EFFECTS");
+console.log("❤️ DUO LOVE BUILD v41 - CLOUD SYNC + 3D FRAMES + XP + EFFECTS");
 
 /* =========================================================
    SINCRONIZARE CONT + CUPLU - SUPABASE

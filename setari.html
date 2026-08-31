@@ -1575,6 +1575,643 @@
 
   
 
+
+    /* =====================================================
+       RAME 3D & ANIMATE — PREVIEW v41
+    ====================================================== */
+
+    .photo-frame-section-title {
+      grid-column:
+        1 / -1;
+
+      margin:
+        7px 0 0;
+
+      color:
+        rgba(255,255,255,.48);
+
+      font-size:
+        9px;
+      font-weight:
+        850;
+      letter-spacing:
+        1.7px;
+    }
+
+
+    .photo-frame-option {
+      overflow:
+        visible;
+    }
+
+
+    .photo-frame-option
+    .photo-frame-preview {
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      isolation:
+        isolate;
+    }
+
+
+    .photo-frame-option
+    .frame-badge {
+      position:
+        absolute;
+
+      right:
+        7px;
+      top:
+        7px;
+
+      z-index:
+        3;
+
+      padding:
+        3px 5px;
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(8,6,12,.84);
+
+      color:
+        rgba(255,255,255,.72);
+
+      font-size:
+        7px;
+      font-weight:
+        850;
+
+      pointer-events:
+        none;
+    }
+
+
+    .photo-frame-option[data-frame="glass3d"]
+    .photo-frame-preview {
+      border:
+        1px solid
+        rgba(255,255,255,.55);
+
+      box-shadow:
+        0 5px 10px rgba(0,0,0,.24),
+        inset 0 1px 0 rgba(255,255,255,.30);
+
+      animation:
+        previewFloat
+        3.4s
+        ease-in-out
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="holo"]
+    .photo-frame-preview {
+      border:
+        2px solid
+        #70e6ff;
+
+      box-shadow:
+        0 0 10px rgba(96,219,255,.38);
+
+      animation:
+        previewHue
+        3s
+        linear
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="crystal"]
+    .photo-frame-preview {
+      border:
+        2px solid
+        #d8f3ff;
+
+      box-shadow:
+        0 0 10px rgba(190,228,255,.35);
+    }
+
+
+    .photo-frame-option[data-frame="crystal"]
+    .photo-frame-preview::after {
+      content:
+        "✧   ✧";
+
+      display:
+        grid;
+      place-items:
+        center;
+
+      height:
+        100%;
+
+      color:
+        white;
+
+      animation:
+        previewTwinkle
+        1.7s
+        ease-in-out
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="galaxy"]
+    .photo-frame-preview {
+      border:
+        2px solid
+        #745cdd;
+
+      box-shadow:
+        0 0 11px rgba(116,92,221,.45);
+
+      background:
+        radial-gradient(
+          circle at 20% 30%,
+          white 0 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 75% 65%,
+          white 0 1px,
+          transparent 2px
+        ),
+        linear-gradient(
+          135deg,
+          #3e2a6d,
+          #263f74,
+          #722c68
+        );
+
+      animation:
+        previewPulse
+        2.8s
+        ease-in-out
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="rainbow"]
+    .photo-frame-preview {
+      border:
+        3px solid
+        #ff77aa;
+
+      animation:
+        previewRainbow
+        3.5s
+        linear
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="ice"]
+    .photo-frame-preview {
+      border:
+        2px solid
+        #89eaff;
+
+      box-shadow:
+        0 0 11px rgba(137,234,255,.42);
+    }
+
+
+    .photo-frame-option[data-frame="ice"]
+    .photo-frame-preview::after {
+      content:
+        "❄  ❄";
+
+      display:
+        grid;
+      place-items:
+        center;
+
+      height:
+        100%;
+
+      color:
+        #e5fbff;
+    }
+
+
+    .photo-frame-option[data-frame="lightning"]
+    .photo-frame-preview {
+      border:
+        2px solid
+        #b78dff;
+
+      box-shadow:
+        0 0 10px rgba(183,141,255,.38);
+    }
+
+
+    .photo-frame-option[data-frame="lightning"]
+    .photo-frame-preview::after {
+      content:
+        "⚡  ⚡";
+
+      display:
+        grid;
+      place-items:
+        center;
+
+      height:
+        100%;
+
+      animation:
+        previewFlash
+        1.4s
+        steps(2,end)
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="pearl"]
+    .photo-frame-preview {
+      border:
+        3px solid
+        #ffe6f3;
+
+      box-shadow:
+        0 0 10px rgba(255,224,240,.32);
+
+      animation:
+        previewPulse
+        3.2s
+        ease-in-out
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="cyber"]
+    .photo-frame-preview {
+      border:
+        2px solid
+        #43efff;
+
+      box-shadow:
+        0 0 10px rgba(67,239,255,.38);
+
+      animation:
+        previewHue
+        2.2s
+        linear
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="loveOrbit"]
+    .photo-frame-preview {
+      border:
+        2px solid
+        #ff72a8;
+
+      box-shadow:
+        0 0 10px rgba(255,114,168,.34);
+    }
+
+
+    .photo-frame-option[data-frame="loveOrbit"]
+    .photo-frame-preview::after {
+      content:
+        "❤";
+
+      display:
+        grid;
+      place-items:
+        center;
+
+      height:
+        100%;
+
+      color:
+        #ffb3cf;
+
+      animation:
+        previewSpin
+        3.6s
+        linear
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="starOrbit"]
+    .photo-frame-preview {
+      border:
+        2px solid
+        #a390ff;
+    }
+
+
+    .photo-frame-option[data-frame="starOrbit"]
+    .photo-frame-preview::after {
+      content:
+        "✦";
+
+      display:
+        grid;
+      place-items:
+        center;
+
+      height:
+        100%;
+
+      color:
+        #eee9ff;
+
+      animation:
+        previewSpin
+        4.2s
+        linear
+        infinite
+        reverse;
+    }
+
+
+    .photo-frame-option[data-frame="neonPulse"]
+    .photo-frame-preview {
+      border:
+        2px solid
+        #ff64c7;
+
+      animation:
+        previewNeon
+        1.6s
+        ease-in-out
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="luxury3d"]
+    .photo-frame-preview {
+      border:
+        3px solid
+        #e9c86b;
+
+      box-shadow:
+        0 3px 0 #9c7126,
+        0 7px 12px rgba(0,0,0,.30);
+
+      animation:
+        previewFloat
+        3.2s
+        ease-in-out
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="auroraFrame"]
+    .photo-frame-preview {
+      border:
+        2px solid
+        #6edfd8;
+
+      box-shadow:
+        0 0 10px rgba(110,223,216,.32);
+
+      animation:
+        previewHue
+        3.4s
+        linear
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="love3d"]
+    .photo-frame-preview {
+      border:
+        3px solid
+        #ff7dae;
+
+      box-shadow:
+        0 3px 0 #a63f69,
+        0 7px 12px rgba(0,0,0,.28);
+
+      animation:
+        previewFloat
+        2.8s
+        ease-in-out
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="love3d"]
+    .photo-frame-preview::after {
+      content:
+        "❤  ❤";
+
+      display:
+        grid;
+      place-items:
+        center;
+
+      height:
+        100%;
+
+      color:
+        #ffd2e3;
+
+      animation:
+        previewHeartbeat
+        1.35s
+        ease-in-out
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="dream"]
+    .photo-frame-preview {
+      border:
+        2px solid
+        #c7acff;
+
+      box-shadow:
+        0 0 10px rgba(199,172,255,.36);
+
+      animation:
+        previewPulse
+        3s
+        ease-in-out
+        infinite;
+    }
+
+
+    .photo-frame-option[data-frame="dream"]
+    .photo-frame-preview::after {
+      content:
+        "☾ ✦";
+
+      display:
+        grid;
+      place-items:
+        center;
+
+      height:
+        100%;
+
+      color:
+        #f0e8ff;
+    }
+
+
+    @keyframes previewFloat {
+      0%,100% {
+        transform:
+          translateY(0)
+          rotateX(0deg);
+      }
+
+      50% {
+        transform:
+          translateY(-2px)
+          rotateX(2deg);
+      }
+    }
+
+
+    @keyframes previewHue {
+      from {
+        filter:
+          hue-rotate(0deg);
+      }
+
+      to {
+        filter:
+          hue-rotate(360deg);
+      }
+    }
+
+
+    @keyframes previewTwinkle {
+      0%,100% {
+        opacity:
+          .42;
+      }
+
+      50% {
+        opacity:
+          1;
+      }
+    }
+
+
+    @keyframes previewPulse {
+      0%,100% {
+        filter:
+          brightness(1);
+      }
+
+      50% {
+        filter:
+          brightness(1.18);
+      }
+    }
+
+
+    @keyframes previewRainbow {
+      0% {
+        border-color:
+          #ff6d9f;
+      }
+
+      25% {
+        border-color:
+          #ffd05c;
+      }
+
+      50% {
+        border-color:
+          #67e6a6;
+      }
+
+      75% {
+        border-color:
+          #6ebfff;
+      }
+
+      100% {
+        border-color:
+          #ff6d9f;
+      }
+    }
+
+
+    @keyframes previewFlash {
+      0%,76%,100% {
+        opacity:
+          .45;
+      }
+
+      78%,84% {
+        opacity:
+          1;
+      }
+    }
+
+
+    @keyframes previewSpin {
+      from {
+        transform:
+          rotate(0deg);
+      }
+
+      to {
+        transform:
+          rotate(360deg);
+      }
+    }
+
+
+    @keyframes previewNeon {
+      0%,100% {
+        box-shadow:
+          0 0 7px
+          rgba(255,100,199,.25);
+      }
+
+      50% {
+        box-shadow:
+          0 0 15px
+          rgba(255,100,199,.65);
+      }
+    }
+
+
+    @keyframes previewHeartbeat {
+      0%,100% {
+        transform:
+          scale(.90);
+      }
+
+      50% {
+        transform:
+          scale(1.10);
+      }
+    }
+
+
+    @media (
+      prefers-reduced-motion:
+      reduce
+    ) {
+
+      .photo-frame-preview,
+      .photo-frame-preview::before,
+      .photo-frame-preview::after {
+        animation:
+          none !important;
+      }
+
+    }
+
+
     /* =====================================================
        RAME PENTRU POZA DE PE HOME 🖼️
     ====================================================== */
@@ -1756,7 +2393,7 @@
 </head>
 
 
-<body class="settings-page" data-build="v39">
+<body class="settings-page" data-build="v41">
 
 
   <main class="app">
@@ -2265,6 +2902,10 @@
         class="photo-frame-grid"
       >
 
+        <div class="photo-frame-section-title">
+          CLASICE
+        </div>
+
         <button type="button" class="photo-frame-option" data-frame="none">
           <span class="photo-frame-preview"></span>
           <span class="photo-frame-name">Fără ramă</span>
@@ -2298,6 +2939,107 @@
         <button type="button" class="photo-frame-option" data-frame="fire">
           <span class="photo-frame-preview"></span>
           <span class="photo-frame-name">🔥 Foc</span>
+        </button>
+
+
+        <div class="photo-frame-section-title">
+          3D & ANIMATE
+        </div>
+
+        <button type="button" class="photo-frame-option" data-frame="glass3d">
+          <span class="frame-badge">3D</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">🫧 Glass 3D</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="holo">
+          <span class="frame-badge">ANIMATĂ</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">🌈 Holografică</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="crystal">
+          <span class="frame-badge">ANIMATĂ</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">💎 Cristal</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="galaxy">
+          <span class="frame-badge">ANIMATĂ</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">🌌 Galaxy</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="rainbow">
+          <span class="frame-badge">ANIMATĂ</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">🌈 Rainbow</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="ice">
+          <span class="frame-badge">FX</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">❄️ Ice</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="lightning">
+          <span class="frame-badge">ANIMATĂ</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">⚡ Lightning</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="pearl">
+          <span class="frame-badge">3D</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">🤍 Pearl</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="cyber">
+          <span class="frame-badge">ANIMATĂ</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">🩵 Cyber</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="loveOrbit">
+          <span class="frame-badge">ORBITĂ</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">❤️ Love Orbit</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="starOrbit">
+          <span class="frame-badge">ORBITĂ</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">✨ Star Orbit</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="neonPulse">
+          <span class="frame-badge">PULSE</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">💖 Neon Pulse</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="luxury3d">
+          <span class="frame-badge">3D</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">👑 Luxury 3D</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="auroraFrame">
+          <span class="frame-badge">ANIMATĂ</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">🌌 Aurora</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="love3d">
+          <span class="frame-badge">3D</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">💞 Love 3D</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="dream">
+          <span class="frame-badge">ANIMATĂ</span>
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">🌙 Dream</span>
         </button>
 
       </div>
@@ -2672,14 +3414,14 @@
 <script src="./supabase.js?v=31"></script>
 <script src="./security.js?v=32"></script>
 
-  <script src="./cloud-sync.js?v=39"></script>
+  <script src="./cloud-sync.js?v=41"></script>
 
   <script src="./tema.js?v=39"></script>
 
 
   <script>
 
-    console.log("❤️ DUO LOVE BUILD v39 - SETARI + RAME");
+    console.log("❤️ DUO LOVE BUILD v41 - SETARI + 20 RAME 3D/ANIMATE");
 
     /* =====================================================
        ELEMENTE
