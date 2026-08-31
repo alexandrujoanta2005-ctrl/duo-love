@@ -57,7 +57,7 @@
   <link rel="preconnect" href="https://vrcwpodmvdamkgveuedz.supabase.co" crossorigin>
   <link rel="dns-prefetch" href="//vrcwpodmvdamkgveuedz.supabase.co">
 
-  <link rel="stylesheet" href="./style.css?v=54">
+  <link rel="stylesheet" href="./style.css?v=31">
 
 
   <style>
@@ -752,7 +752,45 @@
 
       cursor: pointer !important;
     }
-/* =====================================================
+
+
+
+
+    .bear-ai-tools-row {
+      flex: 0 0 auto !important;
+      padding: 8px 10px 0 !important;
+    }
+
+    .bear-ai-create-btn {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-height: 44px !important;
+      padding: 10px 12px !important;
+      border: 1px solid rgba(255,255,255,.16) !important;
+      border-radius: 14px !important;
+      background: linear-gradient(
+        135deg,
+        #df4f91,
+        #8a58d3
+      ) !important;
+      box-shadow:
+        0 8px 20px rgba(171,67,139,.25) !important;
+      color: white !important;
+      text-align: center !important;
+      text-decoration: none !important;
+      font-size: 12px !important;
+      font-weight: 950 !important;
+      line-height: 1.2 !important;
+    }
+
+    .bear-ai-create-btn:active {
+      transform: scale(.985) !important;
+    }
+
+
+    /* =====================================================
        MESAJE AI
     ====================================================== */
 
@@ -4481,6 +4519,38 @@
   }
 </style>
 
+
+<style id="duo-v54-attached-floating-controls">
+
+  /* animație scurtă când focul/ursul se mută lângă panou */
+  #appStreakCard,
+  #bearAIFloating {
+    transition:
+      left .28s ease,
+      top .28s ease,
+      right .28s ease,
+      bottom .28s ease,
+      transform .28s ease !important;
+  }
+
+  /*
+    Focul trebuie să rămână DEASUPRA fundalului modalului,
+    ca să se vadă în partea stângă a calendarului.
+  */
+  #appStreakCard.calendar-attached {
+    z-index: 2147483646 !important;
+  }
+
+  /*
+    Ursulețul stă peste marginea chatului,
+    nu rămâne departe de fereastra Teddy.
+  */
+  #bearAIFloating.chat-attached {
+    z-index: 2147483646 !important;
+  }
+
+</style>
+
 </head>
 
 
@@ -5721,7 +5791,7 @@
 <script src="./security.js?v=32"></script>
   <script src="./cloud-sync.js?v=41"></script>
 
-  <script src="./tema.js?v=54"></script>
+  <script src="./tema.js?v=28"></script>
 
   <script src="./ursulet.js?v=28"></script>
 
@@ -8873,6 +8943,193 @@
 
 
 
+
+    /* =====================================================
+       v54 — FOCUL SE RIDICĂ LÂNGĂ CALENDAR
+       iar la X revine jos în stânga
+    ====================================================== */
+
+    function attachStreakFireToCalendar() {
+
+      const calendarCard =
+        streakCalendarModal.querySelector(
+          ".streak-calendar-card"
+        );
+
+
+      if (
+        !calendarCard ||
+        !appStreakCard
+      ) {
+
+        return;
+
+      }
+
+
+      requestAnimationFrame(
+        function () {
+
+          const cardRect =
+            calendarCard.getBoundingClientRect();
+
+
+          const fireRect =
+            appStreakCard.getBoundingClientRect();
+
+
+          const nav =
+            document.querySelector(
+              ".bottom-nav"
+            );
+
+
+          let maxTop =
+            window.innerHeight -
+            fireRect.height -
+            12;
+
+
+          if (
+            nav
+          ) {
+
+            const navRect =
+              nav.getBoundingClientRect();
+
+
+            maxTop =
+              Math.min(
+                maxTop,
+                navRect.top -
+                fireRect.height -
+                10
+              );
+
+          }
+
+
+          /*
+            Îl suprapunem puțin peste marginea stângă
+            a calendarului, exact ca o "ancoră" a meniului.
+          */
+
+          const desiredLeft =
+            Math.max(
+              8,
+              cardRect.left -
+              fireRect.width *
+              .42
+            );
+
+
+          const desiredTop =
+            Math.min(
+              maxTop,
+              Math.max(
+                12,
+                cardRect.top +
+                cardRect.height *
+                .58
+              )
+            );
+
+
+          appStreakCard
+            .classList.add(
+              "calendar-attached"
+            );
+
+
+          appStreakCard.style
+            .setProperty(
+              "right",
+              "auto",
+              "important"
+            );
+
+
+          appStreakCard.style
+            .setProperty(
+              "bottom",
+              "auto",
+              "important"
+            );
+
+
+          appStreakCard.style
+            .setProperty(
+              "left",
+              desiredLeft +
+              "px",
+              "important"
+            );
+
+
+          appStreakCard.style
+            .setProperty(
+              "top",
+              desiredTop +
+              "px",
+              "important"
+            );
+
+        }
+      );
+
+    }
+
+
+
+    function restoreStreakFireHomePosition() {
+
+      if (
+        !appStreakCard
+      ) {
+
+        return;
+
+      }
+
+
+      appStreakCard
+        .classList.remove(
+          "calendar-attached"
+        );
+
+
+      /*
+        Ștergem poziția temporară.
+        CSS-ul original îl pune iar:
+        stânga jos, lângă bara de navigare.
+      */
+
+      appStreakCard.style
+        .removeProperty(
+          "left"
+        );
+
+
+      appStreakCard.style
+        .removeProperty(
+          "top"
+        );
+
+
+      appStreakCard.style
+        .removeProperty(
+          "right"
+        );
+
+
+      appStreakCard.style
+        .removeProperty(
+          "bottom"
+        );
+
+    }
+
+
     function openStreakCalendar() {
 
       const today =
@@ -8902,6 +9159,9 @@
 
       renderStreakCalendar();
 
+
+      attachStreakFireToCalendar();
+
     }
 
 
@@ -8917,6 +9177,9 @@
         "aria-hidden",
         "true"
       );
+
+
+      restoreStreakFireHomePosition();
 
     }
 
@@ -9607,6 +9870,15 @@
 
     let bearAIChatMessages =
       [];
+
+
+    /*
+      v54:
+      Reținem locul ursulețului înainte să deschidem chatul,
+      ca să îl putem pune înapoi exact acolo la X.
+    */
+    let bearAIChatReturnPosition =
+      null;
 
 
 
@@ -10574,6 +10846,155 @@
 
 
 
+
+    /* =====================================================
+       v54 — URSULEȚUL SE LIPEȘTE DE CHAT
+    ====================================================== */
+
+    function rememberBearPositionBeforeChat() {
+
+      if (
+        bearAIChatReturnPosition
+      ) {
+
+        return;
+
+      }
+
+
+      const rect =
+        bearAIFloating
+          .getBoundingClientRect();
+
+
+      bearAIChatReturnPosition = {
+        x:
+          rect.left,
+
+        y:
+          rect.top
+      };
+
+    }
+
+
+
+    function attachBearToOpenPanel() {
+
+      if (
+        !bearAIPanel.classList.contains(
+          "open"
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      requestAnimationFrame(
+        function () {
+
+          const panelRect =
+            bearAIPanel
+              .getBoundingClientRect();
+
+
+          const bearRect =
+            bearAIFloating
+              .getBoundingClientRect();
+
+
+          /*
+            Ursul stă lipit de colțul stânga-sus al chatului.
+            Pe ecranele mici se suprapune puțin peste margine,
+            ca să nu iasă în afara ecranului.
+          */
+
+          const desiredX =
+            Math.max(
+              8,
+              panelRect.left -
+              bearRect.width *
+              .40
+            );
+
+
+          const desiredY =
+            Math.max(
+              8,
+              panelRect.top +
+              18
+            );
+
+
+          bearAIFloating
+            .classList.add(
+              "chat-attached"
+            );
+
+
+          setBearAIPosition(
+            desiredX,
+            desiredY
+          );
+
+        }
+      );
+
+    }
+
+
+
+    function restoreBearPositionAfterChat() {
+
+      bearAIFloating
+        .classList.remove(
+          "chat-attached"
+        );
+
+
+      if (
+        !bearAIChatReturnPosition
+      ) {
+
+        loadBearAIPosition();
+
+        return;
+
+      }
+
+
+      const savedPosition =
+        bearAIChatReturnPosition;
+
+
+      bearAIChatReturnPosition =
+        null;
+
+
+      setBearAIPosition(
+        savedPosition.x,
+        savedPosition.y
+      );
+
+    }
+
+
+
+    function closeBearAIChat() {
+
+      bearAIPanel
+        .classList.remove(
+          "open"
+        );
+
+
+      restoreBearPositionAfterChat();
+
+    }
+
+
     /* =====================================================
        DESCHIDE CHATUL
     ====================================================== */
@@ -10583,30 +11004,45 @@
       refreshBearAIName();
 
 
-      bearAIPanel.classList.toggle(
-        "open"
-      );
-
-
+      /*
+        Dacă e deja deschis, apăsarea pe urs îl închide
+        și îl pune înapoi unde era.
+      */
       if (
         bearAIPanel.classList.contains(
           "open"
         )
       ) {
 
-        renderBearAIChat();
+        closeBearAIChat();
 
-
-        setTimeout(
-          function () {
-
-            bearAIInput.focus();
-
-          },
-          120
-        );
+        return;
 
       }
+
+
+      rememberBearPositionBeforeChat();
+
+
+      bearAIPanel.classList.add(
+        "open"
+      );
+
+
+      renderBearAIChat();
+
+
+      attachBearToOpenPanel();
+
+
+      setTimeout(
+        function () {
+
+          bearAIInput.focus();
+
+        },
+        120
+      );
 
     }
 
@@ -10739,6 +11175,15 @@
         );
 
 
+        bearAIFloating.classList.remove(
+          "chat-attached"
+        );
+
+
+        bearAIChatReturnPosition =
+          null;
+
+
         setBearAIPosition(
           bearOriginalX +
           differenceX,
@@ -10840,7 +11285,30 @@
       "resize",
       function () {
 
-        loadBearAIPosition();
+        if (
+          bearAIPanel.classList.contains(
+            "open"
+          )
+        ) {
+
+          attachBearToOpenPanel();
+
+        } else {
+
+          loadBearAIPosition();
+
+        }
+
+
+        if (
+          streakCalendarModal.classList.contains(
+            "open"
+          )
+        ) {
+
+          attachStreakFireToCalendar();
+
+        }
 
       }
     );
@@ -10855,9 +11323,7 @@
       "click",
       function () {
 
-        bearAIPanel.classList.remove(
-          "open"
-        );
+        closeBearAIChat();
 
       }
     );

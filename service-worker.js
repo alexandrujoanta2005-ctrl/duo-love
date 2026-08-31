@@ -50,6 +50,7 @@ const STATIC_FILES = [
   "./amintiri.js",
   "./evenimente.js",
   "./mesaje.js",
+  "./self.js",
   "./setari.js",
   "./recompense.js",
 
