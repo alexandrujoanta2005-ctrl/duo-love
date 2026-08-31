@@ -2629,8 +2629,8 @@ function openShopRewardDetail(
 
 
         <div class="reward-detail-item">
-          ⚠ După cumpărare,
-          XP-ul disponibil se resetează la 0.
+          ✅ După cumpărare,
+          se scade doar costul recompensei din XP-ul disponibil.
           XP-ul total rămâne neschimbat.
         </div>
 
