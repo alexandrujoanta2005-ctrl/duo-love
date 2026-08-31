@@ -1208,6 +1208,693 @@
 
 
 
+
+    /* =====================================================
+       FOC + CALENDAR SERIE 🔥📅
+    ====================================================== */
+
+    .streak-flame-wrap {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+
+    .streak-flame-wrap:active {
+      transform: scale(.96);
+    }
+
+
+    .streak-flame-wrap:focus-visible {
+      outline:
+        2px solid
+        var(--streak-color);
+      outline-offset: 3px;
+    }
+
+
+    .streak-calendar-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2147483600;
+
+      display: none;
+      place-items: center;
+
+      padding:
+        calc(
+          18px +
+          env(safe-area-inset-top)
+        )
+        14px
+        calc(
+          18px +
+          env(safe-area-inset-bottom)
+        );
+
+      box-sizing: border-box;
+
+      background:
+        rgba(
+          3,
+          3,
+          7,
+          .72
+        );
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+
+    .streak-calendar-modal.open {
+      display: grid;
+    }
+
+
+    .streak-calendar-card {
+      width:
+        min(
+          100%,
+          420px
+        );
+
+      max-height:
+        min(
+          760px,
+          calc(
+            100dvh -
+            36px -
+            env(safe-area-inset-top) -
+            env(safe-area-inset-bottom)
+          )
+        );
+
+      overflow-y: auto;
+      box-sizing: border-box;
+
+      padding: 18px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .12
+        );
+
+      border-radius: 26px;
+
+      background:
+        linear-gradient(
+          160deg,
+          rgba(22,13,27,.98),
+          rgba(11,8,16,.98)
+        );
+
+      box-shadow:
+        0 24px 70px
+        rgba(
+          0,
+          0,
+          0,
+          .50
+        );
+
+      scrollbar-width: none;
+    }
+
+
+    .streak-calendar-card::-webkit-scrollbar {
+      display: none;
+    }
+
+
+    .streak-calendar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+
+    .streak-calendar-title {
+      min-width: 0;
+    }
+
+
+    .streak-calendar-title span {
+      display: block;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .50
+        );
+
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+
+    .streak-calendar-title h2 {
+      margin:
+        4px 0 0;
+
+      color: white;
+
+      font-size: 24px;
+      line-height: 1.05;
+    }
+
+
+    .streak-calendar-close {
+      flex: 0 0 40px;
+
+      width: 40px;
+      height: 40px;
+
+      border: 0;
+      border-radius: 50%;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .08
+        );
+
+      color: white;
+
+      font-size: 23px;
+      cursor: pointer;
+    }
+
+
+    .streak-current-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      margin-top: 16px;
+      padding: 13px;
+
+      border-radius: 18px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .05
+        );
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .07
+        );
+    }
+
+
+    .streak-current-flame {
+      display: grid;
+      place-items: center;
+
+      width: 50px;
+      height: 50px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .055
+        );
+
+      font-size: 27px;
+    }
+
+
+    .streak-current-copy {
+      min-width: 0;
+    }
+
+
+    .streak-current-copy strong,
+    .streak-current-copy span {
+      display: block;
+    }
+
+
+    .streak-current-copy strong {
+      color: white;
+      font-size: 15px;
+    }
+
+
+    .streak-current-copy span {
+      margin-top: 3px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .58
+        );
+
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+
+    .streak-levels-title {
+      display: block;
+
+      margin-top: 17px;
+      margin-bottom: 8px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .48
+        );
+
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+    }
+
+
+    .streak-levels-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 8px;
+    }
+
+
+    .streak-level-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      min-height: 58px;
+      padding: 10px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .07
+        );
+
+      border-radius: 15px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .035
+        );
+    }
+
+
+    .streak-level-item.active {
+      border-color:
+        color-mix(
+          in srgb,
+          var(--level-color) 55%,
+          transparent
+        );
+
+      box-shadow:
+        inset 0 0 22px
+        color-mix(
+          in srgb,
+          var(--level-color) 12%,
+          transparent
+        );
+    }
+
+
+    .streak-level-dot {
+      flex: 0 0 auto;
+
+      width: 15px;
+      height: 19px;
+
+      color:
+        var(--level-color);
+
+      filter:
+        drop-shadow(
+          0 0 7px
+          var(--level-color)
+        );
+    }
+
+
+    .streak-level-copy strong,
+    .streak-level-copy span {
+      display: block;
+    }
+
+
+    .streak-level-copy strong {
+      color: white;
+      font-size: 11px;
+    }
+
+
+    .streak-level-copy span {
+      margin-top: 2px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .48
+        );
+
+      font-size: 9px;
+    }
+
+
+    .streak-calendar-monthbar {
+      display: grid;
+      grid-template-columns:
+        40px
+        minmax(0, 1fr)
+        40px;
+
+      align-items: center;
+      gap: 8px;
+
+      margin-top: 18px;
+    }
+
+
+    .streak-month-button {
+      width: 40px;
+      height: 40px;
+
+      border: 0;
+      border-radius: 13px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .07
+        );
+
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+
+    .streak-month-label {
+      color: white;
+
+      font-size: 15px;
+      font-weight: 800;
+
+      text-align: center;
+      text-transform: capitalize;
+    }
+
+
+    .streak-calendar-weekdays,
+    .streak-calendar-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          7,
+          minmax(0, 1fr)
+        );
+
+      gap: 5px;
+    }
+
+
+    .streak-calendar-weekdays {
+      margin-top: 12px;
+    }
+
+
+    .streak-calendar-weekdays span {
+      padding:
+        4px 0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .38
+        );
+
+      font-size: 9px;
+      font-weight: 800;
+
+      text-align: center;
+    }
+
+
+    .streak-calendar-grid {
+      margin-top: 5px;
+    }
+
+
+    .streak-day {
+      position: relative;
+
+      display: grid;
+      place-items: center;
+
+      aspect-ratio: 1 / 1;
+
+      min-width: 0;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .06
+        );
+
+      border-radius: 12px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .035
+        );
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .68
+        );
+
+      font: inherit;
+      font-size: 11px;
+      font-weight: 700;
+
+      cursor: default;
+    }
+
+
+    .streak-day.empty {
+      border-color: transparent;
+      background: transparent;
+    }
+
+
+    .streak-day.claimed {
+      color: white;
+
+      border-color:
+        rgba(
+          255,
+          145,
+          71,
+          .32
+        );
+
+      background:
+        rgba(
+          255,
+          145,
+          71,
+          .10
+        );
+    }
+
+
+    .streak-day.claimed::after {
+      content: "🔥";
+
+      position: absolute;
+      right: 2px;
+      bottom: 1px;
+
+      font-size: 8px;
+    }
+
+
+    .streak-day.today {
+      outline:
+        2px solid
+        rgba(
+          255,
+          255,
+          255,
+          .30
+        );
+
+      outline-offset: -2px;
+    }
+
+
+    .streak-day.claimable {
+      border: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ff983e,
+          #ff4f5f
+        );
+
+      color: white;
+
+      box-shadow:
+        0 6px 18px
+        rgba(
+          255,
+          90,
+          70,
+          .30
+        );
+
+      cursor: pointer;
+
+      animation:
+        streakClaimPulse
+        1.5s
+        ease-in-out
+        infinite;
+    }
+
+
+    .streak-day.claimable::after {
+      content: "🔥";
+
+      position: absolute;
+      right: 2px;
+      bottom: 1px;
+
+      font-size: 8px;
+    }
+
+
+    .streak-day:disabled {
+      opacity: .72;
+    }
+
+
+    .streak-claim-message {
+      min-height: 18px;
+
+      margin:
+        12px 0 0;
+
+      color: #ffb8d4;
+
+      font-size: 11px;
+      line-height: 1.4;
+
+      text-align: center;
+    }
+
+
+    .streak-calendar-help {
+      margin:
+        7px 0 0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .44
+        );
+
+      font-size: 10px;
+      line-height: 1.4;
+
+      text-align: center;
+    }
+
+
+    @keyframes streakClaimPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.07);
+      }
+
+    }
+
+
+    @media (max-width: 370px) {
+
+      .streak-levels-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .streak-calendar-card {
+        padding: 15px;
+      }
+
+    }
+
+
     /* =====================================================
        XP COMUN AL CUPLULUI ⭐
     ====================================================== */
@@ -1806,7 +2493,7 @@
 </head>
 
 
-<body class="duo-splash-active" data-build="v28">
+<body class="duo-splash-active" data-build="v36">
 
   <script>
     /*
@@ -2005,7 +2692,13 @@
         class="streak-card orange"
       >
 
-        <div class="streak-flame-wrap">
+        <div
+          id="appStreakFlameButton"
+          class="streak-flame-wrap"
+          role="button"
+          tabindex="0"
+          aria-label="Deschide culorile focului și calendarul seriei"
+        >
 
           <svg
             id="appStreakFlame"
@@ -2069,6 +2762,244 @@
           <strong id="appStreakBest">
             0
           </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ==================================================
+           FOC + CALENDAR SERIE 🔥📅
+      =================================================== -->
+
+      <div
+        id="streakCalendarModal"
+        class="streak-calendar-modal"
+        aria-hidden="true"
+      >
+
+        <div
+          class="streak-calendar-card"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="streakCalendarTitle"
+        >
+
+          <div class="streak-calendar-header">
+
+            <div class="streak-calendar-title">
+
+              <span>
+                🔥 SERIA VOASTRĂ
+              </span>
+
+              <h2 id="streakCalendarTitle">
+                Foc & calendar
+              </h2>
+
+            </div>
+
+
+            <button
+              id="streakCalendarClose"
+              class="streak-calendar-close"
+              type="button"
+              aria-label="Închide"
+            >
+              ×
+            </button>
+
+          </div>
+
+
+          <div class="streak-current-box">
+
+            <div
+              id="streakCurrentFlame"
+              class="streak-current-flame"
+            >
+              🔥
+            </div>
+
+
+            <div class="streak-current-copy">
+
+              <strong id="streakCurrentTitle">
+                Foc portocaliu
+              </strong>
+
+              <span id="streakCurrentText">
+                Seria începe de aici.
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <span class="streak-levels-title">
+            CULORILE FOCULUI
+          </span>
+
+
+          <div
+            id="streakLevelsGrid"
+            class="streak-levels-grid"
+          >
+
+            <div
+              class="streak-level-item"
+              data-streak-level="orange"
+              style="--level-color:#ff9a3c"
+            >
+              <svg
+                class="streak-level-dot"
+                viewBox="0 0 64 80"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M35.8 3.6c2.8 13.2-6.8 18.8-2.8 29.2 1.5 3.8 4.8 6.2 7.9 3.9 4.2-3.1 4.3-10.1 3.4-15.2 10.2 8.4 16.1 20.3 13 33.1C54.2 67.5 44 76 31.8 76 17.7 76 7 65.7 7 51.3c0-13.8 9.8-23 17.2-31.5 5.2-6 9.4-11 11.6-16.2Z"
+                />
+              </svg>
+
+              <div class="streak-level-copy">
+                <strong>Portocaliu</strong>
+                <span>1 — 6 zile</span>
+              </div>
+            </div>
+
+
+            <div
+              class="streak-level-item"
+              data-streak-level="red"
+              style="--level-color:#ff4f5f"
+            >
+              <svg
+                class="streak-level-dot"
+                viewBox="0 0 64 80"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M35.8 3.6c2.8 13.2-6.8 18.8-2.8 29.2 1.5 3.8 4.8 6.2 7.9 3.9 4.2-3.1 4.3-10.1 3.4-15.2 10.2 8.4 16.1 20.3 13 33.1C54.2 67.5 44 76 31.8 76 17.7 76 7 65.7 7 51.3c0-13.8 9.8-23 17.2-31.5 5.2-6 9.4-11 11.6-16.2Z"
+                />
+              </svg>
+
+              <div class="streak-level-copy">
+                <strong>Roșu</strong>
+                <span>7 — 13 zile</span>
+              </div>
+            </div>
+
+
+            <div
+              class="streak-level-item"
+              data-streak-level="purple"
+              style="--level-color:#c26cff"
+            >
+              <svg
+                class="streak-level-dot"
+                viewBox="0 0 64 80"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M35.8 3.6c2.8 13.2-6.8 18.8-2.8 29.2 1.5 3.8 4.8 6.2 7.9 3.9 4.2-3.1 4.3-10.1 3.4-15.2 10.2 8.4 16.1 20.3 13 33.1C54.2 67.5 44 76 31.8 76 17.7 76 7 65.7 7 51.3c0-13.8 9.8-23 17.2-31.5 5.2-6 9.4-11 11.6-16.2Z"
+                />
+              </svg>
+
+              <div class="streak-level-copy">
+                <strong>Mov</strong>
+                <span>14 — 29 zile</span>
+              </div>
+            </div>
+
+
+            <div
+              class="streak-level-item"
+              data-streak-level="blue"
+              style="--level-color:#55c7ff"
+            >
+              <svg
+                class="streak-level-dot"
+                viewBox="0 0 64 80"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M35.8 3.6c2.8 13.2-6.8 18.8-2.8 29.2 1.5 3.8 4.8 6.2 7.9 3.9 4.2-3.1 4.3-10.1 3.4-15.2 10.2 8.4 16.1 20.3 13 33.1C54.2 67.5 44 76 31.8 76 17.7 76 7 65.7 7 51.3c0-13.8 9.8-23 17.2-31.5 5.2-6 9.4-11 11.6-16.2Z"
+                />
+              </svg>
+
+              <div class="streak-level-copy">
+                <strong>Albastru</strong>
+                <span>30+ zile</span>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="streak-calendar-monthbar">
+
+            <button
+              id="streakPrevMonth"
+              class="streak-month-button"
+              type="button"
+              aria-label="Luna precedentă"
+            >
+              ‹
+            </button>
+
+
+            <div
+              id="streakMonthLabel"
+              class="streak-month-label"
+            >
+              Luna
+            </div>
+
+
+            <button
+              id="streakNextMonth"
+              class="streak-month-button"
+              type="button"
+              aria-label="Luna următoare"
+            >
+              ›
+            </button>
+
+          </div>
+
+
+          <div class="streak-calendar-weekdays">
+            <span>L</span>
+            <span>Ma</span>
+            <span>Mi</span>
+            <span>J</span>
+            <span>V</span>
+            <span>S</span>
+            <span>D</span>
+          </div>
+
+
+          <div
+            id="streakCalendarGrid"
+            class="streak-calendar-grid"
+          ></div>
+
+
+          <p
+            id="streakClaimMessage"
+            class="streak-claim-message"
+          ></p>
+
+
+          <p class="streak-calendar-help">
+            Pentru focul de azi: apasă pe ziua de azi din calendar. O singură revendicare pe zi pentru seria voastră.
+          </p>
 
         </div>
 
@@ -2590,7 +3521,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./supabase.js?v=31"></script>
 <script src="./security.js?v=32"></script>
-  <script src="./cloud-sync.js?v=28"></script>
+  <script src="./cloud-sync.js?v=35"></script>
 
   <script src="./tema.js?v=28"></script>
 
@@ -2600,7 +3531,7 @@
 
   <script>
 
-    console.log("❤️ DUO LOVE BUILD v28 - HOME");
+    console.log("❤️ DUO LOVE BUILD v36 - HOME + STREAK CALENDAR");
 
     /* =====================================================
        AUTENTIFICARE
@@ -4166,33 +5097,33 @@
       ) {
 
         appStreakHelp.textContent =
-          "Intrați și mâine ca să continuați seria.";
+          "Apasă pe foc și revendică ziua din calendar 🔥";
 
       } else if (
         count < 7
       ) {
 
         appStreakHelp.textContent =
-          "Focul crește. Continuați zilnic 🔥";
+          "Focul crește. Apasă pe foc pentru calendar 🔥";
 
       } else if (
         count < 14
       ) {
 
         appStreakHelp.textContent =
-          "Seria voastră este încinsă ❤️‍🔥";
+          "Seria voastră este încinsă ❤️‍🔥 Apasă pe foc pentru calendar.";
 
       } else if (
         count < 30
       ) {
 
         appStreakHelp.textContent =
-          "Flacăra voastră a ajuns la nivel mov 💜";
+          "Flacăra voastră este mov 💜 Apasă pe foc pentru calendar.";
 
       } else {
 
         appStreakHelp.textContent =
-          "Serie legendară. Foc albastru 💙🔥";
+          "Serie legendară. Foc albastru 💙🔥 Apasă pe foc pentru calendar.";
 
       }
 
@@ -4281,6 +5212,988 @@
 
     }
 
+
+
+
+    /* =====================================================
+       FOC + CALENDAR SERIE 🔥📅
+
+       IMPORTANT:
+       Seria NU se mai ia automat la intrarea pe Home.
+       Utilizatorul deschide focul și apasă pe ziua de azi.
+    ====================================================== */
+
+    const appStreakFlameButton =
+      document.getElementById(
+        "appStreakFlameButton"
+      );
+
+
+    const streakCalendarModal =
+      document.getElementById(
+        "streakCalendarModal"
+      );
+
+
+    const streakCalendarClose =
+      document.getElementById(
+        "streakCalendarClose"
+      );
+
+
+    const streakCalendarGrid =
+      document.getElementById(
+        "streakCalendarGrid"
+      );
+
+
+    const streakMonthLabel =
+      document.getElementById(
+        "streakMonthLabel"
+      );
+
+
+    const streakPrevMonth =
+      document.getElementById(
+        "streakPrevMonth"
+      );
+
+
+    const streakNextMonth =
+      document.getElementById(
+        "streakNextMonth"
+      );
+
+
+    const streakClaimMessage =
+      document.getElementById(
+        "streakClaimMessage"
+      );
+
+
+    const streakCurrentFlame =
+      document.getElementById(
+        "streakCurrentFlame"
+      );
+
+
+    const streakCurrentTitle =
+      document.getElementById(
+        "streakCurrentTitle"
+      );
+
+
+    const streakCurrentText =
+      document.getElementById(
+        "streakCurrentText"
+      );
+
+
+    let streakCalendarYear =
+      null;
+
+
+    let streakCalendarMonth =
+      null;
+
+
+    let streakClaimRunning =
+      false;
+
+
+
+    function getRomaniaTodayKey() {
+
+      const parts =
+        getRomaniaDateParts(
+          new Date()
+        );
+
+
+      return getRomaniaDateKey(
+        parts
+      );
+
+    }
+
+
+
+    function parseDateKeyUTC(
+      dateKey
+    ) {
+
+      const match =
+        String(
+          dateKey ||
+          ""
+        )
+          .match(
+            /^(\d{4})-(\d{2})-(\d{2})$/
+          );
+
+
+      if (
+        !match
+      ) {
+
+        return null;
+
+      }
+
+
+      return new Date(
+        Date.UTC(
+          Number(
+            match[1]
+          ),
+          Number(
+            match[2]
+          ) - 1,
+          Number(
+            match[3]
+          )
+        )
+      );
+
+    }
+
+
+
+    function formatDateKeyUTC(
+      date
+    ) {
+
+      return [
+        date.getUTCFullYear(),
+        String(
+          date.getUTCMonth() +
+          1
+        )
+          .padStart(
+            2,
+            "0"
+          ),
+        String(
+          date.getUTCDate()
+        )
+          .padStart(
+            2,
+            "0"
+          )
+      ]
+        .join(
+          "-"
+        );
+
+    }
+
+
+
+    function addDaysToDateKey(
+      dateKey,
+      amount
+    ) {
+
+      const date =
+        parseDateKeyUTC(
+          dateKey
+        );
+
+
+      if (
+        !date
+      ) {
+
+        return "";
+
+      }
+
+
+      date.setUTCDate(
+        date.getUTCDate() +
+        Number(
+          amount ||
+          0
+        )
+      );
+
+
+      return formatDateKeyUTC(
+        date
+      );
+
+    }
+
+
+
+    function getCurrentStreakInfoForCalendar() {
+
+      if (
+        typeof window.getAppStreakInfo ===
+          "function"
+      ) {
+
+        return window
+          .getAppStreakInfo();
+
+      }
+
+
+      const count =
+        Math.max(
+          0,
+          Number(
+            localStorage.getItem(
+              "appStreakCount"
+            )
+          ) || 0
+        );
+
+
+      return {
+
+        count:
+          count,
+
+        best:
+          Math.max(
+            count,
+            Number(
+              localStorage.getItem(
+                "appStreakBest"
+              )
+            ) || 0
+          ),
+
+        lastDate:
+          localStorage.getItem(
+            "appStreakLastDate"
+          ) || "",
+
+        level:
+          getStreakLevelFromCount(
+            count
+          )
+
+      };
+
+    }
+
+
+
+    function getStreakClaimedDates() {
+
+      const info =
+        getCurrentStreakInfoForCalendar();
+
+
+      const count =
+        Math.max(
+          0,
+          Number(
+            info.count
+          ) || 0
+        );
+
+
+      const lastDate =
+        String(
+          info.lastDate ||
+          ""
+        );
+
+
+      const dates =
+        new Set();
+
+
+      if (
+        !lastDate ||
+        count <= 0
+      ) {
+
+        return dates;
+
+      }
+
+
+      /*
+        Seria este consecutivă, deci putem reconstrui
+        zilele curente ale seriei din count + lastDate.
+      */
+
+      for (
+        let i = 0;
+        i < count;
+        i++
+      ) {
+
+        const key =
+          addDaysToDateKey(
+            lastDate,
+            -i
+          );
+
+
+        if (
+          key
+        ) {
+
+          dates.add(
+            key
+          );
+
+        }
+
+      }
+
+
+      return dates;
+
+    }
+
+
+
+    function updateStreakLevelPanel() {
+
+      const info =
+        getCurrentStreakInfoForCalendar();
+
+
+      const count =
+        Math.max(
+          0,
+          Number(
+            info.count
+          ) || 0
+        );
+
+
+      const level =
+        info.level ||
+        getStreakLevelFromCount(
+          count
+        );
+
+
+      const labels = {
+
+        orange: {
+          flame:
+            "🟠🔥",
+          title:
+            "Foc portocaliu",
+          text:
+            count > 0
+              ? count +
+                (
+                  count === 1
+                    ? " zi în serie."
+                    : " zile în serie."
+                )
+              : "Ia focul de azi din calendar."
+        },
+
+        red: {
+          flame:
+            "🔴🔥",
+          title:
+            "Foc roșu",
+          text:
+            count +
+            " zile. Seria voastră este încinsă."
+        },
+
+        purple: {
+          flame:
+            "🟣🔥",
+          title:
+            "Foc mov",
+          text:
+            count +
+            " zile. Ați trecut de 14 zile."
+        },
+
+        blue: {
+          flame:
+            "🔵🔥",
+          title:
+            "Foc albastru",
+          text:
+            count +
+            " zile. Serie legendară."
+        }
+
+      };
+
+
+      const current =
+        labels[
+          level
+        ] ||
+        labels.orange;
+
+
+      streakCurrentFlame.textContent =
+        current.flame;
+
+
+      streakCurrentTitle.textContent =
+        current.title;
+
+
+      streakCurrentText.textContent =
+        current.text;
+
+
+      document
+        .querySelectorAll(
+          "[data-streak-level]"
+        )
+        .forEach(
+          function (
+            item
+          ) {
+
+            item.classList.toggle(
+              "active",
+              item.dataset.streakLevel ===
+                level
+            );
+
+          }
+        );
+
+    }
+
+
+
+    function renderStreakCalendar() {
+
+      if (
+        streakCalendarYear ===
+          null ||
+        streakCalendarMonth ===
+          null
+      ) {
+
+        const today =
+          getRomaniaDateParts(
+            new Date()
+          );
+
+
+        streakCalendarYear =
+          today.year;
+
+
+        streakCalendarMonth =
+          today.month - 1;
+
+      }
+
+
+      const todayKey =
+        getRomaniaTodayKey();
+
+
+      const claimedDates =
+        getStreakClaimedDates();
+
+
+      const firstDay =
+        new Date(
+          Date.UTC(
+            streakCalendarYear,
+            streakCalendarMonth,
+            1
+          )
+        );
+
+
+      const daysInMonth =
+        new Date(
+          Date.UTC(
+            streakCalendarYear,
+            streakCalendarMonth +
+            1,
+            0
+          )
+        )
+          .getUTCDate();
+
+
+      /*
+        JS: Duminică=0.
+        Calendarul nostru începe Luni.
+      */
+
+      const leading =
+        (
+          firstDay.getUTCDay() +
+          6
+        ) %
+        7;
+
+
+      streakMonthLabel.textContent =
+        firstDay.toLocaleDateString(
+          "ro-RO",
+          {
+            month:
+              "long",
+            year:
+              "numeric",
+            timeZone:
+              "UTC"
+          }
+        );
+
+
+      const cells = [];
+
+
+      for (
+        let i = 0;
+        i < leading;
+        i++
+      ) {
+
+        cells.push(
+          '<div class="streak-day empty"></div>'
+        );
+
+      }
+
+
+      for (
+        let day = 1;
+        day <= daysInMonth;
+        day++
+      ) {
+
+        const key =
+          [
+            streakCalendarYear,
+            String(
+              streakCalendarMonth +
+              1
+            )
+              .padStart(
+                2,
+                "0"
+              ),
+            String(
+              day
+            )
+              .padStart(
+                2,
+                "0"
+              )
+          ]
+            .join(
+              "-"
+            );
+
+
+        const claimed =
+          claimedDates.has(
+            key
+          );
+
+
+        const isToday =
+          key ===
+          todayKey;
+
+
+        const claimable =
+          isToday &&
+          !claimed;
+
+
+        const classes =
+          [
+            "streak-day",
+            claimed
+              ? "claimed"
+              : "",
+            isToday
+              ? "today"
+              : "",
+            claimable
+              ? "claimable"
+              : ""
+          ]
+            .filter(
+              Boolean
+            )
+            .join(
+              " "
+            );
+
+
+        cells.push(
+          `
+            <button
+              type="button"
+              class="${classes}"
+              data-streak-date="${key}"
+              ${claimable ? "" : "disabled"}
+              aria-label="${
+                claimable
+                  ? "Ia focul pentru azi"
+                  : claimed
+                    ? "Foc luat în această zi"
+                    : "Zi calendar"
+              }"
+            >
+              ${day}
+            </button>
+          `
+        );
+
+      }
+
+
+      streakCalendarGrid.innerHTML =
+        cells.join(
+          ""
+        );
+
+
+      const todayButton =
+        streakCalendarGrid
+          .querySelector(
+            ".streak-day.claimable[data-streak-date]"
+          );
+
+
+      if (
+        todayButton
+      ) {
+
+        todayButton.addEventListener(
+          "click",
+          claimTodayStreakFromCalendar
+        );
+
+      }
+
+
+      const todayClaimed =
+        claimedDates.has(
+          todayKey
+        );
+
+
+      streakClaimMessage.textContent =
+        todayClaimed
+          ? "✅ Focul de azi este deja luat."
+          : (
+              streakCalendarYear ===
+                Number(
+                  todayKey.slice(
+                    0,
+                    4
+                  )
+                ) &&
+              streakCalendarMonth ===
+                Number(
+                  todayKey.slice(
+                    5,
+                    7
+                  )
+                ) -
+                1
+            )
+              ? "🔥 Apasă pe ziua de azi ca să iei focul."
+              : "Revino la luna curentă pentru focul de azi.";
+
+
+      updateStreakLevelPanel();
+
+    }
+
+
+
+    function openStreakCalendar() {
+
+      const today =
+        getRomaniaDateParts(
+          new Date()
+        );
+
+
+      streakCalendarYear =
+        today.year;
+
+
+      streakCalendarMonth =
+        today.month - 1;
+
+
+      streakCalendarModal.classList.add(
+        "open"
+      );
+
+
+      streakCalendarModal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      renderStreakCalendar();
+
+    }
+
+
+
+    function closeStreakCalendar() {
+
+      streakCalendarModal.classList.remove(
+        "open"
+      );
+
+
+      streakCalendarModal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+    }
+
+
+
+    async function claimTodayStreakFromCalendar() {
+
+      if (
+        streakClaimRunning
+      ) {
+
+        return;
+
+      }
+
+
+      if (
+        typeof window.registerDailyAppOpen !==
+          "function"
+      ) {
+
+        streakClaimMessage.textContent =
+          "Nu pot salva focul. Verifică cloud-sync.js.";
+
+
+        return;
+
+      }
+
+
+      streakClaimRunning =
+        true;
+
+
+      streakClaimMessage.textContent =
+        "⏳ Se aprinde focul...";
+
+
+      try {
+
+        const result =
+          await window
+            .registerDailyAppOpen();
+
+
+        if (
+          result &&
+          result.success
+        ) {
+
+          renderAppStreak(
+            result,
+            result.increased ===
+              true
+          );
+
+
+          streakClaimMessage.textContent =
+            result.increased ===
+              true
+              ? "🔥 Focul de azi a fost luat!"
+              : "✅ Focul de azi era deja luat.";
+
+
+          if (
+            result.increased ===
+              true &&
+            typeof window.addCoupleActivity ===
+              "function"
+          ) {
+
+            window
+              .addCoupleActivity(
+                "streak_claimed",
+                {
+                  text:
+                    "Focul zilnic a fost revendicat din calendar. 🔥"
+                }
+              )
+              .catch(
+                function () {}
+              );
+
+          }
+
+
+          renderStreakCalendar();
+
+
+          return;
+
+        }
+
+
+        streakClaimMessage.textContent =
+          "Focul nu a putut fi salvat.";
+
+      } catch (
+        error
+      ) {
+
+        console.error(
+          "Eroare foc calendar:",
+          error
+        );
+
+
+        streakClaimMessage.textContent =
+          "Focul nu a putut fi salvat.";
+
+      } finally {
+
+        streakClaimRunning =
+          false;
+
+      }
+
+    }
+
+
+
+    appStreakFlameButton
+      .addEventListener(
+        "click",
+        openStreakCalendar
+      );
+
+
+    appStreakFlameButton
+      .addEventListener(
+        "keydown",
+        function (
+          event
+        ) {
+
+          if (
+            event.key ===
+              "Enter" ||
+            event.key ===
+              " "
+          ) {
+
+            event.preventDefault();
+
+            openStreakCalendar();
+
+          }
+
+        }
+      );
+
+
+    streakCalendarClose
+      .addEventListener(
+        "click",
+        closeStreakCalendar
+      );
+
+
+    streakCalendarModal
+      .addEventListener(
+        "click",
+        function (
+          event
+        ) {
+
+          if (
+            event.target ===
+              streakCalendarModal
+          ) {
+
+            closeStreakCalendar();
+
+          }
+
+        }
+      );
+
+
+    streakPrevMonth
+      .addEventListener(
+        "click",
+        function () {
+
+          streakCalendarMonth--;
+
+
+          if (
+            streakCalendarMonth <
+              0
+          ) {
+
+            streakCalendarMonth =
+              11;
+
+
+            streakCalendarYear--;
+
+          }
+
+
+          renderStreakCalendar();
+
+        }
+      );
+
+
+    streakNextMonth
+      .addEventListener(
+        "click",
+        function () {
+
+          streakCalendarMonth++;
+
+
+          if (
+            streakCalendarMonth >
+              11
+          ) {
+
+            streakCalendarMonth =
+              0;
+
+
+            streakCalendarYear++;
+
+          }
+
+
+          renderStreakCalendar();
+
+        }
+      );
 
 
     async function registerAndRenderAppStreak() {
@@ -6040,8 +7953,26 @@
       }
 
 
+      /*
+        Seria 🔥 nu se mai revendică automat.
+        Se ia doar manual din calendar.
+      */
+
+      renderStoredAppStreak();
+
+
+      if (
+        streakCalendarModal.classList.contains(
+          "open"
+        )
+      ) {
+
+        renderStreakCalendar();
+
+      }
+
+
       await Promise.allSettled([
-        registerAndRenderAppStreak(),
         claimAndRenderDailyXP(),
         refreshHomeCouplePhoto()
       ]);
