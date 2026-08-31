@@ -2139,6 +2139,489 @@
     }
 
 
+
+    /* =====================================================
+       RAMA POZEI DE CUPLU 🖼️
+       ALESĂ DIN SETĂRI
+    ====================================================== */
+
+    .hero-photo-wrap {
+      --photo-frame-color:
+        transparent;
+      --photo-frame-glow:
+        transparent;
+
+      transition:
+        box-shadow .28s ease,
+        outline-color .28s ease,
+        transform .28s ease;
+    }
+
+
+    .hero-photo-wrap[data-photo-frame="rose"] {
+      outline:
+        3px solid
+        #ff8fbd;
+
+      outline-offset:
+        3px;
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.10),
+        0 0 24px rgba(255, 99, 162, .34);
+    }
+
+
+    .hero-photo-wrap[data-photo-frame="neon"] {
+      outline:
+        2px solid
+        #be83ff;
+
+      outline-offset:
+        3px;
+
+      box-shadow:
+        0 0 12px rgba(190,131,255,.58),
+        0 0 30px rgba(98,192,255,.30);
+    }
+
+
+    .hero-photo-wrap[data-photo-frame="gold"] {
+      outline:
+        3px solid
+        #f2cf73;
+
+      outline-offset:
+        3px;
+
+      box-shadow:
+        0 0 22px rgba(242,207,115,.30),
+        inset 0 0 22px rgba(242,207,115,.08);
+    }
+
+
+    .hero-photo-wrap[data-photo-frame="hearts"] {
+      outline:
+        3px solid
+        #ff79aa;
+
+      outline-offset:
+        3px;
+
+      box-shadow:
+        0 0 24px rgba(255,121,170,.34);
+    }
+
+
+    .hero-photo-wrap[data-photo-frame="stars"] {
+      outline:
+        2px solid
+        #a98cff;
+
+      outline-offset:
+        3px;
+
+      box-shadow:
+        0 0 26px rgba(169,140,255,.38);
+    }
+
+
+    .hero-photo-wrap[data-photo-frame="fire"] {
+      outline:
+        3px solid
+        #ff8a3d;
+
+      outline-offset:
+        3px;
+
+      box-shadow:
+        0 0 14px rgba(255,138,61,.52),
+        0 0 30px rgba(255,79,95,.22);
+    }
+
+
+    .photo-frame-decor {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+
+      overflow: hidden;
+
+      border-radius: inherit;
+
+      pointer-events: none;
+    }
+
+
+    .hero-photo-wrap[data-photo-frame="hearts"]
+    .photo-frame-decor::before {
+      content:
+        "♡   ♡   ♡";
+
+      position: absolute;
+
+      left: 50%;
+      top: 7px;
+
+      transform:
+        translateX(-50%);
+
+      color:
+        rgba(255, 213, 230, .92);
+
+      font-size: 19px;
+      letter-spacing: 4px;
+
+      text-shadow:
+        0 0 10px rgba(255,105,166,.70);
+    }
+
+
+    .hero-photo-wrap[data-photo-frame="hearts"]
+    .photo-frame-decor::after {
+      content:
+        "♡   ♡   ♡";
+
+      position: absolute;
+
+      left: 50%;
+      bottom: 7px;
+
+      transform:
+        translateX(-50%);
+
+      color:
+        rgba(255, 213, 230, .92);
+
+      font-size: 19px;
+      letter-spacing: 4px;
+
+      text-shadow:
+        0 0 10px rgba(255,105,166,.70);
+    }
+
+
+    .hero-photo-wrap[data-photo-frame="stars"]
+    .photo-frame-decor::before {
+      content:
+        "✦  ✧  ✦  ✧";
+
+      position: absolute;
+
+      left: 50%;
+      top: 8px;
+
+      transform:
+        translateX(-50%);
+
+      color:
+        rgba(232,224,255,.96);
+
+      font-size: 17px;
+      letter-spacing: 5px;
+
+      text-shadow:
+        0 0 11px rgba(176,144,255,.86);
+    }
+
+
+    .hero-photo-wrap[data-photo-frame="fire"]
+    .photo-frame-decor::before {
+      content:
+        "🔥";
+
+      position: absolute;
+
+      right: 10px;
+      top: 9px;
+
+      font-size: 22px;
+
+      filter:
+        drop-shadow(
+          0 0 8px
+          rgba(255,120,50,.72)
+        );
+    }
+
+
+    /* =====================================================
+       STAREA NOASTRĂ AZI 😊
+    ====================================================== */
+
+    .couple-mood-card {
+      margin-top: 13px;
+      padding: 13px 14px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.09);
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.055),
+          rgba(255,255,255,.025)
+        );
+    }
+
+
+    .couple-mood-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+
+    .couple-mood-title {
+      color:
+        rgba(255,255,255,.58);
+
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+    }
+
+
+    .couple-mood-choose {
+      border: 0;
+      border-radius: 999px;
+
+      padding:
+        7px 10px;
+
+      background:
+        rgba(213,97,145,.15);
+
+      color:
+        #ffc0da;
+
+      font: inherit;
+      font-size: 10px;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .couple-mood-row {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+      gap: 8px;
+
+      margin-top: 10px;
+    }
+
+
+    .couple-mood-person {
+      min-width: 0;
+
+      padding:
+        10px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(255,255,255,.045);
+
+      border:
+        1px solid
+        rgba(255,255,255,.055);
+    }
+
+
+    .couple-mood-person span,
+    .couple-mood-person strong {
+      display: block;
+    }
+
+
+    .couple-mood-person span {
+      overflow: hidden;
+
+      color:
+        rgba(255,255,255,.50);
+
+      font-size: 9px;
+      font-weight: 750;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .couple-mood-person strong {
+      margin-top: 4px;
+
+      overflow: hidden;
+
+      color: white;
+
+      font-size: 14px;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .mood-modal {
+      position: fixed;
+      inset: 0;
+
+      z-index: 2147483605;
+
+      display: none;
+      place-items: center;
+
+      padding:
+        calc(18px + env(safe-area-inset-top))
+        14px
+        calc(18px + env(safe-area-inset-bottom));
+
+      background:
+        rgba(2,2,7,.72);
+
+      backdrop-filter:
+        blur(12px);
+      -webkit-backdrop-filter:
+        blur(12px);
+    }
+
+
+    .mood-modal.open {
+      display: grid;
+    }
+
+
+    .mood-modal-card {
+      width:
+        min(100%, 390px);
+
+      padding: 18px;
+
+      box-sizing: border-box;
+
+      border:
+        1px solid
+        rgba(255,255,255,.11);
+
+      border-radius: 25px;
+
+      background:
+        linear-gradient(
+          160deg,
+          rgba(24,14,29,.99),
+          rgba(10,8,15,.99)
+        );
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.52);
+    }
+
+
+    .mood-modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+
+    .mood-modal-head h2 {
+      margin: 0;
+
+      color: white;
+
+      font-size: 22px;
+    }
+
+
+    .mood-close {
+      width: 39px;
+      height: 39px;
+
+      border: 0;
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.08);
+
+      color: white;
+      font-size: 22px;
+
+      cursor: pointer;
+    }
+
+
+    .mood-options {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+      gap: 9px;
+
+      margin-top: 15px;
+    }
+
+
+    .mood-option {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      min-height: 55px;
+      padding: 10px 11px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.075);
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,.045);
+
+      color: white;
+
+      font: inherit;
+      text-align: left;
+
+      cursor: pointer;
+    }
+
+
+    .mood-option-emoji {
+      flex: 0 0 auto;
+
+      font-size: 24px;
+    }
+
+
+    .mood-option-label {
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+
+    .mood-message {
+      min-height: 17px;
+
+      margin:
+        12px 0 0;
+
+      color: #ffb8d4;
+
+      font-size: 11px;
+
+      text-align: center;
+    }
+
+
     /* =====================================================
        XP COMUN AL CUPLULUI ⭐
     ====================================================== */
@@ -2737,7 +3220,7 @@
 </head>
 
 
-<body class="duo-splash-active" data-build="v38">
+<body class="duo-splash-active" data-build="v39">
 
   <script>
     /*
@@ -2851,6 +3334,12 @@
 
         <div class="hero-photo-shade"></div>
 
+        <div
+          id="photoFrameDecor"
+          class="photo-frame-decor"
+          aria-hidden="true"
+        ></div>
+
         <label
           for="couplePhotoInput"
           class="hero-photo-button"
@@ -2922,6 +3411,151 @@
         <div class="counter-item">
           <strong id="seconds">00</strong>
           <span>SECUNDE</span>
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           STAREA NOASTRĂ AZI 😊
+      =================================================== -->
+
+      <div
+        id="coupleMoodCard"
+        class="couple-mood-card"
+      >
+
+        <div class="couple-mood-head">
+
+          <span class="couple-mood-title">
+            😊 STAREA NOASTRĂ AZI
+          </span>
+
+
+          <button
+            id="chooseMoodButton"
+            class="couple-mood-choose"
+            type="button"
+          >
+            Alege starea
+          </button>
+
+        </div>
+
+
+        <div class="couple-mood-row">
+
+          <div class="couple-mood-person">
+
+            <span id="myMoodName">
+              Tu
+            </span>
+
+            <strong id="myMoodValue">
+              — Neselectată
+            </strong>
+
+          </div>
+
+
+          <div class="couple-mood-person">
+
+            <span id="partnerMoodName">
+              Partener
+            </span>
+
+            <strong id="partnerMoodValue">
+              — Neselectată
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="moodModal"
+        class="mood-modal"
+        aria-hidden="true"
+      >
+
+        <div
+          class="mood-modal-card"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="moodModalTitle"
+        >
+
+          <div class="mood-modal-head">
+
+            <h2 id="moodModalTitle">
+              Cum te simți azi? ❤️
+            </h2>
+
+            <button
+              id="moodModalClose"
+              class="mood-close"
+              type="button"
+              aria-label="Închide"
+            >
+              ×
+            </button>
+
+          </div>
+
+
+          <div class="mood-options">
+
+            <button class="mood-option" type="button" data-mood-key="happy" data-mood-emoji="😊" data-mood-label="Fericit/ă">
+              <span class="mood-option-emoji">😊</span>
+              <span class="mood-option-label">Fericit/ă</span>
+            </button>
+
+            <button class="mood-option" type="button" data-mood-key="love" data-mood-emoji="🥰" data-mood-label="Îndrăgostit/ă">
+              <span class="mood-option-emoji">🥰</span>
+              <span class="mood-option-label">Îndrăgostit/ă</span>
+            </button>
+
+            <button class="mood-option" type="button" data-mood-key="miss" data-mood-emoji="🥹" data-mood-label="Mi-e dor">
+              <span class="mood-option-emoji">🥹</span>
+              <span class="mood-option-label">Mi-e dor</span>
+            </button>
+
+            <button class="mood-option" type="button" data-mood-key="kiss" data-mood-emoji="😘" data-mood-label="Pupici">
+              <span class="mood-option-emoji">😘</span>
+              <span class="mood-option-label">Pupici</span>
+            </button>
+
+            <button class="mood-option" type="button" data-mood-key="tired" data-mood-emoji="😴" data-mood-label="Obosit/ă">
+              <span class="mood-option-emoji">😴</span>
+              <span class="mood-option-label">Obosit/ă</span>
+            </button>
+
+            <button class="mood-option" type="button" data-mood-key="sad" data-mood-emoji="😔" data-mood-label="Trist/ă">
+              <span class="mood-option-emoji">😔</span>
+              <span class="mood-option-label">Trist/ă</span>
+            </button>
+
+            <button class="mood-option" type="button" data-mood-key="excited" data-mood-emoji="🤩" data-mood-label="Entuziasmat/ă">
+              <span class="mood-option-emoji">🤩</span>
+              <span class="mood-option-label">Entuziasmat/ă</span>
+            </button>
+
+            <button class="mood-option" type="button" data-mood-key="calm" data-mood-emoji="😌" data-mood-label="Liniștit/ă">
+              <span class="mood-option-emoji">😌</span>
+              <span class="mood-option-label">Liniștit/ă</span>
+            </button>
+
+          </div>
+
+
+          <p
+            id="moodMessage"
+            class="mood-message"
+          ></p>
+
         </div>
 
       </div>
@@ -3766,7 +4400,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./supabase.js?v=31"></script>
 <script src="./security.js?v=32"></script>
-  <script src="./cloud-sync.js?v=35"></script>
+  <script src="./cloud-sync.js?v=39"></script>
 
   <script src="./tema.js?v=28"></script>
 
@@ -3776,7 +4410,7 @@
 
   <script>
 
-    console.log("❤️ DUO LOVE BUILD v38 - HOME + FLOATING STREAK CALENDAR");
+    console.log("❤️ DUO LOVE BUILD v39 - HOME + FRAME + MOOD + STREAK");
 
     /* =====================================================
        AUTENTIFICARE
@@ -3906,8 +4540,746 @@
 
       loadNextEvent();
 
+      applySelectedPhotoFrame();
+
     }
 
+
+
+
+    /* =====================================================
+       RAMA POZEI 🖼️
+    ====================================================== */
+
+    function applySelectedPhotoFrame() {
+
+      const wrap =
+        document.querySelector(
+          ".hero-photo-wrap"
+        );
+
+
+      if (
+        !wrap
+      ) {
+
+        return;
+
+      }
+
+
+      const frame =
+        localStorage.getItem(
+          "couplePhotoFrame"
+        ) ||
+        "none";
+
+
+      wrap.dataset.photoFrame =
+        frame;
+
+    }
+
+
+
+    /* =====================================================
+       STAREA NOASTRĂ AZI 😊
+       SUPABASE
+    ====================================================== */
+
+    const chooseMoodButton =
+      document.getElementById(
+        "chooseMoodButton"
+      );
+
+
+    const moodModal =
+      document.getElementById(
+        "moodModal"
+      );
+
+
+    const moodModalClose =
+      document.getElementById(
+        "moodModalClose"
+      );
+
+
+    const moodMessage =
+      document.getElementById(
+        "moodMessage"
+      );
+
+
+    const myMoodName =
+      document.getElementById(
+        "myMoodName"
+      );
+
+
+    const myMoodValue =
+      document.getElementById(
+        "myMoodValue"
+      );
+
+
+    const partnerMoodName =
+      document.getElementById(
+        "partnerMoodName"
+      );
+
+
+    const partnerMoodValue =
+      document.getElementById(
+        "partnerMoodValue"
+      );
+
+
+    let moodUser =
+      null;
+
+
+    let moodCoupleId =
+      null;
+
+
+    function normalizePersonName(
+      value
+    ) {
+
+      return String(
+        value ||
+        ""
+      )
+        .trim()
+        .toLocaleLowerCase(
+          "ro-RO"
+        )
+        .normalize(
+          "NFD"
+        )
+        .replace(
+          /[\u0300-\u036f]/g,
+          ""
+        );
+
+    }
+
+
+    function getFirstWord(
+      value
+    ) {
+
+      return String(
+        value ||
+        ""
+      )
+        .trim()
+        .split(
+          /\s+/
+        )[0] ||
+        "";
+
+    }
+
+
+    function getRomaniaMoodDateKey() {
+
+      const result =
+        {};
+
+
+      new Intl.DateTimeFormat(
+        "en-CA",
+        {
+          timeZone:
+            "Europe/Bucharest",
+          year:
+            "numeric",
+          month:
+            "2-digit",
+          day:
+            "2-digit"
+        }
+      )
+        .formatToParts(
+          new Date()
+        )
+        .forEach(
+          function (
+            part
+          ) {
+
+            if (
+              part.type !==
+              "literal"
+            ) {
+
+              result[
+                part.type
+              ] =
+                part.value;
+
+            }
+
+          }
+        );
+
+
+      return (
+        result.year +
+        "-" +
+        result.month +
+        "-" +
+        result.day
+      );
+
+    }
+
+
+    function getMoodDisplayNames(
+      user
+    ) {
+
+      const first =
+        localStorage.getItem(
+          "firstName"
+        ) ||
+        "Alex";
+
+
+      const second =
+        localStorage.getItem(
+          "secondName"
+        ) ||
+        "Bianca";
+
+
+      const meta =
+        user &&
+        user.user_metadata
+          ? user.user_metadata
+          : {};
+
+
+      const ownRaw =
+        meta.first_name ||
+        meta.given_name ||
+        meta.full_name ||
+        meta.name ||
+        "";
+
+
+      const ownName =
+        getFirstWord(
+          ownRaw
+        );
+
+
+      const ownNormalized =
+        normalizePersonName(
+          ownName
+        );
+
+
+      let partnerName =
+        second;
+
+
+      if (
+        ownNormalized &&
+        normalizePersonName(
+          second
+        ) ===
+          ownNormalized
+      ) {
+
+        partnerName =
+          first;
+
+      } else if (
+        ownNormalized &&
+        normalizePersonName(
+          first
+        ) ===
+          ownNormalized
+      ) {
+
+        partnerName =
+          second;
+
+      }
+
+
+      return {
+        own:
+          ownName ||
+          "Tu",
+
+        partner:
+          partnerName ||
+          "Partener"
+      };
+
+    }
+
+
+    async function resolveMoodContext() {
+
+      if (
+        typeof supabaseClient ===
+        "undefined"
+      ) {
+
+        return false;
+
+      }
+
+
+      const {
+        data:
+          sessionData
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      if (
+        !sessionData ||
+        !sessionData.session
+      ) {
+
+        return false;
+
+      }
+
+
+      moodUser =
+        sessionData.session.user;
+
+
+      if (
+        typeof window.getMyCoupleId ===
+        "function"
+      ) {
+
+        moodCoupleId =
+          await window
+            .getMyCoupleId();
+
+      }
+
+
+      if (
+        !moodCoupleId
+      ) {
+
+        const {
+          data
+        } =
+          await supabaseClient
+            .from(
+              "couple_members"
+            )
+            .select(
+              "couple_id"
+            )
+            .eq(
+              "user_id",
+              moodUser.id
+            )
+            .limit(
+              1
+            )
+            .maybeSingle();
+
+
+        moodCoupleId =
+          data &&
+          data.couple_id
+            ? data.couple_id
+            : null;
+
+      }
+
+
+      return Boolean(
+        moodUser &&
+        moodCoupleId
+      );
+
+    }
+
+
+    async function loadTodayMoods() {
+
+      const ready =
+        await resolveMoodContext();
+
+
+      if (
+        !ready
+      ) {
+
+        myMoodName.textContent =
+          "Tu";
+
+
+        myMoodValue.textContent =
+          "— Neselectată";
+
+
+        partnerMoodName.textContent =
+          "Partener";
+
+
+        partnerMoodValue.textContent =
+          "Conectați conturile ❤️";
+
+
+        chooseMoodButton.disabled =
+          true;
+
+
+        return;
+
+      }
+
+
+      chooseMoodButton.disabled =
+        false;
+
+
+      const names =
+        getMoodDisplayNames(
+          moodUser
+        );
+
+
+      myMoodName.textContent =
+        names.own;
+
+
+      partnerMoodName.textContent =
+        names.partner;
+
+
+      const today =
+        getRomaniaMoodDateKey();
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from(
+            "couple_daily_moods"
+          )
+          .select(
+            "user_id,mood_key,emoji,label,updated_at"
+          )
+          .eq(
+            "couple_id",
+            moodCoupleId
+          )
+          .eq(
+            "mood_date",
+            today
+          );
+
+
+      if (
+        error
+      ) {
+
+        console.warn(
+          "Starea de azi nu a putut fi încărcată:",
+          error
+        );
+
+
+        myMoodValue.textContent =
+          "— Neselectată";
+
+
+        partnerMoodValue.textContent =
+          "— Neselectată";
+
+
+        return;
+
+      }
+
+
+      const rows =
+        Array.isArray(
+          data
+        )
+          ? data
+          : [];
+
+
+      const mine =
+        rows.find(
+          function (
+            row
+          ) {
+
+            return (
+              row.user_id ===
+              moodUser.id
+            );
+
+          }
+        );
+
+
+      const partner =
+        rows.find(
+          function (
+            row
+          ) {
+
+            return (
+              row.user_id !==
+              moodUser.id
+            );
+
+          }
+        );
+
+
+      myMoodValue.textContent =
+        mine
+          ? (
+              mine.emoji +
+              " " +
+              mine.label
+            )
+          : "— Neselectată";
+
+
+      partnerMoodValue.textContent =
+        partner
+          ? (
+              partner.emoji +
+              " " +
+              partner.label
+            )
+          : "— Neselectată";
+
+    }
+
+
+    function openMoodModal() {
+
+      moodMessage.textContent =
+        "";
+
+
+      moodModal.classList.add(
+        "open"
+      );
+
+
+      moodModal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+    }
+
+
+    function closeMoodModal() {
+
+      moodModal.classList.remove(
+        "open"
+      );
+
+
+      moodModal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+    }
+
+
+    async function saveTodayMood(
+      button
+    ) {
+
+      const ready =
+        await resolveMoodContext();
+
+
+      if (
+        !ready
+      ) {
+
+        moodMessage.textContent =
+          "Conectați mai întâi conturile. ❤️";
+
+
+        return;
+
+      }
+
+
+      const moodKey =
+        button.dataset.moodKey;
+
+
+      const emoji =
+        button.dataset.moodEmoji;
+
+
+      const label =
+        button.dataset.moodLabel;
+
+
+      if (
+        !moodKey ||
+        !emoji ||
+        !label
+      ) {
+
+        return;
+
+      }
+
+
+      moodMessage.textContent =
+        "⏳ Se salvează...";
+
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from(
+            "couple_daily_moods"
+          )
+          .upsert(
+            {
+              couple_id:
+                moodCoupleId,
+
+              user_id:
+                moodUser.id,
+
+              mood_date:
+                getRomaniaMoodDateKey(),
+
+              mood_key:
+                moodKey,
+
+              emoji:
+                emoji,
+
+              label:
+                label,
+
+              updated_at:
+                new Date()
+                  .toISOString()
+            },
+            {
+              onConflict:
+                "couple_id,user_id,mood_date"
+            }
+          );
+
+
+      if (
+        error
+      ) {
+
+        console.error(
+          "Eroare salvare stare:",
+          error
+        );
+
+
+        moodMessage.textContent =
+          "Starea nu a putut fi salvată.";
+
+
+        return;
+
+      }
+
+
+      await loadTodayMoods();
+
+
+      moodMessage.textContent =
+        "Salvat ❤️";
+
+
+      setTimeout(
+        closeMoodModal,
+        450
+      );
+
+    }
+
+
+    chooseMoodButton.addEventListener(
+      "click",
+      openMoodModal
+    );
+
+
+    moodModalClose.addEventListener(
+      "click",
+      closeMoodModal
+    );
+
+
+    moodModal.addEventListener(
+      "click",
+      function (
+        event
+      ) {
+
+        if (
+          event.target ===
+          moodModal
+        ) {
+
+          closeMoodModal();
+
+        }
+
+      }
+    );
+
+
+    document
+      .querySelectorAll(
+        ".mood-option[data-mood-key]"
+      )
+      .forEach(
+        function (
+          button
+        ) {
+
+          button.addEventListener(
+            "click",
+            function () {
+
+              saveTodayMood(
+                button
+              );
+
+            }
+          );
+
+        }
+      );
 
 
     /* =====================================================
@@ -8219,7 +9591,8 @@
 
       await Promise.allSettled([
         claimAndRenderDailyXP(),
-        refreshHomeCouplePhoto()
+        refreshHomeCouplePhoto(),
+        loadTodayMoods()
       ]);
 
     }
@@ -8270,6 +9643,8 @@
 
 
       loadHomeData();
+
+      loadTodayMoods();
 
       renderStoredAppStreak();
 
@@ -8360,6 +9735,8 @@
       */
 
         loadHomeData();
+
+        loadTodayMoods();
 
         renderStoredAppStreak();
 

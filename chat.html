@@ -23,12 +23,7 @@
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./style.css?v=31">
 
-
   <style>
-
-    /* ======================================================
-       CHAT - DOAR MESAJELE FAC SCROLL
-    ====================================================== */
 
     body.chat-page-body {
       height: 100dvh !important;
@@ -54,6 +49,65 @@
 
     .chat-header {
       flex: 0 0 auto !important;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+
+    .chat-header-copy {
+      min-width: 0;
+    }
+
+
+    .chat-header h1 {
+      margin-bottom: 4px;
+    }
+
+
+    .chat-live-status {
+      flex: 0 0 auto;
+
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      padding:
+        7px 10px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(255,255,255,.055);
+
+      color:
+        rgba(255,255,255,.66);
+
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+
+    .chat-live-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background:
+        #f1b457;
+    }
+
+
+    .chat-live-status.online
+    .chat-live-dot {
+      background:
+        #55db86;
+
+      box-shadow:
+        0 0 9px rgba(85,219,134,.46);
     }
 
 
@@ -69,9 +123,81 @@
     }
 
 
-    /* ======================================================
-       MESAJE
-    ====================================================== */
+    .chat-partner-banner {
+      flex: 0 0 auto;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      margin-bottom: 9px;
+      padding: 10px 12px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.075);
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,.04);
+    }
+
+
+    .chat-partner-avatar {
+      flex: 0 0 38px;
+
+      display: grid;
+      place-items: center;
+
+      width: 38px;
+      height: 38px;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #c95887,
+          #7457be
+        );
+
+      font-size: 18px;
+    }
+
+
+    .chat-partner-copy {
+      min-width: 0;
+    }
+
+
+    .chat-partner-copy strong,
+    .chat-partner-copy span {
+      display: block;
+    }
+
+
+    .chat-partner-copy strong {
+      overflow: hidden;
+
+      color: white;
+
+      font-size: 13px;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .chat-partner-copy span {
+      margin-top: 2px;
+
+      color:
+        rgba(255,255,255,.50);
+
+      font-size: 9px;
+    }
+
 
     #chatMessages {
       flex: 1 1 0 !important;
@@ -81,7 +207,7 @@
       overflow-y: auto !important;
       overflow-x: hidden !important;
 
-      padding: 10px 6px 18px !important;
+      padding: 10px 3px 18px !important;
 
       -webkit-overflow-scrolling: touch !important;
 
@@ -96,316 +222,329 @@
     }
 
 
+    .chat-empty {
+      display: grid;
+      place-items: center;
+
+      min-height: 100%;
+
+      padding: 30px;
+
+      box-sizing: border-box;
+
+      color:
+        rgba(255,255,255,.48);
+
+      font-size: 13px;
+      line-height: 1.5;
+
+      text-align: center;
+    }
+
+
+    .chat-message-row {
+      display: flex;
+      flex-direction: column;
+
+      margin-bottom: 10px;
+    }
+
+
+    .chat-message-row.mine {
+      align-items: flex-end;
+    }
+
+
+    .chat-message-row.partner {
+      align-items: flex-start;
+    }
+
+
     .chat-message {
-      width: fit-content !important;
+      width: fit-content;
+      max-width: 84%;
 
-      max-width: 86% !important;
+      padding:
+        10px 13px;
 
-      padding: 12px 15px !important;
+      border-radius: 19px;
 
-      margin-bottom: 11px !important;
+      color: white;
 
-      border-radius: 20px !important;
+      font-size: 15px;
+      line-height: 1.45;
 
-      font-size: 16px !important;
-
-      line-height: 1.5 !important;
-
-      white-space: pre-wrap !important;
-
-      word-break: break-word !important;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
 
 
-    .chat-message.user-message {
-      margin-left: auto !important;
-      margin-right: 0 !important;
-
-      background:
-        rgba(
-          151,
-          62,
-          101,
-          0.70
-        ) !important;
-
-      color: white !important;
-
-      border-bottom-right-radius:
-        7px !important;
-    }
-
-
-    .chat-message.assistant-message {
-      margin-left: 0 !important;
-      margin-right: auto !important;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.10
-        ) !important;
-
-      color: white !important;
-
-      border-bottom-left-radius:
-        7px !important;
-    }
-
-
-    .chat-message.love-letter {
-      width: 92% !important;
-      max-width: 92% !important;
-
-      padding: 18px !important;
-
-      line-height: 1.65 !important;
+    .chat-message-row.mine
+    .chat-message {
+      border-bottom-right-radius: 6px;
 
       background:
         linear-gradient(
-          145deg,
-          rgba(104, 37, 75, 0.38),
-          rgba(255, 255, 255, 0.08)
-        ) !important;
-
-      border:
-        1px solid
-        rgba(
-          255,
-          180,
-          210,
-          0.16
-        ) !important;
+          135deg,
+          rgba(201,88,135,.92),
+          rgba(145,61,104,.92)
+        );
     }
 
 
-    .typing-message {
-      opacity: 0.75;
-      font-style: italic;
+    .chat-message-row.partner
+    .chat-message {
+      border-bottom-left-radius: 6px;
+
+      background:
+        rgba(255,255,255,.095);
     }
 
 
-    /* ======================================================
-       BUTOANE RAPIDE
-    ====================================================== */
+    .chat-message-meta {
+      margin-top: 4px;
+
+      color:
+        rgba(255,255,255,.36);
+
+      font-size: 8px;
+      font-weight: 650;
+    }
+
 
     .chat-quick {
-      flex: 0 0 auto !important;
+      flex: 0 0 auto;
 
-      display: flex !important;
+      display: flex;
+      gap: 7px;
 
-      flex-wrap: wrap !important;
+      overflow-x: auto;
 
-      gap: 7px !important;
+      padding:
+        2px 0 9px;
 
-      margin: 7px 0 9px !important;
+      scrollbar-width: none;
+    }
+
+
+    .chat-quick::-webkit-scrollbar {
+      display: none;
     }
 
 
     .chat-quick button {
+      flex: 0 0 auto;
+
       border:
         1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.10
-        ) !important;
+        rgba(255,255,255,.08);
+
+      border-radius: 999px;
+
+      padding:
+        8px 11px;
 
       background:
-        rgba(
-          255,
-          255,
-          255,
-          0.08
-        ) !important;
+        rgba(255,255,255,.06);
 
-      color: white !important;
+      color: white;
 
-      padding: 9px 11px !important;
+      font: inherit;
+      font-size: 11px;
 
-      border-radius: 16px !important;
-
-      font-size: 13px !important;
-
-      font-family: inherit !important;
+      cursor: pointer;
     }
 
 
-    /* ======================================================
-       INPUT
-    ====================================================== */
-
     .chat-input-row {
-      flex: 0 0 auto !important;
+      flex: 0 0 auto;
 
-      display: flex !important;
-
-      align-items: center !important;
-
-      gap: 8px !important;
-
-      margin: 0 !important;
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
     }
 
 
     #chatInput {
-      flex: 1 1 auto !important;
+      flex: 1 1 auto;
 
-      min-width: 0 !important;
+      min-width: 0;
+      min-height: 54px;
+      max-height: 110px;
 
-      height: 58px !important;
-      min-height: 58px !important;
-      max-height: 90px !important;
+      box-sizing: border-box;
 
-      padding: 16px !important;
+      padding:
+        15px;
 
-      resize: none !important;
+      resize: none;
 
-      border: 0 !important;
+      border:
+        1px solid
+        rgba(255,255,255,.10);
 
-      outline: none !important;
+      outline: none;
 
-      border-radius: 20px !important;
+      border-radius: 19px;
 
-      background: white !important;
+      background:
+        rgba(255,255,255,.09);
 
-      color: #222 !important;
+      color: white;
 
-      font-size: 16px !important;
+      font: inherit;
+      font-size: 16px;
+    }
 
-      font-family: inherit !important;
+
+    #chatInput::placeholder {
+      color:
+        rgba(255,255,255,.40);
     }
 
 
     #sendButton {
-      flex: 0 0 58px !important;
+      flex: 0 0 54px;
 
-      width: 58px !important;
-      height: 58px !important;
+      width: 54px;
+      height: 54px;
 
-      border: 0 !important;
+      border: 0;
+      border-radius: 18px;
 
-      border-radius: 20px !important;
+      background:
+        #cf5f8e;
 
-      background: #cf5f8e !important;
+      color: white;
 
-      color: white !important;
+      font-size: 21px;
 
-      font-size: 22px !important;
+      cursor: pointer;
+    }
+
+
+    #sendButton:disabled,
+    #chatInput:disabled {
+      opacity: .55;
+    }
+
+
+    .chat-error {
+      flex: 0 0 auto;
+
+      min-height: 17px;
+
+      margin:
+        7px 0 0;
+
+      color: #ffb8d4;
+
+      font-size: 10px;
+
+      text-align: center;
     }
 
   </style>
-
 </head>
 
 
-<body class="chat-page-body">
-
+<body
+  class="chat-page-body"
+  data-build="v39"
+>
 
   <main class="app chat-app">
 
-
-    <!-- HEADER -->
-
     <header class="chat-header">
 
-      <span class="home-small">
-        💬 MESAJE
-      </span>
+      <div class="chat-header-copy">
 
-      <h1>
-        Chat ❤️
-      </h1>
+        <span class="home-small">
+          💬 NOI DOI
+        </span>
 
-      <p>
-        Mesaje, scrisori și cuvinte frumoase pentru iubirea ta. 💕
-      </p>
-
-    </header>
-
-
-
-    <!-- CHAT -->
-
-    <section class="chat-card">
-
-
-      <div
-        class="chat-messages"
-        id="chatMessages"
-      ></div>
-
-
-
-      <!-- BUTOANE RAPIDE -->
-
-      <div class="chat-quick">
-
-
-        <button
-          type="button"
-          data-prompt="mesaj romantic"
-        >
-          ❤️ Mesaj romantic
-        </button>
-
-
-        <button
-          type="button"
-          data-prompt="scrisoare de iubire"
-        >
-          💌 Scrisoare de iubire
-        </button>
-
-
-        <button
-          type="button"
-          data-prompt="mesaj de împăcare"
-        >
-          🥺 Împăcare
-        </button>
-
-
-        <button
-          type="button"
-          data-prompt="mesaj de dor"
-        >
-          🥹 Mi-e dor
-        </button>
-
-
-        <button
-          type="button"
-          data-prompt="mesaj de noapte bună"
-        >
-          🌙 Noapte bună
-        </button>
-
-
-        <button
-          type="button"
-          data-prompt="idee de surpriză"
-        >
-          🎁 Surpriză
-        </button>
-
+        <h1 id="chatTitle">
+          Chat ❤️
+        </h1>
 
       </div>
 
 
+      <div
+        id="chatLiveStatus"
+        class="chat-live-status"
+      >
 
-      <!-- INPUT -->
+        <span class="chat-live-dot"></span>
+
+        <span id="chatLiveText">
+          Conectare...
+        </span>
+
+      </div>
+
+    </header>
+
+
+    <section class="chat-card">
+
+      <div class="chat-partner-banner">
+
+        <div class="chat-partner-avatar">
+          ❤️
+        </div>
+
+
+        <div class="chat-partner-copy">
+
+          <strong id="chatPartnerName">
+            Partener
+          </strong>
+
+          <span>
+            Mesajele sunt doar în spațiul vostru de cuplu.
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="chatMessages"
+        class="chat-messages"
+      ></div>
+
+
+      <div class="chat-quick">
+
+        <button type="button" data-quick-message="Te iubesc ❤️">
+          ❤️ Te iubesc
+        </button>
+
+        <button type="button" data-quick-message="Mi-e dor de tine 🥹❤️">
+          🥹 Mi-e dor
+        </button>
+
+        <button type="button" data-quick-message="Pupici 😘">
+          😘 Pupici
+        </button>
+
+        <button type="button" data-quick-message="Noapte bună, iubire 🌙❤️">
+          🌙 Noapte bună
+        </button>
+
+      </div>
+
 
       <div class="chat-input-row">
 
-
         <textarea
           id="chatInput"
-          placeholder="Scrie aici..."
           rows="1"
+          maxlength="2000"
+          placeholder="Scrie-i un mesaj..."
+          disabled
         ></textarea>
 
 
@@ -413,99 +552,66 @@
           id="sendButton"
           type="button"
           aria-label="Trimite"
+          disabled
         >
           ➤
         </button>
 
-
       </div>
 
 
-    </section>
+      <p
+        id="chatError"
+        class="chat-error"
+      ></p>
 
+    </section>
 
   </main>
 
 
-
-  <!-- MENIU -->
-
   <nav class="bottom-nav">
 
-
-    <button
-      type="button"
-      class="nav-item"
-      data-page="index.html"
-    >
+    <button type="button" class="nav-item" data-page="index.html">
       <span class="nav-icon">🏠</span>
       <span>Acasă</span>
     </button>
 
-
-    <button
-      type="button"
-      class="nav-item active"
-      data-page="chat.html"
-    >
+    <button type="button" class="nav-item active" data-page="chat.html">
       <span class="nav-icon">💬</span>
       <span>Chat</span>
     </button>
 
-
-    <button
-      type="button"
-      class="nav-item"
-      data-page="amintiri.html"
-    >
+    <button type="button" class="nav-item" data-page="amintiri.html">
       <span class="nav-icon">📸</span>
       <span>Amintiri</span>
     </button>
 
-
-    <button
-      type="button"
-      class="nav-item"
-      data-page="evenimente.html"
-    >
+    <button type="button" class="nav-item" data-page="evenimente.html">
       <span class="nav-icon">📅</span>
       <span>Evenimente</span>
     </button>
 
-
-    <button
-      type="button"
-      class="nav-item"
-      data-page="setari.html"
-    >
+    <button type="button" class="nav-item" data-page="setari.html">
       <span class="nav-icon">⚙️</span>
       <span>Setări</span>
     </button>
 
-
   </nav>
 
 
-
-  <!-- ======================================================
-       SCRIPTURI
-       ORDINEA ESTE IMPORTANTĂ
-  ======================================================= -->
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase.js?v=31"></script>
-<script src="./security.js?v=32"></script>
-
-  <script src="./cloud-sync.js"></script>
-
-  <script src="./tema.js"></script>
-
+  <script src="./supabase.js?v=31"></script>
+  <script src="./security.js?v=32"></script>
+  <script src="./cloud-sync.js?v=39"></script>
+  <script src="./tema.js?v=39"></script>
 
   <script>
 
-    /* ======================================================
-       ELEMENTE
-    ====================================================== */
+    console.log(
+      "❤️ DUO LOVE BUILD v39 - REAL COUPLE CHAT"
+    );
+
 
     const messagesBox =
       document.getElementById(
@@ -525,300 +631,241 @@
       );
 
 
-    let messages = [];
-
-
-    /* ======================================================
-       AUTENTIFICARE
-    ====================================================== */
-
-    async function checkAuthentication() {
-
-      if (
-        typeof supabaseClient ===
-        "undefined"
-      ) {
-        return false;
-      }
-
-
-      try {
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient.auth.getSession();
-
-
-        if (
-          error ||
-          !data ||
-          !data.session
-        ) {
-
-          window.location.href =
-            "./login.html";
-
-          return false;
-        }
-
-
-        return true;
-
-      } catch (error) {
-
-        console.error(
-          "Eroare autentificare:",
-          error
-        );
-
-
-        return false;
-
-      }
-
-    }
-
-
-
-    /* ======================================================
-       CITEȘTE MESAJELE DUPĂ SINCRONIZARE
-    ====================================================== */
-
-    function loadMessages() {
-
-      try {
-
-        messages =
-          JSON.parse(
-            localStorage.getItem(
-              "coupleChatMessages"
-            ) ||
-            "[]"
-          );
-
-      } catch (error) {
-
-        messages = [];
-
-      }
-
-
-      if (
-        !Array.isArray(messages)
-      ) {
-
-        messages = [];
-
-      }
-
-
-      /*
-        Convertim și mesajele mai vechi
-        în formatul nou.
-      */
-
-      messages =
-        messages.map(
-          function (message) {
-
-            return {
-
-              role:
-                message.role ||
-                "user",
-
-              text:
-                message.text ||
-                "",
-
-              type:
-                message.type ||
-                "normal",
-
-              date:
-                message.date ||
-                Date.now()
-
-            };
-
-          }
-        );
-
-
-      /*
-        Păstrăm maximum 80 mesaje.
-      */
-
-      if (
-        messages.length >
-        80
-      ) {
-
-        messages =
-          messages.slice(
-            -80
-          );
-
-      }
-
-
-      /*
-        Mesaj de bun venit
-        doar dacă nu există nimic.
-      */
-
-      if (
-        !messages.length
-      ) {
-
-        messages.push({
-
-          role:
-            "assistant",
-
-          type:
-            "normal",
-
-          text:
-            "Bună ❤️ Sunt Asistentul iubirii. 💕\n\nPot să te ajut cu mesaje romantice, scrisori lungi de iubire 💌, împăcare, aniversări, surprize și cuvinte frumoase pentru persoana iubită. 🥰",
-
-          date:
-            Date.now()
-
-        });
-
-
-        saveMessages();
-
-      }
-
-    }
-
-
-
-    /* ======================================================
-       SALVARE LOCAL + CONT SUPABASE
-    ====================================================== */
-
-    function saveMessages() {
-
-      if (
-        messages.length >
-        80
-      ) {
-
-        messages =
-          messages.slice(
-            -80
-          );
-
-      }
-
-
-      /*
-        Dacă cloud-sync.js este încărcat,
-        salvăm și local și pe cont.
-      */
-
-      if (
-        typeof window.saveJSON ===
-        "function"
-      ) {
-
-        window.saveJSON(
-          "coupleChatMessages",
-          messages
-        );
-
-      } else {
-
-        localStorage.setItem(
-          "coupleChatMessages",
-          JSON.stringify(messages)
-        );
-
-      }
-
-    }
-
-
-
-    /* ======================================================
-       RANDARE
-    ====================================================== */
-
-    function renderMessages() {
-
-      messagesBox.innerHTML =
-        "";
-
-
-      messages.forEach(
-        function (message) {
-
-
-          const bubble =
-            document.createElement(
-              "div"
-            );
-
-
-          bubble.classList.add(
-            "chat-message"
-          );
-
-
-          if (
-            message.role ===
-            "assistant"
-          ) {
-
-            bubble.classList.add(
-              "assistant-message"
-            );
-
-          } else {
-
-            bubble.classList.add(
-              "user-message"
-            );
-
-          }
-
-
-          if (
-            message.type ===
-            "letter"
-          ) {
-
-            bubble.classList.add(
-              "love-letter"
-            );
-
-          }
-
-
-          bubble.textContent =
-            message.text;
-
-
-          messagesBox.appendChild(
-            bubble
-          );
-
-        }
+    const chatError =
+      document.getElementById(
+        "chatError"
       );
 
 
-      scrollMessagesToBottom();
+    const chatPartnerName =
+      document.getElementById(
+        "chatPartnerName"
+      );
+
+
+    const chatTitle =
+      document.getElementById(
+        "chatTitle"
+      );
+
+
+    const chatLiveStatus =
+      document.getElementById(
+        "chatLiveStatus"
+      );
+
+
+    const chatLiveText =
+      document.getElementById(
+        "chatLiveText"
+      );
+
+
+    let currentUser =
+      null;
+
+
+    let currentCoupleId =
+      null;
+
+
+    let chatMessages =
+      [];
+
+
+    let realtimeChannel =
+      null;
+
+
+    let refreshTimer =
+      null;
+
+
+    let sending =
+      false;
+
+
+
+    function normalizePersonName(
+      value
+    ) {
+
+      return String(
+        value ||
+        ""
+      )
+        .trim()
+        .toLocaleLowerCase(
+          "ro-RO"
+        )
+        .normalize(
+          "NFD"
+        )
+        .replace(
+          /[\u0300-\u036f]/g,
+          ""
+        );
 
     }
 
 
+    function getFirstWord(
+      value
+    ) {
 
-    function scrollMessagesToBottom() {
+      return String(
+        value ||
+        ""
+      )
+        .trim()
+        .split(
+          /\s+/
+        )[0] ||
+        "";
+
+    }
+
+
+    function getPartnerDisplayName() {
+
+      const first =
+        localStorage.getItem(
+          "firstName"
+        ) ||
+        "Alex";
+
+
+      const second =
+        localStorage.getItem(
+          "secondName"
+        ) ||
+        "Bianca";
+
+
+      const meta =
+        currentUser &&
+        currentUser.user_metadata
+          ? currentUser.user_metadata
+          : {};
+
+
+      const own =
+        getFirstWord(
+          meta.first_name ||
+          meta.given_name ||
+          meta.full_name ||
+          meta.name ||
+          ""
+        );
+
+
+      const ownNormalized =
+        normalizePersonName(
+          own
+        );
+
+
+      if (
+        ownNormalized &&
+        normalizePersonName(
+          first
+        ) ===
+          ownNormalized
+      ) {
+
+        return second;
+
+      }
+
+
+      if (
+        ownNormalized &&
+        normalizePersonName(
+          second
+        ) ===
+          ownNormalized
+      ) {
+
+        return first;
+
+      }
+
+
+      return second ||
+        "Partener";
+
+    }
+
+
+    function setChatReady(
+      ready,
+      text
+    ) {
+
+      input.disabled =
+        !ready;
+
+
+      sendButton.disabled =
+        !ready;
+
+
+      chatLiveStatus.classList.toggle(
+        "online",
+        ready
+      );
+
+
+      chatLiveText.textContent =
+        text ||
+        (
+          ready
+            ? "Conectat"
+            : "Conectare..."
+        );
+
+    }
+
+
+    function formatMessageTime(
+      value
+    ) {
+
+      const date =
+        new Date(
+          value
+        );
+
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return "";
+
+      }
+
+
+      return date.toLocaleTimeString(
+        "ro-RO",
+        {
+          hour:
+            "2-digit",
+
+          minute:
+            "2-digit",
+
+          timeZone:
+            "Europe/Bucharest"
+        }
+      );
+
+    }
+
+
+    function scrollBottom() {
 
       requestAnimationFrame(
         function () {
@@ -832,566 +879,585 @@
     }
 
 
+    function renderMessages() {
 
-    /* ======================================================
-       NORMALIZARE TEXT
-    ====================================================== */
-
-    function normalizeText(text) {
-
-      return text
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(
-          /[\u0300-\u036f]/g,
-          ""
-        );
-
-    }
-
-
-
-    /* ======================================================
-       ALEGERE ALEATORIE
-    ====================================================== */
-
-    function randomFrom(array) {
-
-      return array[
-        Math.floor(
-          Math.random() *
-          array.length
-        )
-      ];
-
-    }
-
-
-
-    /* ======================================================
-       SCRISORI LUNGI
-    ====================================================== */
-
-    const loveLetters = [
-
-
-`Iubirea mea ❤️
-
-Uneori mă gândesc cât de norocos/norocoasă sunt că te-am întâlnit. 🥹💕 Ai apărut în viața mea și, fără să-mi dau seama, ai început să faci parte din cele mai frumoase gânduri ale mele.
-
-Îmi place felul în care mă faci să zâmbesc chiar și atunci când nu am cea mai bună zi. Îmi place liniștea pe care o simt atunci când știu că ești lângă mine. 🫶❤️
-
-Cu tine, lucrurile mici au devenit importante: un mesaj, o privire, un zâmbet, o îmbrățișare sau câteva minute petrecute împreună. ✨
-
-Nu vreau o iubire perfectă. Vreau iubirea noastră. Vreau să râdem, să ne mai supărăm uneori, să ne iertăm, să învățăm unul de la celălalt și să nu uităm niciodată motivul pentru care ne-am ales. ❤️‍🩹
-
-Vreau să fiu lângă tine în zilele în care totul merge bine, dar mai ales în zilele în care simți că nimic nu merge. Vreau să știi că poți veni la mine cu bucuriile, fricile și visele tale. 🤍
-
-Dacă viața mi-ar da șansa să aleg din nou, te-aș alege tot pe tine. Astăzi. Mâine. Și în toate zilele care vor veni. 🥹❤️
-
-Te iubesc pentru ceea ce ești, pentru ceea ce suntem împreună și pentru toate amintirile pe care încă nu le-am creat. 💌🌹
-
-Te iubesc enorm. ❤️♾️`,
-
-
-`Dragostea mea 💕,
-
-Poate că nu îți spun suficient de des cât de important/importantă ești pentru mine, dar vreau să știi că ai un loc special în inima mea pe care nimeni altcineva nu îl poate ocupa. ❤️
-
-De când ești în viața mea, multe lucruri au devenit mai frumoase. Zilele obișnuite au început să aibă momente pe care vreau să le țin minte, iar viitorul pare mai frumos atunci când îmi imaginez că ești și tu acolo. 🥹✨
-
-Îți iubesc zâmbetul, felul tău de a fi și toate lucrurile mici pe care poate nici măcar nu le observi la tine. 💗
-
-Îți mulțumesc pentru fiecare moment în care ai fost lângă mine, pentru fiecare cuvânt frumos și pentru fiecare dată când ai reușit să-mi schimbi starea doar prin simpla ta prezență. 🫂❤️
-
-Nu pot să promit că fiecare zi va fi perfectă. Pot însă să promit că voi încerca să te ascult, să te înțeleg și să nu uit niciodată cât de importantă este povestea noastră. ❤️‍🩹
-
-Vreau să construim împreună amintiri, să facem poze pe care să le privim peste ani, să râdem de lucruri pe care doar noi le înțelegem și să avem acel sentiment că, indiferent unde suntem, acasă este acolo unde suntem împreună. 🏡❤️
-
-Ești una dintre cele mai frumoase părți din viața mea.
-
-Te aleg pe tine. În fiecare zi. 💕♾️`,
-
-
-`Sufletul meu ❤️,
-
-Nu știu dacă există suficiente cuvinte ca să descriu ceea ce simt pentru tine. Uneori un simplu „te iubesc” pare prea mic pentru tot ce este în inima mea. 🥹❤️
-
-Pentru mine nu ești doar persoana pe care o iubesc. Ești persoana căreia vreau să-i povestesc când mi se întâmplă ceva frumos. Ești persoana la care mă gândesc atunci când aud o melodie care mă atinge. 🎶💕 Ești persoana cu care vreau să împart momentele importante, dar și zilele obișnuite.
-
-Îmi doresc să avem o poveste lungă. Una în care să creștem împreună, să învățăm să ne înțelegem mai bine și să ne amintim mereu că suntem de aceeași parte. 🫶
-
-Când vor veni zile grele, vreau să ne ținem mai tare de mână. Când vor veni zile frumoase, vreau să ne bucurăm de ele fără să uităm cât de norocoși suntem că ne avem. ❤️
-
-Nu vreau să fii perfect/perfectă. Nu vreau nici eu să fiu. Vreau doar să fim sinceri unul cu celălalt și să alegem mereu să reparăm, nu să renunțăm. ❤️‍🩹
-
-Și dacă într-o zi vei uita cât de mult însemni pentru mine, recitește aceste cuvinte:
-
-Ești iubit/iubită. Ești dorit/dorită. Ești important/importantă pentru mine. 🥹❤️
-
-Iar dacă aș putea să îți ofer un singur lucru, ți-aș da posibilitatea să te vezi pentru o clipă prin ochii mei. Atunci ai înțelege cât de special/specială ești pentru mine. 🌹✨
-
-Te iubesc. Astăzi mai mult decât ieri și, sper, mai puțin decât mâine. ❤️♾️`
-
-    ];
-
-
-
-    /* ======================================================
-       MESAJE ROMANTICE
-    ====================================================== */
-
-    const romanticMessages = [
-
-      "Poate că nu îți spun în fiecare clipă, dar prezența ta face zilele mele mai frumoase. Te aleg pe tine, iar și iar. ❤️🥹",
-
-      "Dintre toate lucrurile frumoase pe care mi le-a dat viața, tu ești unul dintre cele pe care vreau să le păstrez cel mai aproape de inimă. ❤️✨",
-
-      "Nu am nevoie de o poveste perfectă. Am nevoie doar de tine, de noi și de toate momentele pe care încă le avem de trăit împreună. 🫶❤️",
-
-      "Când mă gândesc la tine, parcă lumea devine puțin mai liniștită și inima mea puțin mai fericită. 🥹💕",
-
-      "Dacă ar trebui să aleg din nou dintre milioane de oameni, tot spre tine ar merge inima mea. ❤️♾️"
-
-    ];
-
-
-
-    /* ======================================================
-       ÎMPĂCARE
-    ====================================================== */
-
-    const reconciliationMessages = [
-
-      "Îmi pare rău pentru ceea ce s-a întâmplat. 🥺❤️ Nu vreau să câștig o ceartă, vreau să fim bine. Îmi pasă de tine și de ceea ce avem împreună. Vreau să vorbim, să ne ascultăm și să reparăm lucrurile cu răbdare. ❤️‍🩹",
-
-      "Poate am spus sau am făcut lucruri care te-au rănit și îmi pare sincer rău. 🥹 Nu vreau ca orgoliul să fie mai important decât noi. Pentru mine contezi prea mult. ❤️",
-
-      "Nu vreau să lăsăm o zi grea să ne facă să uităm toate zilele frumoase pe care le-am avut împreună. 🫂❤️ Hai să vorbim și să găsim drumul unul spre celălalt."
-
-    ];
-
-
-
-    /* ======================================================
-       DOR
-    ====================================================== */
-
-    const missingMessages = [
-
-      "Mi-e dor de tine într-un fel pe care uneori nici nu știu să-l explic. 🥹❤️ Mi-e dor de vocea ta, de prezența ta și de sentimentul acela frumos pe care îl am când ești aproape.",
-
-      "Sunt momente în care tot ce îmi doresc este să fii lângă mine, să te strâng în brațe și să uit pentru câteva clipe de tot restul lumii. 🫂❤️ Mi-e dor de tine.",
-
-      "Distanța mă face să înțeleg și mai bine cât de mult însemni pentru mine. 🥹💕 Abia aștept momentul în care te voi avea din nou aproape."
-
-    ];
-
-
-
-    /* ======================================================
-       NOAPTE BUNĂ
-    ====================================================== */
-
-    const goodNightMessages = [
-
-      "Noapte bună, iubirea mea. 🌙❤️ Închide ochii și lasă toate grijile zilei deoparte. Sper să ai cele mai liniștite vise și să te trezești mâine cu zâmbetul pe buze. Te îmbrățișez de la distanță. 🫂💕",
-
-      "Înainte să adormi vreau doar să-ți amintesc că ești iubit/iubită și că cineva se gândește la tine chiar acum. 🥹❤️ Dormi liniștit/liniștită, suflet frumos. 🌙✨",
-
-      "Noapte bună ❤️🌙 Dacă aș fi lângă tine acum, te-aș strânge în brațe și ți-aș spune încet cât de mult însemni pentru mine. Vise frumoase. 💕"
-
-    ];
-
-
-
-    /* ======================================================
-       BUNĂ DIMINEAȚA
-    ====================================================== */
-
-    const morningMessages = [
-
-      "Bună dimineața, iubirea mea. ☀️❤️ Sper ca ziua ta să înceapă cu un zâmbet și să se termine cu unul și mai mare. Să nu uiți că cineva se gândește la tine și te iubește mult. 💕",
-
-      "Neața, suflet frumos. 🥰☀️ Îți doresc o zi liniștită, frumoasă și plină de motive să zâmbești. Și dacă nu găsești niciunul, amintește-ți că mă ai pe mine. ❤️"
-
-    ];
-
-
-
-    /* ======================================================
-       ANIVERSARE
-    ====================================================== */
-
-    const anniversaryMessages = [
-
-      "Astăzi nu sărbătorim doar timpul care a trecut, ci toate momentele, zâmbetele, îmbrățișările și amintirile pe care le-am construit împreună. 🥹❤️ La mulți ani nouă și poveștii noastre! Sper ca acesta să fie doar începutul. 🥂💕♾️",
-
-      "La mulți ani nouă! ❤️🎉 Dacă aș putea să mă întorc în timp, aș alege din nou drumul care m-a adus la tine. Îți mulțumesc pentru toate momentele frumoase și abia aștept să vedem câte ne mai așteaptă. 🥹💕"
-
-    ];
-
-
-
-    /* ======================================================
-       SURPRIZE
-    ====================================================== */
-
-    const surprises = [
-
-      "🎁 Idee de surpriză: pregătește o seară doar pentru voi. ❤️ Pune melodiile voastre preferate 🎶, câteva poze cu amintiri 📸, ceva bun de mâncat și scrie de mână o scrisoare în care să spui ce iubești cel mai mult la persoana ta. 💌✨",
-
-      "✨ Fă o cutie cu amintiri: pune câteva poze, bilețele cu momentele voastre preferate și câteva motive pentru care o/o iubești. ❤️ La final adaugă un bilețel: «Asta este doar începutul poveștii noastre.» 🥹💕",
-
-      "🌹 Poți pregăti o surpriză simplă: o plimbare seara, melodia voastră preferată, un loc liniștit și un mesaj scris special pentru ea/el. Uneori cele mai frumoase surprize nu sunt cele scumpe, ci cele făcute cu suflet. ❤️"
-
-    ];
-
-
-
-    /* ======================================================
-       GENERARE RĂSPUNS
-    ====================================================== */
-
-    function generateAssistantReply(
-      userText
-    ) {
-
-      const text =
-        normalizeText(
-          userText
-        );
+      messagesBox.innerHTML =
+        "";
 
 
       if (
-        text.includes("scrisoare") ||
-        text.includes("scrisoare de iubire")
+        !chatMessages.length
       ) {
 
-        return {
-          text:
-            randomFrom(
-              loveLetters
-            ),
+        messagesBox.innerHTML =
+          `
+            <div class="chat-empty">
+              💌 Încă nu aveți mesaje aici.<br>
+              Scrie primul mesaj pentru partenerul tău. ❤️
+            </div>
+          `;
 
-          type:
-            "letter"
-        };
+
+        return;
 
       }
 
 
-      if (
-        text.includes("impac") ||
-        text.includes("iertare") ||
-        text.includes("scuze") ||
-        text.includes("cearta")
-      ) {
-
-        return {
-          text:
-            randomFrom(
-              reconciliationMessages
-            ),
-
-          type:
-            "normal"
-        };
-
-      }
-
-
-      if (
-        text.includes("noapte buna") ||
-        text.includes("somn")
-      ) {
-
-        return {
-          text:
-            randomFrom(
-              goodNightMessages
-            ),
-
-          type:
-            "normal"
-        };
-
-      }
-
-
-      if (
-        text.includes("buna dimineata") ||
-        text.includes("neata")
-      ) {
-
-        return {
-          text:
-            randomFrom(
-              morningMessages
-            ),
-
-          type:
-            "normal"
-        };
-
-      }
-
-
-      if (
-        text.includes("dor") ||
-        text.includes("mi-e dor")
-      ) {
-
-        return {
-          text:
-            randomFrom(
-              missingMessages
-            ),
-
-          type:
-            "normal"
-        };
-
-      }
-
-
-      if (
-        text.includes("anivers") ||
-        text.includes("la multi ani")
-      ) {
-
-        return {
-          text:
-            randomFrom(
-              anniversaryMessages
-            ),
-
-          type:
-            "normal"
-        };
-
-      }
-
-
-      if (
-        text.includes("surpriza") ||
-        text.includes("cadou") ||
-        text.includes("idee")
-      ) {
-
-        return {
-          text:
-            randomFrom(
-              surprises
-            ),
-
-          type:
-            "normal"
-        };
-
-      }
-
-
-      if (
-        text.includes("romantic") ||
-        text.includes("mesaj") ||
-        text.includes("iubire") ||
-        text.includes("te iubesc")
-      ) {
-
-        return {
-          text:
-            randomFrom(
-              romanticMessages
-            ),
-
-          type:
-            "normal"
-        };
-
-      }
-
-
-      if (
-        text.includes("ce faci")
-      ) {
-
-        return {
-          text:
-            "Sunt aici cu tine. ❤️ Spune-mi ce ai nevoie: un mesaj romantic, o scrisoare lungă de iubire 💌, o idee de surpriză 🎁 sau poate vrei să reparăm o ceartă. 🥹💕",
-
-          type:
-            "normal"
-        };
-
-      }
-
-
-      if (
-        text.includes("salut") ||
-        text.includes("buna") ||
-        text === "hei"
-      ) {
-
-        return {
-          text:
-            "Bună ❤️💕 Cu ce te ajut astăzi? Pot să-ți scriu o scrisoare lungă de iubire 💌, un mesaj romantic 🥹, ceva pentru aniversare 🎉 sau o surpriză frumoasă. ✨",
-
-          type:
-            "normal"
-        };
-
-      }
-
-
-      return {
-
-        text:
-          "Pot să transform ceea ce simți într-un mesaj frumos. ❤️\n\nPoți să-mi scrii, de exemplu:\n\n💌 „Fă-mi o scrisoare lungă de iubire”\n❤️ „Mesaj romantic”\n🥺 „Vreau să-mi cer iertare”\n🌙 „Mesaj de noapte bună”\n🥹 „Mi-e dor de ea/el”\n🎉 „Mesaj pentru aniversare”\n🎁 „Dă-mi o idee de surpriză”",
-
-        type:
-          "normal"
-      };
-
-    }
-
-
-
-    /* ======================================================
-       RĂSPUNS ASISTENT
-    ====================================================== */
-
-    function assistantReply(
-      userText
-    ) {
-
-      const typing =
-        document.createElement(
-          "div"
-        );
-
-
-      typing.className =
-        "chat-message assistant-message typing-message";
-
-
-      typing.textContent =
-        "Scriu ceva frumos... 💕";
-
-
-      messagesBox.appendChild(
-        typing
-      );
-
-
-      scrollMessagesToBottom();
-
-
-      setTimeout(
-        function () {
-
-          typing.remove();
-
-
-          const answer =
-            generateAssistantReply(
-              userText
+      chatMessages.forEach(
+        function (
+          message
+        ) {
+
+          const mine =
+            message.sender_id ===
+            currentUser.id;
+
+
+          const row =
+            document.createElement(
+              "div"
             );
 
 
-          messages.push({
-
-            role:
-              "assistant",
-
-            text:
-              answer.text,
-
-            type:
-              answer.type,
-
-            date:
-              Date.now()
-
-          });
+          row.className =
+            "chat-message-row " +
+            (
+              mine
+                ? "mine"
+                : "partner"
+            );
 
 
-          saveMessages();
+          const bubble =
+            document.createElement(
+              "div"
+            );
 
-          renderMessages();
 
-        },
-        650
+          bubble.className =
+            "chat-message";
+
+
+          bubble.textContent =
+            message.body;
+
+
+          const meta =
+            document.createElement(
+              "div"
+            );
+
+
+          meta.className =
+            "chat-message-meta";
+
+
+          meta.textContent =
+            (
+              mine
+                ? "Tu"
+                : getPartnerDisplayName()
+            ) +
+            " · " +
+            formatMessageTime(
+              message.created_at
+            );
+
+
+          row.appendChild(
+            bubble
+          );
+
+
+          row.appendChild(
+            meta
+          );
+
+
+          messagesBox.appendChild(
+            row
+          );
+
+        }
       );
+
+
+      scrollBottom();
 
     }
 
 
-
-    /* ======================================================
-       TRIMITERE
-    ====================================================== */
-
-    function sendMessage(
-      suppliedText
+    function mergeMessages(
+      rows
     ) {
 
-      const value =
-        (
-          suppliedText ||
-          input.value
-        ).trim();
+      const map =
+        new Map();
 
+
+      chatMessages
+        .concat(
+          Array.isArray(rows)
+            ? rows
+            : []
+        )
+        .forEach(
+          function (
+            item
+          ) {
+
+            if (
+              item &&
+              item.id
+            ) {
+
+              map.set(
+                item.id,
+                item
+              );
+
+            }
+
+          }
+        );
+
+
+      chatMessages =
+        Array.from(
+          map.values()
+        )
+          .sort(
+            function (
+              a,
+              b
+            ) {
+
+              return (
+                new Date(
+                  a.created_at
+                ) -
+                new Date(
+                  b.created_at
+                )
+              );
+
+            }
+          )
+          .slice(
+            -120
+          );
+
+    }
+
+
+    async function resolveChatContext() {
 
       if (
-        !value
+        typeof supabaseClient ===
+        "undefined"
       ) {
-        return;
+
+        return false;
+
       }
 
 
-      messages.push({
-
-        role:
-          "user",
-
-        text:
-          value,
-
-        type:
-          "normal",
-
-        date:
-          Date.now()
-
-      });
+      const {
+        data:
+          sessionData,
+        error:
+          sessionError
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
 
 
-      /*
-        Se salvează imediat și în cloud.
-      */
+      if (
+        sessionError ||
+        !sessionData ||
+        !sessionData.session
+      ) {
 
-      saveMessages();
+        window.location.href =
+          "./login.html";
+
+
+        return false;
+
+      }
+
+
+      currentUser =
+        sessionData.session.user;
+
+
+      if (
+        typeof window.getMyCoupleId ===
+        "function"
+      ) {
+
+        currentCoupleId =
+          await window
+            .getMyCoupleId();
+
+      }
+
+
+      if (
+        !currentCoupleId
+      ) {
+
+        const {
+          data
+        } =
+          await supabaseClient
+            .from(
+              "couple_members"
+            )
+            .select(
+              "couple_id"
+            )
+            .eq(
+              "user_id",
+              currentUser.id
+            )
+            .limit(
+              1
+            )
+            .maybeSingle();
+
+
+        currentCoupleId =
+          data &&
+          data.couple_id
+            ? data.couple_id
+            : null;
+
+      }
+
+
+      if (
+        !currentCoupleId
+      ) {
+
+        chatError.textContent =
+          "Conectați conturile din Setări ca să puteți vorbi aici. ❤️";
+
+
+        setChatReady(
+          false,
+          "Fără partener"
+        );
+
+
+        return false;
+
+      }
+
+
+      const partner =
+        getPartnerDisplayName();
+
+
+      chatPartnerName.textContent =
+        partner;
+
+
+      chatTitle.textContent =
+        "Chat cu " +
+        partner +
+        " ❤️";
+
+
+      return true;
+
+    }
+
+
+    async function loadChatMessages(
+      silent = false
+    ) {
+
+      if (
+        !currentCoupleId
+      ) {
+
+        return;
+
+      }
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from(
+            "couple_chat_messages"
+          )
+          .select(
+            "id,couple_id,sender_id,body,created_at"
+          )
+          .eq(
+            "couple_id",
+            currentCoupleId
+          )
+          .order(
+            "created_at",
+            {
+              ascending:
+                false
+            }
+          )
+          .limit(
+            120
+          );
+
+
+      if (
+        error
+      ) {
+
+        console.error(
+          "Eroare citire chat:",
+          error
+        );
+
+
+        if (
+          !silent
+        ) {
+
+          chatError.textContent =
+            "Chatul nu poate fi încărcat. Rulează SQL-ul v39 în Supabase.";
+
+        }
+
+
+        return;
+
+      }
+
+
+      mergeMessages(
+        (
+          data ||
+          []
+        )
+          .slice()
+          .reverse()
+      );
+
+
+      renderMessages();
+
+    }
+
+
+    function startRealtimeChat() {
+
+      if (
+        !currentCoupleId ||
+        typeof supabaseClient.channel !==
+          "function"
+      ) {
+
+        return;
+
+      }
+
+
+      if (
+        realtimeChannel
+      ) {
+
+        supabaseClient
+          .removeChannel(
+            realtimeChannel
+          )
+          .catch(
+            function () {}
+          );
+
+      }
+
+
+      realtimeChannel =
+        supabaseClient
+          .channel(
+            "duo-love-chat-" +
+            currentCoupleId
+          )
+          .on(
+            "postgres_changes",
+            {
+              event:
+                "INSERT",
+
+              schema:
+                "public",
+
+              table:
+                "couple_chat_messages",
+
+              filter:
+                "couple_id=eq." +
+                currentCoupleId
+            },
+            function (
+              payload
+            ) {
+
+              if (
+                payload &&
+                payload.new
+              ) {
+
+                mergeMessages([
+                  payload.new
+                ]);
+
+
+                renderMessages();
+
+              }
+
+            }
+          )
+          .subscribe(
+            function (
+              status
+            ) {
+
+              if (
+                status ===
+                "SUBSCRIBED"
+              ) {
+
+                setChatReady(
+                  true,
+                  "Conectat"
+                );
+
+              }
+
+            }
+          );
+
+    }
+
+
+    async function sendMessage(
+      suppliedText = ""
+    ) {
+
+      if (
+        sending ||
+        !currentUser ||
+        !currentCoupleId
+      ) {
+
+        return;
+
+      }
+
+
+      const text =
+        String(
+          suppliedText ||
+          input.value
+        )
+          .trim();
+
+
+      if (
+        !text
+      ) {
+
+        return;
+
+      }
+
+
+      sending =
+        true;
+
+
+      sendButton.disabled =
+        true;
+
+
+      chatError.textContent =
+        "";
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from(
+            "couple_chat_messages"
+          )
+          .insert(
+            {
+              couple_id:
+                currentCoupleId,
+
+              sender_id:
+                currentUser.id,
+
+              body:
+                text
+            }
+          )
+          .select(
+            "id,couple_id,sender_id,body,created_at"
+          )
+          .single();
+
+
+      sending =
+        false;
+
+
+      sendButton.disabled =
+        false;
+
+
+      if (
+        error
+      ) {
+
+        console.error(
+          "Eroare trimitere chat:",
+          error
+        );
+
+
+        chatError.textContent =
+          "Mesajul nu a putut fi trimis.";
+
+
+        return;
+
+      }
 
 
       input.value =
         "";
 
 
+      mergeMessages([
+        data
+      ]);
+
+
       renderMessages();
-
-
-      assistantReply(
-        value
-      );
 
     }
 
-
-
-    /* ======================================================
-       BUTON TRIMITE
-    ====================================================== */
 
     sendButton.addEventListener(
       "click",
@@ -1403,14 +1469,11 @@ Te iubesc. Astăzi mai mult decât ieri și, sper, mai puțin decât mâine. ❤
     );
 
 
-
-    /* ======================================================
-       ENTER
-    ====================================================== */
-
     input.addEventListener(
       "keydown",
-      function (event) {
+      function (
+        event
+      ) {
 
         if (
           event.key ===
@@ -1428,28 +1491,21 @@ Te iubesc. Astăzi mai mult decât ieri și, sper, mai puțin decât mâine. ❤
     );
 
 
-
-    /* ======================================================
-       BUTOANE RAPIDE
-    ====================================================== */
-
     document
       .querySelectorAll(
-        ".chat-quick button"
+        "[data-quick-message]"
       )
       .forEach(
-        function (button) {
+        function (
+          button
+        ) {
 
           button.addEventListener(
             "click",
             function () {
 
-              const prompt =
-                button.dataset.prompt;
-
-
               sendMessage(
-                prompt
+                button.dataset.quickMessage
               );
 
             }
@@ -1459,50 +1515,50 @@ Te iubesc. Astăzi mai mult decât ieri și, sper, mai puțin decât mâine. ❤
       );
 
 
+    document
+      .querySelectorAll(
+        ".bottom-nav .nav-item[data-page]"
+      )
+      .forEach(
+        function (
+          button
+        ) {
 
-    /* ======================================================
-       PORNIRE CHAT + CLOUD
-    ====================================================== */
+          button.addEventListener(
+            "click",
+            function () {
+
+              window.location.href =
+                "./" +
+                button.dataset.page;
+
+            }
+          );
+
+        }
+      );
+
+
+    document.addEventListener(
+      "visibilitychange",
+      function () {
+
+        if (
+          document.visibilityState ===
+            "visible"
+        ) {
+
+          loadChatMessages(
+            true
+          );
+
+        }
+
+      }
+    );
+
 
     async function startChat() {
-
-      /*
-        1. Verificăm utilizatorul.
-      */
-
-      const authenticated =
-        await checkAuthentication();
-
-
-      if (
-        !authenticated
-      ) {
-
-        return;
-
-      }
-
-
-      /*
-        2. Descărcăm conversația și
-        restul datelor de pe cont.
-      */
-
-      if (
-        typeof window.loadAppDataFromCloud ===
-        "function"
-      ) {
-
-        await window
-          .loadAppDataFromCloud();
-
-      }
-
-
-      /*
-        3. Reaplicăm fundalul/fontul
-        după sincronizare.
-      */
 
       if (
         typeof window.applyGlobalBackground ===
@@ -1524,61 +1580,63 @@ Te iubesc. Astăzi mai mult decât ieri și, sper, mai puțin decât mâine. ❤
       }
 
 
-      /*
-        4. Citim conversația după cloud.
-      */
+      if (
+        typeof window.loadAppDataFromCloud ===
+        "function"
+      ) {
 
-      loadMessages();
+        await window
+          .loadAppDataFromCloud()
+          .catch(
+            function () {}
+          );
+
+      }
 
 
-      /*
-        5. Afișăm conversația.
-      */
+      const ready =
+        await resolveChatContext();
 
-      renderMessages();
+
+      if (
+        !ready
+      ) {
+
+        return;
+
+      }
+
+
+      await loadChatMessages();
+
+
+      setChatReady(
+        true,
+        "Conectat"
+      );
+
+
+      startRealtimeChat();
+
+
+      refreshTimer =
+        setInterval(
+          function () {
+
+            loadChatMessages(
+              true
+            );
+
+          },
+          5000
+        );
 
     }
 
-
-
-    /* ======================================================
-       SALVARE CÂND APLICAȚIA ESTE ASCUNSĂ
-    ====================================================== */
-
-    document.addEventListener(
-      "visibilitychange",
-      function () {
-
-        if (
-          document.visibilityState ===
-          "hidden"
-        ) {
-
-          if (
-            typeof window.saveAppDataToCloud ===
-            "function"
-          ) {
-
-            window.saveAppDataToCloud();
-
-          }
-
-        }
-
-      }
-    );
-
-
-
-    /* ======================================================
-       START
-    ====================================================== */
 
     startChat();
 
   </script>
 
-
 </body>
-
 </html>

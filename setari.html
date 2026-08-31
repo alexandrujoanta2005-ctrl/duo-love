@@ -1573,12 +1573,190 @@
 
     }
 
+  
+
+    /* =====================================================
+       RAME PENTRU POZA DE PE HOME 🖼️
+    ====================================================== */
+
+    .photo-frame-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+      gap: 9px;
+
+      margin-top: 10px;
+    }
+
+
+    .photo-frame-option {
+      position: relative;
+
+      min-height: 82px;
+
+      overflow: hidden;
+
+      padding: 10px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
+      border-radius: 17px;
+
+      background:
+        rgba(255,255,255,.045);
+
+      color: white;
+
+      font: inherit;
+
+      cursor: pointer;
+    }
+
+
+    .photo-frame-option.selected {
+      border-color:
+        #e173a4;
+
+      box-shadow:
+        0 0 0 2px
+        rgba(225,115,164,.14);
+    }
+
+
+    .photo-frame-preview {
+      display: block;
+
+      height: 39px;
+
+      margin-bottom: 7px;
+
+      border-radius: 11px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(151,62,101,.60),
+          rgba(87,58,138,.48)
+        );
+    }
+
+
+    .photo-frame-option[data-frame="rose"]
+    .photo-frame-preview {
+      border:
+        3px solid #ff8fbd;
+
+      box-shadow:
+        0 0 12px rgba(255,143,189,.40);
+    }
+
+
+    .photo-frame-option[data-frame="neon"]
+    .photo-frame-preview {
+      border:
+        2px solid #be83ff;
+
+      box-shadow:
+        0 0 11px rgba(190,131,255,.62);
+    }
+
+
+    .photo-frame-option[data-frame="gold"]
+    .photo-frame-preview {
+      border:
+        3px solid #f2cf73;
+
+      box-shadow:
+        0 0 10px rgba(242,207,115,.34);
+    }
+
+
+    .photo-frame-option[data-frame="hearts"]
+    .photo-frame-preview {
+      border:
+        3px solid #ff79aa;
+    }
+
+
+    .photo-frame-option[data-frame="hearts"]
+    .photo-frame-preview::after {
+      content:
+        "♡ ♡ ♡";
+
+      display: grid;
+      place-items: center;
+
+      height: 100%;
+
+      color: white;
+      font-size: 15px;
+    }
+
+
+    .photo-frame-option[data-frame="stars"]
+    .photo-frame-preview {
+      border:
+        2px solid #a98cff;
+    }
+
+
+    .photo-frame-option[data-frame="stars"]
+    .photo-frame-preview::after {
+      content:
+        "✦ ✧ ✦";
+
+      display: grid;
+      place-items: center;
+
+      height: 100%;
+
+      color: white;
+      font-size: 14px;
+    }
+
+
+    .photo-frame-option[data-frame="fire"]
+    .photo-frame-preview {
+      border:
+        3px solid #ff8a3d;
+
+      box-shadow:
+        0 0 11px rgba(255,112,51,.46);
+    }
+
+
+    .photo-frame-option[data-frame="fire"]
+    .photo-frame-preview::after {
+      content:
+        "🔥";
+
+      display: grid;
+      place-items: center;
+
+      height: 100%;
+
+      font-size: 18px;
+    }
+
+
+    .photo-frame-name {
+      display: block;
+
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+
+
   </style>
 
 </head>
 
 
-<body class="settings-page" data-build="v27">
+<body class="settings-page" data-build="v39">
 
 
   <main class="app">
@@ -2077,6 +2255,54 @@
       </div>
 
 
+      <label class="settings-label">
+        RAMA POZEI DE PE HOME
+      </label>
+
+
+      <div
+        id="photoFrameGrid"
+        class="photo-frame-grid"
+      >
+
+        <button type="button" class="photo-frame-option" data-frame="none">
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">Fără ramă</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="rose">
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">💗 Roz romantic</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="neon">
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">💜 Neon</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="gold">
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">✨ Aurie</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="hearts">
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">♡ Inimioare</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="stars">
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">✦ Stele</span>
+        </button>
+
+        <button type="button" class="photo-frame-option" data-frame="fire">
+          <span class="photo-frame-preview"></span>
+          <span class="photo-frame-name">🔥 Foc</span>
+        </button>
+
+      </div>
+
+
       <label
         class="settings-label"
         for="firstName"
@@ -2446,14 +2672,14 @@
 <script src="./supabase.js?v=31"></script>
 <script src="./security.js?v=32"></script>
 
-  <script src="./cloud-sync.js?v=27"></script>
+  <script src="./cloud-sync.js?v=39"></script>
 
-  <script src="./tema.js?v=27"></script>
+  <script src="./tema.js?v=39"></script>
 
 
   <script>
 
-    console.log("❤️ DUO LOVE BUILD v27 - SETARI");
+    console.log("❤️ DUO LOVE BUILD v39 - SETARI + RAME");
 
     /* =====================================================
        ELEMENTE
@@ -2540,6 +2766,13 @@
     const backgroundButtons =
       document.querySelectorAll(
         ".background-option"
+      );
+
+
+
+    const photoFrameButtons =
+      document.querySelectorAll(
+        ".photo-frame-option[data-frame]"
       );
 
 
@@ -3256,6 +3489,71 @@
 
 
 
+
+    /* =====================================================
+       RAMA POZEI DE PE HOME 🖼️
+    ====================================================== */
+
+    function updateSelectedPhotoFrame() {
+
+      const selected =
+        localStorage.getItem(
+          "couplePhotoFrame"
+        ) ||
+        "none";
+
+
+      photoFrameButtons.forEach(
+        function (
+          button
+        ) {
+
+          button.classList.toggle(
+            "selected",
+            button.dataset.frame ===
+              selected
+          );
+
+        }
+      );
+
+    }
+
+
+    photoFrameButtons.forEach(
+      function (
+        button
+      ) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            const frame =
+              this.dataset.frame ||
+              "none";
+
+
+            saveCloudSetting(
+              "couplePhotoFrame",
+              frame
+            );
+
+
+            updateSelectedPhotoFrame();
+
+
+            showSaved(
+              "Rama pozei a fost salvată ❤️"
+            );
+
+          }
+        );
+
+      }
+    );
+
+
     /* =====================================================
        ÎNCARCĂ SETĂRILE
     ====================================================== */
@@ -3341,6 +3639,8 @@
 
 
       updateSelectedBackground();
+
+      updateSelectedPhotoFrame();
 
     }
 
@@ -6085,6 +6385,16 @@
           saveCloudSetting(
             "appFontSize",
             fontSizeRange.value
+          );
+
+
+
+          saveCloudSetting(
+            "couplePhotoFrame",
+            localStorage.getItem(
+              "couplePhotoFrame"
+            ) ||
+            "none"
           );
 
 

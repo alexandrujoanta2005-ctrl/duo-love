@@ -1,4 +1,4 @@
-console.log("❤️ DUO LOVE BUILD v35 - CLOUD SYNC + XP 20/50 + EFFECTS + MUSIC");
+console.log("❤️ DUO LOVE BUILD v39 - CLOUD SYNC + FRAME + XP + EFFECTS");
 
 /* =========================================================
    SINCRONIZARE CONT + CUPLU - SUPABASE
@@ -17,6 +17,7 @@ const CLOUD_KEYS = [
   "appFontSize",
 
   "couplePhotoPath",
+  "couplePhotoFrame",
 
   "loveEvents",
   "loveHistory",
