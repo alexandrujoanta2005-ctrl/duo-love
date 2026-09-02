@@ -34,8 +34,8 @@
   href="./manifest.json"
 >
 
-<link rel="stylesheet" href="./style.css?v=58">
-<link rel="stylesheet" href="./setari.css?v=58">
+<link rel="stylesheet" href="./style.css?v=60">
+<link rel="stylesheet" href="./setari.css?v=60">
 
 <style>
 
@@ -2490,6 +2490,25 @@
       font-size: 24px !important;
     }
   }
+
+
+  /* =====================================================
+     PROFIL CUPLU + TEME SEZONIERE + WIDGET HOME - v60
+  ====================================================== */
+  .duo-profile-grid{display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:10px;align-items:end}
+  .duo-profile-field{min-width:0}
+  .duo-profile-emoji{text-align:center;font-size:24px!important}
+  .duo-profile-preview{margin-top:16px;padding:16px;border:1px solid rgba(255,255,255,.10);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.035));text-align:center}
+  .duo-profile-preview small{display:block;margin-bottom:7px;color:rgba(255,255,255,.54);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+  .duo-profile-preview strong{display:block;overflow-wrap:anywhere;font-size:21px;line-height:1.35}
+  .duo-profile-preview span{display:block;margin-top:6px;color:rgba(255,255,255,.62);font-size:13px}
+  .duo-season-preview{position:relative;overflow:hidden;margin-top:13px;padding:15px;border:1px solid rgba(255,255,255,.10);border-radius:19px;background:rgba(255,255,255,.045)}
+  .duo-season-preview strong{display:block;margin-bottom:5px}.duo-season-preview span{display:block;color:rgba(255,255,255,.61);font-size:13px;line-height:1.45}
+  .duo-widget-preview{margin-top:14px;padding:16px;border:1px solid rgba(255,255,255,.11);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035))}
+  .duo-widget-preview.soft{background:linear-gradient(145deg,rgba(239,147,189,.13),rgba(139,114,216,.10))}.duo-widget-preview.minimal{border-style:dashed;background:transparent}
+  .duo-widget-preview small{display:block;color:rgba(255,255,255,.50);font-size:10px;font-weight:800;letter-spacing:2px}.duo-widget-preview strong{display:block;margin-top:7px;font-size:18px}.duo-widget-preview span{display:block;margin-top:5px;color:rgba(255,255,255,.62);font-size:12px}
+  @media(max-width:380px){.duo-profile-grid{grid-template-columns:minmax(0,1fr) 78px}}
+
 </style>
 
 </head>
@@ -3206,6 +3225,45 @@
 
     </section>
 
+    <!-- =====================================================
+         PROFIL DE CUPLU
+    ====================================================== -->
+    <section class="settings-card" id="duoProfileCard">
+      <span class="settings-small">💞 PROFIL DE CUPLU</span>
+      <h2>Personalizați-vă profilul</h2>
+      <p class="settings-card-description">Poreclele și emoji-urile apar pe Acasă și în mini-widget. Se sincronizează în spațiul vostru comun. ❤️</p>
+
+      <div class="duo-profile-grid">
+        <div class="duo-profile-field">
+          <label class="settings-label" for="firstNickname">PORECLA PRIMULUI</label>
+          <input id="firstNickname" class="settings-input" type="text" maxlength="24" placeholder="Iubi" autocomplete="off">
+        </div>
+        <div class="duo-profile-field">
+          <label class="settings-label" for="firstEmoji">EMOJI</label>
+          <input id="firstEmoji" class="settings-input duo-profile-emoji" type="text" maxlength="8" placeholder="💙" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="duo-profile-grid">
+        <div class="duo-profile-field">
+          <label class="settings-label" for="secondNickname">PORECLA CELUI DE-AL DOILEA</label>
+          <input id="secondNickname" class="settings-input" type="text" maxlength="24" placeholder="Prințesa" autocomplete="off">
+        </div>
+        <div class="duo-profile-field">
+          <label class="settings-label" for="secondEmoji">EMOJI</label>
+          <input id="secondEmoji" class="settings-input duo-profile-emoji" type="text" maxlength="8" placeholder="💗" autocomplete="off">
+        </div>
+      </div>
+
+      <label class="settings-label" for="duoRelationshipLabel">NUMELE SPAȚIULUI VOSTRU</label>
+      <input id="duoRelationshipLabel" class="settings-input" type="text" maxlength="40" placeholder="Povestea noastră" autocomplete="off">
+
+      <div class="duo-profile-preview" id="duoProfilePreview">
+        <small id="duoProfilePreviewLabel">POVESTEA NOASTRĂ</small>
+        <strong id="duoProfilePreviewNames">💙 Alex & Bianca 💗</strong>
+        <span>Poreclele sunt opționale — dacă lipsesc, folosim numele.</span>
+      </div>
+    </section>
 
 
     <!-- =====================================================
@@ -3428,6 +3486,31 @@
 
     </section>
 
+    <!-- =====================================================
+         TEMĂ SEZONIERĂ
+    ====================================================== -->
+    <section class="settings-card">
+      <span class="settings-small">✨ SEZON</span>
+      <h2>Temă sezonieră</h2>
+      <p class="settings-card-description">Fundalul ales rămâne același. Tema sezonieră adaugă peste el efecte discrete și se vede în aplicație.</p>
+      <label class="settings-label" for="seasonalThemeSelect">EFECT SEZONIER</label>
+      <select id="seasonalThemeSelect" class="settings-select">
+        <option value="auto">🪄 Automat după perioadă</option><option value="off">⭕ Fără efect sezonier</option><option value="valentine">💘 Valentine's</option><option value="spring">🌸 Primăvară</option><option value="summer">☀️ Vară</option><option value="autumn">🍂 Toamnă</option><option value="halloween">🎃 Halloween</option><option value="christmas">🎄 Crăciun</option><option value="winter">❄️ Iarnă</option><option value="newyear">🎆 Anul Nou</option>
+      </select>
+      <div class="duo-season-preview"><strong id="seasonalThemePreviewTitle">Tema automată este activă ✨</strong><span id="seasonalThemePreviewText">Efectul se adaptează perioadei din an.</span></div>
+    </section>
+
+    <!-- =====================================================
+         WIDGET HOME
+    ====================================================== -->
+    <section class="settings-card">
+      <span class="settings-small">🪟 WIDGET HOME</span>
+      <h2>Cardul vostru de pe Acasă</h2>
+      <p class="settings-card-description">Alege stilul mini-widgetului care arată poreclele, zilele împreună, citatul și sezonul activ.</p>
+      <label class="settings-label" for="duoWidgetStyle">STIL WIDGET</label>
+      <select id="duoWidgetStyle" class="settings-select"><option value="glass">🫧 Glass</option><option value="soft">💗 Soft</option><option value="minimal">✨ Minimal</option></select>
+      <div id="duoWidgetSettingsPreview" class="duo-widget-preview"><small id="duoWidgetPreviewLabel">POVESTEA NOASTRĂ</small><strong id="duoWidgetPreviewNames">💙 Alex & Bianca 💗</strong><span>Widgetul va apărea automat pe pagina Acasă.</span></div>
+    </section>
 
 
     <p
@@ -3526,14 +3609,14 @@
 <script src="./supabase.js?v=31"></script>
 <script src="./security.js?v=32"></script>
 
-  <script src="./cloud-sync.js?v=42"></script>
+  <script src="./cloud-sync.js?v=60"></script>
 
-  <script src="./tema.js?v=59"></script>
+  <script src="./tema.js?v=60"></script>
 
 
   <script>
 
-    console.log("❤️ DUO LOVE BUILD v59 - PROFIL + TEME SEZONIERE + WIDGET");
+    console.log("❤️ DUO LOVE BUILD v60 - PROFIL + TEME SEZONIERE + WIDGET");
 
     /* =====================================================
        ELEMENTE
@@ -3550,6 +3633,14 @@
         "secondName"
       );
 
+
+    const firstNicknameInput = document.getElementById("firstNickname");
+    const secondNicknameInput = document.getElementById("secondNickname");
+    const firstEmojiInput = document.getElementById("firstEmoji");
+    const secondEmojiInput = document.getElementById("secondEmoji");
+    const duoRelationshipLabelInput = document.getElementById("duoRelationshipLabel");
+    const seasonalThemeSelect = document.getElementById("seasonalThemeSelect");
+    const duoWidgetStyleSelect = document.getElementById("duoWidgetStyle");
 
     const relationshipInput =
       document.getElementById(
@@ -4345,6 +4436,54 @@
 
 
     /* =====================================================
+       PROFIL + SEZON + WIDGET
+    ====================================================== */
+
+    function cleanProfileText(value, fallback = "") {
+      const text = String(value || "").trim();
+      return text || fallback;
+    }
+
+    function updateDuoProfilePreview() {
+      const firstName = cleanProfileText(firstNameInput.value, "Alex");
+      const secondName = cleanProfileText(secondNameInput.value, "Bianca");
+      const firstDisplay = cleanProfileText(firstNicknameInput.value, firstName);
+      const secondDisplay = cleanProfileText(secondNicknameInput.value, secondName);
+      const firstEmoji = cleanProfileText(firstEmojiInput.value, "💙");
+      const secondEmoji = cleanProfileText(secondEmojiInput.value, "💗");
+      const label = cleanProfileText(duoRelationshipLabelInput.value, "Povestea noastră");
+      document.getElementById("duoProfilePreviewLabel").textContent = label.toLocaleUpperCase("ro-RO");
+      document.getElementById("duoProfilePreviewNames").textContent = firstEmoji + " " + firstDisplay + " & " + secondDisplay + " " + secondEmoji;
+      document.getElementById("duoWidgetPreviewLabel").textContent = label.toLocaleUpperCase("ro-RO");
+      document.getElementById("duoWidgetPreviewNames").textContent = firstEmoji + " " + firstDisplay + " & " + secondDisplay + " " + secondEmoji;
+    }
+
+    function updateSeasonalSettingsPreview() {
+      const info = typeof window.getDuoSeasonInfo === "function" ? window.getDuoSeasonInfo() : null;
+      const selected = seasonalThemeSelect.value || "auto";
+      const title = document.getElementById("seasonalThemePreviewTitle");
+      const text = document.getElementById("seasonalThemePreviewText");
+      if (selected === "auto") {
+        title.textContent = "Tema automată este activă ✨";
+        text.textContent = info && info.label ? "Acum este activ: " + info.label + "." : "Efectul se adaptează perioadei din an.";
+      } else if (selected === "off") {
+        title.textContent = "Efectele sezoniere sunt oprite";
+        text.textContent = "Rămâne doar fundalul pe care l-ai ales.";
+      } else {
+        const option = seasonalThemeSelect.options[seasonalThemeSelect.selectedIndex];
+        title.textContent = option ? option.textContent.trim() : "Temă sezonieră";
+        text.textContent = "Efectul este aplicat peste fundalul vostru.";
+      }
+    }
+
+    function updateWidgetSettingsPreview() {
+      const preview = document.getElementById("duoWidgetSettingsPreview");
+      preview.classList.remove("soft", "minimal");
+      if (duoWidgetStyleSelect.value === "soft") preview.classList.add("soft");
+      if (duoWidgetStyleSelect.value === "minimal") preview.classList.add("minimal");
+    }
+
+    /* =====================================================
        RAMA POZEI DE PE HOME 🖼️
     ====================================================== */
 
@@ -4428,6 +4567,15 @@
         "Bianca";
 
 
+      firstNicknameInput.value = localStorage.getItem("firstNickname") || "";
+      secondNicknameInput.value = localStorage.getItem("secondNickname") || "";
+      firstEmojiInput.value = localStorage.getItem("firstEmoji") || "💙";
+      secondEmojiInput.value = localStorage.getItem("secondEmoji") || "💗";
+      duoRelationshipLabelInput.value = localStorage.getItem("duoRelationshipLabel") || "Povestea noastră";
+      seasonalThemeSelect.value = localStorage.getItem("duoSeasonalTheme") || "auto";
+      duoWidgetStyleSelect.value = localStorage.getItem("duoWidgetStyle") || "glass";
+
+
       relationshipInput.value =
         localStorage.getItem(
           "relationshipStartDate"
@@ -4491,6 +4639,10 @@
 
       }
 
+
+      updateDuoProfilePreview();
+      updateSeasonalSettingsPreview();
+      updateWidgetSettingsPreview();
 
       updateSelectedBackground();
 
@@ -6838,6 +6990,46 @@
 
 
     /* =====================================================
+       PROFIL CUPLU + SEZON + WIDGET
+    ====================================================== */
+
+    const profileFields = [
+      [firstNicknameInput, "firstNickname"],
+      [secondNicknameInput, "secondNickname"],
+      [firstEmojiInput, "firstEmoji"],
+      [secondEmojiInput, "secondEmoji"],
+      [duoRelationshipLabelInput, "duoRelationshipLabel"]
+    ];
+
+    profileFields.forEach(function(entry){
+      const input = entry[0];
+      const key = entry[1];
+      input.addEventListener("input", updateDuoProfilePreview);
+      input.addEventListener("change", function(){
+        saveCloudSetting(key, input.value.trim());
+        updateDuoProfilePreview();
+      });
+    });
+
+    firstNameInput.addEventListener("input", updateDuoProfilePreview);
+    secondNameInput.addEventListener("input", updateDuoProfilePreview);
+
+    seasonalThemeSelect.addEventListener("change", function(){
+      saveCloudSetting("duoSeasonalTheme", this.value);
+      if (typeof window.applySeasonalTheme === "function") window.applySeasonalTheme();
+      updateSeasonalSettingsPreview();
+      showSaved("Tema sezonieră a fost salvată ✨");
+    });
+
+    duoWidgetStyleSelect.addEventListener("change", function(){
+      saveCloudSetting("duoWidgetStyle", this.value);
+      updateWidgetSettingsPreview();
+      showSaved("Stilul widgetului a fost salvat ❤️");
+    });
+
+    window.addEventListener("duo-season-change", updateSeasonalSettingsPreview);
+
+    /* =====================================================
        FONT
     ====================================================== */
 
@@ -7210,6 +7402,15 @@
             "secondName",
             secondNameInput.value.trim()
           );
+
+
+          saveCloudSetting("firstNickname", firstNicknameInput.value.trim());
+          saveCloudSetting("secondNickname", secondNicknameInput.value.trim());
+          saveCloudSetting("firstEmoji", firstEmojiInput.value.trim() || "💙");
+          saveCloudSetting("secondEmoji", secondEmojiInput.value.trim() || "💗");
+          saveCloudSetting("duoRelationshipLabel", duoRelationshipLabelInput.value.trim() || "Povestea noastră");
+          saveCloudSetting("duoSeasonalTheme", seasonalThemeSelect.value || "auto");
+          saveCloudSetting("duoWidgetStyle", duoWidgetStyleSelect.value || "glass");
 
 
           saveCloudSetting(

@@ -1,4 +1,4 @@
-const CACHE_VERSION = "duo-love-v59";
+const CACHE_VERSION = "duo-love-v60";
 
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PAGE_CACHE = `${CACHE_VERSION}-pages`;

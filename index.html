@@ -57,7 +57,7 @@
   <link rel="preconnect" href="https://vrcwpodmvdamkgveuedz.supabase.co" crossorigin>
   <link rel="dns-prefetch" href="//vrcwpodmvdamkgveuedz.supabase.co">
 
-  <link rel="stylesheet" href="./style.css?v=31">
+  <link rel="stylesheet" href="./style.css?v=60">
 
 
   <style>
@@ -4551,10 +4551,25 @@
 
 </style>
 
+
+<style id="duo-v60-home-widget">
+  .duo-home-widget{position:relative;overflow:hidden;margin:14px 0 18px;padding:18px;border:1px solid rgba(255,255,255,.11);border-radius:25px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035));box-shadow:0 14px 34px rgba(0,0,0,.18);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+  .duo-home-widget.soft{background:linear-gradient(145deg,rgba(225,99,154,.14),rgba(126,94,211,.11));border-color:rgba(238,150,191,.18)}
+  .duo-home-widget.minimal{background:rgba(8,7,13,.20);border-style:dashed;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .duo-widget-kicker{display:block;color:rgba(255,255,255,.50);font-size:10px;font-weight:800;letter-spacing:2.4px;text-transform:uppercase}
+  .duo-widget-names{display:block;margin-top:8px;overflow-wrap:anywhere;font-size:clamp(20px,5vw,25px);line-height:1.25}
+  .duo-widget-stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+  .duo-widget-stat{padding:11px 12px;border-radius:16px;background:rgba(255,255,255,.055)}
+  .duo-widget-stat small{display:block;color:rgba(255,255,255,.48);font-size:9px;font-weight:800;letter-spacing:1.5px}
+  .duo-widget-stat strong{display:block;margin-top:4px;font-size:15px;overflow-wrap:anywhere}
+  .duo-widget-quote{margin:13px 0 0;color:rgba(255,255,255,.72);font-size:13px;line-height:1.5;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+  @media(max-width:360px){.duo-widget-stats{grid-template-columns:1fr}}
+</style>
+
 </head>
 
 
-<body class="duo-splash-active" data-build="v59">
+<body class="duo-splash-active" data-build="v60">
 
   <script>
     /*
@@ -5365,6 +5380,18 @@
 
     </section>
 
+    <!-- =====================================================
+         MINI-WIDGET CUPLU
+    ====================================================== -->
+    <section id="duoHomeWidget" class="duo-home-widget" aria-label="Widgetul cuplului">
+      <span id="duoWidgetLabel" class="duo-widget-kicker">POVESTEA NOASTRĂ</span>
+      <strong id="duoWidgetNames" class="duo-widget-names">💙 Alex & Bianca 💗</strong>
+      <div class="duo-widget-stats">
+        <div class="duo-widget-stat"><small>ÎMPREUNĂ</small><strong id="duoWidgetDays">0 zile ❤️</strong></div>
+        <div class="duo-widget-stat"><small>SEZON</small><strong id="duoWidgetSeason">✨ Automat</strong></div>
+      </div>
+      <p id="duoWidgetQuote" class="duo-widget-quote">În fiecare zi aleg din nou să te iubesc.</p>
+    </section>
 
 
     <!-- =====================================================
@@ -5789,9 +5816,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./supabase.js?v=31"></script>
 <script src="./security.js?v=32"></script>
-  <script src="./cloud-sync.js?v=42"></script>
+  <script src="./cloud-sync.js?v=60"></script>
 
-  <script src="./tema.js?v=59"></script>
+  <script src="./tema.js?v=60"></script>
 
   <script src="./ursulet.js?v=28"></script>
 
@@ -5864,29 +5891,59 @@
        HOME
     ====================================================== */
 
+    function readDuoProfile() {
+      const firstName = (localStorage.getItem("firstName") || "Alex").trim() || "Alex";
+      const secondName = (localStorage.getItem("secondName") || "Bianca").trim() || "Bianca";
+      const firstNickname = (localStorage.getItem("firstNickname") || "").trim();
+      const secondNickname = (localStorage.getItem("secondNickname") || "").trim();
+      const firstEmoji = (localStorage.getItem("firstEmoji") || "💙").trim() || "💙";
+      const secondEmoji = (localStorage.getItem("secondEmoji") || "💗").trim() || "💗";
+      const label = (localStorage.getItem("duoRelationshipLabel") || "Povestea noastră").trim() || "Povestea noastră";
+      return {firstName,secondName,firstNickname,secondNickname,firstEmoji,secondEmoji,label,firstDisplay:firstNickname||firstName,secondDisplay:secondNickname||secondName};
+    }
+
+    function calculateDuoWidgetDays() {
+      const raw = localStorage.getItem("relationshipStartDate");
+      if (!raw) return 0;
+      const start = new Date(raw);
+      if (Number.isNaN(start.getTime())) return 0;
+      return Math.max(0, Math.floor((Date.now() - start.getTime()) / 86400000));
+    }
+
+    function renderDuoHomeWidget() {
+      const widget = document.getElementById("duoHomeWidget");
+      if (!widget) return;
+      const profile = readDuoProfile();
+      const style = localStorage.getItem("duoWidgetStyle") || "glass";
+      widget.classList.remove("soft","minimal");
+      if (style === "soft") widget.classList.add("soft");
+      if (style === "minimal") widget.classList.add("minimal");
+      document.getElementById("duoWidgetLabel").textContent = profile.label.toLocaleUpperCase("ro-RO");
+      document.getElementById("duoWidgetNames").textContent = profile.firstEmoji + " " + profile.firstDisplay + " & " + profile.secondDisplay + " " + profile.secondEmoji;
+      const days = calculateDuoWidgetDays();
+      document.getElementById("duoWidgetDays").textContent = days + (days === 1 ? " zi ❤️" : " zile ❤️");
+      const quote = (localStorage.getItem("coupleQuote") || "În fiecare zi aleg din nou să te iubesc.").trim();
+      document.getElementById("duoWidgetQuote").textContent = quote || "În fiecare zi aleg din nou să te iubesc.";
+      const info = typeof window.getDuoSeasonInfo === "function" ? window.getDuoSeasonInfo() : null;
+      document.getElementById("duoWidgetSeason").textContent = info && info.label ? info.label : "✨ Automat";
+    }
+
     function loadHomeData() {
 
-      const firstName =
-        localStorage.getItem(
-          "firstName"
-        ) ||
-        "Alex";
-
-
-      const secondName =
-        localStorage.getItem(
-          "secondName"
-        ) ||
-        "Bianca";
+      const duoProfile =
+        readDuoProfile();
 
 
       document.getElementById(
         "coupleNames"
       ).textContent =
-        firstName +
-        "💙 & " +
-        secondName +
-        "💙";
+        duoProfile.firstEmoji +
+        " " +
+        duoProfile.firstDisplay +
+        " & " +
+        duoProfile.secondDisplay +
+        " " +
+        duoProfile.secondEmoji;
 
 
       const savedPhoto =
@@ -5930,6 +5987,8 @@
       loadNextEvent();
 
       applySelectedPhotoFrame();
+
+      renderDuoHomeWidget();
 
     }
 
@@ -11662,6 +11721,16 @@
 
 
 
+
+
+    window.addEventListener("storage", function(event){
+      const keys=["firstName","secondName","firstNickname","secondNickname","firstEmoji","secondEmoji","duoRelationshipLabel","duoWidgetStyle","duoSeasonalTheme","relationshipStartDate","coupleQuote"];
+      if (!event || event.key === null || keys.includes(event.key)) loadHomeData();
+    });
+
+    window.addEventListener("duolove:setting-changed", function(){loadHomeData();});
+    window.addEventListener("duolove:cloud-applied", function(){loadHomeData();});
+    window.addEventListener("duo-season-change", renderDuoHomeWidget);
 
 
     /* =====================================================

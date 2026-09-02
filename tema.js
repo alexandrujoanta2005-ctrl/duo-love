@@ -81,6 +81,483 @@
 
 
   /* =========================================================
+     TEME SEZONIERE
+     Se aplică PESTE fundalul ales, fără să îl înlocuiască.
+  ========================================================= */
+
+  const SEASONAL_THEMES = {
+
+    off: {
+      label: "Fără efect sezonier",
+      emojis: [],
+      glow: "transparent"
+    },
+
+    valentine: {
+      label: "Valentine's 💘",
+      emojis: ["💗", "💕", "🌹", "✨"],
+      glow: "radial-gradient(circle at 15% 10%, rgba(255,88,154,.22), transparent 34%), radial-gradient(circle at 85% 75%, rgba(255,128,178,.16), transparent 38%)"
+    },
+
+    spring: {
+      label: "Primăvară 🌸",
+      emojis: ["🌸", "🌷", "🌼", "✨"],
+      glow: "radial-gradient(circle at 15% 15%, rgba(255,171,210,.16), transparent 34%), radial-gradient(circle at 82% 72%, rgba(128,220,153,.15), transparent 40%)"
+    },
+
+    summer: {
+      label: "Vară ☀️",
+      emojis: ["☀️", "🌻", "✨", "🫧"],
+      glow: "radial-gradient(circle at 18% 12%, rgba(255,211,94,.17), transparent 34%), radial-gradient(circle at 82% 78%, rgba(75,190,255,.13), transparent 40%)"
+    },
+
+    autumn: {
+      label: "Toamnă 🍂",
+      emojis: ["🍂", "🍁", "✨", "🤎"],
+      glow: "radial-gradient(circle at 15% 15%, rgba(219,132,65,.18), transparent 36%), radial-gradient(circle at 85% 78%, rgba(148,71,50,.15), transparent 42%)"
+    },
+
+    halloween: {
+      label: "Halloween 🎃",
+      emojis: ["🎃", "👻", "🦇", "✨"],
+      glow: "radial-gradient(circle at 18% 12%, rgba(255,126,35,.18), transparent 34%), radial-gradient(circle at 82% 74%, rgba(124,71,205,.17), transparent 42%)"
+    },
+
+    christmas: {
+      label: "Crăciun 🎄",
+      emojis: ["❄️", "🎄", "✨", "🎁"],
+      glow: "radial-gradient(circle at 16% 12%, rgba(218,54,72,.15), transparent 34%), radial-gradient(circle at 84% 76%, rgba(46,158,106,.16), transparent 42%)"
+    },
+
+    winter: {
+      label: "Iarnă ❄️",
+      emojis: ["❄️", "✨", "🤍", "🫧"],
+      glow: "radial-gradient(circle at 15% 12%, rgba(146,195,255,.16), transparent 35%), radial-gradient(circle at 82% 76%, rgba(218,231,255,.12), transparent 42%)"
+    },
+
+    newyear: {
+      label: "Anul Nou 🎆",
+      emojis: ["✨", "🎆", "⭐", "🥂"],
+      glow: "radial-gradient(circle at 18% 12%, rgba(255,206,82,.18), transparent 34%), radial-gradient(circle at 82% 74%, rgba(147,93,255,.18), transparent 42%)"
+    }
+
+  };
+
+
+  function getAutomaticSeasonalTheme(
+    date = new Date()
+  ) {
+
+    const month =
+      date.getMonth() + 1;
+
+    const day =
+      date.getDate();
+
+
+    if (
+      (month === 12 && day >= 27) ||
+      (month === 1 && day <= 7)
+    ) {
+      return "newyear";
+    }
+
+
+    if (
+      month === 12
+    ) {
+      return "christmas";
+    }
+
+
+    if (
+      month === 2 &&
+      day <= 16
+    ) {
+      return "valentine";
+    }
+
+
+    if (
+      month === 1 ||
+      month === 2
+    ) {
+      return "winter";
+    }
+
+
+    if (
+      month >= 3 &&
+      month <= 5
+    ) {
+      return "spring";
+    }
+
+
+    if (
+      month >= 6 &&
+      month <= 8
+    ) {
+      return "summer";
+    }
+
+
+    if (
+      month === 10 &&
+      day >= 21 ||
+      month === 11 &&
+      day <= 3
+    ) {
+      return "halloween";
+    }
+
+
+    return "autumn";
+
+  }
+
+
+  function getSeasonalSelection() {
+
+    const saved =
+      localStorage.getItem(
+        "duoSeasonalTheme"
+      ) ||
+      "auto";
+
+
+    if (
+      saved === "auto" ||
+      Object.prototype.hasOwnProperty.call(
+        SEASONAL_THEMES,
+        saved
+      )
+    ) {
+      return saved;
+    }
+
+
+    return "auto";
+
+  }
+
+
+  function getResolvedSeasonalTheme() {
+
+    const selected =
+      getSeasonalSelection();
+
+
+    return selected === "auto"
+      ? getAutomaticSeasonalTheme()
+      : selected;
+
+  }
+
+
+  function ensureSeasonalStyle() {
+
+    if (
+      document.getElementById(
+        "duoSeasonalStyle"
+      )
+    ) {
+      return;
+    }
+
+
+    const style =
+      document.createElement(
+        "style"
+      );
+
+
+    style.id =
+      "duoSeasonalStyle";
+
+
+    style.textContent = `
+      #duoSeasonalOverlay{
+        position:fixed;
+        inset:0;
+        z-index:40;
+        overflow:hidden;
+        pointer-events:none!important;
+        background:var(--duo-season-glow,transparent);
+        opacity:.58;
+        transition:opacity .3s ease;
+      }
+
+      #duoSeasonalOverlay[hidden]{
+        display:none!important;
+      }
+
+      #duoSeasonalOverlay .duo-season-particle{
+        position:absolute;
+        top:-12vh;
+        display:block;
+        opacity:.22;
+        font-size:var(--duo-season-size,20px);
+        line-height:1;
+        filter:drop-shadow(0 4px 10px rgba(0,0,0,.18));
+        animation:duoSeasonFall var(--duo-season-duration,15s) linear infinite;
+        animation-delay:var(--duo-season-delay,0s);
+        will-change:transform;
+      }
+
+      @keyframes duoSeasonFall{
+        from{transform:translate3d(0,-12vh,0) rotate(0deg)}
+        to{transform:translate3d(var(--duo-season-drift,20px),118vh,0) rotate(330deg)}
+      }
+
+      @media (prefers-reduced-motion:reduce){
+        #duoSeasonalOverlay .duo-season-particle{
+          animation:none!important;
+          display:none!important;
+        }
+      }
+    `;
+
+
+    document.head.appendChild(
+      style
+    );
+
+  }
+
+
+  function ensureSeasonalOverlay() {
+
+    let overlay =
+      document.getElementById(
+        "duoSeasonalOverlay"
+      );
+
+
+    if (
+      overlay
+    ) {
+      return overlay;
+    }
+
+
+    overlay =
+      document.createElement(
+        "div"
+      );
+
+
+    overlay.id =
+      "duoSeasonalOverlay";
+
+
+    overlay.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
+    document.body.appendChild(
+      overlay
+    );
+
+
+    return overlay;
+
+  }
+
+
+  function applySeasonalTheme() {
+
+    if (
+      !document.body
+    ) {
+      return;
+    }
+
+
+    ensureSeasonalStyle();
+
+
+    const selection =
+      getSeasonalSelection();
+
+
+    const resolved =
+      getResolvedSeasonalTheme();
+
+
+    const meta =
+      SEASONAL_THEMES[resolved] ||
+      SEASONAL_THEMES.off;
+
+
+    document.body.dataset.duoSeasonSelection =
+      selection;
+
+
+    document.body.dataset.duoSeason =
+      resolved;
+
+
+    const overlay =
+      ensureSeasonalOverlay();
+
+
+    overlay.innerHTML =
+      "";
+
+
+    overlay.style.setProperty(
+      "--duo-season-glow",
+      meta.glow || "transparent"
+    );
+
+
+    if (
+      resolved === "off" ||
+      !meta.emojis.length
+    ) {
+
+      overlay.hidden =
+        true;
+
+    } else {
+
+      overlay.hidden =
+        false;
+
+
+      for (
+        let index = 0;
+        index < 14;
+        index++
+      ) {
+
+        const particle =
+          document.createElement(
+            "span"
+          );
+
+
+        particle.className =
+          "duo-season-particle";
+
+
+        particle.textContent =
+          meta.emojis[
+            index %
+            meta.emojis.length
+          ];
+
+
+        particle.style.left =
+          (
+            3 +
+            (index * 7.1) % 94
+          ) +
+          "%";
+
+
+        particle.style.setProperty(
+          "--duo-season-size",
+          (
+            15 +
+            (index % 5) * 3
+          ) +
+          "px"
+        );
+
+
+        particle.style.setProperty(
+          "--duo-season-duration",
+          (
+            13 +
+            (index % 6) * 2.2
+          ) +
+          "s"
+        );
+
+
+        particle.style.setProperty(
+          "--duo-season-delay",
+          (-index * 1.7) +
+          "s"
+        );
+
+
+        particle.style.setProperty(
+          "--duo-season-drift",
+          (
+            index % 2 === 0
+              ? 26
+              : -22
+          ) +
+          "px"
+        );
+
+
+        overlay.appendChild(
+          particle
+        );
+
+      }
+
+    }
+
+
+    try {
+
+      window.dispatchEvent(
+        new CustomEvent(
+          "duo-season-change",
+          {
+            detail: {
+              selected:
+                selection,
+              resolved:
+                resolved,
+              label:
+                meta.label
+            }
+          }
+        )
+      );
+
+    } catch (error) {
+    }
+
+  }
+
+
+  function getDuoSeasonInfo() {
+
+    const selected =
+      getSeasonalSelection();
+
+
+    const resolved =
+      getResolvedSeasonalTheme();
+
+
+    const meta =
+      SEASONAL_THEMES[resolved] ||
+      SEASONAL_THEMES.off;
+
+
+    return {
+      selected,
+      resolved,
+      label:
+        meta.label,
+      automatic:
+        selected === "auto"
+    };
+
+  }
+
+
+  /* =========================================================
      PAGINI MENIU
   ========================================================= */
 
@@ -1133,6 +1610,41 @@
 
 
   /* =========================================================
+     ACTUALIZARE PWA - EVITĂ RĂMÂNEREA PE CACHE VECHI
+  ========================================================= */
+
+  function setupPWAControllerRefresh() {
+
+    if (
+      !("serviceWorker" in navigator)
+    ) {
+      return;
+    }
+
+    navigator.serviceWorker.addEventListener(
+      "controllerchange",
+      function () {
+
+        const reloadKey =
+          "__duoLoveSwReloadV60";
+
+        try {
+          if (sessionStorage.getItem(reloadKey)) return;
+          sessionStorage.setItem(reloadKey, "1");
+        } catch (error) {
+        }
+
+        window.location.reload();
+      }
+    );
+
+  }
+
+
+  setupPWAControllerRefresh();
+
+
+  /* =========================================================
      PORNIRE
   ========================================================= */
 
@@ -1143,6 +1655,8 @@
     applyGlobalFont();
 
     applyGlobalAccent();
+
+    applySeasonalTheme();
 
     removeExternalTargets();
 
@@ -1198,6 +1712,8 @@
 
       applyGlobalAccent();
 
+      applySeasonalTheme();
+
       updateActiveNavigation();
 
       fixNavigationTap();
@@ -1220,12 +1736,14 @@
         event.key === "appFont" ||
         event.key === "appFontSize" ||
         event.key === "appAccent" ||
+        event.key === "duoSeasonalTheme" ||
         event.key === null
       ) {
 
         applyGlobalBackground();
         applyGlobalFont();
         applyGlobalAccent();
+        applySeasonalTheme();
 
       }
 
@@ -1240,7 +1758,35 @@
       applyGlobalBackground();
       applyGlobalFont();
       applyGlobalAccent();
+      applySeasonalTheme();
 
+    }
+  );
+
+
+  window.addEventListener(
+    "duolove:setting-changed",
+    function (event) {
+
+      if (
+        event &&
+        event.detail &&
+        event.detail.key === "duoSeasonalTheme"
+      ) {
+        applySeasonalTheme();
+      }
+
+    }
+  );
+
+
+  window.addEventListener(
+    "duolove:cloud-applied",
+    function () {
+      applyGlobalBackground();
+      applyGlobalFont();
+      applyGlobalAccent();
+      applySeasonalTheme();
     }
   );
 
@@ -1257,6 +1803,7 @@
         applyGlobalBackground();
         applyGlobalFont();
         applyGlobalAccent();
+        applySeasonalTheme();
 
       }
 
@@ -1278,6 +1825,14 @@
 
   window.applyGlobalAccent =
     applyGlobalAccent;
+
+
+  window.applySeasonalTheme =
+    applySeasonalTheme;
+
+
+  window.getDuoSeasonInfo =
+    getDuoSeasonInfo;
 
 
   window.updateActiveNavigation =
