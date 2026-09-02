@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="ro">
+<html lang="ro" class="duo-scroll-root">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#08070d">
 <title>Love AI ❤️</title>
 <link rel="manifest" href="./manifest.json">
-<link rel="stylesheet" href="./style.css?v=54">
+<link rel="stylesheet" href="./style.css?v=56">
 <style>
 :root{
   --ls-text:#fff7fb;
@@ -104,7 +104,7 @@ h1{margin:3px 0 0;font-size:28px;line-height:1.1}
 @media(max-width:520px){.two{grid-template-columns:1fr}.output-actions{grid-template-columns:1fr}.image-box{min-height:270px}}
 </style>
 </head>
-<body>
+<body class="duo-scroll-page">
 <main class="page">
   <header class="top">
     <button class="back" type="button" onclick="history.back()">←</button>
@@ -239,7 +239,7 @@ h1{margin:3px 0 0;font-size:28px;line-height:1.1}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./supabase.js?v=31"></script>
-<script src="./tema.js?v=54"></script>
+<script src="./tema.js?v=58"></script>
 <script>
 (function(){
   const tabs=[...document.querySelectorAll('.tab')];
@@ -322,7 +322,7 @@ h1{margin:3px 0 0;font-size:28px;line-height:1.1}
     return chosen.join(' ');
   }
 
-  function generateText(){
+  function generateText(shouldScroll=true){
     const kind=document.getElementById('kind').value;
     const tone=document.getElementById('tone').value;
     const length=document.getElementById('length').value;
@@ -344,10 +344,11 @@ h1{margin:3px 0 0;font-size:28px;line-height:1.1}
     if(kind==='sorry') text=`${hello},\n\nÎmi pare rău pentru ce s-a întâmplat. Nu vreau să câștig o ceartă; vreau să avem grijă de noi. Îmi pasă de ceea ce simți și vreau să te ascult cu adevărat. 🫶${extra}\n\nCând ești pregătit/ă, vreau să vorbim cu calm și să ne regăsim. ❤️`;
 
     output.textContent=text;
+    if(shouldScroll) requestAnimationFrame(()=>output.scrollIntoView({behavior:'smooth',block:'start'}));
   }
 
-  document.getElementById('generateText').addEventListener('click',generateText);
-  document.getElementById('regenerateText').addEventListener('click',generateText);
+  document.getElementById('generateText').addEventListener('click',()=>generateText(true));
+  document.getElementById('regenerateText').addEventListener('click',()=>generateText(true));
 
   document.querySelectorAll('.emoji').forEach(btn=>btn.addEventListener('click',()=>{
     const d=document.getElementById('detail');
@@ -454,6 +455,7 @@ h1{margin:3px 0 0;font-size:28px;line-height:1.1}
       img.alt='Imagine generată de Love AI';
       box.innerHTML='';
       box.appendChild(img);
+      requestAnimationFrame(()=>box.scrollIntoView({behavior:'smooth',block:'start'}));
       download.disabled=false;
       status.textContent='Imagine gata ❤️ Poți apăsa Descarcă imaginea PNG.';
       show('Imagine generată ✨');
@@ -505,7 +507,7 @@ h1{margin:3px 0 0;font-size:28px;line-height:1.1}
     }catch(e){}
   });
 
-  generateText();
+  generateText(false);
 })();
 </script>
 </body>

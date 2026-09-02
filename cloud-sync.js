@@ -12,6 +12,14 @@ const CLOUD_KEYS = [
   "relationshipStartDate",
   "coupleQuote",
 
+  "firstNickname",
+  "secondNickname",
+  "firstEmoji",
+  "secondEmoji",
+  "duoRelationshipLabel",
+  "duoSeasonalTheme",
+  "duoWidgetStyle",
+
   "selectedTheme",
   "appFont",
   "appFontSize",
@@ -704,6 +712,24 @@ function applyCloudData(
 
     }
 
+  }
+
+
+  try {
+
+    window.dispatchEvent(
+      new CustomEvent(
+        "duolove:cloud-applied",
+        {
+          detail: {
+            keys:
+              CLOUD_KEYS.slice()
+          }
+        }
+      )
+    );
+
+  } catch (error) {
   }
 
 }
@@ -2217,6 +2243,27 @@ function saveSetting(
       key
     );
 
+  }
+
+
+  try {
+
+    window.dispatchEvent(
+      new CustomEvent(
+        "duolove:setting-changed",
+        {
+          detail: {
+            key:
+              key,
+
+            value:
+              value
+          }
+        }
+      )
+    );
+
+  } catch (error) {
   }
 
 

@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ro">
+<html lang="ro" class="duo-scroll-root">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#09070d">
-<link rel="stylesheet" href="./style.css?v=54">
+<link rel="stylesheet" href="./style.css?v=56">
 <title>Evenimente ❤️</title>
 <style>
 
@@ -207,7 +207,7 @@ body.bg-custom{
 </style>
 
 </head>
-<body>
+<body class="duo-scroll-page">
 <main class="page">
   <header class="top">
     <div class="top-left">
@@ -277,7 +277,7 @@ body.bg-custom{
   <a href="./setari.html"><span class="ico">⚙️</span><span>Setări</span></a>
 </nav>
 
-<script src="./tema.js?v=54"></script>
+<script src="./tema.js?v=58"></script>
 <script>
 window.addEventListener("pageshow", function(){
   if (typeof window.applyGlobalBackground === "function") window.applyGlobalBackground();
@@ -367,6 +367,7 @@ window.addEventListener("storage", function(event){
     events.forEach(e=>{
       const card=document.createElement("article");
       card.className="event";
+      card.dataset.eventId=e.id;
       card.innerHTML=`
         <div class="event-icon">${esc(e.icon||"❤️")}</div>
         <div class="event-copy">
@@ -432,8 +433,9 @@ window.addEventListener("storage", function(event){
     }
 
     const arr=getEvents();
+    const newId="event_"+Date.now()+"_"+Math.random().toString(36).slice(2);
     arr.unshift({
-      id:"event_"+Date.now()+"_"+Math.random().toString(36).slice(2),
+      id:newId,
       title:ttl,
       date:date.value,
       icon:icon.value||"❤️",
@@ -455,6 +457,9 @@ window.addEventListener("storage", function(event){
     document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
     show("Eveniment salvat ❤️");
     render();
+    const created=[...document.querySelectorAll(".event[data-event-id]")]
+      .find(el=>el.dataset.eventId===newId);
+    if(created) requestAnimationFrame(()=>created.scrollIntoView({behavior:"smooth",block:"start"}));
   });
 
   render();

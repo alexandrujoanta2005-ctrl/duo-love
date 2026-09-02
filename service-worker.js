@@ -1,4 +1,4 @@
-const CACHE_VERSION = "duo-love-v55";
+const CACHE_VERSION = "duo-love-v59";
 
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PAGE_CACHE = `${CACHE_VERSION}-pages`;
@@ -350,8 +350,19 @@ async function staleWhileRevalidate(
 
 
   const cached =
-    await cache.match(
-      request
+    (
+      await cache.match(
+        request
+      )
+    ) ||
+    (
+      await cache.match(
+        request,
+        {
+          ignoreSearch:
+            true
+        }
+      )
     );
 
 

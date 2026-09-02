@@ -34,6 +34,53 @@
 
 
   /* =========================================================
+     FUNDALURI CANONICE
+     Aceleași valori sunt aplicate inline pe fiecare pagină,
+     ca CSS-ul local să nu schimbe aspectul temei.
+  ========================================================= */
+
+  const THEME_BACKGROUNDS = {
+
+    dark:
+      "radial-gradient(circle at 20% 0%, rgba(120,61,38,.34), transparent 36%), linear-gradient(180deg, #24110d, #140a0e 50%, #07070d)",
+
+    aurora:
+      "radial-gradient(circle at 15% 20%, rgba(35,100,170,.5), transparent 35%), radial-gradient(circle at 80% 70%, rgba(170,55,100,.4), transparent 40%), #080810",
+
+    mesh:
+      "radial-gradient(circle at 20% 20%, #20375a, transparent 30%), radial-gradient(circle at 80% 40%, #4d1e42, transparent 35%), radial-gradient(circle at 40% 85%, #301c4b, transparent 40%), #0b0b14",
+
+    starlight:
+      "radial-gradient(circle at 15% 15%, rgba(255,255,255,.9) 0 1px, transparent 2px), radial-gradient(circle at 70% 30%, rgba(255,255,255,.7) 0 1px, transparent 2px), radial-gradient(circle at 35% 70%, rgba(255,255,255,.65) 0 1px, transparent 2px), linear-gradient(#0b0d20, #191026)",
+
+    silk:
+      "linear-gradient(145deg, #130d19, #442139, #1d1930, #130d19)",
+
+    plain:
+      "#18151d",
+
+    nature:
+      "radial-gradient(circle at top left, rgba(57,112,71,.55), transparent 40%), radial-gradient(circle at bottom right, rgba(90,53,62,.35), transparent 42%), #0e1713",
+
+    stars:
+      "radial-gradient(circle at 20% 20%, rgba(255,255,255,.9) 0 1px, transparent 2px), radial-gradient(circle at 65% 45%, rgba(255,255,255,.8) 0 1px, transparent 2px), radial-gradient(circle at 80% 80%, rgba(255,255,255,.55) 0 1px, transparent 2px), linear-gradient(#060711, #16132a)",
+
+    moon:
+      "radial-gradient(circle at 80% 15%, rgba(220,224,255,.35), transparent 13%), linear-gradient(#07101d, #121323, #170e1c)",
+
+    clouds:
+      "radial-gradient(ellipse at 20% 25%, rgba(255,255,255,.15), transparent 30%), radial-gradient(ellipse at 75% 50%, rgba(255,255,255,.10), transparent 35%), linear-gradient(#142032, #1b1a2d, #170f19)",
+
+    cozy:
+      "radial-gradient(circle at 70% 70%, rgba(255,150,90,.30), transparent 35%), linear-gradient(#160e12, #281519, #130e17)",
+
+    pastel:
+      "radial-gradient(circle at 15% 20%, rgba(199,153,222,.35), transparent 35%), radial-gradient(circle at 80% 65%, rgba(244,150,180,.30), transparent 40%), linear-gradient(#201728, #29172a)"
+
+  };
+
+
+  /* =========================================================
      PAGINI MENIU
   ========================================================= */
 
@@ -187,6 +234,14 @@
 
 
     document.body.style.removeProperty(
+      "background"
+    );
+
+    document.body.style.removeProperty(
+      "background-color"
+    );
+
+    document.body.style.removeProperty(
       "background-image"
     );
 
@@ -244,6 +299,13 @@
 
       document.body.classList.add(
         "bg-custom"
+      );
+
+
+      document.body.style.setProperty(
+        "background-color",
+        "#07070d",
+        "important"
       );
 
 
@@ -332,6 +394,46 @@
 
     document.body.classList.add(
       "bg-" + selectedTheme
+    );
+
+
+    const canonicalBackground =
+      THEME_BACKGROUNDS[selectedTheme] ||
+      THEME_BACKGROUNDS.dark;
+
+
+    document.body.style.setProperty(
+      "background",
+      canonicalBackground,
+      "important"
+    );
+
+
+    document.body.style.setProperty(
+      "background-size",
+      "cover",
+      "important"
+    );
+
+
+    document.body.style.setProperty(
+      "background-position",
+      "center center",
+      "important"
+    );
+
+
+    document.body.style.setProperty(
+      "background-repeat",
+      "no-repeat",
+      "important"
+    );
+
+
+    document.body.style.setProperty(
+      "background-attachment",
+      "fixed",
+      "important"
     );
 
   }
@@ -620,6 +722,14 @@
 
 
     if (!nav) {
+      return;
+    }
+
+
+    if (
+      nav.dataset.preserveLinks ===
+      "true"
+    ) {
       return;
     }
 
@@ -1091,6 +1201,64 @@
       updateActiveNavigation();
 
       fixNavigationTap();
+
+    }
+  );
+
+
+  /* =========================================================
+     SINCRONIZARE TEMĂ ÎNTRE PAGINI / TAB-URI
+  ========================================================= */
+
+  window.addEventListener(
+    "storage",
+    function (event) {
+
+      if (
+        event.key === "selectedTheme" ||
+        event.key === "customBackground" ||
+        event.key === "appFont" ||
+        event.key === "appFontSize" ||
+        event.key === "appAccent" ||
+        event.key === null
+      ) {
+
+        applyGlobalBackground();
+        applyGlobalFont();
+        applyGlobalAccent();
+
+      }
+
+    }
+  );
+
+
+  window.addEventListener(
+    "duo-theme-change",
+    function () {
+
+      applyGlobalBackground();
+      applyGlobalFont();
+      applyGlobalAccent();
+
+    }
+  );
+
+
+  document.addEventListener(
+    "visibilitychange",
+    function () {
+
+      if (
+        document.visibilityState ===
+        "visible"
+      ) {
+
+        applyGlobalBackground();
+        applyGlobalFont();
+        applyGlobalAccent();
+
+      }
 
     }
   );
