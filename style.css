@@ -10561,3 +10561,88 @@ body > .bottom-nav .nav-icon {
     font-size: 20px !important;
   }
 }
+
+/* =========================================================
+   DUO LOVE v56 - FUNDAL IDENTIC PE TOATE PAGINILE
+   Aceleași definiții sunt folosite indiferent de pagină.
+========================================================= */
+body.bg-aurora {
+  background:
+    radial-gradient(circle at 15% 25%, rgba(33,100,160,.45), transparent 35%),
+    radial-gradient(circle at 80% 70%, rgba(170,55,100,.38), transparent 40%),
+    linear-gradient(160deg,#080810,#111429 55%,#190d18) !important;
+}
+body.bg-mesh {
+  background:
+    radial-gradient(circle at 20% 20%, #20375a, transparent 30%),
+    radial-gradient(circle at 80% 40%, #4d1e42, transparent 35%),
+    radial-gradient(circle at 40% 85%, #301c4b, transparent 40%),
+    #0b0b14 !important;
+}
+body.bg-starlight {
+  background:
+    radial-gradient(circle at 15% 15%, rgba(255,255,255,.8) 0 1px, transparent 2px),
+    radial-gradient(circle at 70% 30%, rgba(255,255,255,.6) 0 1px, transparent 2px),
+    radial-gradient(circle at 35% 70%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+    linear-gradient(#0b0d20,#191026) !important;
+}
+body.bg-silk { background:linear-gradient(145deg,#130d19,#442139,#1d1930,#130d19) !important; }
+body.bg-plain { background:#16131d !important; }
+body.bg-nature {
+  background:
+    radial-gradient(circle at top left, rgba(57,112,71,.5), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(90,53,62,.4), transparent 40%),
+    #0e1713 !important;
+}
+body.bg-stars {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 65% 45%, rgba(255,255,255,.8) 0 1px, transparent 2px),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,.5) 0 1px, transparent 2px),
+    linear-gradient(#060711,#16132a) !important;
+}
+body.bg-moon {
+  background:
+    radial-gradient(circle at 80% 15%, rgba(220,224,255,.3), transparent 13%),
+    linear-gradient(#07101d,#121323,#170e1c) !important;
+}
+body.bg-clouds {
+  background:
+    radial-gradient(ellipse at 20% 25%, rgba(255,255,255,.15), transparent 30%),
+    radial-gradient(ellipse at 75% 50%, rgba(255,255,255,.1), transparent 35%),
+    linear-gradient(#142032,#1b1a2d,#170f19) !important;
+}
+body.bg-cozy {
+  background:
+    radial-gradient(circle at 70% 70%, rgba(255,150,90,.25), transparent 32%),
+    linear-gradient(#160e12,#281519,#130e17) !important;
+}
+body.bg-pastel {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(199,153,222,.35), transparent 35%),
+    radial-gradient(circle at 80% 65%, rgba(244,150,180,.3), transparent 40%),
+    linear-gradient(#201728,#29172a) !important;
+}
+body.bg-dark { background:linear-gradient(#050508,#0d0c12) !important; }
+
+/* Pagini cu conținut care crește: nu le mai blocăm la exact 100dvh. */
+html.duo-scroll-root,
+body.duo-scroll-page {
+  height:auto !important;
+  min-height:100% !important;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+}
+body.duo-scroll-page {
+  min-height:100vh !important;
+  min-height:100dvh !important;
+  overscroll-behavior-y:auto !important;
+  touch-action:pan-y manipulation !important;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:calc(112px + env(safe-area-inset-bottom)) !important;
+}
+body.duo-scroll-page > main.page {
+  min-height:calc(100dvh - 112px) !important;
+  padding-bottom:30px !important;
+  background:transparent !important;
+}

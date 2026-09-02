@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ro">
+<html lang="ro" class="duo-scroll-root">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#09070d">
-<link rel="stylesheet" href="./style.css?v=54">
+<link rel="stylesheet" href="./style.css?v=56">
 <title>Evenimente ❤️</title>
 <style>
 
@@ -111,6 +111,21 @@ h1{margin:3px 0 0;font-size:28px;line-height:1.1}
 .countdown{display:inline-block;margin-top:6px;padding:5px 8px;border-radius:999px;background:rgba(226,77,142,.15);color:#ffc0dd;font-size:9px;font-weight:900}
 .del{width:40px;height:40px;border:1px solid rgba(225,87,101,.18);border-radius:13px;background:rgba(225,87,101,.13);color:#ffb9c0;cursor:pointer}
 @media(max-width:470px){.event{grid-template-columns:48px minmax(0,1fr)}.event-icon{width:48px;height:48px}.del{grid-column:2;width:100%}}
+
+/* v55: formular compact + texte lungi sigure pe mobil */
+.page{padding:0 0 calc(92px + env(safe-area-inset-bottom))}
+.event-copy h3,.event-copy p{overflow-wrap:anywhere;word-break:break-word}
+.event-note-preview{
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;
+  max-height:5.8em;
+}
+.field textarea{max-height:220px}
+@media(max-width:500px){
+  h1{font-size:23px}.card{padding:12px;border-radius:20px}.card h2{font-size:16px}
+  .field input,.field textarea,.field select{font-size:16px;min-height:44px}
+  .field textarea{min-height:86px}
+  .page{padding-left:10px;padding-right:10px}
+}
 </style>
 
 <style id="duo-theme-sync-v49">
@@ -192,7 +207,7 @@ body.bg-custom{
 </style>
 
 </head>
-<body>
+<body class="duo-scroll-page">
 <main class="page">
   <header class="top">
     <div class="top-left">
@@ -214,7 +229,7 @@ body.bg-custom{
       <button class="chip" data-title="" data-icon="❤️">❤️ Altceva</button>
     </div>
 
-    <div class="field"><label>NUME EVENIMENT</label><input id="title" placeholder="Ex: Cina noastră ❤️"></div>
+    <div class="field"><label>NUME EVENIMENT</label><input id="title" maxlength="120" placeholder="Ex: Cina noastră ❤️"></div>
 
     <div class="quick-title">DATA RAPIDĂ</div>
     <div class="chips" id="dateChips">
@@ -238,7 +253,7 @@ body.bg-custom{
       </div>
     </div>
 
-    <div class="field"><label>DETALII — OPȚIONAL</label><textarea id="note" placeholder="Loc, oră, ce vreți să faceți..."></textarea></div>
+    <div class="field"><label>DETALII — OPȚIONAL</label><textarea id="note" maxlength="4000" placeholder="Loc, oră, ce vreți să faceți..."></textarea></div>
 
     <label style="display:flex;align-items:center;gap:9px;margin-top:10px;color:rgba(255,235,246,.72);font-size:11px">
       <input id="repeat" type="checkbox" style="width:18px;height:18px">
@@ -262,7 +277,7 @@ body.bg-custom{
   <a href="./setari.html"><span class="ico">⚙️</span><span>Setări</span></a>
 </nav>
 
-<script src="./tema.js?v=54"></script>
+<script src="./tema.js?v=58"></script>
 <script>
 window.addEventListener("pageshow", function(){
   if (typeof window.applyGlobalBackground === "function") window.applyGlobalBackground();
@@ -294,7 +309,16 @@ window.addEventListener("storage", function(event){
 
   function esc(s){const d=document.createElement("div");d.textContent=String(s??"");return d.innerHTML}
   function getEvents(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")||[]}catch(e){return[]}}
-  function saveEvents(v){localStorage.setItem(KEY,JSON.stringify(v))}
+  function saveEvents(v){
+    try{
+      localStorage.setItem(KEY,JSON.stringify(v));
+      return true;
+    }catch(e){
+      console.error("Nu s-au putut salva evenimentele:",e);
+      show("Spațiul de stocare este plin. Șterge câteva date vechi și încearcă din nou.");
+      return false;
+    }
+  }
   function show(msg){toast.textContent=msg;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),2200)}
 
   function getNext(e){
@@ -343,12 +367,13 @@ window.addEventListener("storage", function(event){
     events.forEach(e=>{
       const card=document.createElement("article");
       card.className="event";
+      card.dataset.eventId=e.id;
       card.innerHTML=`
         <div class="event-icon">${esc(e.icon||"❤️")}</div>
         <div class="event-copy">
           <h3>${esc(e.title||"Eveniment ❤️")}</h3>
           <p>📅 ${e._next.toLocaleDateString("ro-RO",{day:"numeric",month:"long",year:"numeric"})}${e.repeatYearly?" · 🔁 anual":""}</p>
-          ${e.note?`<p>${esc(e.note)}</p>`:""}
+          ${e.note?`<p class="event-note-preview">${esc(e.note)}</p>`:""}
           <span class="countdown">${remaining(e._next)}</span>
         </div>
         <button class="del" type="button">🗑️</button>
@@ -408,8 +433,9 @@ window.addEventListener("storage", function(event){
     }
 
     const arr=getEvents();
+    const newId="event_"+Date.now()+"_"+Math.random().toString(36).slice(2);
     arr.unshift({
-      id:"event_"+Date.now()+"_"+Math.random().toString(36).slice(2),
+      id:newId,
       title:ttl,
       date:date.value,
       icon:icon.value||"❤️",
@@ -418,7 +444,9 @@ window.addEventListener("storage", function(event){
       createdAt:Date.now()
     });
 
-    saveEvents(arr);
+    if(!saveEvents(arr)){
+      return;
+    }
 
     title.value="";
     note.value="";
@@ -429,6 +457,9 @@ window.addEventListener("storage", function(event){
     document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
     show("Eveniment salvat ❤️");
     render();
+    const created=[...document.querySelectorAll(".event[data-event-id]")]
+      .find(el=>el.dataset.eventId===newId);
+    if(created) requestAnimationFrame(()=>created.scrollIntoView({behavior:"smooth",block:"start"}));
   });
 
   render();
