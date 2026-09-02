@@ -191,17 +191,6 @@ body{background:radial-gradient(circle at 20% 0%,rgba(255,255,255,.98),transpare
 .capsule-actions{display:flex;gap:8px;margin-top:10px}
 .capsule-actions button{flex:1}
 .locked-copy{margin-top:10px;color:#9a7890;font-size:11px;line-height:1.5}
-
-/* v58: fundalul global rămâne vizibil și în Capsulă */
-body[class*="bg-"]{color:#fff}
-body[class*="bg-"] h1{color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.28)}
-body[class*="bg-"] .kicker{color:#f3a4cd}
-body[class*="bg-"] .back{background:rgba(16,11,22,.78);color:#fff;border:1px solid rgba(255,255,255,.12)}
-body[class*="bg-"] .card,
-body[class*="bg-"] .capsule{background:rgba(255,255,255,.90)}
-body.bg-custom .card,
-body.bg-custom .capsule{background:rgba(255,255,255,.88)}
-
 </style>
 </head>
 <body>
@@ -234,7 +223,7 @@ body.bg-custom .capsule{background:rgba(255,255,255,.88)}
 </main>
 <div id="toast" class="toast">Capsulă sigilată ❤️</div>
 
-<nav class="bottom-nav" data-preserve-links="true">
+<nav class="bottom-nav">
   <a href="./index.html"><span class="ico">🏠</span><span>Acasă</span></a>
   <a href="./chat.html"><span class="ico">💬</span><span>Chat</span></a>
   <a class="love-ai-nav" href="./love-studio.html"><span class="ico">✨</span><span>Love AI</span></a>
@@ -244,7 +233,6 @@ body.bg-custom .capsule{background:rgba(255,255,255,.88)}
 </nav>
 
 
-<script src="./tema.js?v=58"></script>
 <script src="./duo-media.js"></script>
 <script>
 (function(){

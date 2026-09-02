@@ -21,22 +21,18 @@
   <title>Chat ❤️</title>
 
   <link rel="manifest" href="./manifest.json">
-  <link rel="stylesheet" href="./style.css?v=58">
+  <link rel="stylesheet" href="./style.css?v=54">
 
   <style>
 
     body.chat-page-body {
-      height: var(--duo-chat-height, 100dvh) !important;
-      min-height: var(--duo-chat-height, 100dvh) !important;
+      height: 100dvh !important;
       overflow: hidden !important;
-      overscroll-behavior: none !important;
     }
 
 
     .chat-app {
-      height: var(--duo-chat-height, 100dvh) !important;
-      min-height: 0 !important;
-      box-sizing: border-box !important;
+      height: 100dvh !important;
 
       display: flex !important;
       flex-direction: column !important;
@@ -280,7 +276,6 @@
 
       white-space: pre-wrap;
       word-break: break-word;
-      overflow-wrap: anywhere;
     }
 
 
@@ -383,7 +378,6 @@
         15px;
 
       resize: none;
-      overflow-y: hidden;
 
       border:
         1px solid
@@ -483,7 +477,7 @@
 
 <body
   class="chat-page-body"
-  data-build="v58"
+  data-build="v39"
 >
 
   <main class="app chat-app">
@@ -575,7 +569,7 @@
         <textarea
           id="chatInput"
           rows="1"
-          maxlength="5000"
+          maxlength="2000"
           placeholder="Scrie-i un mesaj..."
           disabled
         ></textarea>
@@ -647,12 +641,12 @@
   <script src="./supabase.js?v=31"></script>
   <script src="./security.js?v=32"></script>
   <script src="./cloud-sync.js?v=41"></script>
-  <script src="./tema.js?v=58"></script>
+  <script src="./tema.js?v=54"></script>
 
   <script>
 
     console.log(
-      "❤️ DUO LOVE BUILD v58 - REAL COUPLE CHAT + FUNDAL SINCRONIZAT"
+      "❤️ DUO LOVE BUILD v39 - REAL COUPLE CHAT"
     );
 
 
@@ -727,79 +721,6 @@
     let sending =
       false;
 
-
-
-    function syncChatViewportHeight() {
-
-      const viewportHeight =
-        window.visualViewport &&
-        window.visualViewport.height
-          ? Math.round(window.visualViewport.height)
-          : window.innerHeight;
-
-      if (viewportHeight > 0) {
-        document.documentElement.style.setProperty(
-          "--duo-chat-height",
-          viewportHeight + "px"
-        );
-      }
-
-    }
-
-
-    function resizeChatInput() {
-
-      input.style.height = "auto";
-
-      const nextHeight =
-        Math.max(
-          54,
-          Math.min(
-            110,
-            input.scrollHeight
-          )
-        );
-
-      input.style.height =
-        nextHeight + "px";
-
-      input.style.overflowY =
-        input.scrollHeight > 110
-          ? "auto"
-          : "hidden";
-
-    }
-
-
-    syncChatViewportHeight();
-
-    window.addEventListener(
-      "resize",
-      syncChatViewportHeight,
-      { passive: true }
-    );
-
-    window.addEventListener(
-      "orientationchange",
-      function () {
-        setTimeout(syncChatViewportHeight, 120);
-      },
-      { passive: true }
-    );
-
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener(
-        "resize",
-        syncChatViewportHeight,
-        { passive: true }
-      );
-
-      window.visualViewport.addEventListener(
-        "scroll",
-        syncChatViewportHeight,
-        { passive: true }
-      );
-    }
 
 
     function normalizePersonName(
@@ -1473,7 +1394,9 @@
         !currentUser ||
         !currentCoupleId
       ) {
+
         return;
+
       }
 
 
@@ -1485,83 +1408,90 @@
           .trim();
 
 
-      if (!text) {
+      if (
+        !text
+      ) {
+
         return;
+
       }
 
 
-      if (text.length > 5000) {
-        chatError.textContent =
-          "Mesajul este prea lung. Maxim 5000 de caractere.";
-        return;
-      }
+      sending =
+        true;
 
 
-      sending = true;
-      sendButton.disabled = true;
-      chatError.textContent = "";
+      sendButton.disabled =
+        true;
 
 
-      try {
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient
-            .from(
-              "couple_chat_messages"
-            )
-            .insert(
-              {
-                couple_id:
-                  currentCoupleId,
-
-                sender_id:
-                  currentUser.id,
-
-                body:
-                  text
-              }
-            )
-            .select(
-              "id,couple_id,sender_id,body,created_at"
-            )
-            .single();
+      chatError.textContent =
+        "";
 
 
-        if (error) {
-          throw error;
-        }
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from(
+            "couple_chat_messages"
+          )
+          .insert(
+            {
+              couple_id:
+                currentCoupleId,
+
+              sender_id:
+                currentUser.id,
+
+              body:
+                text
+            }
+          )
+          .select(
+            "id,couple_id,sender_id,body,created_at"
+          )
+          .single();
 
 
-        input.value = "";
-        resizeChatInput();
+      sending =
+        false;
 
-        mergeMessages([
-          data
-        ]);
 
-        renderMessages();
+      sendButton.disabled =
+        false;
 
-      } catch (error) {
+
+      if (
+        error
+      ) {
 
         console.error(
           "Eroare trimitere chat:",
           error
         );
 
+
         chatError.textContent =
-          navigator.onLine
-            ? "Mesajul nu a putut fi trimis. Încearcă din nou."
-            : "Nu ai conexiune la internet. Mesajul a rămas în casetă.";
+          "Mesajul nu a putut fi trimis.";
 
-      } finally {
 
-        sending = false;
-        sendButton.disabled = false;
+        return;
 
       }
+
+
+      input.value =
+        "";
+
+
+      mergeMessages([
+        data
+      ]);
+
+
+      renderMessages();
 
     }
 
@@ -1572,26 +1502,6 @@
 
         sendMessage();
 
-      }
-    );
-
-
-    input.addEventListener(
-      "input",
-      resizeChatInput
-    );
-
-
-    input.addEventListener(
-      "focus",
-      function () {
-        setTimeout(
-          function () {
-            syncChatViewportHeight();
-            scrollBottom();
-          },
-          80
-        );
       }
     );
 
@@ -1761,27 +1671,7 @@
     }
 
 
-    startChat()
-      .catch(
-        function (error) {
-
-          console.error(
-            "Eroare pornire chat:",
-            error
-          );
-
-          setChatReady(
-            false,
-            "Reconectare..."
-          );
-
-          chatError.textContent =
-            navigator.onLine
-              ? "Chatul nu s-a putut conecta. Redeschide pagina sau încearcă din nou."
-              : "Nu ai conexiune la internet. Chatul se va reconecta când revii online.";
-
-        }
-      );
+    startChat();
 
   </script>
 
@@ -1795,7 +1685,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
       if(draft && input){
         input.value=draft;
-        input.dispatchEvent(new Event("input", { bubbles:true }));
         localStorage.removeItem("duoDraftChatMessage");
         input.focus();
       }

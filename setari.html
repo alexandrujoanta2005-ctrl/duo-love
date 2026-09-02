@@ -34,8 +34,8 @@
   href="./manifest.json"
 >
 
-<link rel="stylesheet" href="./style.css?v=58">
-<link rel="stylesheet" href="./setari.css?v=58">
+<link rel="stylesheet" href="./style.css?v=54">
+<link rel="stylesheet" href="./setari.css?v=27">
 
 <style>
 
@@ -2417,85 +2417,10 @@
   }
 </style>
 
-
-<style id="duo-v57-settings-fix">
-  html {
-    min-height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
-  body.settings-page {
-    height: auto !important;
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-    overscroll-behavior-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    touch-action: pan-y manipulation !important;
-    background-attachment: fixed !important;
-  }
-
-  body.settings-page .app {
-    min-height: 100dvh !important;
-    box-sizing: border-box !important;
-    padding-bottom: calc(126px + env(safe-area-inset-bottom)) !important;
-    background: transparent !important;
-  }
-
-  body.settings-page .settings-header,
-  body.settings-page .settings-card {
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  body.settings-page .settings-input,
-  body.settings-page .settings-textarea,
-  body.settings-page .settings-select,
-  body.settings-page button {
-    max-width: 100%;
-  }
-
-  body.settings-page .settings-textarea {
-    max-height: 45dvh;
-    overflow-y: auto;
-  }
-
-  body.settings-page button,
-  body.settings-page label,
-  body.settings-page input,
-  body.settings-page select,
-  body.settings-page textarea {
-    touch-action: manipulation;
-  }
-
-  body.settings-page #savedMessage {
-    min-height: 22px;
-    overflow-wrap: anywhere;
-  }
-
-  @media (max-width: 390px) {
-    body.settings-page .settings-header,
-    body.settings-page .settings-card {
-      padding: 16px !important;
-      border-radius: 22px !important;
-    }
-
-    body.settings-page .settings-header h1 {
-      font-size: 30px !important;
-    }
-
-    body.settings-page .settings-card h2 {
-      font-size: 24px !important;
-    }
-  }
-</style>
-
 </head>
 
 
-<body class="settings-page" data-build="v58">
+<body class="settings-page" data-build="v41">
 
 
   <main class="app">
@@ -3528,12 +3453,12 @@
 
   <script src="./cloud-sync.js?v=41"></script>
 
-  <script src="./tema.js?v=58"></script>
+  <script src="./tema.js?v=54"></script>
 
 
   <script>
 
-    console.log("❤️ DUO LOVE BUILD v58 - SETARI STABILE + FUNDAL SINCRONIZAT");
+    console.log("❤️ DUO LOVE BUILD v41 - SETARI + 20 RAME 3D/ANIMATE");
 
     /* =====================================================
        ELEMENTE
@@ -7257,18 +7182,9 @@
             "function"
           ) {
 
-            let saved = false;
-
-            try {
-              saved =
-                await window
-                  .forceCloudSave();
-            } catch (error) {
-              console.error(
-                "Eroare salvare cloud din Setări:",
-                error
-              );
-            }
+            const saved =
+              await window
+                .forceCloudSave();
 
 
             showSaved(
@@ -7288,18 +7204,9 @@
             "function"
           ) {
 
-            let saved = false;
-
-            try {
-              saved =
-                await window
-                  .saveAppDataToCloud();
-            } catch (error) {
-              console.error(
-                "Eroare sincronizare Setări:",
-                error
-              );
-            }
+            const saved =
+              await window
+                .saveAppDataToCloud();
 
 
             showSaved(
@@ -7567,74 +7474,42 @@
 
     async function startSettings() {
 
-      let connected = false;
-
-      try {
-        connected =
-          await loadAccount();
-      } catch (error) {
-        console.error(
-          "Eroare verificare cont:",
-          error
-        );
-      }
+      const connected =
+        await loadAccount();
 
 
-      if (!connected) {
+      if (
+        !connected
+      ) {
 
         loadSettings();
+
         showNoPartnerConnection();
-
-        if (
-          typeof window.applyGlobalBackground ===
-          "function"
-        ) {
-          window.applyGlobalBackground();
-        }
-
-        if (
-          typeof window.applyGlobalFont ===
-          "function"
-        ) {
-          window.applyGlobalFont();
-        }
-
-        if (
-          typeof window.applyGlobalAccent ===
-          "function"
-        ) {
-          window.applyGlobalAccent();
-        }
 
         return;
 
       }
 
 
-      try {
-        await registerNotificationServiceWorker();
-      } catch (error) {
-        console.warn(
-          "Service Worker notificări indisponibil:",
-          error
-        );
-      }
+      /*
+        Înregistrăm Service Worker-ul pentru notificări.
+      */
 
+      await registerNotificationServiceWorker();
+
+
+      /*
+        Descărcăm fie datele personale,
+        fie datele comune ale cuplului.
+      */
 
       if (
         typeof window.loadAppDataFromCloud ===
         "function"
       ) {
 
-        try {
-          await window
-            .loadAppDataFromCloud();
-        } catch (error) {
-          console.warn(
-            "Cloud indisponibil, folosim setările locale:",
-            error
-          );
-        }
+        await window
+          .loadAppDataFromCloud();
 
       }
 
@@ -7642,31 +7517,28 @@
       loadSettings();
 
 
-      try {
-        await updateNotificationStatus();
-      } catch (error) {
-        console.warn(
-          "Starea notificărilor nu a putut fi verificată:",
-          error
-        );
-      }
+      /*
+        Reîmprospătăm starea după ce avem
+        data relației din cloud.
+      */
+
+      await updateNotificationStatus();
 
 
-      try {
-        await loadSecuritySettings();
-      } catch (error) {
-        console.warn(
-          "Setările de securitate nu au putut fi încărcate:",
-          error
-        );
-      }
+      /*
+        Verificăm codul personal de acces.
+      */
+
+      await loadSecuritySettings();
 
 
       if (
         typeof window.applyGlobalBackground ===
         "function"
       ) {
+
         window.applyGlobalBackground();
+
       }
 
 
@@ -7674,30 +7546,20 @@
         typeof window.applyGlobalFont ===
         "function"
       ) {
+
         window.applyGlobalFont();
+
       }
 
 
-      if (
-        typeof window.applyGlobalAccent ===
-        "function"
-      ) {
-        window.applyGlobalAccent();
-      }
+      /*
+        Verificăm dacă există partener.
+      */
 
-
-      try {
-        await loadPartnerConnection();
-      } catch (error) {
-        console.warn(
-          "Conexiunea cu partenerul nu a putut fi verificată:",
-          error
-        );
-
-        showNoPartnerConnection();
-      }
+      await loadPartnerConnection();
 
     }
+
 
 
     /* =====================================================
@@ -7742,23 +7604,7 @@
        START
     ====================================================== */
 
-    startSettings()
-      .catch(
-        function (error) {
-          console.error(
-            "Eroare pornire Setări:",
-            error
-          );
-
-          try {
-            loadSettings();
-          } catch (fallbackError) {}
-
-          showSaved(
-            "Setările locale sunt disponibile. Unele funcții online nu s-au conectat."
-          );
-        }
-      );
+    startSettings();
 
   </script>
 
