@@ -1,0 +1,9 @@
+DUO LOVE FULL v65
+
+NOU:
+- Love AI are buton permanent „← DUO LOVE” în bara de sus.
+- Butonul revine la ../index.html (aplicația DUO LOVE principală).
+- Muzica reparată rămâne inclusă.
+- Harta + GPS și restul funcțiilor din v64 sunt păstrate.
+- Cache DUO LOVE: v65.
+- Cache Love AI: v3.
