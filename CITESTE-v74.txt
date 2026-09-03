@@ -1,0 +1,19 @@
+DUO LOVE v74 — LOVE AI CLOUD + MUZICĂ AUTOPLAY
+
+1. Urcă toate fișierele din acest ZIP peste proiectul DUO LOVE din GitHub.
+2. În Supabase LOVE AI (qcoprkunssrogmygntzz) rulează o singură dată:
+   LOVE-AI-CLOUD-SYNC-v74.sql
+3. Google Provider rămâne configurat doar în proiectul LOVE AI.
+
+LOVE AI sincronizează pe cont:
+- profilul
+- mesajele/scrisorile/notițele
+- istoricul și conversația Love AI
+- favoritele și zona secretă (PIN-ul rămâne doar hash, nu PIN în clar)
+- limba și setările
+- ultima melodie + preferința de autoplay
+- pozele, într-un bucket privat Supabase Storage
+
+Muzica încearcă să reia automat ultima melodie. Safari/Chrome pot bloca sunetul automat până la prima atingere; aplicația reîncearcă imediat la prima atingere.
+
+Autentificarea DUO LOVE nu este modificată.
