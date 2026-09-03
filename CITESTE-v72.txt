@@ -1,0 +1,12 @@
+DUO LOVE v72 — Bara de jos stabilă între pagini
+
+Fix:
+- aceeași bară de navigare pe Acasă, Chat, Harta, Love AI, Amintiri și Evenimente
+- Harta primește automat aceeași bară dacă lipsește din HTML
+- poziția este bottom: 0 identică pe toate paginile
+- butoanele nu se mai ridică/coboară la active, tap, focus sau hover
+- vechile linkuri <a> din Amintiri/Evenimente sunt normalizate înainte de conversie
+- cache bust style.css?v=72 și tema.js?v=72
+- service worker cache duo-love-v72
+- Setări rămâne separat sus în dreapta
+- autentificarea DUO LOVE și Google Login Love AI nu au fost schimbate

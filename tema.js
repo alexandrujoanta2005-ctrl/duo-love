@@ -1161,14 +1161,34 @@
 
   function moveNavigationToBody() {
 
-    const nav =
+    let nav =
       document.querySelector(
         ".bottom-nav"
       );
 
 
+    /* v72: aceeași bară există pe TOATE paginile principale.
+       Harta nu avea nav în HTML, iar asta putea produce poziții diferite
+       între pagini / versiuni cache-uite. */
     if (!nav) {
-      return null;
+
+      nav =
+        document.createElement(
+          "nav"
+        );
+
+      nav.className =
+        "bottom-nav";
+
+      nav.setAttribute(
+        "aria-label",
+        "Navigare principală"
+      );
+
+      document.body.appendChild(
+        nav
+      );
+
     }
 
 
@@ -1855,14 +1875,14 @@
 
 
   /* =========================================================
-     v71 — BLOCHEAZĂ BARA JOS + TASTATURĂ
+     v72 — BARA JOS IDENTICĂ PE TOATE PAGINILE
   ========================================================= */
 
-  function lockBottomNavigationV71() {
+  function lockBottomNavigationV72() {
 
     let style =
       document.getElementById(
-        "duo-v71-nav-lock"
+        "duo-v72-nav-lock"
       );
 
     if (!style) {
@@ -1873,10 +1893,10 @@
         );
 
       style.id =
-        "duo-v71-nav-lock";
+        "duo-v72-nav-lock";
 
       style.textContent = `
-        :root{--duo-nav-height-v71:74px}
+        :root{--duo-nav-height-v72:72px}
 
         .bottom-nav,
         body > .bottom-nav,
@@ -1890,11 +1910,12 @@
           inset:auto 0 0 0 !important;
           width:100% !important;
           max-width:none !important;
-          height:var(--duo-nav-height-v71) !important;
-          min-height:var(--duo-nav-height-v71) !important;
-          max-height:var(--duo-nav-height-v71) !important;
+          height:var(--duo-nav-height-v72) !important;
+          min-height:var(--duo-nav-height-v72) !important;
+          max-height:var(--duo-nav-height-v72) !important;
           margin:0 !important;
-          padding:4px 6px 2px !important;
+          padding:3px 6px 1px !important;
+          box-sizing:border-box !important;
           display:grid !important;
           grid-template-columns:repeat(6,minmax(0,1fr)) !important;
           gap:2px !important;
@@ -1914,8 +1935,10 @@
           z-index:2147483647 !important;
         }
 
-        .bottom-nav .nav-item,
-        body > .bottom-nav .nav-item,
+        .bottom-nav > .nav-item,
+        body > .bottom-nav > .nav-item,
+        .bottom-nav > a,
+        body > .bottom-nav > a,
         .bottom-nav .nav-item.active,
         body > .bottom-nav .nav-item.active,
         .bottom-nav .nav-item:active,
@@ -1937,7 +1960,20 @@
           min-height:68px !important;
           max-height:68px !important;
           margin:0 !important;
-          padding:5px 1px 2px !important;
+          padding:4px 1px 1px !important;
+          box-sizing:border-box !important;
+          display:flex !important;
+          flex-direction:column !important;
+          align-items:center !important;
+          justify-content:center !important;
+          gap:3px !important;
+          border:0 !important;
+          outline:0 !important;
+          border-radius:16px !important;
+          text-decoration:none !important;
+          font:inherit !important;
+          font-weight:400 !important;
+          line-height:1 !important;
           transform:none !important;
           -webkit-transform:none !important;
           translate:none !important;
@@ -1951,7 +1987,9 @@
         .bottom-nav .nav-item .nav-icon,
         body > .bottom-nav .nav-item .nav-icon,
         .bottom-nav .nav-item span,
-        body > .bottom-nav .nav-item span{
+        body > .bottom-nav .nav-item span,
+        .bottom-nav > a span,
+        body > .bottom-nav > a span{
           position:static !important;
           top:auto !important;
           bottom:auto !important;
@@ -1984,14 +2022,14 @@
 
     if (nav) {
       nav.classList.add(
-        "duo-nav-v71-locked"
+        "duo-nav-v72-locked"
       );
     }
 
   }
 
 
-  function setupStableKeyboardNavigationV71() {
+  function setupStableKeyboardNavigationV72() {
 
     try {
       if (navigator.virtualKeyboard) {
@@ -2113,9 +2151,9 @@
 
     createPWANavigation();
 
-    lockBottomNavigationV71();
+    lockBottomNavigationV72();
 
-    setupStableKeyboardNavigationV71();
+    setupStableKeyboardNavigationV72();
 
     createSettingsShortcut();
 
