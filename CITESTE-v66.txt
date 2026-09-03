@@ -1,0 +1,10 @@
+DUO LOVE FULL v66
+
+- Love AI are buton vizibil permanent „← DUO LOVE” în bara de sus.
+- Butonul este link HTML direct către ../index.html, deci funcționează chiar dacă un script Love AI are eroare.
+- Cache DUO LOVE: v66.
+- Cache Love AI: v4.
+- Include Harta + GPS, Love AI local cu muzică, profil, teme, widget și restul proiectului.
+
+Pentru GitHub: urcă TOATE fișierele din acest folder în repository-ul DUO LOVE principal.
+Pentru Hartă: rulează SUPABASE-HARTA.sql o singură dată în Supabase SQL Editor.
