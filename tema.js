@@ -598,12 +598,6 @@
       icon: "📅",
       name: "Evenimente"
     },
-
-    {
-      file: "setari.html",
-      icon: "⚙️",
-      name: "Setări"
-    }
   ];
 
 
@@ -1654,16 +1648,15 @@
 
 
   /* =========================================================
-     MENIU 7 BUTOANE - FIX v69
-     Harta + Love AI au mărit meniul global la 7 secțiuni.
-     Forțăm o singură linie, astfel încât Setări să rămână vizibil.
+     MENIU 6 BUTOANE + SETĂRI SEPARAT - v70
+     Setări nu mai ocupă un loc în bara de jos.
   ========================================================= */
 
-  function ensureSevenItemNavigationLayout() {
+  function ensureSixItemNavigationLayout() {
 
     let style =
       document.getElementById(
-        "duo-v69-seven-nav"
+        "duo-v70-nav-settings"
       );
 
     if (!style) {
@@ -1674,15 +1667,15 @@
         );
 
       style.id =
-        "duo-v69-seven-nav";
+        "duo-v70-nav-settings";
 
       style.textContent = `
         .bottom-nav,
         body > .bottom-nav {
           display: grid !important;
-          grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
-          gap: 1px !important;
-          overflow: visible !important;
+          grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+          gap: 2px !important;
+          overflow: hidden !important;
         }
 
         .bottom-nav .nav-item,
@@ -1694,27 +1687,73 @@
 
         .bottom-nav .nav-icon,
         body > .bottom-nav .nav-icon {
-          font-size: 18px !important;
+          font-size: 20px !important;
         }
 
         .bottom-nav .nav-item > span:last-child,
         body > .bottom-nav .nav-item > span:last-child {
-          font-size: 7.5px !important;
+          font-size: 8.2px !important;
           line-height: 1.05 !important;
           white-space: nowrap !important;
           overflow: hidden !important;
           text-overflow: ellipsis !important;
         }
 
+        #duoSettingsShortcut {
+          position: fixed !important;
+          top: calc(env(safe-area-inset-top) + 12px) !important;
+          right: 12px !important;
+          width: 46px !important;
+          height: 46px !important;
+          min-width: 46px !important;
+          min-height: 46px !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          border: 1px solid rgba(255,255,255,.16) !important;
+          border-radius: 50% !important;
+          background: rgba(12,8,18,.80) !important;
+          color: #fff !important;
+          box-shadow: 0 8px 24px rgba(0,0,0,.30) !important;
+          backdrop-filter: blur(16px) !important;
+          -webkit-backdrop-filter: blur(16px) !important;
+          font: inherit !important;
+          font-size: 23px !important;
+          line-height: 1 !important;
+          cursor: pointer !important;
+          z-index: 2147483600 !important;
+          touch-action: manipulation !important;
+          -webkit-tap-highlight-color: transparent !important;
+        }
+
+        #duoSettingsShortcut:active {
+          background: rgba(var(--app-accent-rgb, 217,104,152), .34) !important;
+        }
+
+        #duoSettingsShortcut.is-active {
+          background: rgba(var(--app-accent-rgb, 217,104,152), .34) !important;
+          border-color: rgba(var(--app-accent-rgb, 217,104,152), .62) !important;
+        }
+
         @media (max-width: 360px) {
           .bottom-nav .nav-icon,
           body > .bottom-nav .nav-icon {
-            font-size: 17px !important;
+            font-size: 19px !important;
           }
 
           .bottom-nav .nav-item > span:last-child,
           body > .bottom-nav .nav-item > span:last-child {
-            font-size: 6.8px !important;
+            font-size: 7.4px !important;
+          }
+
+          #duoSettingsShortcut {
+            width: 43px !important;
+            height: 43px !important;
+            min-width: 43px !important;
+            min-height: 43px !important;
+            font-size: 21px !important;
           }
         }
       `;
@@ -1724,6 +1763,92 @@
       );
 
     }
+
+  }
+
+
+  function createSettingsShortcut() {
+
+    let button =
+      document.getElementById(
+        "duoSettingsShortcut"
+      );
+
+    if (!button) {
+
+      button =
+        document.createElement(
+          "button"
+        );
+
+      button.id =
+        "duoSettingsShortcut";
+
+      button.type =
+        "button";
+
+      button.innerHTML =
+        "⚙️";
+
+      button.setAttribute(
+        "aria-label",
+        "Setări"
+      );
+
+      button.setAttribute(
+        "title",
+        "Setări"
+      );
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          if (
+            getCurrentPage() ===
+            "setari.html"
+          ) {
+            return;
+          }
+
+          const currentURL =
+            new URL(
+              window.location.href
+            );
+
+          const currentPath =
+            currentURL.pathname;
+
+          const lastSlash =
+            currentPath.lastIndexOf(
+              "/"
+            );
+
+          const folder =
+            currentPath.substring(
+              0,
+              lastSlash + 1
+            );
+
+          window.location.href =
+            currentURL.origin +
+            folder +
+            "setari.html";
+
+        }
+      );
+
+      document.body.appendChild(
+        button
+      );
+
+    }
+
+    button.classList.toggle(
+      "is-active",
+      getCurrentPage() ===
+        "setari.html"
+    );
 
   }
 
@@ -1744,9 +1869,11 @@
 
     removeExternalTargets();
 
-    ensureSevenItemNavigationLayout();
+    ensureSixItemNavigationLayout();
 
     createPWANavigation();
+
+    createSettingsShortcut();
 
     fixNavigationTap();
 
@@ -1801,6 +1928,8 @@
       applySeasonalTheme();
 
       updateActiveNavigation();
+
+      createSettingsShortcut();
 
       fixNavigationTap();
 

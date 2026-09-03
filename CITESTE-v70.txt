@@ -1,0 +1,8 @@
+DUO LOVE v70 — Setări mutat separat
+
+Schimbări:
+- Setări a fost scos din bara de navigare de jos.
+- Bara de jos are acum 6 secțiuni: Acasă, Chat, Harta noastră, Love AI, Amintiri, Evenimente.
+- Butonul ⚙️ Setări este separat, fix sus în dreapta pe paginile DUO LOVE.
+- Login-ul DUO LOVE, Supabase, cuplul și Google Login din Love AI NU au fost modificate.
+- Cache PWA DUO LOVE actualizat la v70.
