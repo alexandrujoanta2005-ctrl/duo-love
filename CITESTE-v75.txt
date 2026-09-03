@@ -1,0 +1,9 @@
+DUO LOVE v75 — iPhone PWA muzica
+
+- LOVE AI pastreaza ultima melodie.
+- Pe iPhone/iOS, redarea cu sunet fara nicio interactiune este blocata de sistem.
+- LOVE AI preincarca melodia in mod permis si, la prima atingere oriunde in aplicatie, trimite imediat comenzile unMute + playVideo catre playerul YouTube.
+- Afiseaza temporar mesajul „Atinge oriunde pentru muzica” pana la prima interactiune.
+- Dupa deblocarea din sesiunea curenta, navigarea in LOVE AI nu mai cere Play.
+- Login-ul DUO LOVE si Supabase DUO LOVE nu au fost modificate.
+- Cache root: v75; cache LOVE AI: v9.
