@@ -1,4 +1,4 @@
-const CACHE_VERSION = "duo-love-v60";
+const CACHE_VERSION = "duo-love-v64";
 
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PAGE_CACHE = `${CACHE_VERSION}-pages`;
@@ -18,6 +18,7 @@ const PAGE_FILES = [
   "./misiuni-animal.html",
   "./login.html",
   "./chat.html",
+  "./harta.html",
   "./amintiri.html",
   "./evenimente.html",
   "./love-studio.html",
@@ -531,10 +532,38 @@ self.addEventListener(
       );
 
 
+    /* Love AI are propriul service worker și propriul cache.
+       Nu interceptăm subfolderul din service worker-ul DUO LOVE. */
+    if (
+      url.pathname.includes(
+        "/love-ai/"
+      )
+    ) {
+
+      return;
+
+    }
+
+
     if (
       url.hostname.includes(
         "supabase.co"
       )
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+      Tile-urile OpenStreetMap sunt numeroase și se schimbă în funcție
+      de zona/zoom-ul vizualizat. Nu le păstrăm în cache-ul PWA,
+      ca să nu umple memoria dispozitivului.
+    */
+    if (
+      url.hostname === "tile.openstreetmap.org" ||
+      url.hostname.endsWith(".tile.openstreetmap.org")
     ) {
 
       return;

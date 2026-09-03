@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#171020">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Love AI">
+  <meta name="description" content="Love AI — mesaje romantice, scrisori, șabloane, poze și o zonă privată.">
+  <title>Love AI ❤️</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./favicon.png">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root{
+      --bg:#160f1d;--bg2:#24112a;--card:rgba(43,26,49,.76);--card2:rgba(255,255,255,.055);
+      --text:#fff7fb;--muted:#bbaebd;--pink:#ff6ca9;--violet:#a66bff;--danger:#ff6b7a;
+      --border:rgba(255,255,255,.11);--shadow:0 20px 60px rgba(0,0,0,.34);
+      --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+    }
+    *{box-sizing:border-box} html{background:#100b16;scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:
+      radial-gradient(circle at 18% -5%,rgba(255,71,143,.24),transparent 32%),
+      radial-gradient(circle at 95% 92%,rgba(128,76,255,.23),transparent 36%),
+      linear-gradient(160deg,var(--bg),#110c18 55%,#0e0a14);background-attachment:fixed}
+    button,input,textarea,select{font:inherit}button{color:inherit}a{color:inherit;text-decoration:none}
+    .app{width:min(100%,520px);margin:0 auto;min-height:100vh;padding-bottom:calc(104px + var(--safe-bottom))}
+    .topbar{position:sticky;top:0;z-index:30;padding:calc(12px + var(--safe-top)) 18px 10px;background:linear-gradient(180deg,rgba(20,13,27,.94),rgba(20,13,27,.68),transparent);backdrop-filter:blur(16px)}
+    .topbar-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.topbar h1{margin:0;font-family:Georgia,serif;font-size:27px;font-weight:600;background:linear-gradient(90deg,#ff83ba,#fff,#b28cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .pill,.icon-btn,.btn,.chip{border:1px solid var(--border);background:rgba(255,255,255,.065);border-radius:16px;min-height:44px;cursor:pointer;transition:.18s ease;touch-action:manipulation}.pill:active,.icon-btn:active,.btn:active,.chip:active{transform:scale(.975)}
+    .icon-btn{width:44px;display:grid;place-items:center}.content{padding:8px 18px 24px}.page{display:none}.page.active{display:block;animation:rise .25s ease both}@keyframes rise{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+    .glass{background:linear-gradient(145deg,rgba(55,34,62,.78),rgba(29,20,37,.72));border:1px solid var(--border);backdrop-filter:blur(18px);box-shadow:var(--shadow);border-radius:28px}.card{padding:18px}.hero{position:relative;overflow:hidden;padding:24px}.hero:after{content:"❤️";position:absolute;right:-16px;top:-28px;font-size:116px;opacity:.08;transform:rotate(-10deg)}
+    .muted{color:var(--muted)}.small{font-size:12px}.tiny{font-size:10px}.label{display:block;margin:0 0 8px;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.title{font-family:Georgia,serif;font-size:24px;margin:4px 0 8px}.section-title{margin:26px 2px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);font-weight:800}
+    .btn{padding:11px 15px;font-weight:700}.btn.primary{border:0;background:linear-gradient(135deg,var(--pink),var(--violet));color:#210d1a;box-shadow:0 14px 34px rgba(226,73,151,.22)}.btn.full{width:100%}.btn.danger{color:#ffc3cb}.btn:disabled{opacity:.45;cursor:not-allowed}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.quick{display:flex;align-items:center;gap:10px;padding:14px;border-radius:22px;background:var(--card2);border:1px solid var(--border);cursor:pointer}.quick-ico{flex:0 0 38px;width:38px;height:38px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--pink),var(--violet));color:#27101f}.quick span:last-child{font-size:13px;font-weight:700;min-width:0}
+    .home-sections .quick{flex-direction:column;text-align:center;justify-content:center;min-height:86px}.home-sections .quick-ico{background:transparent;border:0;font-size:21px}.home-sections .quick span:last-child{font-size:10px}
+    .input,.textarea,.select{width:100%;border:1px solid var(--border);background:rgba(7,5,12,.38);color:var(--text);border-radius:17px;padding:13px 14px;outline:none;font-size:16px}.textarea{min-height:105px;resize:vertical}.input:focus,.textarea:focus,.select:focus{border-color:rgba(255,108,169,.62);box-shadow:0 0 0 3px rgba(255,108,169,.1)}.form-row{margin-bottom:16px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:9px 12px;min-height:38px;font-size:12px}.chip.active{border-color:transparent;background:linear-gradient(135deg,var(--pink),var(--violet));color:#25101e;font-weight:800}
+    .chat{min-height:52vh;display:flex;flex-direction:column;gap:10px}.bubble{max-width:85%;padding:12px 14px;border-radius:22px;white-space:pre-wrap;line-height:1.48;font-size:14px;overflow-wrap:anywhere}.bubble.user{align-self:flex-end;background:linear-gradient(135deg,var(--pink),var(--violet));color:#250f1d}.bubble.ai{align-self:flex-start;background:var(--card);border:1px solid var(--border)}.bubble-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.mini{min-height:34px;padding:7px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.06);font-size:11px;cursor:pointer}
+    .composer{position:sticky;bottom:89px;z-index:10;margin-top:12px}.composer-box{display:flex;gap:7px;padding:7px;border-radius:999px}.composer .input{border:0;background:transparent;padding:10px 12px}.send{flex:0 0 43px;width:43px;height:43px;border:0;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--violet));cursor:pointer}
+    .item{margin-bottom:11px;padding:16px}.item h3{font-family:Georgia,serif;margin:0 0 7px}.item p{white-space:pre-wrap;line-height:1.52;margin:0;font-size:14px}.item-actions{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:12px}.empty{text-align:center;padding:42px 15px;color:var(--muted);font-size:13px}
+    .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.photo{overflow:hidden}.photo img{display:block;width:100%;aspect-ratio:1;object-fit:cover}.photo .item-actions{padding:8px;margin:0;justify-content:space-between}.file-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;cursor:pointer}.file-btn input{display:none}
+    .profile-head{text-align:center}.avatar{width:70px;height:70px;border-radius:25px;margin:0 auto;display:grid;place-items:center;font-size:30px;background:linear-gradient(135deg,var(--pink),var(--violet));box-shadow:0 16px 36px rgba(255,90,165,.19)}
+    .bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:0 12px calc(9px + var(--safe-bottom))}.bottom-inner{width:min(calc(100% - 8px),500px);margin:auto;display:flex;padding:7px;border-radius:26px;background:rgba(37,25,45,.92);border:1px solid var(--border);backdrop-filter:blur(20px);box-shadow:0 14px 40px rgba(0,0,0,.45)}.nav-btn{flex:1;border:0;background:transparent;color:var(--muted);padding:7px 2px;border-radius:17px;font-size:9px;cursor:pointer;min-width:0}.nav-btn b{display:block;font-size:20px;font-weight:400;margin-bottom:2px}.nav-btn.active{color:#ff8bbc;background:rgba(255,255,255,.06)}
+    .toast{position:fixed;z-index:1000;left:50%;top:calc(18px + var(--safe-top));transform:translate(-50%,-20px);width:min(calc(100% - 30px),430px);background:#2c1c32;border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:12px 14px;box-shadow:0 20px 50px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .modal{position:fixed;z-index:100;inset:0;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.58);padding:18px}.modal.open{display:flex}.sheet{width:min(100%,500px);max-height:88vh;overflow:auto;border-radius:30px;padding:20px}.sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .tabs{display:flex;gap:7px;overflow:auto;padding-bottom:3px}.tabs .chip{white-space:nowrap}.result{margin-top:14px}.divider{height:1px;background:var(--border);margin:16px 0}.badge{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 9px;font-size:10px;color:var(--muted)}
+    .music-player{position:fixed;left:50%;bottom:calc(92px + var(--safe-bottom));transform:translateX(-50%);z-index:35;width:min(calc(100% - 24px),500px);display:none;padding:9px;border-radius:19px}.music-player.show{display:flex;align-items:center;gap:9px}.music-player .grow{flex:1;min-width:0}.music-player .grow strong,.music-player .grow span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.music-mini-video{flex:0 0 96px;width:96px;height:54px;border-radius:12px;overflow:hidden;background:rgba(0,0,0,.55);display:grid;place-items:center}.music-mini-video iframe{display:block;width:96px;height:54px;border:0;background:#000}.music-mini-video .resume{width:100%;height:100%;border:0;background:transparent;color:#fff;font-size:22px;cursor:pointer}.music-player .icon-btn{flex:0 0 38px;width:38px;height:38px}.ytbox{min-height:72px}.ytbox iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:18px;background:#000}.music-status{padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:rgba(255,255,255,.035)}.track-row{display:flex;align-items:center;gap:10px;width:100%;margin-bottom:8px;padding:11px 12px;text-align:left}.track-row .track-main{flex:1;min-width:0}.track-row .track-main b,.track-row .track-main small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track-actions{display:flex;gap:6px;flex:0 0 auto}.track-actions button{min-width:42px}.music-note{line-height:1.5}@media(max-width:390px){.music-mini-video{flex-basis:82px;width:82px;height:46px}.music-mini-video iframe{width:82px;height:46px}.music-player{gap:7px}.music-player .icon-btn{width:34px;height:34px;flex-basis:34px}.track-row{align-items:flex-start}.track-actions{flex-direction:column}}
+    .secret-lock{text-align:center;padding:34px 20px}.secret-lock .lock{font-size:46px}.status{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.05);font-size:12px;color:var(--muted)}
+    .splash{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%,rgba(255,73,151,.25),transparent 32%),linear-gradient(#170f1f,#0c0911);transition:.5s}.splash.hide{opacity:0;visibility:hidden}.splash-heart{font-size:70px;animation:beat 1.2s ease-in-out infinite}@keyframes beat{50%{transform:scale(1.14)}}.splash h1{font-family:Georgia,serif;font-size:42px;margin:12px 0 0;background:linear-gradient(90deg,#ff8abc,#fff,#ad87ff);-webkit-background-clip:text;background-clip:text;color:transparent}.splash p{color:var(--muted);letter-spacing:.18em;font-size:10px;text-transform:uppercase}
+    @media(max-width:360px){.content{padding-left:13px;padding-right:13px}.topbar{padding-left:13px;padding-right:13px}.grid3{gap:7px}.home-sections .quick{padding:10px 5px}.topbar h1{font-size:24px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div id="splash" class="splash"><div class="splash-heart">❤️</div><h1>Love AI</h1><p>AI-ul tău de iubire</p></div>
+  <div id="toast" class="toast" role="status"></div>
+
+  <div class="app">
+    <header class="topbar"><div class="topbar-row"><h1 id="pageTitle">Love AI ❤️</h1><button id="backBtn" class="icon-btn" type="button" title="Înapoi" style="display:none">←</button></div></header>
+    <main class="content">
+      <section class="page active" data-page="home">
+        <div class="glass hero">
+          <p class="muted small" id="helloText">Bună 💗</p>
+          <h2 class="title">Ce vrei să transmiți azi?</h2>
+          <div class="chips" style="margin-top:16px"><button class="btn primary" data-go="ai">✨ Love AI</button><button class="btn" data-go="generator">🪄 Generator</button></div>
+        </div>
+        <div class="section-title">Idei rapide</div>
+        <div class="grid2" id="quickIdeas"></div>
+        <div class="home-sections grid3" id="homeSections" style="margin-top:18px"></div>
+      </section>
+
+      <section class="page" data-page="ai">
+        <div id="chat" class="chat"></div>
+        <div class="tabs" id="aiQuick"></div>
+        <form class="composer" id="chatForm"><div class="glass composer-box"><input id="chatInput" class="input" maxlength="4000" placeholder="Scrie ce simți..."><button class="send" type="submit">➤</button></div></form>
+      </section>
+
+      <section class="page" data-page="generator">
+        <p class="muted small">Completează câteva detalii și primești un text numai al vostru.</p>
+        <div class="glass card" style="margin-top:12px">
+          <div class="form-row"><label class="label">Numele partenerului</label><input id="genName" class="input" maxlength="60" placeholder="Ex: Maria"></div>
+          <div class="form-row"><label class="label">Ocazia</label><div class="grid2" data-chip-group="occasion"><button class="chip" data-value="anniversary">💞 Aniversare</button><button class="chip" data-value="birthday">🎂 Zi de naștere</button><button class="chip active" data-value="ordinary">☀️ Zi obișnuită</button><button class="chip" data-value="makeup">🕊️ Împăcare</button></div></div>
+          <div class="form-row"><label class="label">Detalii specifice</label><textarea id="genDetails" class="textarea" maxlength="600" placeholder="O amintire dragă, ce apreciezi cel mai mult..."></textarea></div>
+          <div class="form-row"><label class="label">Ton</label><div class="grid2" data-chip-group="tone"><button class="chip active" data-value="romantic">🔥 Romantic</button><button class="chip" data-value="funny">😜 Jucăuș</button><button class="chip" data-value="shy">🥺 Sincer</button><button class="chip" data-value="poetic">🌙 Poetic</button></div></div>
+          <div class="form-row"><label class="label">Lungime</label><div class="grid3" data-chip-group="length"><button class="chip" data-value="short">Scurt</button><button class="chip active" data-value="medium">Mediu</button><button class="chip" data-value="long">Lung</button></div></div>
+          <div class="form-row"><label class="label">Tip</label><div class="grid2" data-chip-group="kind"><button class="chip active" data-value="message">Mesaj</button><button class="chip" data-value="letter">Scrisoare</button></div></div>
+          <button id="generateBtn" class="btn primary full">🪄 Generează</button>
+        </div>
+        <div id="generatorResult"></div>
+      </section>
+
+      <section class="page" data-page="templates">
+        <p class="muted small">Alege un șablon, pune numele și trimite-l rapid.</p>
+        <div class="glass card" style="margin-top:12px"><label class="label">Personalizează cu numele</label><input id="templateName" class="input" maxlength="60" placeholder="Ex: Maria"><div class="tabs" id="templateCats" style="margin-top:12px"></div></div>
+        <div id="templateList" style="margin-top:12px"></div>
+      </section>
+
+      <section class="page" data-page="messages"><div id="messageList"></div></section>
+      <section class="page" data-page="letters"><div id="letterList"></div></section>
+      <section class="page" data-page="favorites"><div id="favoriteList"></div></section>
+      <section class="page" data-page="history"><div class="glass card"><div class="form-row" style="margin:0"><input id="historySearch" class="input" placeholder="Caută în istoric..."></div><button id="clearHistoryBtn" class="btn full" style="margin-top:10px">🧹 Golește istoricul</button></div><div id="historyList" style="margin-top:12px"></div></section>
+
+      <section class="page" data-page="photos">
+        <label class="glass file-btn"><span>＋ Adaugă poză</span><input id="photoInput" type="file" accept="image/*"></label>
+        <div id="photoGrid" class="photo-grid" style="margin-top:12px"></div>
+      </section>
+
+      <section class="page" data-page="secret">
+        <div id="secretLocked" class="glass secret-lock"><div class="lock">🔒</div><h2 class="title">Zona privată</h2><p class="muted small">Notițe, mesaje și poze pe care vrei să le ții separat.</p><input id="secretPinInput" class="input" inputmode="numeric" maxlength="8" placeholder="PIN 4-8 cifre" style="margin-top:12px"><button id="secretUnlockBtn" class="btn primary full" style="margin-top:10px">Deblochează</button><button id="secretSetBtn" class="btn full" style="margin-top:8px">Setează / schimbă PIN</button></div>
+        <div id="secretOpen" style="display:none"><div class="glass card"><textarea id="secretNote" class="textarea" placeholder="Scrie ceva doar pentru voi doi..."></textarea><button id="addSecretNote" class="btn primary full" style="margin-top:10px">＋ Adaugă notiță</button><button id="lockSecret" class="btn full" style="margin-top:8px">🔒 Blochează</button></div><div id="secretList" style="margin-top:12px"></div></div>
+      </section>
+
+      <section class="page" data-page="music">
+        <p class="muted small music-note">Ascultă melodii romantice sau lipește un link YouTube. Playerul rămâne activ când navighezi prin Love AI.</p>
+        <div class="glass card" style="margin-top:12px">
+          <label class="label">Link YouTube</label>
+          <input id="youtubeInput" class="input" inputmode="url" autocomplete="off" placeholder="https://youtube.com/watch?v=...">
+          <div class="grid2" style="margin-top:10px"><button id="youtubePlay" class="btn primary full">▶ Redă în aplicație</button><button id="youtubeOpen" class="btn full">↗ Deschide YouTube</button></div>
+          <div id="youtubeEmbed" class="ytbox" style="margin-top:12px"></div>
+        </div>
+        <div id="musicStatus" class="music-status muted small" style="margin-top:12px">Nu redă nimic momentan.</div>
+        <div class="section-title">Playlist romantic</div><div id="playlist"></div>
+        <p class="muted tiny music-note">Unele videoclipuri pot bloca redarea încorporată. În cazul acesta folosește butonul ↗ pentru a le deschide direct în YouTube.</p>
+      </section>
+
+      <section class="page" data-page="profile">
+        <div class="glass card profile-head"><div class="avatar">❤️</div><h2 class="title" id="profileName">Love AI</h2><p id="profileAccount" class="muted small">Mod local</p></div>
+        <div class="glass card" style="margin-top:12px"><label class="label">Nume afișat</label><input id="displayName" class="input" maxlength="60"><button id="saveProfile" class="btn primary full" style="margin-top:10px">Salvează profilul</button></div>
+        <div class="grid2" style="margin-top:12px"><button class="quick" data-go="favorites"><span class="quick-ico">⭐</span><span>Favorite</span></button><button class="quick" data-go="letters"><span class="quick-ico">💌</span><span>Scrisori</span></button><button class="quick" data-go="secret"><span class="quick-ico">🔒</span><span>Zona secretă</span></button><button class="quick" data-go="settings"><span class="quick-ico">⚙️</span><span>Setări</span></button></div>
+        <div class="glass card" style="margin-top:12px"><h3 style="margin-top:0">☁️ Cont cloud (opțional)</h3><p class="muted small">Poți folosi aplicația fără cont. Dacă te conectezi, profilul și textele pot fi sincronizate în Supabase.</p><div id="authLoggedOut"><input id="authEmail" class="input" type="email" placeholder="nume@email.com"><button id="sendMagic" class="btn full" style="margin-top:8px">✉️ Trimite link magic</button><button id="googleLogin" class="btn full" style="margin-top:8px">G Continuă cu Google</button></div><button id="logoutBtn" class="btn danger full" style="margin-top:8px;display:none">Deconectare</button><div id="cloudStatus" class="status" style="margin-top:10px">Mod local activ.</div></div>
+      </section>
+
+      <section class="page" data-page="settings">
+        <div class="glass card"><h3 style="margin-top:0">🌐 Limbă</h3><div class="grid2"><button class="chip active" id="langRo">🇷🇴 Română</button><button class="chip" id="langEn">🇬🇧 English</button></div></div>
+        <div class="glass card" style="margin-top:12px"><h3 style="margin-top:0">🔊 Sunete</h3><div class="grid2"><button class="chip" id="soundOn">Pornit</button><button class="chip" id="soundOff">Oprit</button></div></div>
+        <div class="glass card" style="margin-top:12px"><h3 style="margin-top:0">🔔 Notificări</h3><p class="muted small">Testează permisiunea pentru notificări în browser.</p><button id="testNotif" class="btn full">Testează notificarea</button></div>
+        <div class="glass card" style="margin-top:12px"><h3 style="margin-top:0">📲 Instalare</h3><p class="muted small">Pe iPhone: Partajare → „Adaugă pe ecranul principal”. Pe Android: meniul browserului → „Instalează aplicația”.</p></div>
+        <div class="glass card" style="margin-top:12px"><h3 style="margin-top:0">🗂️ Date locale</h3><button id="exportBtn" class="btn full">Exportă backup JSON</button><label class="btn full" style="display:flex;align-items:center;justify-content:center;margin-top:8px;cursor:pointer">Importă backup<input id="importInput" type="file" accept="application/json" hidden></label><button id="clearAllBtn" class="btn danger full" style="margin-top:8px">Șterge toate datele locale</button></div>
+        <div class="glass card" style="margin-top:12px;text-align:center"><div style="font-size:30px">❤️</div><p class="tiny muted" style="letter-spacing:.16em">CREATOR</p><h3 class="title" style="margin:0">Alexandru Joantă</h3><p class="muted small">Versiune HTML statică 1.1 • Muzică reparată</p></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="musicPlayer" class="glass music-player" aria-live="polite"><div id="playerVideo" class="music-mini-video"></div><div class="grow"><strong id="playerTitle"></strong><span id="playerArtist" class="muted tiny"></span></div><button id="playerOpen" class="icon-btn" title="Muzică">🎶</button><button id="playerYoutube" class="icon-btn" title="Deschide în YouTube">↗</button><button id="playerStop" class="icon-btn" title="Oprește">✕</button></div>
+
+  <nav class="bottom-nav"><div class="bottom-inner">
+    <button class="nav-btn active" data-go="home"><b>❤️</b>Acasă</button>
+    <button class="nav-btn" data-go="ai"><b>✨</b>Love AI</button>
+    <button class="nav-btn" data-go="messages"><b>💌</b>Mesaje</button>
+    <button class="nav-btn" data-go="photos"><b>📸</b>Poze</button>
+    <button class="nav-btn" data-go="profile"><b>👤</b>Profil</button>
+  </div></nav>
+
+<script>
+(function(){
+  'use strict';
+  const SUPABASE_URL='https://accoivdigjlxjjaojzry.supabase.co';
+  const SUPABASE_KEY='sb_publishable_ywXiao3O1pHrYDBJmqCNtw_Jh94y_zQ';
+  const AI_ENDPOINT=''; // Opțional: endpoint securizat care primește {messages,lang} și răspunde {reply}
+  const sb=(window.supabase&&SUPABASE_URL&&SUPABASE_KEY)?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
+  const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+  const STORE='loveai_html_data_v1';
+  const defaultData={displayName:'',items:[],history:[],lang:'ro',sound:true,secretPinHash:'',photos:[]};
+  let data=loadData(), currentPage='home', session=null, secretUnlocked=false, templateCat='love', currentTrack=null;
+  const pageTitles={home:'Love AI ❤️',ai:'AI de iubire ✨',generator:'Generator 🪄',templates:'Șabloane 💌',messages:'Mesaje 💌',letters:'Scrisori 💕',favorites:'Favorite ⭐',history:'Istoric 🕘',photos:'Poze 📸',secret:'Zona Secretă 🔒',music:'Muzică 🎶',profile:'Profil 👤',settings:'Setări ⚙️'};
+
+  function loadData(){try{return Object.assign({},defaultData,JSON.parse(localStorage.getItem(STORE)||'{}'))}catch(e){return {...defaultData}}}
+  function saveData(){try{localStorage.setItem(STORE,JSON.stringify(data))}catch(e){toast('Spațiul local este plin. Șterge câteva poze sau fă backup.')} }
+  function uid(){return (crypto&&crypto.randomUUID)?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2)}
+  function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2300);beep()}
+  function beep(){if(!data.sound)return;try{const a=new (window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator(),g=a.createGain();o.frequency.value=520;g.gain.setValueAtTime(.035,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.08);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.08)}catch(e){}}
+  function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+  function formatDate(ts){try{return new Intl.DateTimeFormat(data.lang==='en'?'en-GB':'ro-RO',{dateStyle:'medium',timeStyle:'short'}).format(new Date(ts))}catch(e){return ''}}
+  function replaceName(s,n){return s.replaceAll('{name}',n||'iubirea mea')}
+  function shareText(text){if(navigator.share)return navigator.share({text}).catch(()=>{});return copyText(text)}
+  async function copyText(text){try{await navigator.clipboard.writeText(text);toast('Copiat 📋')}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.append(ta);ta.select();document.execCommand('copy');ta.remove();toast('Copiat 📋')}}
+  function wa(text){window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank','noopener')}
+
+  function go(page,preset){if(!pageTitles[page])page='home';currentPage=page;location.hash='#'+page;$$('.page').forEach(p=>p.classList.toggle('active',p.dataset.page===page));$('#pageTitle').textContent=pageTitles[page];$('#backBtn').style.display=['home','ai','messages','photos','profile'].includes(page)?'none':'grid';$$('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.go===page));window.scrollTo(0,0);renderPage(page);if(page==='ai'&&preset)askPreset(preset)}
+  function renderPage(page){if(page==='home')renderHome();if(page==='messages')renderItems('#messageList',{kind:'message',secret:false});if(page==='letters')renderItems('#letterList',{kind:'letter',secret:false});if(page==='favorites')renderItems('#favoriteList',{favorite:true});if(page==='history')renderHistory();if(page==='photos')renderPhotos();if(page==='secret')renderSecret();if(page==='templates')renderTemplates();if(page==='music')renderMusic();if(page==='profile')renderProfile();if(page==='settings')renderSettings();}
+
+  const quick=[['love','❤️','Mesaj de iubire'],['letter','💌','Scrisoare'],['morning','☀️','Bună dimineața'],['night','🌙','Noapte bună'],['cute','✨','Mesaj drăguț'],['date','⭐','Idei de întâlnire']];
+  const homeSec=[['templates','📖','Șabloane'],['history','🕘','Istoric'],['music','🎶','Muzică'],['messages','💌','Mesaje'],['letters','💕','Scrisori'],['photos','📸','Poze'],['secret','🔒','Secret'],['favorites','⭐','Favorite'],['settings','⚙️','Setări']];
+  function renderHome(){const name=data.displayName||session?.user?.email?.split('@')[0]||'';$('#helloText').textContent='Bună'+(name?', '+name:'')+' 💗';$('#quickIdeas').innerHTML=quick.map(q=>`<button class="quick" data-ai-preset="${q[0]}"><span class="quick-ico">${q[1]}</span><span>${q[2]}</span></button>`).join('');$('#homeSections').innerHTML=homeSec.map(q=>`<button class="quick" data-go="${q[0]}"><span class="quick-ico">${q[1]}</span><span>${q[2]}</span></button>`).join('')}
+
+  const presets={love:'Scrie-mi un mesaj de iubire scurt și sincer.',letter:'Scrie-mi o scrisoare de iubire emoționantă.',morning:'Scrie un mesaj de bună dimineața plin de dragoste.',night:'Scrie un mesaj de noapte bună tandru.',cute:'Scrie un mesaj drăguț și jucăuș.',date:'Dă-mi 5 idei de întâlniri romantice.'};
+  const localReplies={
+    love:["Uneori nu găsesc cuvintele perfecte, dar știu sigur un lucru: cu tine, orice zi are mai mult sens. ❤️ Îți mulțumesc că ești liniștea, zâmbetul și omul la care mă întorc cu inima.","Te iubesc nu doar pentru felul în care mă faci să zâmbesc, ci pentru felul în care lumea pare mai caldă când ești lângă mine. ❤️✨"],
+    letter:["Iubirea mea,\n\nDacă aș putea păstra un singur lucru din toate zilele noastre, aș păstra sentimentul de acasă pe care îl simt lângă tine. Îți mulțumesc pentru răbdare, râsete și toate momentele mici care au devenit mari pentru mine. ❤️\n\nTe aleg azi, mâine și în toate zilele care vin. ✨"],
+    morning:["Bună dimineața, iubirea mea ☀️❤️ Sper să începi ziua știind că cineva se gândește deja la tine și îți trimite cea mai strânsă îmbrățișare. Să ai o zi frumoasă! 🥰"],
+    night:["Noapte bună, suflet drag 🌙✨ Lasă ziua să se termine și odihnește-te. Eu rămân cu gândul la tine și cu recunoștința că exiști în viața mea. ❤️"],
+    cute:["Mic reminder: ești persoana mea preferată. 😄💗 Și da, probabil o să continui să te tachinez doar ca să-ți văd zâmbetul. ✨"],
+    date:["5 idei pentru voi ❤️\n1. Plimbare seara + ceva dulce. 🌙\n2. Gătiți împreună o rețetă nouă. 🍝\n3. Seară de film cu telefoanele puse deoparte. 🎬\n4. Mergeți într-un loc unde n-ați mai fost. 📍\n5. Faceți câte o surpriză de maximum 20 lei unul pentru celălalt. 🎁"]
+  };
+  function localAI(text){const low=text.toLowerCase();let key=low.includes('bună diminea')?'morning':low.includes('noapte')?'night':low.includes('întâln')||low.includes('date')?'date':low.includes('scriso')?'letter':low.includes('drăgu')||low.includes('juc')?'cute':'love';const arr=localReplies[key];let r=arr[Math.floor(Math.random()*arr.length)];if(text.length>45&&!Object.values(presets).includes(text)){r+='\n\n„'+text.slice(0,120).replace(/\s+/g,' ').trim()+'” — am păstrat ideea ta și am pus-o într-un ton mai cald. 💗'}return r}
+  async function callAI(messages){if(AI_ENDPOINT){const res=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({lang:data.lang,messages})});if(!res.ok)throw new Error('AI');const j=await res.json();if(j&&j.reply)return j.reply}return localAI(messages[messages.length-1].content)}
+  let chatMessages=[];
+  function renderChat(){const c=$('#chat');if(!chatMessages.length)c.innerHTML='<div class="glass card" style="text-align:center"><div style="font-size:34px">❤️</div><p class="muted small">Sunt aici pentru inima ta. Spune-mi ce vrei să transmiți.</p></div>';else c.innerHTML=chatMessages.map((m,i)=>`<div class="bubble ${m.role==='user'?'user':'ai'}">${esc(m.content).replace(/\n/g,'<br>')}${m.role==='assistant'?`<div class="bubble-actions"><button class="mini" data-save-msg="${i}">💾 Mesaj</button><button class="mini" data-save-letter="${i}">💌 Scrisoare</button><button class="mini" data-copy-chat="${i}">📋 Copiază</button><button class="mini" data-share-chat="${i}">↗ Trimite</button></div>`:''}</div>`).join('');$('#aiQuick').innerHTML=quick.map(q=>`<button class="chip" data-ai-preset="${q[0]}">${q[1]} ${q[2]}</button>`).join('');setTimeout(()=>window.scrollTo(0,document.body.scrollHeight),50)}
+  async function ask(text){text=String(text||'').trim();if(!text)return;chatMessages.push({role:'user',content:text});renderChat();$('#chatInput').value='';const thinking={role:'assistant',content:'Love AI scrie...'};chatMessages.push(thinking);renderChat();try{const msgs=chatMessages.filter(m=>m!==thinking).slice(-20);const reply=await callAI(msgs);chatMessages[chatMessages.length-1]={role:'assistant',content:reply};addHistory(reply,'chat');toast('Textul tău e gata ✨')}catch(e){chatMessages[chatMessages.length-1]={role:'assistant',content:'Nu am putut genera acum. Încearcă din nou. ❤️'}}renderChat()}
+  function askPreset(k){go('ai');ask(presets[k]||presets.love)}
+
+  function addHistory(content,kind,title){data.history.unshift({id:uid(),content,kind,title:title||'',createdAt:Date.now()});data.history=data.history.slice(0,50);saveData()}
+  function addItem(kind,content,title,secret){const it={id:uid(),kind,title:title||'',content:content||'',is_secret:!!secret,is_favorite:false,created_at:new Date().toISOString()};data.items.unshift(it);saveData();cloudCreateItem(it);return it}
+  function filteredItems(opts){return data.items.filter(it=>(!opts.kind||it.kind===opts.kind)&&(opts.secret===undefined||!!it.is_secret===opts.secret)&&(opts.favorite===undefined||!!it.is_favorite===opts.favorite))}
+  function renderItems(sel,opts){const root=$(sel),items=filteredItems(opts);if(!items.length){root.innerHTML='<div class="empty">Nimic aici încă. 💭</div>';return}root.innerHTML=items.map(it=>`<article class="glass item"><span class="badge">${esc(it.kind)}</span>${it.title?`<h3>${esc(it.title)}</h3>`:''}<p>${esc(it.content).replace(/\n/g,'<br>')}</p><div class="item-actions"><button class="mini" data-fav="${it.id}">${it.is_favorite?'★ Favorit':'☆ Favorite'}</button><button class="mini" data-secret="${it.id}">${it.is_secret?'🔓 Scoate din secret':'🔒 Secret'}</button><button class="mini" data-copy-item="${it.id}">📋</button><button class="mini" data-share-item="${it.id}">↗</button><button class="mini" data-del="${it.id}" style="margin-left:auto;color:#ffc3cb">🗑</button></div></article>`).join('')}
+  function itemById(id){return data.items.find(x=>x.id===id)}
+  function refreshLists(){renderPage(currentPage)}
+
+  const templateData={love:["{name}, ❤️ dacă inima mea ar putea vorbi, ar spune doar numele tău. Îți mulțumesc că exiști în viața mea. 🥰✨","Bună dimineața, {name}! ☀️💗 Primul gând al zilei ești tot tu. Să ai o zi la fel de frumoasă ca zâmbetul tău. 😘","Noapte bună, {name} 🌙✨ Închide ochii și lasă-mă să te îmbrățișez în gânduri până dimineață. 🤍"],anniversary:["Încă un an împreună, {name} 💞🥂 și încă mă îndrăgostesc de tine în fiecare zi. La mulți ani nouă! ❤️","{name}, azi sărbătoresc nu doar timpul nostru împreună, ci toate momentele mici care ne-au făcut «noi». 💗✨"],appreciation:["{name}, vreau doar să știi cât de mult apreciez felul în care ești lângă mine. 🌷❤️","Îți mulțumesc, {name}, pentru răbdare, grijă și pentru toate lucrurile mici pe care poate nu ți le spun suficient. 🤍"],missyou:["Mi-e dor de tine, {name}. 🌙❤️ Parcă ziua are o piesă lipsă când nu ești aproape.","{name}, azi mi-ar prinde tare bine o îmbrățișare de la tine. Până atunci, îți trimit una prin mesaj. 🫂💗"]};
+  function renderTemplates(){const cats=[['love','❤️ Dragoste'],['anniversary','🎉 Aniversări'],['appreciation','🌷 Apreciere'],['missyou','🌙 Mi-e dor']];$('#templateCats').innerHTML=cats.map(c=>`<button class="chip ${templateCat===c[0]?'active':''}" data-template-cat="${c[0]}">${c[1]}</button>`).join('');const n=$('#templateName').value.trim();$('#templateList').innerHTML=templateData[templateCat].map((t,i)=>{const txt=replaceName(t,n);return `<article class="glass item"><p>${esc(txt)}</p><div class="item-actions"><button class="mini" data-template-save="${i}">💾 Salvează</button><button class="mini" data-template-copy="${i}">📋 Copiază</button><button class="mini" data-template-share="${i}">WhatsApp</button></div></article>`}).join('')}
+
+  function genText(){const name=$('#genName').value.trim();if(!name){toast('Scrie numele partenerului.');return}const occasion=$('[data-chip-group="occasion"] .active').dataset.value,tone=$('[data-chip-group="tone"] .active').dataset.value,len=$('[data-chip-group="length"] .active').dataset.value,kind=$('[data-chip-group="kind"] .active').dataset.value,details=$('#genDetails').value.trim();const starts={anniversary:`${name}, azi mă uit la noi și simt cât de norocos/norocoasă sunt că te am. 💞`,birthday:`La mulți ani, ${name}! 🎂❤️ Azi vreau să-ți reamintesc cât de special(ă) ești pentru mine.`,ordinary:`${name}, nu e nevoie de o zi specială ca să-ți spun cât de mult însemni pentru mine. ❤️`,makeup:`${name}, nu vreau ca un moment greu să fie mai puternic decât tot ce avem frumos împreună. 🕊️❤️`};const mids={romantic:'Cu tine simt dor, liniște și acea bucurie pe care nu o pot explica în câteva cuvinte.',funny:'Și da, încă ești persoana mea preferată chiar și când îmi furi pătura sau ultima bucățică bună. 😄',shy:'Poate nu spun mereu perfect ce simt, dar sentimentele mele pentru tine sunt cât se poate de sincere.',poetic:'Ești lumina blândă care face zilele obișnuite să pară mai frumoase și serile mai aproape de acasă. ✨'};let parts=[starts[occasion],mids[tone]];if(details)parts.push('Și mă gândesc la '+details.replace(/[.!?]+$/,'')+' — e unul dintre lucrurile pe care le port cu mine. 💗');parts.push(kind==='letter'?'Îți mulțumesc că faci parte din povestea mea. Te aleg cu toată inima, azi și în zilele care vin. ❤️':'Voiam doar să știi asta azi. Te iubesc. ❤️');if(len==='short')parts=parts.slice(0,2);if(len==='long')parts.push('Îmi doresc să continuăm să strângem amintiri, să ne ținem de mână în zilele ușoare și să ne alegem și în cele mai grele. Pentru mine, noi merităm grijă, răbdare și tot binele pe care îl putem construi împreună. 🌙✨');const text=kind==='letter'?`Dragă ${name},\n\n${parts.join('\n\n')}\n\nCu drag, ❤️`:parts.join(' ');$('#generatorResult').innerHTML=`<article class="glass item result"><p>${esc(text).replace(/\n/g,'<br>')}</p><div class="item-actions"><button class="mini" id="genSave">💾 Salvează</button><button class="mini" id="genCopy">📋 Copiază</button><button class="mini" id="genWa">WhatsApp</button></div></article>`;$('#generatorResult').dataset.text=text;$('#generatorResult').dataset.kind=kind;addHistory(text,kind,name);toast('Textul tău e gata ✨')}
+
+  function renderHistory(){const q=($('#historySearch')?.value||'').toLowerCase(),list=data.history.filter(h=>(h.content+' '+(h.title||'')).toLowerCase().includes(q));$('#historyList').innerHTML=list.length?list.map(h=>`<article class="glass item"><span class="badge">${esc(h.kind)} · ${formatDate(h.createdAt)}</span>${h.title?`<h3>${esc(h.title)}</h3>`:''}<p>${esc(h.content).replace(/\n/g,'<br>')}</p><div class="item-actions"><button class="mini" data-copy-history="${h.id}">📋 Copiază</button><button class="mini" data-save-history="${h.id}">💾 Salvează</button><button class="mini" data-del-history="${h.id}" style="margin-left:auto">🗑</button></div></article>`).join(''):'<div class="empty">Încă nu ai generat niciun text. 💭</div>'}
+
+  async function compressImage(file){return new Promise((resolve,reject)=>{const img=new Image(),url=URL.createObjectURL(file);img.onload=()=>{const max=1000,scale=Math.min(1,max/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));c.getContext('2d').drawImage(img,0,0,c.width,c.height);const out=c.toDataURL('image/jpeg',.78);URL.revokeObjectURL(url);resolve(out)};img.onerror=reject;img.src=url})}
+  function renderPhotos(){const list=data.photos.filter(p=>!p.secret);$('#photoGrid').innerHTML=list.length?list.map(p=>`<figure class="glass photo"><img src="${p.data}" alt="Amintire" loading="lazy"><figcaption class="item-actions"><button class="mini" data-photo-fav="${p.id}">${p.favorite?'★':'☆'}</button><button class="mini" data-photo-secret="${p.id}">🔒</button><button class="mini" data-photo-del="${p.id}">🗑</button></figcaption></figure>`).join(''):'<div class="empty" style="grid-column:1/-1">Nicio poză încă. 📸</div>'}
+
+  async function hashPin(pin){const b=new TextEncoder().encode(pin),h=await crypto.subtle.digest('SHA-256',b);return Array.from(new Uint8Array(h)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+  function renderSecret(){$('#secretLocked').style.display=secretUnlocked?'none':'block';$('#secretOpen').style.display=secretUnlocked?'block':'none';if(!secretUnlocked)return;const items=filteredItems({secret:true}),photos=data.photos.filter(p=>p.secret);$('#secretList').innerHTML=`<div class="photo-grid">${photos.map(p=>`<figure class="glass photo"><img src="${p.data}" alt="Poză secretă"><figcaption class="item-actions"><button class="mini" data-photo-unsecret="${p.id}">🔓</button><button class="mini" data-photo-del="${p.id}">🗑</button></figcaption></figure>`).join('')}</div>`+items.map(it=>`<article class="glass item"><span class="badge">${esc(it.kind)}</span><p>${esc(it.content).replace(/\n/g,'<br>')}</p><div class="item-actions"><button class="mini" data-secret="${it.id}">🔓 Scoate</button><button class="mini" data-del="${it.id}">🗑</button></div></article>`).join('')+(items.length||photos.length?'':'<div class="empty">Zona secretă este goală.</div>')}
+
+  const playlist=[['450p7goxZqg','All of Me','John Legend'],['LjhCEhWiKXk','Just the Way You Are','Bruno Mars'],['lp-EO5I60KA','Thinking Out Loud','Ed Sheeran'],['2Vv-BfVoq4g','Perfect','Ed Sheeran'],['rtOvBOTyX00','A Thousand Years','Christina Perri']];
+  function parseYT(v){v=String(v||'').trim();if(/^[\w-]{11}$/.test(v))return v;try{const u=new URL(v);const h=u.hostname.replace(/^www\./,'').replace(/^m\./,'');if(h==='youtu.be'){const id=u.pathname.split('/').filter(Boolean)[0];if(id&&/^[\w-]{11}$/.test(id))return id}if(h==='youtube.com'||h==='music.youtube.com'||h.endsWith('.youtube.com')){const q=u.searchParams.get('v');if(q&&/^[\w-]{11}$/.test(q))return q;const parts=u.pathname.split('/').filter(Boolean);if(['embed','shorts','live'].includes(parts[0])&&parts[1]&&/^[\w-]{11}$/.test(parts[1]))return parts[1]}}catch(e){}const m=v.match(/[?&]v=([\w-]{11})/)||v.match(/youtu\.be\/([\w-]{11})/)||v.match(/(?:embed|shorts|live)\/([\w-]{11})/);return m&&m[1]}
+  function youtubeUrl(id){return 'https://www.youtube.com/watch?v='+encodeURIComponent(id)}
+  function embedUrl(id,autoplay=true){return 'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?playsinline=1&rel=0&autoplay='+(autoplay?'1':'0')}
+  function renderMusic(){
+    $('#playlist').innerHTML=playlist.map(t=>`<div class="glass track-row"><span class="quick-ico">🎵</span><span class="track-main"><b>${esc(t[1])}</b><small class="muted">${esc(t[2])}</small></span><span class="track-actions"><button class="mini" data-track="${t[0]}">▶</button><button class="mini" data-open-track="${t[0]}">↗</button></span></div>`).join('');
+    const status=$('#musicStatus');if(status)status.textContent=currentTrack?`🎶 ${currentTrack.title}${currentTrack.artist?' — '+currentTrack.artist:''}`:'Nu redă nimic momentan.';
+  }
+  function setPlayerInfo(resumeOnly=false){if(!currentTrack)return;$('#playerTitle').textContent=currentTrack.title||'YouTube';$('#playerArtist').textContent=currentTrack.artist||'YouTube';$('#musicPlayer').classList.add('show');if(resumeOnly){$('#playerVideo').innerHTML='<button type="button" class="resume" data-resume-track title="Reia melodia">▶</button>'}else{$('#playerVideo').innerHTML=`<iframe src="${embedUrl(currentTrack.id,true)}" title="${esc(currentTrack.title||'YouTube')}" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`}}
+  function playTrack(id,title,artist){if(!id)return;currentTrack={id,title:title||'Videoclipul tău',artist:artist||'YouTube'};localStorage.setItem('loveai_html_track',JSON.stringify(currentTrack));setPlayerInfo(false);const box=$('#youtubeEmbed');if(box)box.innerHTML=`<div class="muted small">🎶 Redarea continuă în mini-playerul de jos. <button class="mini" type="button" data-open-track="${esc(id)}">↗ Deschide în YouTube</button></div>`;renderMusic()}
+  function stopTrack(){currentTrack=null;$('#playerVideo').innerHTML='';$('#youtubeEmbed').innerHTML='';$('#musicPlayer').classList.remove('show');localStorage.removeItem('loveai_html_track');renderMusic()}
+  function openTrack(id){if(id)window.open(youtubeUrl(id),'_blank','noopener,noreferrer')}
+
+  function renderProfile(){const name=data.displayName||session?.user?.email?.split('@')[0]||'Love AI';$('#displayName').value=data.displayName||'';$('#profileName').textContent=name;$('#profileAccount').textContent=session?(session.user.email||session.user.phone||'Cont conectat'):'Mod local';$('#authLoggedOut').style.display=session?'none':'block';$('#logoutBtn').style.display=session?'block':'none';$('#cloudStatus').textContent=session?'☁️ Conectat la Supabase.':'Mod local activ. Datele rămân pe acest dispozitiv.'}
+  function renderSettings(){$('#langRo').classList.toggle('active',data.lang==='ro');$('#langEn').classList.toggle('active',data.lang==='en');$('#soundOn').classList.toggle('active',data.sound);$('#soundOff').classList.toggle('active',!data.sound)}
+
+  async function initAuth(){if(!sb)return;const {data:d}=await sb.auth.getSession();session=d.session;sb.auth.onAuthStateChange((_e,s)=>{session=s;renderProfile();renderHome();if(s)syncFromCloud()});if(session)syncFromCloud()}
+  async function cloudCreateItem(it){if(!sb||!session)return;try{await sb.from('items').insert({user_id:session.user.id,kind:it.kind,title:it.title||null,content:it.content||null,is_secret:it.is_secret,is_favorite:it.is_favorite})}catch(e){}}
+  async function syncFromCloud(){if(!sb||!session)return;try{const [{data:profile},{data:items}]=await Promise.all([sb.from('profiles').select('display_name').eq('id',session.user.id).maybeSingle(),sb.from('items').select('*').neq('kind','photo').order('created_at',{ascending:false})]);if(profile?.display_name)data.displayName=profile.display_name;if(Array.isArray(items)){const localIds=new Set(data.items.map(x=>x.cloud_id).filter(Boolean));items.forEach(r=>{if(!localIds.has(r.id)&&!data.items.some(x=>x.content===r.content&&x.kind===r.kind))data.items.push({id:'cloud-'+r.id,cloud_id:r.id,kind:r.kind,title:r.title||'',content:r.content||'',is_secret:!!r.is_secret,is_favorite:!!r.is_favorite,created_at:r.created_at})})}saveData();renderPage(currentPage)}catch(e){}}
+
+  document.addEventListener('click',async e=>{const b=e.target.closest('button,[data-go],[data-ai-preset]');if(!b)return;
+    if(b.dataset.go){go(b.dataset.go);return}
+    if(b.dataset.aiPreset){askPreset(b.dataset.aiPreset);return}
+    if(b.dataset.templateCat){templateCat=b.dataset.templateCat;renderTemplates();return}
+    if(b.dataset.templateSave!==undefined){const txt=replaceName(templateData[templateCat][+b.dataset.templateSave],$('#templateName').value.trim());addItem('message',txt);toast('Salvat 💾');return}
+    if(b.dataset.templateCopy!==undefined){copyText(replaceName(templateData[templateCat][+b.dataset.templateCopy],$('#templateName').value.trim()));return}
+    if(b.dataset.templateShare!==undefined){wa(replaceName(templateData[templateCat][+b.dataset.templateShare],$('#templateName').value.trim()));return}
+    if(b.dataset.saveMsg!==undefined){addItem('message',chatMessages[+b.dataset.saveMsg].content);toast('Salvat ca mesaj 💾');return}
+    if(b.dataset.saveLetter!==undefined){addItem('letter',chatMessages[+b.dataset.saveLetter].content);toast('Salvat ca scrisoare 💾');return}
+    if(b.dataset.copyChat!==undefined){copyText(chatMessages[+b.dataset.copyChat].content);return}
+    if(b.dataset.shareChat!==undefined){shareText(chatMessages[+b.dataset.shareChat].content);return}
+    if(b.dataset.fav){const it=itemById(b.dataset.fav);if(it){it.is_favorite=!it.is_favorite;saveData();refreshLists()}return}
+    if(b.dataset.secret){const it=itemById(b.dataset.secret);if(it){it.is_secret=!it.is_secret;saveData();refreshLists()}return}
+    if(b.dataset.copyItem){const it=itemById(b.dataset.copyItem);if(it)copyText(it.content);return}
+    if(b.dataset.shareItem){const it=itemById(b.dataset.shareItem);if(it)shareText(it.content);return}
+    if(b.dataset.del){data.items=data.items.filter(x=>x.id!==b.dataset.del);saveData();refreshLists();return}
+    if(b.dataset.copyHistory){const h=data.history.find(x=>x.id===b.dataset.copyHistory);if(h)copyText(h.content);return}
+    if(b.dataset.saveHistory){const h=data.history.find(x=>x.id===b.dataset.saveHistory);if(h){addItem(h.kind==='letter'?'letter':'message',h.content,h.title);toast('Salvat 💾')}return}
+    if(b.dataset.delHistory){data.history=data.history.filter(x=>x.id!==b.dataset.delHistory);saveData();renderHistory();return}
+    if(b.dataset.photoFav){const p=data.photos.find(x=>x.id===b.dataset.photoFav);if(p){p.favorite=!p.favorite;saveData();renderPhotos()}return}
+    if(b.dataset.photoSecret){const p=data.photos.find(x=>x.id===b.dataset.photoSecret);if(p){p.secret=true;saveData();renderPhotos();toast('Mutată în Zona Secretă 🔒')}return}
+    if(b.dataset.photoUnsecret){const p=data.photos.find(x=>x.id===b.dataset.photoUnsecret);if(p){p.secret=false;saveData();renderSecret()}return}
+    if(b.dataset.photoDel){data.photos=data.photos.filter(x=>x.id!==b.dataset.photoDel);saveData();renderPage(currentPage);return}
+    if(b.dataset.track){const t=playlist.find(x=>x[0]===b.dataset.track);if(t)playTrack(t[0],t[1],t[2]);return}
+    if(b.dataset.openTrack){openTrack(b.dataset.openTrack);return}
+    if(b.hasAttribute('data-resume-track')){if(currentTrack)playTrack(currentTrack.id,currentTrack.title,currentTrack.artist);return}
+  });
+
+  $('#backBtn').addEventListener('click',()=>history.length>1?history.back():go('home'));
+  $('#chatForm').addEventListener('submit',e=>{e.preventDefault();ask($('#chatInput').value)});
+  $$('.grid2[data-chip-group],.grid3[data-chip-group]').forEach(g=>g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;g.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));c.classList.add('active')}));
+  $('#generateBtn').addEventListener('click',genText);
+  $('#generatorResult').addEventListener('click',e=>{const text=$('#generatorResult').dataset.text,kind=$('#generatorResult').dataset.kind;if(e.target.closest('#genSave')){addItem(kind,text,$('#genName').value.trim());toast('Salvat 💾')}if(e.target.closest('#genCopy'))copyText(text);if(e.target.closest('#genWa'))wa(text)});
+  $('#templateName').addEventListener('input',renderTemplates);
+  $('#historySearch').addEventListener('input',renderHistory);$('#clearHistoryBtn').addEventListener('click',()=>{data.history=[];saveData();renderHistory();toast('Istoric golit')});
+  $('#photoInput').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=await compressImage(f);data.photos.unshift({id:uid(),data:d,secret:false,favorite:false,createdAt:Date.now()});saveData();renderPhotos();toast('Poză adăugată 📸')}catch(err){toast('Nu am putut procesa poza.')}e.target.value=''});
+  $('#secretSetBtn').addEventListener('click',async()=>{const p=$('#secretPinInput').value.trim();if(!/^\d{4,8}$/.test(p)){toast('PIN-ul trebuie să aibă 4-8 cifre.');return}data.secretPinHash=await hashPin(p);saveData();secretUnlocked=true;renderSecret();toast('PIN salvat 🔒')});
+  $('#secretUnlockBtn').addEventListener('click',async()=>{const p=$('#secretPinInput').value.trim();if(!data.secretPinHash){toast('Setează mai întâi un PIN.');return}if(await hashPin(p)===data.secretPinHash){secretUnlocked=true;renderSecret()}else toast('PIN greșit')});
+  $('#lockSecret').addEventListener('click',()=>{secretUnlocked=false;$('#secretPinInput').value='';renderSecret()});
+  $('#addSecretNote').addEventListener('click',()=>{const t=$('#secretNote').value.trim();if(!t)return;addItem('note',t,'',true);$('#secretNote').value='';renderSecret();toast('Notiță adăugată 🔒')});
+  $('#youtubePlay').addEventListener('click',()=>{const id=parseYT($('#youtubeInput').value);if(!id){toast('Link YouTube invalid 🙈');return}playTrack(id,'Videoclipul tău','YouTube');toast('Redare pornită 🎶')});
+  $('#youtubeOpen').addEventListener('click',()=>{const id=parseYT($('#youtubeInput').value);if(!id){toast('Link YouTube invalid 🙈');return}openTrack(id)});
+  $('#playerStop').addEventListener('click',stopTrack);$('#playerOpen').addEventListener('click',()=>go('music'));$('#playerYoutube').addEventListener('click',()=>currentTrack&&openTrack(currentTrack.id));
+  $('#saveProfile').addEventListener('click',async()=>{data.displayName=$('#displayName').value.trim();saveData();if(sb&&session){try{await sb.from('profiles').upsert({id:session.user.id,display_name:data.displayName})}catch(e){}}renderProfile();renderHome();toast('Profil salvat ❤️')});
+  $('#sendMagic').addEventListener('click',async()=>{if(!sb){toast('Supabase indisponibil');return}const email=$('#authEmail').value.trim();if(!email){toast('Scrie adresa de e-mail.');return}const {error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:location.href.split('#')[0]}});toast(error?error.message:'Verifică e-mailul pentru linkul magic ✉️')});
+  $('#googleLogin').addEventListener('click',async()=>{if(!sb)return;const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href.split('#')[0]}});if(error)toast(error.message)});$('#logoutBtn').addEventListener('click',async()=>{if(sb)await sb.auth.signOut();session=null;renderProfile();toast('Deconectat')});
+  $('#langRo').addEventListener('click',()=>{data.lang='ro';saveData();renderSettings();toast('Limba: Română')});$('#langEn').addEventListener('click',()=>{data.lang='en';saveData();renderSettings();toast('Language: English')});$('#soundOn').addEventListener('click',()=>{data.sound=true;saveData();renderSettings();beep()});$('#soundOff').addEventListener('click',()=>{data.sound=false;saveData();renderSettings()});
+  $('#testNotif').addEventListener('click',async()=>{if(!('Notification'in window)){toast('Notificările nu sunt disponibile.');return}const p=await Notification.requestPermission();if(p==='granted')new Notification('Totul funcționează! 🔔✨',{body:'Love AI te poate anunța când un mesaj este gata. ❤️',icon:'./icons/icon-192.png'});else toast('Permisiunea nu a fost acordată.')});
+  $('#exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='love-ai-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
+  $('#importInput').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const j=JSON.parse(await f.text());data=Object.assign({},defaultData,j);saveData();renderPage(currentPage);toast('Backup importat ✅')}catch(err){toast('Fișier backup invalid.')}e.target.value=''});
+  $('#clearAllBtn').addEventListener('click',()=>{if(!confirm('Ștergi toate datele locale Love AI?'))return;data={...defaultData};saveData();chatMessages=[];secretUnlocked=false;renderPage(currentPage);toast('Date locale șterse')});
+  window.addEventListener('hashchange',()=>{const p=location.hash.replace('#','');if(p&&p!==currentPage)go(p)});
+
+  function init(){renderChat();renderHome();renderSettings();const savedTrack=localStorage.getItem('loveai_html_track');if(savedTrack){try{currentTrack=JSON.parse(savedTrack);if(currentTrack&&currentTrack.id)setPlayerInfo(true)}catch(e){currentTrack=null;localStorage.removeItem('loveai_html_track')}}initAuth();const p=location.hash.replace('#','');if(p&&pageTitles[p])go(p);else go('home');setTimeout(()=>$('#splash').classList.add('hide'),900);if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}))}
+  init();
+})();
+</script>
+</body>
+</html>

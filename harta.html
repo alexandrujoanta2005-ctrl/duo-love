@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#07070d">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <title>Harta noastră 📍</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./style.css?v=60">
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  >
+
+  <style>
+    :root{
+      color-scheme:dark;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      min-height:100%;
+      background:#07070d;
+    }
+
+    body.duo-map-page{
+      margin:0!important;
+      min-height:100vh;
+      min-height:100dvh;
+      overflow-x:hidden;
+      overflow-y:auto!important;
+      color:white;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    .duo-map-app{
+      width:min(calc(100% - 20px), 540px);
+      margin:0 auto;
+      padding:
+        calc(env(safe-area-inset-top) + 12px)
+        0
+        calc(120px + env(safe-area-inset-bottom));
+    }
+
+    .duo-map-header,
+    .duo-map-panel,
+    .duo-map-map-card{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(12,9,17,.72);
+      box-shadow:0 14px 38px rgba(0,0,0,.18);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+    }
+
+    .duo-map-header{
+      padding:18px;
+      border-radius:25px;
+    }
+
+    .duo-map-header-row{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .duo-map-back{
+      flex:0 0 44px;
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:15px;
+      background:rgba(255,255,255,.07);
+      color:white;
+      text-decoration:none;
+      font-size:24px;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    .duo-map-title-wrap{
+      min-width:0;
+      flex:1;
+    }
+
+    .duo-map-kicker{
+      display:block;
+      margin-bottom:4px;
+      color:rgba(255,255,255,.52);
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:2.3px;
+    }
+
+    .duo-map-title{
+      margin:0;
+      font-size:clamp(27px,8vw,36px);
+      line-height:1.05;
+    }
+
+    .duo-map-subtitle{
+      margin:12px 0 0;
+      color:rgba(255,255,255,.66);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .duo-map-panel{
+      margin-top:14px;
+      padding:15px;
+      border-radius:22px;
+    }
+
+    .duo-map-status-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+    }
+
+    .duo-map-person{
+      min-width:0;
+      padding:13px;
+      border-radius:17px;
+      background:rgba(255,255,255,.055);
+    }
+
+    .duo-map-person-top{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+    }
+
+    .duo-map-dot{
+      flex:0 0 9px;
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:#8d8d96;
+      box-shadow:0 0 0 4px rgba(255,255,255,.035);
+    }
+
+    .duo-map-dot.live{
+      background:#55db86;
+      box-shadow:0 0 13px rgba(85,219,134,.45);
+    }
+
+    .duo-map-person strong{
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      font-size:14px;
+    }
+
+    .duo-map-person small{
+      display:block;
+      margin-top:7px;
+      color:rgba(255,255,255,.52);
+      font-size:11px;
+      line-height:1.35;
+    }
+
+    .duo-map-controls{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+      margin-top:12px;
+    }
+
+    .duo-map-button{
+      min-height:50px;
+      padding:12px 13px;
+      border:0;
+      border-radius:16px;
+      color:white;
+      font:inherit;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    .duo-map-button.primary{
+      background:linear-gradient(135deg,#c95887,#8855cf);
+    }
+
+    .duo-map-button.secondary{
+      border:1px solid rgba(255,255,255,.11);
+      background:rgba(255,255,255,.075);
+    }
+
+    .duo-map-button:disabled{
+      cursor:default;
+      opacity:.48;
+    }
+
+    .duo-map-message{
+      min-height:18px;
+      margin:11px 1px 0;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      line-height:1.45;
+    }
+
+    .duo-map-message.error{
+      color:#ffb5bd;
+    }
+
+    .duo-map-map-card{
+      margin-top:14px;
+      padding:8px;
+      overflow:hidden;
+      border-radius:25px;
+    }
+
+    #duoCoupleMap{
+      width:100%;
+      height:min(58vh,520px);
+      min-height:390px;
+      overflow:hidden;
+      border-radius:19px;
+      background:#17131d;
+    }
+
+    .leaflet-container{
+      font-family:inherit;
+      background:#17131d;
+    }
+
+    .leaflet-control-attribution{
+      background:rgba(8,8,12,.78)!important;
+      color:rgba(255,255,255,.72)!important;
+      font-size:9px!important;
+    }
+
+    .leaflet-control-attribution a{
+      color:#ffadd0!important;
+    }
+
+    .duo-map-privacy{
+      margin:14px 2px 0;
+      padding:13px 14px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:17px;
+      background:rgba(5,5,10,.28);
+      color:rgba(255,255,255,.55);
+      font-size:11px;
+      line-height:1.55;
+    }
+
+    .duo-map-privacy strong{
+      color:rgba(255,255,255,.82);
+    }
+
+    @media(max-width:390px){
+      .duo-map-status-grid,
+      .duo-map-controls{
+        grid-template-columns:1fr;
+      }
+
+      #duoCoupleMap{
+        min-height:350px;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,
+      *::before,
+      *::after{
+        scroll-behavior:auto!important;
+        animation:none!important;
+        transition:none!important;
+      }
+    }
+  </style>
+</head>
+
+<body class="duo-map-page">
+  <main class="duo-map-app">
+    <header class="duo-map-header">
+      <div class="duo-map-header-row">
+        <a class="duo-map-back" href="./index.html" aria-label="Înapoi la Acasă">‹</a>
+
+        <div class="duo-map-title-wrap">
+          <span class="duo-map-kicker">DOAR PENTRU VOI DOI</span>
+          <h1 class="duo-map-title">Harta noastră 📍</h1>
+        </div>
+      </div>
+
+      <p class="duo-map-subtitle">
+        Fiecare pornește GPS-ul doar când dorește să-și partajeze poziția.
+        Pe hartă apar doar pozițiile live ale cuplului vostru.
+      </p>
+    </header>
+
+    <section class="duo-map-panel" aria-label="Starea locațiilor">
+      <div class="duo-map-status-grid">
+        <div class="duo-map-person">
+          <div class="duo-map-person-top">
+            <span id="myLocationDot" class="duo-map-dot"></span>
+            <strong>Tu</strong>
+          </div>
+          <small id="myLocationStatus">Locația este oprită.</small>
+        </div>
+
+        <div class="duo-map-person">
+          <div class="duo-map-person-top">
+            <span id="partnerLocationDot" class="duo-map-dot"></span>
+            <strong>Partener</strong>
+          </div>
+          <small id="partnerLocationStatus">Aștept locația partenerului.</small>
+        </div>
+      </div>
+
+      <div class="duo-map-controls">
+        <button
+          id="startLocationButton"
+          class="duo-map-button primary"
+          type="button"
+        >
+          📍 Pornește locația mea
+        </button>
+
+        <button
+          id="stopLocationButton"
+          class="duo-map-button secondary"
+          type="button"
+          disabled
+        >
+          Oprește și șterge
+        </button>
+      </div>
+
+      <p id="duoMapMessage" class="duo-map-message" aria-live="polite">
+        GPS-ul nu pornește automat. Trebuie să apeși butonul și să accepți permisiunea telefonului.
+      </p>
+    </section>
+
+    <section class="duo-map-map-card" aria-label="Harta pozițiilor">
+      <div id="duoCoupleMap" role="application" aria-label="Harta cu poziția voastră"></div>
+    </section>
+
+    <div class="duo-map-privacy">
+      <strong>Confidențialitate:</strong>
+      nu este salvat un traseu. Se păstrează o singură poziție pentru fiecare persoană,
+      iar când apeși „Oprește și șterge”, poziția ta este ștearsă.
+      O poziție care nu a fost actualizată de peste 2 minute nu mai este afișată ca live.
+      Într-o aplicație web/PWA, actualizarea GPS în fundal nu este garantată; pentru poziție live,
+      pagina trebuie să rămână deschisă sau activă.
+    </div>
+  </main>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./supabase.js?v=31"></script>
+  <script src="./security.js?v=32"></script>
+  <script src="./cloud-sync.js?v=60"></script>
+  <script src="./tema.js?v=64"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const LIVE_WINDOW_MS = 2 * 60 * 1000;
+      const UPLOAD_THROTTLE_MS = 7000;
+      const PARTNER_REFRESH_MS = 8000;
+
+      let map = null;
+      let myMarker = null;
+      let myAccuracyCircle = null;
+      let partnerMarker = null;
+      let partnerAccuracyCircle = null;
+
+      let session = null;
+      let coupleId = null;
+      let gpsWatchId = null;
+      let sharingActive = false;
+      let lastUploadAt = 0;
+      let refreshTimer = null;
+      let lastOwnCoords = null;
+      let hasCenteredAfterStart = false;
+      let partnerWasVisible = false;
+
+      const startButton = document.getElementById("startLocationButton");
+      const stopButton = document.getElementById("stopLocationButton");
+      const message = document.getElementById("duoMapMessage");
+
+      const myDot = document.getElementById("myLocationDot");
+      const partnerDot = document.getElementById("partnerLocationDot");
+
+      const myStatus = document.getElementById("myLocationStatus");
+      const partnerStatus = document.getElementById("partnerLocationStatus");
+
+      function setMessage(text, isError) {
+        message.textContent = text || "";
+        message.classList.toggle("error", Boolean(isError));
+      }
+
+      function setMyLive(live, text) {
+        myDot.classList.toggle("live", Boolean(live));
+        myStatus.textContent = text;
+      }
+
+      function setPartnerLive(live, text) {
+        partnerDot.classList.toggle("live", Boolean(live));
+        partnerStatus.textContent = text;
+      }
+
+      function formatAge(iso) {
+        const time = new Date(iso).getTime();
+
+        if (!Number.isFinite(time)) {
+          return "actualizare necunoscută";
+        }
+
+        const seconds = Math.max(0, Math.floor((Date.now() - time) / 1000));
+
+        if (seconds < 10) {
+          return "acum";
+        }
+
+        if (seconds < 60) {
+          return "acum " + seconds + " sec.";
+        }
+
+        const minutes = Math.floor(seconds / 60);
+        return "acum " + minutes + (minutes === 1 ? " min." : " min.");
+      }
+
+      function isFresh(row) {
+        if (!row || !row.updated_at || row.sharing !== true) {
+          return false;
+        }
+
+        const time = new Date(row.updated_at).getTime();
+
+        return Number.isFinite(time) &&
+          Date.now() - time <= LIVE_WINDOW_MS;
+      }
+
+      function createCircle(lat, lng, isMine) {
+        return L.circleMarker(
+          [lat, lng],
+          {
+            radius: isMine ? 10 : 11,
+            weight: 3,
+            color: isMine ? "#ffffff" : "#ffd7e8",
+            fillColor: isMine ? "#5da8ff" : "#e2609b",
+            fillOpacity: .95
+          }
+        );
+      }
+
+      function createAccuracyCircle(lat, lng, accuracy, isMine) {
+        const safeAccuracy = Math.max(
+          5,
+          Math.min(Number(accuracy) || 25, 2000)
+        );
+
+        return L.circle(
+          [lat, lng],
+          {
+            radius: safeAccuracy,
+            weight: 1,
+            color: isMine ? "#77b6ff" : "#f18abb",
+            fillColor: isMine ? "#77b6ff" : "#f18abb",
+            fillOpacity: .08
+          }
+        );
+      }
+
+      function initMap() {
+        if (typeof L === "undefined") {
+          setMessage(
+            "Harta nu s-a putut încărca. Verifică internetul și încearcă din nou.",
+            true
+          );
+          return false;
+        }
+
+        map = L.map(
+          "duoCoupleMap",
+          {
+            zoomControl: true,
+            attributionControl: true
+          }
+        ).setView([45.9432, 24.9668], 6);
+
+        L.tileLayer(
+          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          {
+            maxZoom: 19,
+            attribution: "&copy; OpenStreetMap contributors"
+          }
+        ).addTo(map);
+
+        return true;
+      }
+
+      function updateMyMarker(lat, lng, accuracy) {
+        if (!map) {
+          return;
+        }
+
+        if (!myMarker) {
+          myMarker = createCircle(lat, lng, true)
+            .addTo(map)
+            .bindPopup("Tu 📍");
+        } else {
+          myMarker.setLatLng([lat, lng]);
+        }
+
+        if (!myAccuracyCircle) {
+          myAccuracyCircle = createAccuracyCircle(
+            lat,
+            lng,
+            accuracy,
+            true
+          ).addTo(map);
+        } else {
+          myAccuracyCircle
+            .setLatLng([lat, lng])
+            .setRadius(
+              Math.max(
+                5,
+                Math.min(Number(accuracy) || 25, 2000)
+              )
+            );
+        }
+
+        lastOwnCoords = [lat, lng];
+      }
+
+      function removePartnerMarker() {
+        if (!map) {
+          return;
+        }
+
+        if (partnerMarker) {
+          map.removeLayer(partnerMarker);
+          partnerMarker = null;
+        }
+
+        if (partnerAccuracyCircle) {
+          map.removeLayer(partnerAccuracyCircle);
+          partnerAccuracyCircle = null;
+        }
+      }
+
+      function updatePartnerMarker(row) {
+        if (!map || !row) {
+          return;
+        }
+
+        const lat = Number(row.latitude);
+        const lng = Number(row.longitude);
+        const accuracy = Number(row.accuracy) || 25;
+
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
+          return;
+        }
+
+        if (!partnerMarker) {
+          partnerMarker = createCircle(lat, lng, false)
+            .addTo(map)
+            .bindPopup("Partener ❤️");
+        } else {
+          partnerMarker.setLatLng([lat, lng]);
+        }
+
+        if (!partnerAccuracyCircle) {
+          partnerAccuracyCircle = createAccuracyCircle(
+            lat,
+            lng,
+            accuracy,
+            false
+          ).addTo(map);
+        } else {
+          partnerAccuracyCircle
+            .setLatLng([lat, lng])
+            .setRadius(
+              Math.max(
+                5,
+                Math.min(accuracy, 2000)
+              )
+            );
+        }
+      }
+
+      function fitVisibleLocations() {
+        if (!map) {
+          return;
+        }
+
+        const points = [];
+
+        if (myMarker) {
+          points.push(myMarker.getLatLng());
+        }
+
+        if (partnerMarker) {
+          points.push(partnerMarker.getLatLng());
+        }
+
+        if (points.length === 1) {
+          map.setView(points[0], 15);
+        } else if (points.length >= 2) {
+          map.fitBounds(
+            L.latLngBounds(points),
+            {
+              padding: [45, 45],
+              maxZoom: 16
+            }
+          );
+        }
+      }
+
+      async function loadContext() {
+        if (typeof supabaseClient === "undefined") {
+          throw new Error("Clientul Supabase nu este disponibil.");
+        }
+
+        const sessionResult =
+          await supabaseClient.auth.getSession();
+
+        if (
+          sessionResult.error ||
+          !sessionResult.data ||
+          !sessionResult.data.session
+        ) {
+          location.href = "./login.html";
+          return false;
+        }
+
+        session = sessionResult.data.session;
+
+        const coupleResult =
+          await supabaseClient.rpc("my_couple_id");
+
+        if (coupleResult.error) {
+          throw coupleResult.error;
+        }
+
+        coupleId = coupleResult.data || null;
+
+        if (!coupleId) {
+          startButton.disabled = true;
+          setMessage(
+            "Conectează mai întâi partenerul din Setări pentru a folosi Harta noastră.",
+            true
+          );
+          return false;
+        }
+
+        return true;
+      }
+
+      async function saveOwnLocation(position) {
+        if (!session || !coupleId) {
+          return;
+        }
+
+        const coords = position.coords;
+
+        const payload = {
+          user_id: session.user.id,
+          couple_id: coupleId,
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          accuracy: coords.accuracy || null,
+          sharing: true,
+          updated_at: new Date().toISOString()
+        };
+
+        const result =
+          await supabaseClient
+            .from("couple_locations")
+            .upsert(
+              payload,
+              {
+                onConflict: "user_id"
+              }
+            );
+
+        if (result.error) {
+          throw result.error;
+        }
+
+        lastUploadAt = Date.now();
+      }
+
+      async function loadCoupleLocations(options) {
+        options = options || {};
+
+        if (!session || !coupleId) {
+          return;
+        }
+
+        const result =
+          await supabaseClient
+            .from("couple_locations")
+            .select(
+              "user_id,couple_id,latitude,longitude,accuracy,sharing,updated_at"
+            )
+            .eq("couple_id", coupleId)
+            .eq("sharing", true);
+
+        if (result.error) {
+          if (
+            String(result.error.message || "")
+              .toLowerCase()
+              .includes("couple_locations")
+          ) {
+            setMessage(
+              "Lipsește tabela GPS din Supabase. Rulează fișierul SUPABASE-HARTA.sql o singură dată.",
+              true
+            );
+          } else {
+            setMessage(
+              "Nu am putut actualiza pozițiile: " +
+                (result.error.message || "eroare necunoscută"),
+              true
+            );
+          }
+
+          return;
+        }
+
+        const rows = Array.isArray(result.data)
+          ? result.data
+          : [];
+
+        const mine =
+          rows.find(
+            row =>
+              row.user_id === session.user.id &&
+              isFresh(row)
+          ) || null;
+
+        const partner =
+          rows.find(
+            row =>
+              row.user_id !== session.user.id &&
+              isFresh(row)
+          ) || null;
+
+        if (!sharingActive && mine) {
+          updateMyMarker(
+            Number(mine.latitude),
+            Number(mine.longitude),
+            Number(mine.accuracy)
+          );
+
+          setMyLive(
+            true,
+            "Ultima ta poziție: " + formatAge(mine.updated_at)
+          );
+        }
+
+        if (mine) {
+          stopButton.disabled = false;
+        } else if (!sharingActive) {
+          stopButton.disabled = true;
+        }
+
+        if (partner) {
+          updatePartnerMarker(partner);
+
+          setPartnerLive(
+            true,
+            "Live · " + formatAge(partner.updated_at)
+          );
+
+          if (!partnerWasVisible) {
+            partnerWasVisible = true;
+            fitVisibleLocations();
+          }
+        } else {
+          removePartnerMarker();
+          partnerWasVisible = false;
+
+          setPartnerLive(
+            false,
+            "Partenerul nu partajează acum o poziție live."
+          );
+        }
+
+        if (options.fit === true) {
+          fitVisibleLocations();
+        }
+      }
+
+      async function startSharing() {
+        if (sharingActive) {
+          return;
+        }
+
+        if (!window.isSecureContext) {
+          setMessage(
+            "GPS-ul web are nevoie de HTTPS. Deschide aplicația din GitHub Pages/HTTPS, nu dintr-un fișier local.",
+            true
+          );
+          return;
+        }
+
+        if (!navigator.geolocation) {
+          setMessage(
+            "Acest dispozitiv/browser nu oferă acces la GPS.",
+            true
+          );
+          return;
+        }
+
+        startButton.disabled = true;
+
+        setMessage(
+          "Se cere permisiunea GPS… Acceptă locația exactă dacă vrei să apari precis pe hartă.",
+          false
+        );
+
+        gpsWatchId =
+          navigator.geolocation.watchPosition(
+            async function (position) {
+              sharingActive = true;
+
+              stopButton.disabled = false;
+              startButton.disabled = true;
+
+              const lat = position.coords.latitude;
+              const lng = position.coords.longitude;
+              const accuracy = position.coords.accuracy;
+
+              updateMyMarker(lat, lng, accuracy);
+
+              setMyLive(
+                true,
+                "Live · precizie aproximativă ±" +
+                  Math.round(accuracy || 0) +
+                  " m"
+              );
+
+              if (Date.now() - lastUploadAt >= UPLOAD_THROTTLE_MS) {
+                try {
+                  await saveOwnLocation(position);
+
+                  setMessage(
+                    "Locația ta este partajată cu partenerul conectat. ❤️",
+                    false
+                  );
+
+                  await loadCoupleLocations();
+                } catch (error) {
+                  console.error("Eroare salvare GPS:", error);
+
+                  setMessage(
+                    "Nu am putut salva locația în Supabase. " +
+                    (error && error.message ? error.message : ""),
+                    true
+                  );
+                }
+              }
+
+              if (!hasCenteredAfterStart) {
+                hasCenteredAfterStart = true;
+                fitVisibleLocations();
+              }
+            },
+            function (error) {
+              sharingActive = false;
+              hasCenteredAfterStart = false;
+              startButton.disabled = false;
+              stopButton.disabled = true;
+
+              let text =
+                "Nu am putut accesa locația.";
+
+              if (error && error.code === 1) {
+                text =
+                  "Permisiunea GPS a fost refuzată. Activează locația pentru acest site din setările browserului.";
+              } else if (error && error.code === 2) {
+                text =
+                  "Telefonul nu a putut determina poziția. Verifică dacă GPS-ul este pornit.";
+              } else if (error && error.code === 3) {
+                text =
+                  "Localizarea a durat prea mult. Încearcă din nou într-un loc cu semnal GPS mai bun.";
+              }
+
+              setMyLive(false, "Locația este oprită.");
+              setMessage(text, true);
+            },
+            {
+              enableHighAccuracy: true,
+              timeout: 20000,
+              maximumAge: 5000
+            }
+          );
+      }
+
+      async function stopSharing() {
+        if (gpsWatchId !== null) {
+          navigator.geolocation.clearWatch(gpsWatchId);
+          gpsWatchId = null;
+        }
+
+        sharingActive = false;
+        hasCenteredAfterStart = false;
+        startButton.disabled = false;
+        stopButton.disabled = true;
+
+        if (map && myMarker) {
+          map.removeLayer(myMarker);
+          myMarker = null;
+        }
+
+        if (map && myAccuracyCircle) {
+          map.removeLayer(myAccuracyCircle);
+          myAccuracyCircle = null;
+        }
+
+        lastOwnCoords = null;
+
+        setMyLive(false, "Locația este oprită.");
+
+        if (!session) {
+          return;
+        }
+
+        try {
+          const result =
+            await supabaseClient
+              .from("couple_locations")
+              .delete()
+              .eq("user_id", session.user.id);
+
+          if (result.error) {
+            throw result.error;
+          }
+
+          setMessage(
+            "Partajarea a fost oprită și poziția ta a fost ștearsă.",
+            false
+          );
+
+          await loadCoupleLocations({
+            fit: true
+          });
+        } catch (error) {
+          console.error("Eroare oprire GPS:", error);
+
+          setMessage(
+            "GPS-ul local a fost oprit, dar nu am putut șterge poziția din cloud. Încearcă din nou când ai internet.",
+            true
+          );
+        }
+      }
+
+      async function initialize() {
+        if (!initMap()) {
+          return;
+        }
+
+        startButton.disabled = true;
+
+        try {
+          const ready =
+            await loadContext();
+
+          if (!ready) {
+            return;
+          }
+
+          startButton.disabled = false;
+
+          await loadCoupleLocations({
+            fit: true
+          });
+
+          refreshTimer =
+            window.setInterval(
+              function () {
+                loadCoupleLocations()
+                  .catch(
+                    error =>
+                      console.warn(
+                        "Actualizare hartă:",
+                        error
+                      )
+                  );
+              },
+              PARTNER_REFRESH_MS
+            );
+
+        } catch (error) {
+          console.error("Inițializare hartă:", error);
+
+          startButton.disabled = true;
+
+          setMessage(
+            "Harta nu a putut porni: " +
+              (error && error.message
+                ? error.message
+                : "eroare necunoscută"),
+            true
+          );
+        }
+      }
+
+      startButton.addEventListener(
+        "click",
+        startSharing
+      );
+
+      stopButton.addEventListener(
+        "click",
+        stopSharing
+      );
+
+      window.addEventListener(
+        "focus",
+        function () {
+          if (session && coupleId) {
+            loadCoupleLocations()
+              .catch(function () {});
+          }
+        }
+      );
+
+      window.addEventListener(
+        "beforeunload",
+        function () {
+          if (refreshTimer) {
+            clearInterval(refreshTimer);
+          }
+
+          if (gpsWatchId !== null) {
+            navigator.geolocation.clearWatch(gpsWatchId);
+          }
+        }
+      );
+
+      initialize();
+    })();
+  </script>
+</body>
+</html>

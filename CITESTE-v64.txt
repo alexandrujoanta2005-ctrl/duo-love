@@ -1,0 +1,19 @@
+DUO LOVE FULL v64
+
+Acest ZIP conține proiectul complet DUO LOVE, inclusiv:
+- Harta noastră cu GPS (harta.html)
+- Love AI local în folderul love-ai/
+- Muzica Love AI reparată
+- Profil de cuplu + teme sezoniere + widget
+- Fixuri Chat / Setări / scroll / fundal
+
+GITHUB:
+1. Încarcă toate fișierele și folderele DIN ACEST ZIP direct în rădăcina repository-ului.
+2. index.html trebuie să fie în rădăcină.
+3. Păstrează folderul love-ai/ exact așa.
+
+HARTA GPS:
+Rulează o singură dată conținutul fișierului SUPABASE-HARTA.sql în Supabase -> SQL Editor.
+GPS-ul necesită HTTPS; GitHub Pages oferă HTTPS.
+
+Versiune cache principală: duo-love-v64

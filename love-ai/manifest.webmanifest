@@ -1,0 +1,14 @@
+{
+  "name": "Love AI ❤️",
+  "short_name": "Love AI",
+  "description": "Mesaje romantice, scrisori, șabloane și amintiri.",
+  "start_url": "./index.html#home",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#160f1d",
+  "theme_color": "#171020",
+  "icons": [
+    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png"}
+  ]
+}

@@ -575,9 +575,16 @@
     },
 
     {
-      file: "love-studio.html",
-      icon: "✨",
-      name: "Love AI"
+      file: "harta.html",
+      icon: "📍",
+      name: "Harta noastră"
+    },
+
+    {
+      file: "love-ai/index.html",
+      icon: "💖",
+      name: "Love AI",
+      external: true
     },
 
     {
@@ -1345,9 +1352,11 @@
 
 
             const destination =
-              currentURL.origin +
-              folder +
-              page.file;
+              page.external
+                ? page.file
+                : currentURL.origin +
+                  folder +
+                  page.file;
 
 
             window.location.href =
