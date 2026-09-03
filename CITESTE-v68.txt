@@ -1,0 +1,9 @@
+DUO LOVE FULL v68
+
+- Love AI conectat la proiectul Supabase separat qcoprkunssrogmygntzz.
+- Publishable key Love AI actualizată.
+- Sesiune Google Love AI separată explicit de DUO LOVE.
+- DUO LOVE Supabase/login nu a fost modificat.
+- Cache root: duo-love-v68.
+- Cache Love AI: love-ai-html-v6.
+- Include LOVE-AI-SUPABASE-SETUP.sql.

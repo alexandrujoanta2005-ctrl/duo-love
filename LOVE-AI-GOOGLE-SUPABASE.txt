@@ -1,0 +1,31 @@
+LOVE AI — GOOGLE LOGIN (PROIECT SUPABASE SEPARAT)
+
+LOVE AI folosește acum proiectul Supabase separat:
+https://qcoprkunssrogmygntzz.supabase.co
+
+DUO LOVE rămâne pe proiectul lui existent și NU este modificat.
+Sesiunea Love AI are și o cheie locală separată: love-ai-auth-session-v1.
+
+CALLBACK URL PENTRU GOOGLE CLOUD:
+https://qcoprkunssrogmygntzz.supabase.co/auth/v1/callback
+
+PAȘI PENTRU GOOGLE LOGIN:
+1. În Google Cloud / Google Auth Platform creează un OAuth Client de tip Web application.
+2. La Authorized JavaScript origins adaugă domeniul pe care este publicat DUO LOVE (de ex. https://NUME.github.io).
+3. La Authorized redirect URIs adaugă EXACT:
+   https://qcoprkunssrogmygntzz.supabase.co/auth/v1/callback
+4. Copiază Google Client ID și Client Secret.
+5. În proiectul Supabase LOVE AI: Authentication > Providers > Google.
+6. Activează Google, introdu Client ID + Client Secret și salvează.
+7. În Supabase LOVE AI: Authentication > URL Configuration:
+   - Site URL = URL-ul public al folderului love-ai/
+   - Redirect URLs = același URL al folderului love-ai/
+     exemplu: https://NUME.github.io/REPO/love-ai/
+8. Rulează o singură dată fișierul LOVE-AI-SUPABASE-SETUP.sql în SQL Editor, pentru profil și sincronizarea mesajelor.
+9. Publică fișierele și testează „Continuă cu Google”.
+
+IMPORTANT:
+- NU modifica proiectul Supabase DUO LOVE.
+- Client Secret Google NU se pune în GitHub sau index.html.
+- Database password NU se pune în GitHub sau index.html.
+- Publishable key este destinată frontend-ului; protecția datelor se face prin RLS.

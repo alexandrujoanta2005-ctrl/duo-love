@@ -49,6 +49,8 @@
     .music-player{position:fixed;left:50%;bottom:calc(92px + var(--safe-bottom));transform:translateX(-50%);z-index:35;width:min(calc(100% - 24px),500px);display:none;padding:9px;border-radius:19px}.music-player.show{display:flex;align-items:center;gap:9px}.music-player .grow{flex:1;min-width:0}.music-player .grow strong,.music-player .grow span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.music-mini-video{flex:0 0 96px;width:96px;height:54px;border-radius:12px;overflow:hidden;background:rgba(0,0,0,.55);display:grid;place-items:center}.music-mini-video iframe{display:block;width:96px;height:54px;border:0;background:#000}.music-mini-video .resume{width:100%;height:100%;border:0;background:transparent;color:#fff;font-size:22px;cursor:pointer}.music-player .icon-btn{flex:0 0 38px;width:38px;height:38px}.ytbox{min-height:72px}.ytbox iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:18px;background:#000}.music-status{padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:rgba(255,255,255,.035)}.track-row{display:flex;align-items:center;gap:10px;width:100%;margin-bottom:8px;padding:11px 12px;text-align:left}.track-row .track-main{flex:1;min-width:0}.track-row .track-main b,.track-row .track-main small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track-actions{display:flex;gap:6px;flex:0 0 auto}.track-actions button{min-width:42px}.music-note{line-height:1.5}@media(max-width:390px){.music-mini-video{flex-basis:82px;width:82px;height:46px}.music-mini-video iframe{width:82px;height:46px}.music-player{gap:7px}.music-player .icon-btn{width:34px;height:34px;flex-basis:34px}.track-row{align-items:flex-start}.track-actions{flex-direction:column}}
     .secret-lock{text-align:center;padding:34px 20px}.secret-lock .lock{font-size:46px}.status{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.05);font-size:12px;color:var(--muted)}
     .splash{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%,rgba(255,73,151,.25),transparent 32%),linear-gradient(#170f1f,#0c0911);transition:.5s}.splash.hide{opacity:0;visibility:hidden}.splash-heart{font-size:70px;animation:beat 1.2s ease-in-out infinite}@keyframes beat{50%{transform:scale(1.14)}}.splash h1{font-family:Georgia,serif;font-size:42px;margin:12px 0 0;background:linear-gradient(90deg,#ff8abc,#fff,#ad87ff);-webkit-background-clip:text;background-clip:text;color:transparent}.splash p{color:var(--muted);letter-spacing:.18em;font-size:10px;text-transform:uppercase}
+    .auth-gate{position:fixed;inset:0;z-index:10020;display:flex;align-items:center;justify-content:center;padding:calc(22px + var(--safe-top)) 18px calc(22px + var(--safe-bottom));background:rgba(10,7,14,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);opacity:0;visibility:hidden;transition:.28s}
+    .auth-gate.show{opacity:1;visibility:visible}.auth-card{width:min(100%,420px);padding:24px;border-radius:30px;background:linear-gradient(160deg,rgba(48,29,55,.98),rgba(24,15,31,.98));border:1px solid rgba(255,255,255,.13);box-shadow:0 28px 80px rgba(0,0,0,.55);text-align:center}.auth-logo{width:76px;height:76px;margin:0 auto 15px;border-radius:25px;display:grid;place-items:center;font-size:36px;background:linear-gradient(135deg,var(--pink),var(--violet));box-shadow:0 15px 34px rgba(255,90,165,.22)}.auth-card h2{margin:0;font-family:Georgia,serif;font-size:30px}.auth-card p{margin:8px 0 19px}.google-auth-btn{display:flex;align-items:center;justify-content:center;gap:11px;background:#fff!important;color:#202124!important;border-color:#fff!important;font-weight:750}.google-g{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#4285f4;font-family:Arial,sans-serif;font-size:19px;font-weight:900}.auth-skip{margin-top:9px;background:transparent!important}.auth-privacy{margin:14px 8px 0;color:var(--muted);font-size:11px;line-height:1.45}.avatar.has-photo{padding:0;overflow:hidden;background:rgba(255,255,255,.08)}.avatar.has-photo img{width:100%;height:100%;display:block;object-fit:cover}.google-account-badge{display:inline-flex;align-items:center;gap:6px;margin-top:5px;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.07);font-size:11px;color:var(--muted)}
     @media(max-width:360px){.content{padding-left:13px;padding-right:13px}.topbar{padding-left:13px;padding-right:13px}.grid3{gap:7px}.home-sections .quick{padding:10px 5px}.topbar h1{font-size:21px}.duo-home-btn{padding:0 9px;font-size:10px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
   </style>
@@ -56,6 +58,18 @@
 <body>
   <div id="splash" class="splash"><div class="splash-heart">❤️</div><h1>Love AI</h1><p>AI-ul tău de iubire</p></div>
   <div id="toast" class="toast" role="status"></div>
+
+  <div id="authGate" class="auth-gate" aria-hidden="true">
+    <div class="auth-card">
+      <div class="auth-logo">❤️</div>
+      <h2>Intră în Love AI</h2>
+      <p class="muted small">Conectează-te cu Google ca să-ți păstrezi contul și profilul Love AI.</p>
+      <button id="googleLoginGate" class="btn full google-auth-btn" type="button"><span class="google-g">G</span><span>Continuă cu Google</span></button>
+      <button id="continueLocal" class="btn full auth-skip" type="button">Continuă fără cont</button>
+      <div id="authGateStatus" class="status" style="display:none;margin-top:12px"></div>
+      <p class="auth-privacy">Autentificarea este realizată prin Google + Supabase. Love AI nu vede parola contului tău Google.</p>
+    </div>
+  </div>
 
   <div class="app">
     <header class="topbar"><div class="topbar-row"><h1 id="pageTitle">Love AI ❤️</h1><div class="top-actions"><a id="duoHomeBtn" class="duo-home-btn" href="../index.html" aria-label="Înapoi la DUO LOVE">← DUO LOVE</a><button id="backBtn" class="icon-btn" type="button" title="Înapoi în Love AI" style="display:none">←</button></div></div></header>
@@ -126,10 +140,10 @@
       </section>
 
       <section class="page" data-page="profile">
-        <div class="glass card profile-head"><div class="avatar">❤️</div><h2 class="title" id="profileName">Love AI</h2><p id="profileAccount" class="muted small">Mod local</p></div>
+        <div class="glass card profile-head"><div class="avatar" id="profileAvatar">❤️</div><h2 class="title" id="profileName">Love AI</h2><p id="profileAccount" class="muted small">Mod local</p><div id="googleAccountBadge" class="google-account-badge" style="display:none"><span>G</span><span>Conectat cu Google</span></div></div>
         <div class="glass card" style="margin-top:12px"><label class="label">Nume afișat</label><input id="displayName" class="input" maxlength="60"><button id="saveProfile" class="btn primary full" style="margin-top:10px">Salvează profilul</button></div>
         <div class="grid2" style="margin-top:12px"><button class="quick" data-go="favorites"><span class="quick-ico">⭐</span><span>Favorite</span></button><button class="quick" data-go="letters"><span class="quick-ico">💌</span><span>Scrisori</span></button><button class="quick" data-go="secret"><span class="quick-ico">🔒</span><span>Zona secretă</span></button><button class="quick" data-go="settings"><span class="quick-ico">⚙️</span><span>Setări</span></button></div>
-        <div class="glass card" style="margin-top:12px"><h3 style="margin-top:0">☁️ Cont cloud (opțional)</h3><p class="muted small">Poți folosi aplicația fără cont. Dacă te conectezi, profilul și textele pot fi sincronizate în Supabase.</p><div id="authLoggedOut"><input id="authEmail" class="input" type="email" placeholder="nume@email.com"><button id="sendMagic" class="btn full" style="margin-top:8px">✉️ Trimite link magic</button><button id="googleLogin" class="btn full" style="margin-top:8px">G Continuă cu Google</button></div><button id="logoutBtn" class="btn danger full" style="margin-top:8px;display:none">Deconectare</button><div id="cloudStatus" class="status" style="margin-top:10px">Mod local activ.</div></div>
+        <div class="glass card" style="margin-top:12px"><h3 style="margin-top:0">☁️ Cont cloud (opțional)</h3><p class="muted small">Poți folosi aplicația fără cont. Dacă te conectezi, profilul și textele pot fi sincronizate în Supabase.</p><div id="authLoggedOut"><input id="authEmail" class="input" type="email" placeholder="nume@email.com"><button id="sendMagic" class="btn full" style="margin-top:8px">✉️ Trimite link magic</button><button id="googleLogin" class="btn full google-auth-btn" style="margin-top:8px"><span class="google-g">G</span><span>Continuă cu Google</span></button></div><button id="logoutBtn" class="btn danger full" style="margin-top:8px;display:none">Deconectare</button><div id="cloudStatus" class="status" style="margin-top:10px">Mod local activ.</div></div>
       </section>
 
       <section class="page" data-page="settings">
@@ -138,7 +152,7 @@
         <div class="glass card" style="margin-top:12px"><h3 style="margin-top:0">🔔 Notificări</h3><p class="muted small">Testează permisiunea pentru notificări în browser.</p><button id="testNotif" class="btn full">Testează notificarea</button></div>
         <div class="glass card" style="margin-top:12px"><h3 style="margin-top:0">📲 Instalare</h3><p class="muted small">Pe iPhone: Partajare → „Adaugă pe ecranul principal”. Pe Android: meniul browserului → „Instalează aplicația”.</p></div>
         <div class="glass card" style="margin-top:12px"><h3 style="margin-top:0">🗂️ Date locale</h3><button id="exportBtn" class="btn full">Exportă backup JSON</button><label class="btn full" style="display:flex;align-items:center;justify-content:center;margin-top:8px;cursor:pointer">Importă backup<input id="importInput" type="file" accept="application/json" hidden></label><button id="clearAllBtn" class="btn danger full" style="margin-top:8px">Șterge toate datele locale</button></div>
-        <div class="glass card" style="margin-top:12px;text-align:center"><div style="font-size:30px">❤️</div><p class="tiny muted" style="letter-spacing:.16em">CREATOR</p><h3 class="title" style="margin:0">Alexandru Joantă</h3><p class="muted small">Versiune HTML statică 1.3 • Muzică + buton DUO LOVE vizibil</p></div>
+        <div class="glass card" style="margin-top:12px;text-align:center"><div style="font-size:30px">❤️</div><p class="tiny muted" style="letter-spacing:.16em">CREATOR</p><h3 class="title" style="margin:0">Alexandru Joantă</h3><p class="muted small">Versiune HTML statică 1.5 • Google Login separat + Muzică + DUO LOVE</p></div>
       </section>
     </main>
   </div>
@@ -156,10 +170,11 @@
 <script>
 (function(){
   'use strict';
-  const SUPABASE_URL='https://accoivdigjlxjjaojzry.supabase.co';
-  const SUPABASE_KEY='sb_publishable_ywXiao3O1pHrYDBJmqCNtw_Jh94y_zQ';
+  const SUPABASE_URL='https://qcoprkunssrogmygntzz.supabase.co';
+  const SUPABASE_KEY='sb_publishable_auBKiB31KggU7UhKs_HmUQ_SYT5FZTZ';
   const AI_ENDPOINT=''; // Opțional: endpoint securizat care primește {messages,lang} și răspunde {reply}
-  const sb=(window.supabase&&SUPABASE_URL&&SUPABASE_KEY)?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
+  const AUTH_REDIRECT_URL=(()=>{try{const u=new URL('./',window.location.href);u.search='';u.hash='';return u.href}catch(e){return window.location.href.split('#')[0].split('?')[0]}})();
+  const sb=(window.supabase&&SUPABASE_URL&&SUPABASE_KEY)?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storage:window.localStorage,storageKey:'love-ai-auth-session-v1'}}):null;
   const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
   const STORE='loveai_html_data_v1';
   const defaultData={displayName:'',items:[],history:[],lang:'ro',sound:true,secretPinHash:'',photos:[]};
@@ -234,10 +249,38 @@
   function stopTrack(){currentTrack=null;$('#playerVideo').innerHTML='';$('#youtubeEmbed').innerHTML='';$('#musicPlayer').classList.remove('show');localStorage.removeItem('loveai_html_track');renderMusic()}
   function openTrack(id){if(id)window.open(youtubeUrl(id),'_blank','noopener,noreferrer')}
 
-  function renderProfile(){const name=data.displayName||session?.user?.email?.split('@')[0]||'Love AI';$('#displayName').value=data.displayName||'';$('#profileName').textContent=name;$('#profileAccount').textContent=session?(session.user.email||session.user.phone||'Cont conectat'):'Mod local';$('#authLoggedOut').style.display=session?'none':'block';$('#logoutBtn').style.display=session?'block':'none';$('#cloudStatus').textContent=session?'☁️ Conectat la Supabase.':'Mod local activ. Datele rămân pe acest dispozitiv.'}
+  function getGoogleMeta(){const u=session&&session.user;const m=(u&&u.user_metadata)||{};return {name:(m.full_name||m.name||'').trim(),avatar:(m.avatar_url||m.picture||'').trim(),provider:(u&&u.app_metadata&&u.app_metadata.provider)||''}}
+  function setAuthGate(show,message=''){const gate=$('#authGate');if(!gate)return;gate.classList.toggle('show',!!show);gate.setAttribute('aria-hidden',show?'false':'true');const status=$('#authGateStatus');if(status){status.style.display=message?'block':'none';status.textContent=message||''}}
+  async function signInWithGoogle(){if(!sb){setAuthGate(true,'Supabase nu este disponibil.');toast('Supabase indisponibil');return}const buttons=[$('#googleLoginGate'),$('#googleLogin')].filter(Boolean);buttons.forEach(b=>b.disabled=true);setAuthGate(true,'Se deschide Google…');try{const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:AUTH_REDIRECT_URL,queryParams:{prompt:'select_account'}}});if(error){buttons.forEach(b=>b.disabled=false);setAuthGate(true,error.message);toast(error.message)}}catch(error){buttons.forEach(b=>b.disabled=false);setAuthGate(true,'Nu am putut porni conectarea Google.');toast('Eroare conectare Google')}}
+  function renderProfile(){
+    const meta=getGoogleMeta();
+    const fallbackEmail=session?.user?.email||'';
+    const name=data.displayName||meta.name||fallbackEmail.split('@')[0]||'Love AI';
+    $('#displayName').value=data.displayName||'';
+    $('#profileName').textContent=name;
+    $('#profileAccount').textContent=session?(fallbackEmail||'Cont conectat'):'Mod local';
+    $('#authLoggedOut').style.display=session?'none':'block';
+    $('#logoutBtn').style.display=session?'block':'none';
+    $('#cloudStatus').textContent=session?'☁️ Cont conectat. Datele compatibile pot fi sincronizate în Supabase.':'Mod local activ. Datele rămân pe acest dispozitiv.';
+    const avatar=$('#profileAvatar');
+    if(avatar){if(meta.avatar){avatar.classList.add('has-photo');avatar.innerHTML='<img alt="Poza contului Google">';avatar.querySelector('img').src=meta.avatar}else{avatar.classList.remove('has-photo');avatar.textContent='❤️'}}
+    const badge=$('#googleAccountBadge');if(badge)badge.style.display=session&&meta.provider==='google'?'inline-flex':'none';
+    if(session){localStorage.removeItem('loveai_skip_auth');setAuthGate(false)}
+  }
   function renderSettings(){$('#langRo').classList.toggle('active',data.lang==='ro');$('#langEn').classList.toggle('active',data.lang==='en');$('#soundOn').classList.toggle('active',data.sound);$('#soundOff').classList.toggle('active',!data.sound)}
 
-  async function initAuth(){if(!sb)return;const {data:d}=await sb.auth.getSession();session=d.session;sb.auth.onAuthStateChange((_e,s)=>{session=s;renderProfile();renderHome();if(s)syncFromCloud()});if(session)syncFromCloud()}
+  async function initAuth(){
+    if(!sb){if(localStorage.getItem('loveai_skip_auth')!=='1')setTimeout(()=>setAuthGate(true,'Conectarea cloud nu este disponibilă momentan.'),1000);return}
+    try{
+      const {data:d,error}=await sb.auth.getSession();
+      if(error)console.warn('Love AI auth:',error.message);
+      session=d&&d.session?d.session:null;
+      renderProfile();renderHome();
+      if(session)syncFromCloud();
+      else if(localStorage.getItem('loveai_skip_auth')!=='1')setTimeout(()=>setAuthGate(true),1050);
+      sb.auth.onAuthStateChange((_e,s)=>{session=s;renderProfile();renderHome();if(s){setAuthGate(false);syncFromCloud()}else if(localStorage.getItem('loveai_skip_auth')!=='1')setTimeout(()=>setAuthGate(true),250)});
+    }catch(error){console.warn('Love AI auth init:',error);if(localStorage.getItem('loveai_skip_auth')!=='1')setTimeout(()=>setAuthGate(true,'Nu am putut verifica sesiunea.'),1050)}
+  }
   async function cloudCreateItem(it){if(!sb||!session)return;try{await sb.from('items').insert({user_id:session.user.id,kind:it.kind,title:it.title||null,content:it.content||null,is_secret:it.is_secret,is_favorite:it.is_favorite})}catch(e){}}
   async function syncFromCloud(){if(!sb||!session)return;try{const [{data:profile},{data:items}]=await Promise.all([sb.from('profiles').select('display_name').eq('id',session.user.id).maybeSingle(),sb.from('items').select('*').neq('kind','photo').order('created_at',{ascending:false})]);if(profile?.display_name)data.displayName=profile.display_name;if(Array.isArray(items)){const localIds=new Set(data.items.map(x=>x.cloud_id).filter(Boolean));items.forEach(r=>{if(!localIds.has(r.id)&&!data.items.some(x=>x.content===r.content&&x.kind===r.kind))data.items.push({id:'cloud-'+r.id,cloud_id:r.id,kind:r.kind,title:r.title||'',content:r.content||'',is_secret:!!r.is_secret,is_favorite:!!r.is_favorite,created_at:r.created_at})})}saveData();renderPage(currentPage)}catch(e){}}
 
@@ -286,7 +329,10 @@
   $('#playerStop').addEventListener('click',stopTrack);$('#playerOpen').addEventListener('click',()=>go('music'));$('#playerYoutube').addEventListener('click',()=>currentTrack&&openTrack(currentTrack.id));
   $('#saveProfile').addEventListener('click',async()=>{data.displayName=$('#displayName').value.trim();saveData();if(sb&&session){try{await sb.from('profiles').upsert({id:session.user.id,display_name:data.displayName})}catch(e){}}renderProfile();renderHome();toast('Profil salvat ❤️')});
   $('#sendMagic').addEventListener('click',async()=>{if(!sb){toast('Supabase indisponibil');return}const email=$('#authEmail').value.trim();if(!email){toast('Scrie adresa de e-mail.');return}const {error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:location.href.split('#')[0]}});toast(error?error.message:'Verifică e-mailul pentru linkul magic ✉️')});
-  $('#googleLogin').addEventListener('click',async()=>{if(!sb)return;const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href.split('#')[0]}});if(error)toast(error.message)});$('#logoutBtn').addEventListener('click',async()=>{if(sb)await sb.auth.signOut();session=null;renderProfile();toast('Deconectat')});
+  $('#googleLogin').addEventListener('click',signInWithGoogle);
+  $('#googleLoginGate').addEventListener('click',signInWithGoogle);
+  $('#continueLocal').addEventListener('click',()=>{localStorage.setItem('loveai_skip_auth','1');setAuthGate(false);toast('Mod local activ')});
+  $('#logoutBtn').addEventListener('click',async()=>{if(sb)await sb.auth.signOut();session=null;localStorage.removeItem('loveai_skip_auth');renderProfile();setTimeout(()=>setAuthGate(true),250);toast('Deconectat')});
   $('#langRo').addEventListener('click',()=>{data.lang='ro';saveData();renderSettings();toast('Limba: Română')});$('#langEn').addEventListener('click',()=>{data.lang='en';saveData();renderSettings();toast('Language: English')});$('#soundOn').addEventListener('click',()=>{data.sound=true;saveData();renderSettings();beep()});$('#soundOff').addEventListener('click',()=>{data.sound=false;saveData();renderSettings()});
   $('#testNotif').addEventListener('click',async()=>{if(!('Notification'in window)){toast('Notificările nu sunt disponibile.');return}const p=await Notification.requestPermission();if(p==='granted')new Notification('Totul funcționează! 🔔✨',{body:'Love AI te poate anunța când un mesaj este gata. ❤️',icon:'./icons/icon-192.png'});else toast('Permisiunea nu a fost acordată.')});
   $('#exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='love-ai-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
