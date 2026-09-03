@@ -1,0 +1,38 @@
+DUO LOVE v73 — APPLE LOGIN LA AMBELE APLICATII
+
+CODUL ESTE GATA:
+- DUO LOVE: butonul Apple exista deja si foloseste providerul Apple din Supabase DUO LOVE.
+- LOVE AI: v73 adauga buton Apple la intrare si in Profil, separat de Google.
+- Sesiunile raman separate deoarece fiecare aplicatie foloseste alt proiect Supabase.
+
+IMPORTANT: Apple Login web NU poate functiona doar prin upload in GitHub. Providerul Apple trebuie activat in fiecare proiect Supabase cu datele din Apple Developer.
+
+PROIECT SUPABASE DUO LOVE
+Project ref: vrcwpodmvdamkgveuedz
+Apple Website Domain in Services ID: vrcwpodmvdamkgveuedz.supabase.co
+Apple Return URL: https://vrcwpodmvdamkgveuedz.supabase.co/auth/v1/callback
+
+PROIECT SUPABASE LOVE AI
+Project ref: qcoprkunssrogmygntzz
+Apple Website Domain in Services ID: qcoprkunssrogmygntzz.supabase.co
+Apple Return URL: https://qcoprkunssrogmygntzz.supabase.co/auth/v1/callback
+
+PENTRU FIECARE APLICATIE:
+1. In Apple Developer: Identifiers -> creezi/alegi un App ID si activezi Sign in with Apple.
+2. Creezi un Services ID pentru web si il legi de App ID. Recomandat: cate un Services ID separat pentru DUO LOVE si LOVE AI.
+3. Configurezi Sign in with Apple pentru Services ID:
+   - Domains and Subdomains = domeniul Supabase de mai sus, fara https://
+   - Return URL = callback-ul Supabase de mai sus.
+4. Creezi o Key cu Sign in with Apple si pastrezi fisierul .p8 in siguranta.
+5. Generezi Apple client secret din Team ID + Key ID + .p8 + Services ID.
+6. In Supabase -> Authentication -> Providers -> Apple:
+   - Enable Apple
+   - Client ID = Services ID
+   - Secret = Apple client secret
+   - Save
+7. In Supabase -> Authentication -> URL Configuration adaugi URL-ul real al paginii ca Redirect URL:
+   - DUO LOVE: URL-ul paginii index.html / radacina aplicatiei
+   - LOVE AI: URL-ul folderului /love-ai/
+
+NU pune fisierul .p8, Apple client secret, parola bazei de date sau service_role in GitHub.
+Apple cere rotirea client secret-ului pentru OAuth web periodic (maxim 6 luni), deci pastreaza cheia .p8.

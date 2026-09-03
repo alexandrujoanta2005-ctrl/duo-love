@@ -1,0 +1,11 @@
+DUO LOVE FULL v73
+
+NOU:
+- Apple Login in LOVE AI la intrare si in Profil.
+- Apple Login DUO LOVE pastrat separat.
+- Google Login LOVE AI pastrat.
+- Sesiune Love AI ramane separata de DUO LOVE.
+- Cache DUO LOVE: v73.
+- Cache Love AI: v7.
+
+Configurarea Apple Developer + Supabase este obligatorie pentru ca butoanele Apple sa poata autentifica utilizatorii. Vezi APPLE-LOGIN-SETUP-v73.txt.
