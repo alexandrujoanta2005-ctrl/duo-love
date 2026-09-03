@@ -1654,6 +1654,81 @@
 
 
   /* =========================================================
+     MENIU 7 BUTOANE - FIX v69
+     Harta + Love AI au mărit meniul global la 7 secțiuni.
+     Forțăm o singură linie, astfel încât Setări să rămână vizibil.
+  ========================================================= */
+
+  function ensureSevenItemNavigationLayout() {
+
+    let style =
+      document.getElementById(
+        "duo-v69-seven-nav"
+      );
+
+    if (!style) {
+
+      style =
+        document.createElement(
+          "style"
+        );
+
+      style.id =
+        "duo-v69-seven-nav";
+
+      style.textContent = `
+        .bottom-nav,
+        body > .bottom-nav {
+          display: grid !important;
+          grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+          gap: 1px !important;
+          overflow: visible !important;
+        }
+
+        .bottom-nav .nav-item,
+        body > .bottom-nav .nav-item {
+          min-width: 0 !important;
+          padding-left: 1px !important;
+          padding-right: 1px !important;
+        }
+
+        .bottom-nav .nav-icon,
+        body > .bottom-nav .nav-icon {
+          font-size: 18px !important;
+        }
+
+        .bottom-nav .nav-item > span:last-child,
+        body > .bottom-nav .nav-item > span:last-child {
+          font-size: 7.5px !important;
+          line-height: 1.05 !important;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+        }
+
+        @media (max-width: 360px) {
+          .bottom-nav .nav-icon,
+          body > .bottom-nav .nav-icon {
+            font-size: 17px !important;
+          }
+
+          .bottom-nav .nav-item > span:last-child,
+          body > .bottom-nav .nav-item > span:last-child {
+            font-size: 6.8px !important;
+          }
+        }
+      `;
+
+      document.head.appendChild(
+        style
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
      PORNIRE
   ========================================================= */
 
@@ -1668,6 +1743,8 @@
     applySeasonalTheme();
 
     removeExternalTargets();
+
+    ensureSevenItemNavigationLayout();
 
     createPWANavigation();
 

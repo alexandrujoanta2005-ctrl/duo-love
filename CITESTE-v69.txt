@@ -1,0 +1,12 @@
+DUO LOVE FULL v69 - FIX SETARI IN MENIU
+
+Fix:
+- bara de jos afiseaza toate cele 7 sectiuni pe un singur rand
+- Setari este din nou vizibil si accesibil
+- cache PWA DUO LOVE actualizat la v69
+
+NU au fost modificate:
+- autentificarea DUO LOVE
+- proiectul Supabase DUO LOVE
+- login-ul Google Love AI
+- proiectul Supabase Love AI
