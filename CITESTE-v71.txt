@@ -1,0 +1,9 @@
+DUO LOVE v71 — FIX BARA DE JOS
+
+- bara de navigare DUO LOVE este blocata la baza ecranului
+- butoanele nu se mai ridica/coboara la tap, active, focus sau hover
+- in Chat, cand se deschide tastatura, bara se ascunde in loc sa sara deasupra tastaturii
+- Setari ramane separat sus in dreapta
+- autentificarea DUO LOVE nu a fost modificata
+- Love AI / Google Login nu au fost modificate
+- cache PWA principal actualizat la v71

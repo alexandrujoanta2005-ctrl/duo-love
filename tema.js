@@ -1853,6 +1853,246 @@
   }
 
 
+
+  /* =========================================================
+     v71 — BLOCHEAZĂ BARA JOS + TASTATURĂ
+  ========================================================= */
+
+  function lockBottomNavigationV71() {
+
+    let style =
+      document.getElementById(
+        "duo-v71-nav-lock"
+      );
+
+    if (!style) {
+
+      style =
+        document.createElement(
+          "style"
+        );
+
+      style.id =
+        "duo-v71-nav-lock";
+
+      style.textContent = `
+        :root{--duo-nav-height-v71:74px}
+
+        .bottom-nav,
+        body > .bottom-nav,
+        .bottom-nav.five-items,
+        body > .bottom-nav.five-items{
+          position:fixed !important;
+          left:0 !important;
+          right:0 !important;
+          top:auto !important;
+          bottom:0 !important;
+          inset:auto 0 0 0 !important;
+          width:100% !important;
+          max-width:none !important;
+          height:var(--duo-nav-height-v71) !important;
+          min-height:var(--duo-nav-height-v71) !important;
+          max-height:var(--duo-nav-height-v71) !important;
+          margin:0 !important;
+          padding:4px 6px 2px !important;
+          display:grid !important;
+          grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+          gap:2px !important;
+          align-items:stretch !important;
+          align-content:stretch !important;
+          transform:translate3d(0,0,0) !important;
+          -webkit-transform:translate3d(0,0,0) !important;
+          translate:none !important;
+          scale:1 !important;
+          transition:none !important;
+          animation:none !important;
+          contain:layout paint style !important;
+          backface-visibility:hidden !important;
+          -webkit-backface-visibility:hidden !important;
+          will-change:auto !important;
+          overflow:hidden !important;
+          z-index:2147483647 !important;
+        }
+
+        .bottom-nav .nav-item,
+        body > .bottom-nav .nav-item,
+        .bottom-nav .nav-item.active,
+        body > .bottom-nav .nav-item.active,
+        .bottom-nav .nav-item:active,
+        body > .bottom-nav .nav-item:active,
+        .bottom-nav .nav-item:focus,
+        body > .bottom-nav .nav-item:focus,
+        .bottom-nav .nav-item:focus-visible,
+        body > .bottom-nav .nav-item:focus-visible,
+        .bottom-nav .nav-item:hover,
+        body > .bottom-nav .nav-item:hover{
+          position:static !important;
+          top:auto !important;
+          bottom:auto !important;
+          left:auto !important;
+          right:auto !important;
+          width:100% !important;
+          min-width:0 !important;
+          height:68px !important;
+          min-height:68px !important;
+          max-height:68px !important;
+          margin:0 !important;
+          padding:5px 1px 2px !important;
+          transform:none !important;
+          -webkit-transform:none !important;
+          translate:none !important;
+          scale:1 !important;
+          animation:none !important;
+          transition:none !important;
+          touch-action:manipulation !important;
+          -webkit-tap-highlight-color:transparent !important;
+        }
+
+        .bottom-nav .nav-item .nav-icon,
+        body > .bottom-nav .nav-item .nav-icon,
+        .bottom-nav .nav-item span,
+        body > .bottom-nav .nav-item span{
+          position:static !important;
+          top:auto !important;
+          bottom:auto !important;
+          margin-top:0 !important;
+          margin-bottom:0 !important;
+          transform:none !important;
+          -webkit-transform:none !important;
+          translate:none !important;
+          scale:1 !important;
+          animation:none !important;
+          transition:none !important;
+        }
+
+        html.duo-keyboard-open .bottom-nav,
+        html.duo-keyboard-open body > .bottom-nav{
+          visibility:hidden !important;
+          opacity:0 !important;
+          pointer-events:none !important;
+        }
+      `;
+
+      document.head.appendChild(
+        style
+      );
+
+    }
+
+    const nav =
+      moveNavigationToBody();
+
+    if (nav) {
+      nav.classList.add(
+        "duo-nav-v71-locked"
+      );
+    }
+
+  }
+
+
+  function setupStableKeyboardNavigationV71() {
+
+    try {
+      if (navigator.virtualKeyboard) {
+        navigator.virtualKeyboard.overlaysContent = true;
+      }
+    }
+    catch (error) {
+    }
+
+    const viewport =
+      window.visualViewport;
+
+    if (!viewport) {
+      return;
+    }
+
+    let baseHeight =
+      Math.max(
+        window.innerHeight || 0,
+        viewport.height || 0
+      );
+
+    function updateKeyboardState() {
+
+      const currentHeight =
+        viewport.height ||
+        window.innerHeight ||
+        baseHeight;
+
+      const viewportLoss =
+        baseHeight -
+        currentHeight -
+        (viewport.offsetTop || 0);
+
+      const focused =
+        document.activeElement;
+
+      const typingField =
+        Boolean(
+          focused &&
+          (
+            focused.tagName === "INPUT" ||
+            focused.tagName === "TEXTAREA" ||
+            focused.isContentEditable
+          )
+        );
+
+      const keyboardOpen =
+        typingField &&
+        viewportLoss > 140;
+
+      document.documentElement.classList.toggle(
+        "duo-keyboard-open",
+        keyboardOpen
+      );
+
+      if (!keyboardOpen) {
+        baseHeight =
+          Math.max(
+            baseHeight,
+            window.innerHeight || 0,
+            currentHeight
+          );
+      }
+
+    }
+
+    viewport.addEventListener(
+      "resize",
+      updateKeyboardState,
+      { passive: true }
+    );
+
+    viewport.addEventListener(
+      "scroll",
+      updateKeyboardState,
+      { passive: true }
+    );
+
+    window.addEventListener(
+      "focusin",
+      updateKeyboardState,
+      { passive: true }
+    );
+
+    window.addEventListener(
+      "focusout",
+      function () {
+        setTimeout(
+          updateKeyboardState,
+          80
+        );
+      },
+      { passive: true }
+    );
+
+    updateKeyboardState();
+
+  }
+
+
   /* =========================================================
      PORNIRE
   ========================================================= */
@@ -1872,6 +2112,10 @@
     ensureSixItemNavigationLayout();
 
     createPWANavigation();
+
+    lockBottomNavigationV71();
+
+    setupStableKeyboardNavigationV71();
 
     createSettingsShortcut();
 
