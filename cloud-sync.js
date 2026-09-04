@@ -4190,7 +4190,7 @@ window.invalidateCloudContextCache =
 
 
   script.src =
-    "./reward-effects.js?v=35";
+    "./reward-effects.js?v=76";
 
 
   script.defer =

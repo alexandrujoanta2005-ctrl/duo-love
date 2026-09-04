@@ -1,0 +1,16 @@
+DUO LOVE v76 · XP INFINITY + MISIUNI
+
+NOU:
+- În Setări apare catalogul complet de funcții XP.
+- Recompense până la 1.000.000.000 XP.
+- 5 niveluri noi: Legendary, Mythic, Mythic+, Celestial, Infinity.
+- Filtru misiuni: SINGUR / AMÂNDOI / TOATE.
+- Pachet de 100 misiuni: 50 solo + 50 împreună.
+
+IMPORTANT PENTRU MISIUNILE NOI:
+1. Intră în Supabase-ul DUO LOVE (NU Love AI).
+2. SQL Editor -> New query.
+3. Rulează DUO-LOVE-XP-MISIUNI-v76.sql o singură dată.
+
+Recompensele până la 1 miliard sunt deja în aplicație și nu cer SQL.
+Login-ul, conectarea partenerului, Harta și Love AI nu au fost schimbate.

@@ -521,6 +521,13 @@ const XP_REWARDS = [
 ];
 
 
+/* v76 · extinde catalogul până la 1.000.000.000 XP */
+if (Array.isArray(window.DUO_HIGH_XP_REWARDS)) {
+  XP_REWARDS.push(...window.DUO_HIGH_XP_REWARDS);
+  XP_REWARDS.sort((a, b) => Number(a.xp || 0) - Number(b.xp || 0));
+}
+
+
 const XP_UNLOCKS =
   XP_REWARDS.filter(
     reward =>
@@ -554,6 +561,7 @@ const COUPLE_CHALLENGES = [
 
 let rewardShopData = [];
 let dailyMissionData = [];
+let activeMissionMode = "all";
 
 let currentXP = {
   totalXP: 0,
@@ -1553,6 +1561,12 @@ function renderMilestoneRewards() {
     )
   );
 
+  renderRewardGroup("rewards10kto100k", XP_REWARDS.filter(r => r.xp > 10000 && r.xp <= 100000));
+  renderRewardGroup("rewards100kto1m", XP_REWARDS.filter(r => r.xp > 100000 && r.xp <= 1000000));
+  renderRewardGroup("rewards1mto10m", XP_REWARDS.filter(r => r.xp > 1000000 && r.xp <= 10000000));
+  renderRewardGroup("rewards10mto100m", XP_REWARDS.filter(r => r.xp > 10000000 && r.xp <= 100000000));
+  renderRewardGroup("rewards100mto1b", XP_REWARDS.filter(r => r.xp > 100000000 && r.xp <= 1000000000));
+
 }
 
 
@@ -2027,6 +2041,28 @@ async function loadDailyMissions() {
 
 
 
+
+
+function getMissionMode(mission) {
+  const text = `${mission?.title || ""} ${mission?.description || ""}`.toLowerCase();
+  if (text.includes("👥") || text.includes("împreună") || text.includes("amândoi") || text.includes("amandoi")) {
+    return "couple";
+  }
+  return "solo";
+}
+
+function getVisibleMissions() {
+  if (activeMissionMode === "all") return dailyMissionData;
+  return dailyMissionData.filter(mission => getMissionMode(mission) === activeMissionMode);
+}
+
+function updateMissionModeButtons() {
+  document.querySelectorAll("[data-mission-mode]").forEach(button => {
+    button.classList.toggle("active", button.dataset.missionMode === activeMissionMode);
+  });
+}
+
+
 /* =========================================================
    AFIȘARE MISIUNI
 ========================================================= */
@@ -2058,8 +2094,23 @@ function renderDailyMissions() {
   }
 
 
+  const visibleMissions = getVisibleMissions();
+  updateMissionModeButtons();
+
+  if (!visibleMissions.length) {
+    box.innerHTML = `
+      <p class="empty-state">
+        ${activeMissionMode === "couple"
+          ? "Nu a intrat încă o misiune pentru amândoi în rotația de azi. Se schimbă zilnic. 👥"
+          : "Nu există misiuni în acest filtru azi."}
+      </p>
+    `;
+    if ($("missionCounter")) $("missionCounter").textContent = "0/0 azi";
+    return;
+  }
+
   const completedCount =
-    dailyMissionData
+    visibleMissions
       .filter(
         mission =>
           mission.completed === true
@@ -2073,13 +2124,13 @@ function renderDailyMissions() {
 
     $("missionCounter")
       .textContent =
-      `${completedCount}/${dailyMissionData.length} făcute azi`;
+      `${completedCount}/${visibleMissions.length} făcute azi`;
 
   }
 
 
   box.innerHTML =
-    dailyMissionData
+    visibleMissions
       .map(
         function (mission) {
 
@@ -3908,6 +3959,18 @@ document.addEventListener(
 );
 
 
+
+
+
+/* =========================================================
+   FILTRE MISIUNI v76
+========================================================= */
+document.querySelectorAll("[data-mission-mode]").forEach(button => {
+  button.addEventListener("click", () => {
+    activeMissionMode = button.dataset.missionMode || "all";
+    renderDailyMissions();
+  });
+});
 
 /* =========================================================
    START

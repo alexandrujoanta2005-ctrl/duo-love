@@ -1,4 +1,4 @@
-const CACHE_VERSION = "duo-love-v75";
+const CACHE_VERSION = "duo-love-v76";
 
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PAGE_CACHE = `${CACHE_VERSION}-pages`;
@@ -42,6 +42,7 @@ const STATIC_FILES = [
   "./supabase.js",
   "./cloud-sync.js",
   "./reward-effects.js",
+  "./xp-catalog.js",
   "./tema.js",
   "./ursulet.js",
   "./pet-system.js",

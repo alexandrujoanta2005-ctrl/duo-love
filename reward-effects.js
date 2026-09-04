@@ -2785,3 +2785,135 @@
   };
 
 })();
+
+
+/* =========================================================
+   v76 · TOATE FUNCȚIILE XP ÎN SETĂRI
+========================================================= */
+(function () {
+  "use strict";
+
+  const TIER_LABELS = [
+    [0, 10000, "💎 Până la 10.000 XP"],
+    [10001, 100000, "🌟 10.000 — 100.000 XP"],
+    [100001, 1000000, "💠 100.000 — 1.000.000 XP"],
+    [1000001, 10000000, "🚀 1.000.000 — 10.000.000 XP"],
+    [10000001, 100000000, "🌌 10.000.000 — 100.000.000 XP"],
+    [100000001, 1000000000, "♾️ 100.000.000 — 1.000.000.000 XP"]
+  ];
+
+  function esc(v) {
+    return String(v ?? "").replace(/[&<>\"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
+  }
+
+  function formatXP(v) {
+    return new Intl.NumberFormat("ro-RO").format(Number(v) || 0) + " XP";
+  }
+
+  function ensureStyles() {
+    if (document.getElementById("xpFeatureCatalogStyles")) return;
+    const style = document.createElement("style");
+    style.id = "xpFeatureCatalogStyles";
+    style.textContent = `
+      .xp-feature-catalog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:11px}
+      .xp-feature-current{flex:0 0 auto;padding:7px 10px;border-radius:999px;background:rgba(255,225,124,.10);color:#ffe17c;font-size:10px;font-weight:850}
+      .xp-feature-search{width:100%;box-sizing:border-box;margin:2px 0 12px;padding:11px 12px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.05);color:#fff;font:inherit;font-size:12px;outline:none}
+      .xp-feature-search::placeholder{color:rgba(255,255,255,.34)}
+      .xp-feature-tier{margin-top:9px;border:1px solid rgba(255,255,255,.07);border-radius:16px;background:rgba(255,255,255,.025);overflow:hidden}
+      .xp-feature-tier summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;cursor:pointer;color:#fff;font-size:11px;font-weight:850;list-style:none}
+      .xp-feature-tier summary::-webkit-details-marker{display:none}
+      .xp-feature-tier summary span:last-child{color:rgba(255,255,255,.45);font-size:9px}
+      .xp-feature-tier-list{display:grid;gap:7px;padding:0 9px 10px}
+      .xp-feature-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:9px;align-items:center;padding:10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.055)}
+      .xp-feature-item.locked{opacity:.64}
+      .xp-feature-item-icon{display:grid;place-items:center;width:37px;height:37px;border-radius:12px;background:rgba(255,255,255,.06);font-size:18px}
+      .xp-feature-item strong,.xp-feature-item small{display:block}
+      .xp-feature-item strong{font-size:11px;color:#fff}
+      .xp-feature-item small{margin-top:2px;color:rgba(255,255,255,.45);font-size:9px;line-height:1.3}
+      .xp-feature-status{font-size:9px;font-weight:850;text-align:right;color:rgba(255,255,255,.52)}
+      .xp-feature-status.ok{color:#7ee7aa}
+      .xp-feature-open{display:block;width:100%;margin-top:12px;padding:11px 12px;border:0;border-radius:14px;background:linear-gradient(135deg,#c95887,#993f6b);color:#fff;text-align:center;text-decoration:none;font-size:11px;font-weight:850}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function createCard() {
+    if (document.getElementById("xpFeatureCatalogSettings")) return document.getElementById("xpFeatureCatalogSettings");
+    if (!document.body.classList.contains("settings-page") && !document.getElementById("notificationCard")) return null;
+    const card = document.createElement("section");
+    card.id = "xpFeatureCatalogSettings";
+    card.className = "settings-card";
+    card.innerHTML = `
+      <div class="xp-feature-catalog-head">
+        <div>
+          <span class="settings-small">🛍️ FUNCȚII XP</span>
+          <h2>Toate funcțiile de deblocat</h2>
+        </div>
+        <span id="xpFeatureCurrent" class="xp-feature-current">0 XP</span>
+      </div>
+      <p class="settings-card-description">Aici vezi toate funcțiile care se deblochează pe măsură ce crește XP-ul vostru, până la 1.000.000.000 XP.</p>
+      <input id="xpFeatureSearch" class="xp-feature-search" type="search" placeholder="Caută o funcție..." autocomplete="off">
+      <div id="xpFeatureCatalogList"></div>
+      <a class="xp-feature-open" href="./recompense.html">⭐ Deschide Recompense & Misiuni</a>
+    `;
+    const after = document.getElementById("rewardEffectsSettings");
+    if (after?.parentNode) after.parentNode.insertBefore(card, after.nextSibling);
+    else (document.querySelector("main.app") || document.querySelector("main"))?.appendChild(card);
+    return card;
+  }
+
+  function getXP() {
+    return Math.max(0, Number(localStorage.getItem("coupleTotalXP")) || 0);
+  }
+
+  function render() {
+    ensureStyles();
+    const card = createCard();
+    if (!card) return;
+    const features = Array.isArray(window.DUO_SETTINGS_XP_FEATURES) ? window.DUO_SETTINGS_XP_FEATURES : [];
+    const xp = getXP();
+    const label = document.getElementById("xpFeatureCurrent");
+    if (label) label.textContent = formatXP(xp);
+    const query = (document.getElementById("xpFeatureSearch")?.value || "").trim().toLowerCase();
+    const list = document.getElementById("xpFeatureCatalogList");
+    if (!list) return;
+    list.innerHTML = TIER_LABELS.map(([min,max,title], tierIndex) => {
+      const items = features.filter(item => {
+        const n = Number(item.xp) || 0;
+        const matchesTier = n >= min && n <= max;
+        const hay = `${item.title || ""} ${item.summary || ""} ${item.category || ""}`.toLowerCase();
+        return matchesTier && (!query || hay.includes(query));
+      });
+      if (!items.length) return "";
+      const unlockedCount = items.filter(item => xp >= Number(item.xp || 0)).length;
+      return `
+        <details class="xp-feature-tier" ${tierIndex === 0 || query ? "open" : ""}>
+          <summary><span>${title}</span><span>${unlockedCount}/${items.length} deblocate</span></summary>
+          <div class="xp-feature-tier-list">
+            ${items.map(item => {
+              const unlocked = xp >= Number(item.xp || 0);
+              return `
+                <div class="xp-feature-item ${unlocked ? "" : "locked"}">
+                  <div class="xp-feature-item-icon">${unlocked ? esc(item.icon || "⭐") : "🔒"}</div>
+                  <div><strong>${esc(item.title)}</strong><small>${esc(item.summary || item.category || "Funcție DUO LOVE")}</small></div>
+                  <div class="xp-feature-status ${unlocked ? "ok" : ""}">${unlocked ? "✅ DEBLOCAT" : formatXP(item.xp)}</div>
+                </div>`;
+            }).join("")}
+          </div>
+        </details>`;
+    }).join("") || `<p class="settings-card-description">Nu am găsit nicio funcție.</p>`;
+  }
+
+  function bind() {
+    render();
+    const input = document.getElementById("xpFeatureSearch");
+    if (input && !input.dataset.bound) {
+      input.dataset.bound = "1";
+      input.addEventListener("input", render);
+    }
+  }
+
+  window.addEventListener("duolove:xp-updated", bind);
+  document.addEventListener("DOMContentLoaded", () => setTimeout(bind, 120));
+  setTimeout(bind, 900);
+})();
