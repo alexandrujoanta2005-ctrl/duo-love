@@ -1,0 +1,16 @@
+DUO LOVE v77 - MISIUNI VERIFICATE
+
+IMPORTANT:
+1. Urcă fișierele v77 în GitHub.
+2. În Supabase DUO LOVE rulează:
+   DUO-LOVE-MISIUNI-VERIFICARE-v77.sql
+
+Cum funcționează:
+- Nu se mai acordă XP doar dintr-un click.
+- SOLO: persoana marchează misiunea făcută, partenerul confirmă.
+- ÎMPREUNĂ: ambii confirmă.
+- Doar după a doua confirmare se apelează sistemul XP existent.
+- Același utilizator nu poate da două confirmări.
+- Confirmarea se actualizează automat pe pagina Recompense.
+
+Nu modifică login-ul DUO LOVE, conexiunea cuplului, Harta sau Love AI.

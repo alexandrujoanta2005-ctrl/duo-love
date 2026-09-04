@@ -561,6 +561,7 @@ const COUPLE_CHALLENGES = [
 
 let rewardShopData = [];
 let dailyMissionData = [];
+let missionVerificationStatus = new Map();
 let activeMissionMode = "all";
 
 let currentXP = {
@@ -2035,10 +2036,171 @@ async function loadDailyMissions() {
       : [];
 
 
+  await loadMissionVerificationStatus();
+
+
   renderDailyMissions();
 
 }
 
+
+
+async function loadMissionVerificationStatus() {
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc(
+          "get_daily_mission_verification_status"
+        );
+
+
+    if (error) {
+
+      /*
+        Dacă SQL-ul v77 nu a fost rulat încă,
+        misiunile rămân vizibile, dar nu permitem
+        acordarea XP prin vechiul buton.
+      */
+      console.warn(
+        "Verificarea misiunilor nu este instalată:",
+        error
+      );
+
+      missionVerificationStatus =
+        new Map();
+
+      return false;
+
+    }
+
+
+    missionVerificationStatus =
+      new Map(
+        (Array.isArray(data) ? data : [])
+          .map(
+            row => [
+              String(row.mission_id || ""),
+              row
+            ]
+          )
+      );
+
+
+    return true;
+
+  } catch (error) {
+
+    console.warn(
+      "Eroare status verificare misiuni:",
+      error
+    );
+
+    missionVerificationStatus =
+      new Map();
+
+    return false;
+
+  }
+
+}
+
+
+
+function getMissionVerification(missionId) {
+
+  return (
+    missionVerificationStatus.get(
+      String(missionId || "")
+    ) ||
+    {
+      confirmations: 0,
+      required_confirmations: 2,
+      my_confirmed: false,
+      other_confirmed: false,
+      verified: false
+    }
+  );
+
+}
+
+
+
+function getMissionVerificationUI(
+  mission,
+  completed
+) {
+
+  if (completed) {
+
+    return {
+      label: "✅ Gata",
+      disabled: true,
+      hint: "XP acordat după verificare."
+    };
+
+  }
+
+
+  const status =
+    getMissionVerification(
+      mission.mission_id
+    );
+
+
+  if (
+    status.verified === true
+  ) {
+
+    return {
+      label: "⏳ Se acordă",
+      disabled: true,
+      hint: "Misiunea este verificată."
+    };
+
+  }
+
+
+  if (
+    status.my_confirmed === true
+  ) {
+
+    return {
+      label: "⏳ Așteaptă",
+      disabled: true,
+      hint: "Ai confirmat. Așteptăm partenerul."
+    };
+
+  }
+
+
+  if (
+    status.other_confirmed === true
+  ) {
+
+    return {
+      label: "✅ Confirmă",
+      disabled: false,
+      hint: "Partenerul a marcat misiunea ca făcută. Confirmă pentru acordarea XP."
+    };
+
+  }
+
+
+  return {
+    label: "Verifică",
+    disabled: false,
+    hint:
+      getMissionMode(mission) === "couple"
+        ? "XP se acordă numai după ce confirmați amândoi."
+        : "Marchează ca făcută; partenerul trebuie să confirme înainte de XP."
+  };
+
+}
 
 
 
@@ -2138,6 +2300,13 @@ function renderDailyMissions() {
             mission.completed === true;
 
 
+          const verificationUI =
+            getMissionVerificationUI(
+              mission,
+              completed
+            );
+
+
           return `
 
             <article
@@ -2170,6 +2339,12 @@ function renderDailyMissions() {
                   +${Number(mission.xp_reward) || 0} XP
                 </small>
 
+                <em class="mission-verify-hint">
+                  ${escapeHTML(
+                    verificationUI.hint || ""
+                  )}
+                </em>
+
               </div>
 
 
@@ -2179,14 +2354,10 @@ function renderDailyMissions() {
                 data-mission-id="${escapeAttr(
                   mission.mission_id || ""
                 )}"
-                ${completed ? "disabled" : ""}
+                ${verificationUI.disabled ? "disabled" : ""}
               >
 
-                ${
-                  completed
-                    ? "✅ Gata"
-                    : "Am făcut-o"
-                }
+                ${verificationUI.label}
 
               </button>
 
@@ -2253,7 +2424,7 @@ async function claimMission(
 
 
     button.textContent =
-      "⏳";
+      "⏳ Verific...";
 
   }
 
@@ -2264,7 +2435,7 @@ async function claimMission(
   } =
     await supabaseClient
       .rpc(
-        "claim_daily_mission",
+        "submit_daily_mission_verification",
         {
           p_mission_id:
             missionId
@@ -2275,8 +2446,7 @@ async function claimMission(
   if (error) {
 
     alert(
-      error.message ||
-      "Misiunea nu a putut fi salvată."
+      "Verificarea misiunilor nu este activă încă. Rulează SQL-ul DUO-LOVE-MISIUNI-VERIFICARE-v77.sql în Supabase DUO LOVE."
     );
 
 
@@ -2293,7 +2463,42 @@ async function claimMission(
 
 
   if (
-    row?.awarded === true
+    !row ||
+    row.success === false
+  ) {
+
+    alert(
+      row?.message ||
+      "Misiunea nu a putut fi verificată."
+    );
+
+
+    await refreshAll();
+
+    return;
+  }
+
+
+  if (
+    row.verified !== true
+  ) {
+
+    showRewardBubble(
+      "🔎",
+      "În verificare",
+      row.message ||
+      "Așteaptă confirmarea partenerului."
+    );
+
+
+    await refreshAll();
+
+    return;
+  }
+
+
+  if (
+    row.awarded === true
   ) {
 
     const missionXP =
@@ -2306,16 +2511,16 @@ async function claimMission(
       "⭐",
       `+${missionXP} XP`,
       row.message ||
-      "Misiune completată!"
+      "Misiune verificată și completată!"
     );
 
   } else {
 
     showRewardBubble(
       "✅",
-      "Misiune făcută",
-      row?.message ||
-      "Ai primit deja XP pentru ea azi."
+      "Verificată",
+      row.message ||
+      "Misiunea a fost verificată. XP-ul fusese deja acordat."
     );
 
   }
@@ -3971,6 +4176,36 @@ document.querySelectorAll("[data-mission-mode]").forEach(button => {
     renderDailyMissions();
   });
 });
+
+/* =========================================================
+   ACTUALIZARE CONFIRMARE PARTENER
+========================================================= */
+
+setInterval(
+  async function () {
+
+    if (
+      document.visibilityState !== "visible" ||
+      !dailyMissionData.length
+    ) {
+      return;
+    }
+
+
+    const ok =
+      await loadMissionVerificationStatus();
+
+
+    if (ok) {
+
+      renderDailyMissions();
+
+    }
+
+  },
+  12000
+);
+
 
 /* =========================================================
    START
